@@ -33,3 +33,6 @@ D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ob
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Utilities\DataTemplate.baml
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\AuthorizationView.baml
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PetsView.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\NavigationView.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\NavigationView.baml

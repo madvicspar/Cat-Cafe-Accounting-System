@@ -1,7 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Cats_Cafe_Accounting_System.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using System.Linq;
 using System.Security;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -32,7 +35,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         private void ExecuteSignInCommand()
         {
             // проверка данных
-            OpenMainWindowCommand.Execute(null);
+
+            //OpenMainWindowCommand.Execute(null);
         }
 
         private bool CanExecuteSignInCommand()
@@ -47,7 +51,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void OpenMainWindow()
         {
-            WeakReferenceMessenger.Default.Send(new OpenMainWindowMessage());
+            //WeakReferenceMessenger.Default.Send(new OpenMainWindowMessage());
+            var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
+            authorizationWindow?.Close();
         }
     }
 }

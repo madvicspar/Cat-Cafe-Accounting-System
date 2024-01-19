@@ -27,9 +27,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         });
         public NavigationViewModel(
-            AuthorizationViewModel loginView)
+            PetsViewModel petsViewModel)
         {
-            NavigationOptions.Add(new() { Name = "Login", Description = "User can login with this page. the demo shows how to request data from other ViewModels", DestinationVM = loginView });
+            NavigationOptions.Add(new() { Name = "Pets", Description = "", DestinationVM = petsViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);
             WeakReferenceMessenger.Default.Send(message);

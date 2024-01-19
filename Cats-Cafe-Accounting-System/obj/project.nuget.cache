@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "OSEHDHxBCJ+AO7Ywlig+Zmt9FdbrvtYovHLtVM7c36np2w8RZjubfz1lSmqnG93EcOAFLOhOECoxnb06xZXzLg==",
+  "dgSpecHash": "FynqxPUz9xpmtTg3iQqileMDMEm4nQsR3K9408VDCNzKYpgsoHGL37qv6/OmMcIpg8A5N2qL2r1eF24UvgZbkw==",
   "success": true,
   "projectFilePath": "D:\\vikto\\source\\repos\\Cats-Cafe-Accounting-System\\Cats-Cafe-Accounting-System\\Cats-Cafe-Accounting-System.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vikto\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\vikto\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
-    "C:\\Users\\vikto\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    "C:\\Users\\vikto\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\vikto\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512"
   ],
   "logs": []
 }

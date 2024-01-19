@@ -9,5 +9,8 @@
     <DataTemplate DataType="{x:Type vm:AuthorizationViewModel}">
         <vw:AuthorizationView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NavigationViewModel}">
+        <vw:NavigationView />
+    </DataTemplate>
 
 </ResourceDictionary>

@@ -61,18 +61,20 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Navigation Panel -->
+                <ContentControl Content="{Binding NavigationVM}" Grid.ColumnSpan="2" />
+                
+                <!-- Navigation Panel --><!--
 
                 <Grid Grid.Column="0" HorizontalAlignment="Left"
 Width="228">
 
-                    <!--<Border Background="#272B2F"
-      CornerRadius="0,0,0,20" />-->
+                    --><!--<Border Background="#272B2F"
+      CornerRadius="0,0,0,20" />--><!--
 
                     <StackPanel Height="450"
           Width="228">
 
-                        <!-- Home -->
+                        --><!-- Home --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                         Command="{Binding HomeCommand}">
@@ -86,7 +88,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Pets -->
+                        --><!-- Pets --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding PetsCommand}" 
@@ -101,7 +103,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Visitors -->
+                        --><!-- Visitors --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding VisitorsCommand}">
@@ -115,7 +117,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Jobs -->
+                        --><!-- Jobs --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding JobsCommand}">
@@ -129,7 +131,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Employees -->
+                        --><!-- Employees --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding EmployeesCommand}">
@@ -143,7 +145,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Tickets -->
+                        --><!-- Tickets --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding TicketsCommand}">
@@ -157,7 +159,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Logs -->
+                        --><!-- Logs --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding LogsCommand}">
@@ -171,7 +173,7 @@ Width="228">
 
                         </Menu:Button>
 
-                        <!-- Statistics -->
+                        --><!-- Statistics --><!--
 
                         <Menu:Button Style="{StaticResource PanelNavigationButton}"
                                  Command="{Binding StatisticsCommand}">
@@ -187,7 +189,7 @@ Width="228">
 
                     </StackPanel>
 
-                </Grid>
+                </Grid>-->
 
                 <!-- Main Part -->
 
