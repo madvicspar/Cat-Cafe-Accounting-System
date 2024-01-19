@@ -10,9 +10,8 @@
              d:DesignHeight="550" 
              d:DesignWidth="228"
              Background="Transparent">
-    <StackPanel>
 
-        <ListView ItemsSource="{Binding NavigationOptions}" Background="Transparent">
+        <ListView ItemsSource="{Binding NavigationOptions}" Background="Transparent" SelectionMode="Single">
             <Behaviors:Interaction.Triggers>
                 <Behaviors:EventTrigger EventName="SelectionChanged">
                     <Behaviors:InvokeCommandAction Command="{Binding SelectionChangedCommand}" PassEventArgsToCommand="True"/>
@@ -20,7 +19,20 @@
             </Behaviors:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Menu:Button Style="{StaticResource PanelNavigationButton}">
+                    <Border Height="35">
+                        <Border.ToolTip>
+                            <ToolTip Content="{Binding Description}">
+                                <ToolTip.ContentTemplate>
+                                    <DataTemplate>
+                                        <Menu:Button Style="{StaticResource PanelNavigationButton}"/>
+                                    </DataTemplate>
+                                </ToolTip.ContentTemplate>
+                            </ToolTip>
+                        </Border.ToolTip>
+                        <TextBlock Text="{Binding Name}"
+                                   Style="{StaticResource Text_Style}"/>
+                </Border>
+                    <!--<Menu:Button Style="{StaticResource PanelNavigationButton}">
 
                         <Grid>
 
@@ -29,11 +41,11 @@
 
                         </Grid>
 
-                    </Menu:Button>
+                    </Menu:Button>-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-    </StackPanel>
+
     
 </UserControl>

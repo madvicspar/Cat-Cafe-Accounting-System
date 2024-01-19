@@ -88,6 +88,7 @@ namespace Cats_Cafe_Accounting_System
             services.AddSingleton<AuthorizationView>();
             services.AddSingleton<NavigationViewModel>();
             services.AddSingleton<PetsViewModel>();
+            services.AddSingleton<VisitorsViewModel>();
             Container = services.BuildServiceProvider();
         }
     }

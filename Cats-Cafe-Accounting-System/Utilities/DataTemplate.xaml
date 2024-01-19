@@ -12,5 +12,8 @@
     <DataTemplate DataType="{x:Type vm:NavigationViewModel}">
         <vw:NavigationView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:VisitorsViewModel}">
+        <vw:VisitorsView />
+    </DataTemplate>
 
 </ResourceDictionary>
