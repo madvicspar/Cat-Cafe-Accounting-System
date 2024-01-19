@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "nsfBU0DHynceVmgHQxdUgZIxvr+uyBXAgXGJXfzn/Ck98h6uEjk6IPoigngCIgGluW9RQESZ5ED+BmZs9QDrTg==",
+  "dgSpecHash": "OSEHDHxBCJ+AO7Ywlig+Zmt9FdbrvtYovHLtVM7c36np2w8RZjubfz1lSmqnG93EcOAFLOhOECoxnb06xZXzLg==",
   "success": true,
   "projectFilePath": "D:\\vikto\\source\\repos\\Cats-Cafe-Accounting-System\\Cats-Cafe-Accounting-System\\Cats-Cafe-Accounting-System.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\vikto\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
+    "C:\\Users\\vikto\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\vikto\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
