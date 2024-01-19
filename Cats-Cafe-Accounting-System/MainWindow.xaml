@@ -3,10 +3,206 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Menu="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
         xmlns:local="clr-namespace:Cats_Cafe_Accounting_System"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="600"
+        Width="850"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True">
     <Grid>
+
+        <Border Background="#272B2F" CornerRadius="20" />
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+
+            <!--<Border Grid.Row="0" Background="#272B2F" CornerRadius="20"/>-->
+            <Grid Grid.Row="0">
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="228" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+
+
+            </Grid>
+
+            <Grid Grid.Column="2" Margin="0,5,3,0">
+
+                <Button x:Name="CloseAppButton"
+                        Style="{StaticResource CloseButtonStyle}"
+                        Click="CloseAppButton_Click" />
+
+            </Grid>
+
+            <!-- Window Border -->
+
+            <Border Grid.Row="1"
+  CornerRadius="0, 0, 20, 0"/>
+
+            <Grid Grid.Row="1">
+
+                <!-- Base Grid -->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="228" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Navigation Panel -->
+
+                <Grid Grid.Column="0" HorizontalAlignment="Left"
+Width="228">
+
+                    <!--<Border Background="#272B2F"
+      CornerRadius="0,0,0,20" />-->
+
+                    <StackPanel Height="450"
+          Width="228">
+
+                        <!-- Home -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                        Command="{Binding HomeCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Home" 
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Pets -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding PetsCommand}" 
+                                 IsChecked="True">
+
+                            <Grid>
+
+                                <TextBlock Text="Pets"
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Visitors -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding VisitorsCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Visitors"
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Jobs -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding JobsCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Jobs"
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Employees -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding EmployeesCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Employees"
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Tickets -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding TicketsCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Tickets"
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Logs -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding LogsCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Logs"
+                                 Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                        <!-- Statistics -->
+
+                        <Menu:Button Style="{StaticResource PanelNavigationButton}"
+                                 Command="{Binding StatisticsCommand}">
+
+                            <Grid>
+
+                                <TextBlock Text="Statistics"
+   Style="{StaticResource Text_Style}" />
+
+                            </Grid>
+
+                        </Menu:Button>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- Main Part -->
+
+                <Border Grid.Column="1" Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
+                <Grid Grid.Column="1">
+
+                    <ContentControl Content="{Binding CurrentVM}" Grid.ColumnSpan="2" />
+
+                </Grid>
+
+
+            </Grid>
+
+
+        </Grid>
 
     </Grid>
 </Window>
