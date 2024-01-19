@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Cats_Cafe_Accounting_System.Views.PetsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="400"
+             d:DesignWidth="622"
+             Background="Transparent">
+    <Grid>
+
+        <Border Background="#272B2F" CornerRadius="20" />
+        <Grid>
+
+            <!-- Main Part -->
+
+            <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Pets"
+                            Style="{StaticResource Pages_Headers}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Кличка" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Title}"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding Status.Title}" />
+                                <DataGridTextColumn Header="Порода" Binding="{Binding Breed.Title}" />
+                                <DataGridTextColumn Header="День рождения" Binding="{Binding Birthday}" />
+                                <DataGridTextColumn Header="Дата появления в котокафе" Binding="{Binding CheckInDate}" />
+                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+
+
+                </Grid>
+
+            </Grid>
+
+
+        </Grid>
+
+    </Grid>
+</UserControl>

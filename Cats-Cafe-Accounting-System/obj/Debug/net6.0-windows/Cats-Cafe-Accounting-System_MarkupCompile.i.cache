@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\App.xaml
-4-1282050934
+6-615375677
 
-221217878253
+241486585428
 1971760715528
-MainWindow.xaml;Styles\Button.xaml;Styles\PasswordBox_Binding.xaml;Styles\Text.xaml;
+MainWindow.xaml;Styles\Button.xaml;Styles\PasswordBox_Binding.xaml;Styles\Text.xaml;Utilities\DataTemplate.xaml;Views\PetsView.xaml;
 
-False
+True
 
