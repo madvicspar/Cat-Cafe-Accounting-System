@@ -6,5 +6,8 @@
     <DataTemplate DataType="{x:Type vm:PetsViewModel}">
         <vw:PetsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AuthorizationViewModel}">
+        <vw:AuthorizationView />
+    </DataTemplate>
 
 </ResourceDictionary>

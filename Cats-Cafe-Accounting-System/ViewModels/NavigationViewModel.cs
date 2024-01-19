@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Cats_Cafe_Accounting_System.Models;
+using System.Windows.Controls;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {

@@ -27,3 +27,9 @@ D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ob
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Styles\Text.baml
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\App.baml
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Cats-Cafe-Accounting-System.csproj.CopyComplete
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\AuthorizationView.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PetsView.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Utilities\DataTemplate.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\AuthorizationView.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PetsView.baml
