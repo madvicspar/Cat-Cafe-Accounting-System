@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Cats-Cafe-Accounting-System/1.0.0": {
+        "runtime": {
+          "Cats-Cafe-Accounting-System.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Cats-Cafe-Accounting-System/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
