@@ -10,10 +10,7 @@
              Background="Transparent">
     <Grid>
 
-        <Border Background="#272B2F" CornerRadius="20" />
         <Grid>
-
-            <!-- Main Part -->
 
             <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
             <Grid>

@@ -28,10 +28,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         });
         public NavigationViewModel(
             PetsViewModel petsViewModel,
-            VisitorsViewModel visitorsViewModel)
+            VisitorsViewModel visitorsViewModel,
+            JobsViewModel jobsViewModel)
         {
             NavigationOptions.Add(new() { Name = "Pets", Description = "", DestinationVM = petsViewModel });
             NavigationOptions.Add(new() { Name = "Visitors", Description = "", DestinationVM = visitorsViewModel });
+            NavigationOptions.Add(new() { Name = "Jobs", Description = "", DestinationVM = jobsViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);
             WeakReferenceMessenger.Default.Send(message);

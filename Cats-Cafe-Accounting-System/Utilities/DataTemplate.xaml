@@ -15,5 +15,9 @@
     <DataTemplate DataType="{x:Type vm:VisitorsViewModel}">
         <vw:VisitorsView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:JobsViewModel}">
+        <vw:JobsView />
+    </DataTemplate>
+
 
 </ResourceDictionary>
