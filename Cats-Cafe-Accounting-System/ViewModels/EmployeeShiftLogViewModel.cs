@@ -1,7 +1,9 @@
 ﻿using Cats_Cafe_Accounting_System.Models;
+using Cats_Cafe_Accounting_System.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -20,11 +22,22 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public EmployeeShiftLogViewModel()
         {
             // Инициализация коллекции питомцев
-            EmployeeShiftLogEntries = new ObservableCollection<EmployeeShiftLogEntryModel>();
-            EmployeeShiftLogEntries.Add(new EmployeeShiftLogEntryModel { EmployeeId = 1, Сomments = "lohov", Date = new DateOnly(2023, 05, 23) });
-            EmployeeShiftLogEntries.Add(new EmployeeShiftLogEntryModel { EmployeeId = 3, Сomments = "дада", Date = new DateOnly(2023, 02, 01) }) ;
-            EmployeeShiftLogEntries.Add(new EmployeeShiftLogEntryModel { EmployeeId = 4, Сomments = "чел", Date = new DateOnly(2023, 11, 19) }) ;
+            EmployeeShiftLogEntries = GetEmployeeShiftLogEntriesFromTable("employee_shift_log");
+        }
+        public static ObservableCollection<EmployeeShiftLogEntryModel> GetEmployeeShiftLogEntriesFromTable(string table)
+        {
+            ObservableCollection<EmployeeShiftLogEntryModel> employeeShiftLogEntries = new ObservableCollection<EmployeeShiftLogEntryModel>();
 
+            DataTable dataTable = DBContext.GetTable(table);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                EmployeeShiftLogEntryModel employeeShiftLogEntry = new EmployeeShiftLogEntryModel(Convert.ToInt32(row["id_entry"]), DateTime.Parse(row["date"].ToString()),
+                    Convert.ToInt32(row["employee_id"]), row["comments"].ToString(), new EmployeeModel(Convert.ToInt32(row["employee_id"])));
+                employeeShiftLogEntries.Add(employeeShiftLogEntry);
+            }
+
+            return employeeShiftLogEntries;
         }
     }
 }

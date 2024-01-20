@@ -30,7 +30,7 @@
                     <Grid Grid.Row="1">
                         <DataGrid ItemsSource="{Binding EmployeeShiftLogEntries}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Сотрудник" Binding="{Binding EmployeeId}"/>
+                                <DataGridTextColumn Header="Сотрудник" Binding="{Binding Employee.LastName}"/>
                                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
                                 <DataGridTextColumn Header="Комментарии" Binding="{Binding Сomments}" />
                             </DataGrid.Columns>
