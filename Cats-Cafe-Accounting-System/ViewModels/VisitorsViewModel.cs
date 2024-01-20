@@ -1,9 +1,11 @@
 ﻿using Cats_Cafe_Accounting_System.Models;
 using Cats_Cafe_Accounting_System.RegularClasses;
+using Cats_Cafe_Accounting_System.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +27,24 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public VisitorsViewModel()
         {
             // Инициализация коллекции питомцев
-            Visitors = new ObservableCollection<VisitorModel>();
-            Visitors.Add(new VisitorModel { FirstName = "loh", LastName="lohov", Pathronymic = "lohovich", Gender = new Gender(0, "Мужской"), Birthday = new DateOnly(2023, 05, 23) });
-            Visitors.Add(new VisitorModel { FirstName = "дада", LastName = "да", Pathronymic = "дадада", Gender = new Gender(1, "Женский"), Birthday = new DateOnly(2023, 02, 01)});
-            Visitors.Add(new VisitorModel { FirstName = ", ", LastName = "чел", Pathronymic = "ты..", Gender = new Gender(0, "Мужской"), Birthday = new DateOnly(2023, 11, 19)});
+            Visitors = GetVisitorsFromTable("visitor");
+        }
+        public static ObservableCollection<VisitorModel> GetVisitorsFromTable(string table)
+        {
+            ObservableCollection<VisitorModel> visitors = new ObservableCollection<VisitorModel>();
 
+            DataTable dataTable = DBContext.GetTable(table);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                VisitorModel visitor = new VisitorModel(Convert.ToInt32(row["id"]), row["last_name"].ToString(), row["first_name"].ToString(), row["pathronymic"].ToString(),
+                    Convert.ToInt32(row["gender_id"]),
+                    row["phone_number"].ToString(), DateTime.Parse(row["birthday"].ToString()),
+                    new Gender(Convert.ToInt32(row["gender_id"])));
+                visitors.Add(visitor);
+            }
+
+            return visitors;
         }
     }
 }
