@@ -1,8 +1,10 @@
 ﻿using Cats_Cafe_Accounting_System.Models;
 using Cats_Cafe_Accounting_System.RegularClasses;
+using Cats_Cafe_Accounting_System.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -21,11 +23,26 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public PetsViewModel()
         {
             // Инициализация коллекции питомцев
-            Pets = new ObservableCollection<PetModel>();
-            Pets.Add(new PetModel { Name = "Барсик", Gender = new Gender(0, "Мужской"), Status = new Status(0, "Числится"), Breed = new Breed(0, "Чихуа-хуа"), Birthday = new DateOnly(2023, 05, 23), CheckInDate = new DateOnly(2024, 01, 01), PassNumber = "fneiwjnk123" });
-            Pets.Add(new PetModel { Name = "Мурзик", Gender = new Gender(0, "Мужской"), Status = new Status(1, "Не числится"), Breed = new Breed(1, "бульдог"), Birthday = new DateOnly(2023, 02, 01), CheckInDate = new DateOnly(2023, 05, 05), PassNumber = "hiofw789" });
-            Pets.Add(new PetModel { Name = "Пушинка", Gender = new Gender(1, "Женский"), Status = new Status(0, "Числится"), Breed = new Breed(2, "Кошка"), Birthday = new DateOnly(2023, 11, 19), CheckInDate = new DateOnly(2024, 01, 01), PassNumber = "puh456" });
+            Pets = GetPetsFromTable("pet");
+        }
+        public static ObservableCollection<PetModel> GetPetsFromTable(string table)
+        {
+            ObservableCollection<PetModel> pets = new ObservableCollection<PetModel>();
 
+            DataTable dataTable = DBContext.GetTable(table);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                //DateTime temp = DateTime.Parse(row["birthday"].ToString());
+                PetModel pet = new PetModel(Convert.ToInt32(row["id"]), row["name"].ToString(),
+                    Convert.ToInt32(row["gender_id"]), Convert.ToInt32(row["status_id"]),
+                    row["breed_id"].ToString(), DateTime.Parse(row["birthday"].ToString()),
+                    DateTime.Parse(row["check_in_date"].ToString()), row["pass_number"].ToString(),
+                    new Breed(row["breed_id"].ToString()), new Gender(Convert.ToInt32(row["gender_id"])), new Status(Convert.ToInt32(row["status_id"])));
+                pets.Add(pet);
+            }
+
+            return pets;
         }
     }
 }
