@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="PanelNavigationButton"
-TargetType="RadioButton">
+TargetType="ToggleButton">
         <Setter Property="HorizontalAlignment"
      Value="Center" />
         <Setter Property="VerticalAlignment"
@@ -12,7 +12,7 @@ TargetType="RadioButton">
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
+                <ControlTemplate TargetType="ToggleButton">
 
                     <Border x:Name="border"
                  Height="50"

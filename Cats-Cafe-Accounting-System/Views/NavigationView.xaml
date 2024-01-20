@@ -30,7 +30,7 @@
                         </ToolTip>
                     </Border.ToolTip>
                     <TextBlock Text="{Binding Name}"
-                                   Style="{StaticResource Text_Style}"/>
+                               Style="{StaticResource Text_Style}"/>
                 </Border>
             </DataTemplate>
             </ListView.ItemTemplate>
