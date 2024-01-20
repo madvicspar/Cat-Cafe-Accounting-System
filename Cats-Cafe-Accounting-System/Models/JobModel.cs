@@ -1,6 +1,8 @@
 ﻿using Cats_Cafe_Accounting_System.RegularClasses;
+using Cats_Cafe_Accounting_System.Utilities;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -20,6 +22,13 @@ namespace Cats_Cafe_Accounting_System.Models
             Id = id;
             Title = title;
             Rate = rate;
+        }
+        public JobModel(int id)
+        {
+            DataRow row = DBContext.GetById("job", id);
+            Id = Convert.ToInt32(row["id"]);
+            Title = row["title"].ToString();
+            Rate = (float)Convert.ToDouble(row["rate"]);
         }
     }
 }
