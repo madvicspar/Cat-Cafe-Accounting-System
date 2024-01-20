@@ -19,33 +19,24 @@
             </Behaviors:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Height="35">
-                        <Border.ToolTip>
-                            <ToolTip Content="{Binding Description}">
-                                <ToolTip.ContentTemplate>
-                                    <DataTemplate>
-                                        <Menu:Button Style="{StaticResource PanelNavigationButton}"/>
-                                    </DataTemplate>
-                                </ToolTip.ContentTemplate>
-                            </ToolTip>
-                        </Border.ToolTip>
-                        <TextBlock Text="{Binding Name}"
+                <Border Height="35">
+                    <Border.ToolTip>
+                        <ToolTip Content="{Binding Description}">
+                            <ToolTip.ContentTemplate>
+                                <DataTemplate>
+                                    <Menu:Button Style="{StaticResource PanelNavigationButton}"/>
+                                </DataTemplate>
+                            </ToolTip.ContentTemplate>
+                        </ToolTip>
+                    </Border.ToolTip>
+                    <TextBlock Text="{Binding Name}"
                                    Style="{StaticResource Text_Style}"/>
                 </Border>
-                    <!--<Menu:Button Style="{StaticResource PanelNavigationButton}">
-
-                        <Grid>
-
-                            <TextBlock Text="{Binding Name}"
-                               Style="{StaticResource Text_Style}"/>
-
-                        </Grid>
-
-                    </Menu:Button>-->
-                </DataTemplate>
+            </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+        
 
     
 </UserControl>

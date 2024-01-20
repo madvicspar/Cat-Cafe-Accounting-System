@@ -18,6 +18,12 @@
     <DataTemplate DataType="{x:Type vm:JobsViewModel}">
         <vw:JobsView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EmployeesViewModel}">
+        <vw:EmployeesView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TicketsViewModel}">
+        <vw:TicketsView />
+    </DataTemplate>
 
 
 </ResourceDictionary>

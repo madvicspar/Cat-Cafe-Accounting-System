@@ -18,7 +18,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
         public string Phone { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateOnly Birthday { get; set; }
         [ForeignKey("Job")]
         public int JobId { get; set; }
         public JobModel Job { get; set; }

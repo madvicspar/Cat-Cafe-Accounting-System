@@ -40,3 +40,7 @@ D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ob
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\VisitorsView.baml
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\JobsView.g.cs
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\JobsView.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\EmployeesView.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\EmployeesView.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\TicketsView.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\TicketsView.baml

@@ -27,8 +27,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             // Инициализация коллекции питомцев
             Visitors = new ObservableCollection<VisitorModel>();
             Visitors.Add(new VisitorModel { FirstName = "loh", LastName="lohov", Pathronymic = "lohovich", Gender = new Gender(0, "Мужской"), Birthday = new DateOnly(2023, 05, 23) });
-            Visitors.Add(new VisitorModel { FirstName = "да", LastName = "дада", Pathronymic = "дадада", Gender = new Gender(1, "Женский"), Birthday = new DateOnly(2023, 02, 01)});
-            Visitors.Add(new VisitorModel { FirstName = "чел", LastName = ", ", Pathronymic = "ты..", Gender = new Gender(0, "Мужской"), Birthday = new DateOnly(2023, 11, 19)});
+            Visitors.Add(new VisitorModel { FirstName = "дада", LastName = "да", Pathronymic = "дадада", Gender = new Gender(1, "Женский"), Birthday = new DateOnly(2023, 02, 01)});
+            Visitors.Add(new VisitorModel { FirstName = ", ", LastName = "чел", Pathronymic = "ты..", Gender = new Gender(0, "Мужской"), Birthday = new DateOnly(2023, 11, 19)});
 
         }
     }
