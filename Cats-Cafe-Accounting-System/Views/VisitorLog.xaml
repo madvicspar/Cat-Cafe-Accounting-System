@@ -30,11 +30,12 @@
                     <Grid Grid.Row="1">
                         <DataGrid ItemsSource="{Binding VisitorsLogEntries}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Посетитель" Binding="{Binding VisitorId}"/>
-                                <DataGridTextColumn Header="Билет" Binding="{Binding TicketId}" />
+                                <DataGridTextColumn Header="Посетитель" Binding="{Binding Visitor.FirstName}"/>
+                                <DataGridTextColumn Header="Билет" Binding="{Binding Ticket.Price}" />
                                 <DataGridTextColumn Header="Количество билетов" Binding="{Binding TicketsCount}" />
                                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}"/>
                                 <DataGridTextColumn Header="Время начала" Binding="{Binding TimeStart}" />
+                                <DataGridTextColumn Header="Время конца" Binding="{Binding TimeEnd}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

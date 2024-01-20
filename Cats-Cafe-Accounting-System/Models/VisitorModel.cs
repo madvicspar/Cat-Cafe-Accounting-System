@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Cats_Cafe_Accounting_System.RegularClasses;
 using System.Xml.Linq;
+using Cats_Cafe_Accounting_System.Utilities;
+using System.Data;
+using System.Windows.Media;
+using System.Reflection;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -28,6 +32,18 @@ namespace Cats_Cafe_Accounting_System.Models
             Phone = phone;
             Birthday = birthday;
             Gender = gender;
+        }
+        public VisitorModel(int id)
+        {
+            DataRow row = DBContext.GetById("visitor", id);
+            Id = Convert.ToInt32(row["id"]);
+            FirstName = row["first_name"].ToString();
+            LastName = row["last_name"].ToString();
+            Pathronymic = row["pathronymic"].ToString();
+            GenderId = Convert.ToInt32(row["gender_id"]);
+            Phone = row["phone_number"].ToString();
+            Birthday = DateTime.Parse(row["birthday"].ToString());
+            Gender = new Gender(GenderId);
         }
     }
 }
