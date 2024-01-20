@@ -10,6 +10,9 @@
     <Compile Update="Views\AuthorizationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\EmployeeShiftLog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\EmployeesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,7 +25,13 @@
     <Compile Update="Views\PetsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PetTransferLog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\TicketsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\VisitorLog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\VisitorsView.xaml.cs">
@@ -48,6 +57,9 @@
     <Page Update="Views\AuthorizationView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\EmployeeShiftLog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\EmployeesView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -60,7 +72,13 @@
     <Page Update="Views\PetsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\PetTransferLog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\TicketsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\VisitorLog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\VisitorsView.xaml">

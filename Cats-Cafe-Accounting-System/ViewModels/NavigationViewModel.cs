@@ -31,13 +31,19 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             VisitorsViewModel visitorsViewModel,
             JobsViewModel jobsViewModel,
             EmployeesViewModel employeesViewModel,
-            TicketsViewModel ticketsViewModel)
+            TicketsViewModel ticketsViewModel,
+            PetTransferLogViewModel petTransferLogViewModel,
+            EmployeeShiftLogViewModel employeeShiftLogViewModel,
+            VisitorsLogViewModel visitorsLogViewModel)
         {
             NavigationOptions.Add(new() { Name = "Pets", Description = "", DestinationVM = petsViewModel });
             NavigationOptions.Add(new() { Name = "Visitors", Description = "", DestinationVM = visitorsViewModel });
             NavigationOptions.Add(new() { Name = "Jobs", Description = "", DestinationVM = jobsViewModel });
             NavigationOptions.Add(new() { Name = "Employees", Description = "", DestinationVM = employeesViewModel });
             NavigationOptions.Add(new() { Name = "Tickets", Description = "", DestinationVM = ticketsViewModel });
+            NavigationOptions.Add(new() { Name = "VisitorsLog", Description = "", DestinationVM = visitorsLogViewModel });
+            NavigationOptions.Add(new() { Name = "EmployeeShiiftLog", Description = "", DestinationVM = employeeShiftLogViewModel });
+            NavigationOptions.Add(new() { Name = "PetTransferlog", Description = "", DestinationVM = petTransferLogViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);
             WeakReferenceMessenger.Default.Send(message);

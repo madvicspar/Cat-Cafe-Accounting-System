@@ -14,6 +14,6 @@ namespace Cats_Cafe_Accounting_System.Models
         [ForeignKey("Pet")]
         public int PetId { get; set; }
         public PetModel Pet { get; set; }
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
     }
 }

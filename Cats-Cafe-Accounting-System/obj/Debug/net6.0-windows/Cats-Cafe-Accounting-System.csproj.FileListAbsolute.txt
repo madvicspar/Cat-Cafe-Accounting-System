@@ -44,3 +44,9 @@ D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ob
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\EmployeesView.baml
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\TicketsView.g.cs
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\TicketsView.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\EmployeeShiftLog.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PetTransferLog.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\VisitorLog.g.cs
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\EmployeeShiftLog.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PetTransferLog.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\VisitorLog.baml

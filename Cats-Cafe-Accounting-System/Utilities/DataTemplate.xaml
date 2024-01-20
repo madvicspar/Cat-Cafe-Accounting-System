@@ -24,6 +24,15 @@
     <DataTemplate DataType="{x:Type vm:TicketsViewModel}">
         <vw:TicketsView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EmployeeShiftLogViewModel}">
+        <vw:EmployeeShiftLog />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PetTransferLogViewModel}">
+        <vw:PetTransferLog />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:VisitorsLogViewModel}">
+        <vw:VisitorLog />
+    </DataTemplate>
 
 
 </ResourceDictionary>
