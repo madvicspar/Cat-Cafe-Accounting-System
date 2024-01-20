@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Cats_Cafe_Accounting_System.RegularClasses;
+using Cats_Cafe_Accounting_System.Utilities;
+using System.Data;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -45,6 +47,21 @@ namespace Cats_Cafe_Accounting_System.Models
             Breed = breed;
             Gender = gender;
             Status = status;
+        }
+        public PetModel(int id)
+        {
+            DataRow row = DBContext.GetById("pet", id);
+            Id = id;
+            Name = row["name"].ToString();
+            GenderId = Convert.ToInt32(row["gender_id"]);
+            StatusId = Convert.ToInt32(row["status_id"]);
+            BreedId = row["breed_id"].ToString();
+            Birthday = DateTime.Parse(row["birthday"].ToString());
+            CheckInDate = DateTime.Parse(row["check_in_date"].ToString());
+            PassNumber = row["pass_number"].ToString();
+            Breed = new Breed(BreedId);
+            Gender = new Gender(GenderId);
+            Status = new Status(StatusId);
         }
     }
 }
