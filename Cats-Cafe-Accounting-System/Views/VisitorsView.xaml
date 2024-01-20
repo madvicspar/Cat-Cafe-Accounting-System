@@ -34,6 +34,7 @@
                                 <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
                                 <DataGridTextColumn Header="Отчество" Binding="{Binding Pathronymic}" />
                                 <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Title}"/>
+                                <DataGridTextColumn Header="Номер телефона" Binding="{Binding Phone}" />
                                 <DataGridTextColumn Header="День рождения" Binding="{Binding Birthday}" />
                             </DataGrid.Columns>
                         </DataGrid>
