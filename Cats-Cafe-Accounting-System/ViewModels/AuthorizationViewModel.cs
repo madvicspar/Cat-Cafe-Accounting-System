@@ -61,7 +61,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (CanExecuteSignInCommand())
             {
-                if(DBContext.Auth(new NetworkCredential(UserName, Password)))
+                if(DBContext.AuthenticateUser(new NetworkCredential(UserName, Password)))
                 {
                     var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
                     authorizationWindow?.Close();

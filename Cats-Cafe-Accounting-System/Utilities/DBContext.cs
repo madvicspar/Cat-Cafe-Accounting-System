@@ -46,55 +46,6 @@ namespace Cats_Cafe_Accounting_System.Utilities
             return dataTable;
         }
 
-        public static DataTable GetTableWithForeignKeys(string table)
-        {
-            DataTable dataTable = new DataTable();
-            try
-            {
-                OpenConnection();
-
-                string query = "SELECT";
-                string join = "";
-
-                List<string> attributes = GetAttributes(table);
-                List<string> foreignKeys = attributes.Where(item => Regex.IsMatch(item, "_id$")).ToList();
-
-                for (int i = 0; i < attributes.Count; i++)
-                {
-                    if (foreignKeys.Contains(attributes[i]))
-                    {
-                        int j = foreignKeys.IndexOf(attributes[i]);
-                        string foreignTable = foreignKeys[j].Substring(0, foreignKeys[j].IndexOf('_'));
-                        if (foreignTable == "visitor" || foreignTable == "employee")
-                            query += $" {foreignTable}.last_name || {foreignTable}.first_name || {foreignTable}.last_name AS {foreignKeys[j]},";
-                        else if (foreignTable == "pet")
-                            query += $" {foreignTable}.name,";
-                        else if (foreignTable == "ticket")
-                            query += $" {foreignTable}.comments,";
-                        else
-                            query += $" {foreignTable}.title,";
-                        join += $" LEFT JOIN {foreignTable} ON {table}.{foreignKeys[j]} = {foreignTable}.id";
-                    }
-                    else
-                        query += $" {table}.{attributes[i]},";
-                }
-                query = query.TrimEnd(',');
-                query += $" FROM {table}";
-                if (foreignKeys.Count > 0)
-                    query += join + ";";
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
-
-                adapter.Fill(dataTable);
-                CloseConnection();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
-            }
-            return dataTable;
-        }
-
         public static List<string> GetAttributes(string table)
         {
             List<string> attributes = new List<string>();
@@ -151,12 +102,12 @@ namespace Cats_Cafe_Accounting_System.Utilities
             cmd.ExecuteNonQuery();
             CloseConnection();
         }
-        public static DataRow GetById(string foreignTable, int id)
+        public static DataRow GetById<T>(string foreignTable, T id)
         {
             try
             {
                 OpenConnection();
-                string query = $"SELECT * FROM {foreignTable} WHERE {foreignTable}.id = {id}";
+                string query = $"SELECT * FROM {foreignTable} WHERE {foreignTable}.id = '{id}'";
 
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
 
@@ -174,30 +125,7 @@ namespace Cats_Cafe_Accounting_System.Utilities
 
             return null;
         }
-        public static DataRow GetById(string table, string id)
-        {
-            try
-            {
-                OpenConnection();
-                string query = $"SELECT * FROM {table} WHERE id = '{id}'";
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
-
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                CloseConnection();
-
-                if (dataTable.Rows.Count > 0)
-                    return dataTable.Rows[0];
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
-            }
-
-            return null;
-        }
-        public static bool Auth(NetworkCredential credential)
+        public static bool AuthenticateUser(NetworkCredential credential)
         {
             bool validUser;
             using (var command = new MySqlCommand())
