@@ -25,7 +25,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public int JobId { get; set; }
         public JobModel Job { get; set; }
         public string ContractNumber { get; set; }
-        public SecureString Pass { get; set; }
+        public string Pass { get; set; }
         public string Salt { get; set; }
         public EmployeeModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, int jobId, string contractNumber, Gender gender, JobModel job)
         {
@@ -53,6 +53,7 @@ namespace Cats_Cafe_Accounting_System.Models
             Birthday = DateTime.Parse(row["birthday"].ToString());
             JobId = Convert.ToInt32(row["job_id"]); ;
             ContractNumber = row["contract_number"].ToString();
+            Pass = row["pass"].ToString();
             Gender = new Gender(GenderId);
             Job = new JobModel(JobId);
         }

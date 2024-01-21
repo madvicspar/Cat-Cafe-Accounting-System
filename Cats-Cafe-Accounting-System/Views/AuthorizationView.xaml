@@ -74,12 +74,24 @@
                         Grid.Row="3"
                         Orientation="Vertical"
                         VerticalAlignment="Top">
-                <TextBlock Text="Username"
-                           Foreground="DarkGray"
-                           FontSize="12"
-                           FontWeight="Medium"
-                           FontFamily="Montserrat"
-                           Margin="0,0,0,0" />
+                <Grid>
+
+                    <TextBlock Text="Username"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Width="60"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding UsernameError, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Margin="60,0,0,0"
+                               HorizontalAlignment="Left"/>
+
+                </Grid>
 
                 <TextBox x:Name="UsernameInput"
                          Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
@@ -92,7 +104,7 @@
                          BorderThickness="0,0,0,2"
                          Height="30"
                          VerticalContentAlignment="Center"
-                         Margin="0,5,0,0"
+                         Margin="0,5,0,15"
                          Padding="20,0,0,0"
                          Background="#DBDBDB">
 
@@ -100,19 +112,28 @@
 
                 </TextBox>
 
-                <TextBlock Text="Password"
-                           Foreground="DarkGray"
-                           FontSize="12"
-                           FontWeight="Medium"
-                           FontFamily="MontSerrat"
-                           Margin="0, 15,0,0" />
+                <Grid>
+
+                    <TextBlock Text="Password"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="MontSerrat"/>
+                    <TextBlock Text="{Binding PasswordError}"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="MontSerrat"
+                               Margin="55,0,0,0" />
+
+                </Grid>
+
 
 
                 <Grid>
 
                     <PasswordBox x:Name="PasswordBox"
-                                 Pass:PasswordBox_Binding.Password="{Binding Password}"
-                                 />
+                                 Pass:PasswordBox_Binding.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBox x:Name="PasswordTextBox" 
                              Height="30"
@@ -126,7 +147,8 @@
                              VerticalContentAlignment="Center"
                              Padding="20,0,0,0"
                              Background="#DBDBDB"
-                             Visibility="Hidden"/>
+                             Visibility="Hidden"
+                             Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 </Grid>
 
@@ -138,7 +160,7 @@
                               Unchecked="CheckBox_Changed"/>
 
                 <Button x:Name="LoginButton" 
-                        Command="{Binding OpenMainWindowCommand}"
+                        Command="{Binding SignInCommand}"
                         BorderThickness="0"
                         Content="LOG IN"
                         Foreground="#272B2F"

@@ -5,6 +5,7 @@ using System;
 using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace Cats_Cafe_Accounting_System.Utilities
 {
@@ -173,12 +174,12 @@ namespace Cats_Cafe_Accounting_System.Utilities
 
             return null;
         }
-        public static DataRow GetById(string foreignTable, string id)
+        public static DataRow GetById(string table, string id)
         {
             try
             {
                 OpenConnection();
-                string query = $"SELECT * FROM {foreignTable} WHERE id = '{id}'";
+                string query = $"SELECT * FROM {table} WHERE id = '{id}'";
 
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
 
@@ -195,6 +196,20 @@ namespace Cats_Cafe_Accounting_System.Utilities
             }
 
             return null;
+        }
+        public static bool Auth(NetworkCredential credential)
+        {
+            bool validUser;
+            using (var command = new MySqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "select *from employee where id=@username and pass=@password";
+                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;
+                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = credential.Password;
+                validUser = command.ExecuteScalar() == null ? false : true;
+            }
+            return validUser;
         }
     }
 }
