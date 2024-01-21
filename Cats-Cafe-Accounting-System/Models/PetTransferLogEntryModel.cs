@@ -28,7 +28,7 @@ namespace Cats_Cafe_Accounting_System.Models
         }
         public PetTransferLogEntryModel(int id)
         {
-            DataRow row = DBContext.GetById("owner_log", id);
+            DataRow row = DBContext.GetById("pet_transfer_log_entries", id);
             Id = id;
             Date = DateTime.Parse(row["date"].ToString());
             VisitorId = Convert.ToInt32(row["visitor_id"]);

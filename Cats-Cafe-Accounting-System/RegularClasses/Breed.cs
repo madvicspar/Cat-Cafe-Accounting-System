@@ -17,7 +17,7 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
         }
         public Breed(string id)
         {
-            DataRow row = DBContext.GetById("breed", id);
+            DataRow row = DBContext.GetById("breeds", id);
             Id = row["id"].ToString();
             Title = row["title"].ToString();
         }

@@ -26,7 +26,7 @@ namespace Cats_Cafe_Accounting_System.Models
         }
         public EmployeeShiftLogEntryModel(int id)
         {
-            DataRow row = DBContext.GetById("employee_shift_log", id);
+            DataRow row = DBContext.GetById("employee_shift_log_entries", id);
             Id = id;
             Date = DateTime.Parse(row["date"].ToString());
             EmployeeId = Convert.ToInt32(row["employee_id"]);

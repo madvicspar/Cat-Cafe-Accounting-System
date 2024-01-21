@@ -22,7 +22,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public TicketsViewModel()
         {
             // Инициализация коллекции питомцев
-            Tickets = GetTicketsFromTable("ticket");
+            Tickets = GetTicketsFromTable("tickets");
         }
         public static ObservableCollection<TicketModel> GetTicketsFromTable(string table)
         {
@@ -33,7 +33,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (DataRow row in dataTable.Rows)
             {
                 TicketModel ticket = new TicketModel(Convert.ToInt32(row["id"]), (float)Convert.ToDouble(row["price"]),
-                    Convert.ToInt32(row["pet_id"]), row["comments"].ToString());
+                    row["pet_id"].ToString() == ""? 0 : Convert.ToInt32(row["pet_id"]), row["comments"].ToString());
                 tickets.Add(ticket);
             }
 

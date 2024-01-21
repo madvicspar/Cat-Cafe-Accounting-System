@@ -34,7 +34,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             TicketsViewModel ticketsViewModel,
             PetTransferLogViewModel petTransferLogViewModel,
             EmployeeShiftLogViewModel employeeShiftLogViewModel,
-            VisitorsLogViewModel visitorsLogViewModel)
+            VisitLogViewModel visitorsLogViewModel)
         {
             NavigationOptions.Add(new() { Name = "Pets", Description = "", DestinationVM = petsViewModel });
             NavigationOptions.Add(new() { Name = "Visitors", Description = "", DestinationVM = visitorsViewModel });

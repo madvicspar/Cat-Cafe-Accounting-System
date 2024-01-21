@@ -25,10 +25,10 @@ namespace Cats_Cafe_Accounting_System.Models
         }
         public TicketModel(int id)
         {
-            DataRow row = DBContext.GetById("ticket", id);
+            DataRow row = DBContext.GetById("tickets", id);
             Id = Convert.ToInt32(row["id"]);
             Price = (float)Convert.ToDouble(row["price"]);
-            PetId = Convert.ToInt32(row["pet_id"]);
+            PetId = row["pet_id"].ToString() == "" ? 0 : Convert.ToInt32(row["pet_id"]);
             Comments = row["comments"].ToString();
             Pet = new PetModel(PetId);
         }

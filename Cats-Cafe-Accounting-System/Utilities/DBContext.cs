@@ -125,17 +125,32 @@ namespace Cats_Cafe_Accounting_System.Utilities
 
             return null;
         }
+        public static bool UsernameIsExist(NetworkCredential credential)
+        {
+            bool validUser;
+            using (var command = new MySqlCommand())
+            {
+                OpenConnection();
+                command.Connection = connection;
+                command.CommandText = "select *from employees where username=@username";
+                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;
+                validUser = command.ExecuteScalar() == null ? false : true;
+                CloseConnection();
+            }
+            return validUser;
+        }
         public static bool AuthenticateUser(NetworkCredential credential)
         {
             bool validUser;
             using (var command = new MySqlCommand())
             {
-                connection.Open();
+                OpenConnection();
                 command.Connection = connection;
-                command.CommandText = "select *from employee where id=@username and pass=@password";
+                command.CommandText = "select *from employees where username=@username and password=@password";
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;
                 command.Parameters.Add("@password", MySqlDbType.VarChar).Value = credential.Password;
                 validUser = command.ExecuteScalar() == null ? false : true;
+                CloseConnection() ;
             }
             return validUser;
         }

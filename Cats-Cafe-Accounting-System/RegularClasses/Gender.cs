@@ -18,7 +18,7 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
         }
         public Gender(int id)
         {
-            DataRow row = DBContext.GetById("gender", id);
+            DataRow row = DBContext.GetById("genders", id);
             Id = Convert.ToInt32(row["id"]);
             Title = row["title"].ToString();
         }

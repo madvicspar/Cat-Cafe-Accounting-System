@@ -22,7 +22,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public PetTransferLogViewModel()
         {
             // Инициализация коллекции питомцев
-            PetTransferLogEntries = GetPetTransferLogEntriesFromTable("owner_log");
+            PetTransferLogEntries = GetPetTransferLogEntriesFromTable("pet_transfer_log_entries");
         }
         public static ObservableCollection<PetTransferLogEntryModel> GetPetTransferLogEntriesFromTable(string table)
         {
@@ -32,7 +32,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             foreach (DataRow row in dataTable.Rows)
             {
-                PetTransferLogEntryModel petTransferLogEntry = new PetTransferLogEntryModel(Convert.ToInt32(row["id_entry"]), 
+                PetTransferLogEntryModel petTransferLogEntry = new PetTransferLogEntryModel(Convert.ToInt32(row["id"]), 
                     DateTime.Parse(row["date"].ToString()), Convert.ToInt32(row["visitor_id"]), Convert.ToInt32(row["pet_id"]));
                 petTransferLogEntries.Add(petTransferLogEntry);
             }

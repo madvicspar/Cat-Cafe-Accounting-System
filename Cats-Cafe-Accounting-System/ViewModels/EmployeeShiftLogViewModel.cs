@@ -22,7 +22,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public EmployeeShiftLogViewModel()
         {
             // Инициализация коллекции питомцев
-            EmployeeShiftLogEntries = GetEmployeeShiftLogEntriesFromTable("employee_shift_log");
+            EmployeeShiftLogEntries = GetEmployeeShiftLogEntriesFromTable("employee_shift_log_entries");
         }
         public static ObservableCollection<EmployeeShiftLogEntryModel> GetEmployeeShiftLogEntriesFromTable(string table)
         {
@@ -32,7 +32,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             foreach (DataRow row in dataTable.Rows)
             {
-                EmployeeShiftLogEntryModel employeeShiftLogEntry = new EmployeeShiftLogEntryModel(Convert.ToInt32(row["id_entry"]), 
+                EmployeeShiftLogEntryModel employeeShiftLogEntry = new EmployeeShiftLogEntryModel(Convert.ToInt32(row["id"]), 
                     DateTime.Parse(row["date"].ToString()), Convert.ToInt32(row["employee_id"]), row["comments"].ToString());
                 employeeShiftLogEntries.Add(employeeShiftLogEntry);
             }

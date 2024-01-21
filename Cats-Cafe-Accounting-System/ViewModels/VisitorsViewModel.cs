@@ -27,7 +27,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public VisitorsViewModel()
         {
             // Инициализация коллекции питомцев
-            Visitors = GetVisitorsFromTable("visitor");
+            Visitors = GetVisitorsFromTable("visitors");
         }
         public static ObservableCollection<VisitorModel> GetVisitorsFromTable(string table)
         {

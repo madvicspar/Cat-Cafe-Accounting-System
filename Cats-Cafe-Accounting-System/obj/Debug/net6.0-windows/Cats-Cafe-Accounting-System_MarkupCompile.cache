@@ -12,7 +12,7 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\App.xaml
 152134584072
 
-40-717593391
+402041784526
 2061718946458
 MainWindow.xaml;Styles\Button.xaml;Styles\PasswordBox_Binding.xaml;Styles\Text.xaml;Utilities\DataTemplate.xaml;Views\AuthorizationView.xaml;Views\EmployeeShiftLog.xaml;Views\EmployeesView.xaml;Views\JobsView.xaml;Views\NavigationView.xaml;Views\PetsView.xaml;Views\PetTransferLog.xaml;Views\TicketsView.xaml;Views\VisitorLog.xaml;Views\VisitorsView.xaml;
 

@@ -27,7 +27,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public JobsViewModel()
         {
             // Инициализация коллекции питомцев
-            Jobs = GetJobsFromTable("job");
+            Jobs = GetJobsFromTable("jobs");
         }
         public static ObservableCollection<JobModel> GetJobsFromTable(string table)
         {

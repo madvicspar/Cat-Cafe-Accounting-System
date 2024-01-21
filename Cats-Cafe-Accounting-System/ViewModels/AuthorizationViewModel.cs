@@ -52,7 +52,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public AuthorizationViewModel()
         {
-            UserName = "6";
             SignInCommand = new RelayCommand(ExecuteSignInCommand);
         }
 
@@ -69,8 +68,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 }
                 else
                 {
-                    DataRow row = DBContext.GetById("employee", 6); // заменить на username и вообще сделать новый метод и поле(бд)
-                    if (row != null)
+                    if (DBContext.UsernameIsExist(new NetworkCredential(UserName, "")))
                     {
                         UsernameError = "";
                         PasswordError = "(invalid password)";

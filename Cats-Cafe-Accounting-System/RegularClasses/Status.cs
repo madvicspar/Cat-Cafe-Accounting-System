@@ -18,7 +18,7 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
         }
         public Status(int id)
         {
-            DataRow row = DBContext.GetById("status", id);
+            DataRow row = DBContext.GetById("statuses", id);
             Id = Convert.ToInt32(row["id"]);
             Title = row["title"].ToString();
         }

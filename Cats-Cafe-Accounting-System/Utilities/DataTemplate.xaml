@@ -30,7 +30,7 @@
     <DataTemplate DataType="{x:Type vm:PetTransferLogViewModel}">
         <vw:PetTransferLog />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:VisitorsLogViewModel}">
+    <DataTemplate DataType="{x:Type vm:VisitLogViewModel}">
         <vw:VisitorLog />
     </DataTemplate>
 

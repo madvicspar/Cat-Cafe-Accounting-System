@@ -32,7 +32,7 @@ namespace Cats_Cafe_Accounting_System.Models
         }
         public VisitorModel(int id)
         {
-            DataRow row = DBContext.GetById("visitor", id);
+            DataRow row = DBContext.GetById("visitors", id);
             Id = Convert.ToInt32(row["id"]);
             FirstName = row["first_name"].ToString();
             LastName = row["last_name"].ToString();

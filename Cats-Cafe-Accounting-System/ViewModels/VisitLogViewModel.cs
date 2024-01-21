@@ -8,10 +8,10 @@ using System.Data;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
-    public class VisitorsLogViewModel : ObservableObject
+    public class VisitLogViewModel : ObservableObject
     {
-        private ObservableCollection<VisitorLogEntryModel> visitorsLogEntries;
-        public ObservableCollection<VisitorLogEntryModel> VisitorsLogEntries
+        private ObservableCollection<VisitLogEntryModel> visitorsLogEntries;
+        public ObservableCollection<VisitLogEntryModel> VisitorsLogEntries
         {
             get { return visitorsLogEntries; }
             set
@@ -20,21 +20,21 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(VisitorsLogEntries));
             }
         }
-        public VisitorsLogViewModel()
+        public VisitLogViewModel()
         {
             // Инициализация коллекции питомцев
-            VisitorsLogEntries = GetVisitorsLogEntriesFromTable("visitor_log");
+            VisitorsLogEntries = GetVisitorsLogEntriesFromTable("visit_log_entries");
         }
-        public static ObservableCollection<VisitorLogEntryModel> GetVisitorsLogEntriesFromTable(string table)
+        public static ObservableCollection<VisitLogEntryModel> GetVisitorsLogEntriesFromTable(string table)
         {
-            ObservableCollection<VisitorLogEntryModel> visitorsLogEntries = new ObservableCollection<VisitorLogEntryModel>();
+            ObservableCollection<VisitLogEntryModel> visitorsLogEntries = new ObservableCollection<VisitLogEntryModel>();
 
             DataTable dataTable = DBContext.GetTable(table);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                VisitorLogEntryModel visitorsLogEntry = new VisitorLogEntryModel(Convert.ToInt32(row["id_entry"]), DateTime.Parse(row["date"].ToString()),
-                    DateTime.Parse(row["start_time"].ToString()), DateTime.Parse(row["end_time"].ToString()),
+                VisitLogEntryModel visitorsLogEntry = new VisitLogEntryModel(Convert.ToInt32(row["id"]), DateTime.Parse(row["date"].ToString()),
+                    DateTime.Parse(row["start_time"].ToString()),
                     Convert.ToInt32(row["visitor_id"]), Convert.ToInt32(row["ticket_id"]),Convert.ToInt32(row["tickets_count"]));
                 visitorsLogEntries.Add(visitorsLogEntry);
             }

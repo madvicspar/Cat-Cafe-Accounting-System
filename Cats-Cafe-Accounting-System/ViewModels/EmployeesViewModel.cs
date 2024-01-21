@@ -27,7 +27,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public EmployeesViewModel()
         {
             // Инициализация коллекции питомцев
-            Employees = GetEmployeesFromTable("employee");
+            Employees = GetEmployeesFromTable("employees");
         }
         public static ObservableCollection<EmployeeModel> GetEmployeesFromTable(string table)
         {
@@ -40,7 +40,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 EmployeeModel employee = new EmployeeModel(Convert.ToInt32(row["id"]), row["last_name"].ToString(), 
                     row["first_name"].ToString(), row["pathronymic"].ToString(), Convert.ToInt32(row["gender_id"]),
                     row["phone_number"].ToString(), DateTime.Parse(row["birthday"].ToString()),
-                    Convert.ToInt32(row["job_id"]), row["contract_number"].ToString());
+                    Convert.ToInt32(row["job_id"]), row["username"].ToString(), row["contract_number"].ToString());
                 emplyees.Add(employee);
             }
 

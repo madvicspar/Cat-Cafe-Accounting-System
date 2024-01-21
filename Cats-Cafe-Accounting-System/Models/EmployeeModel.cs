@@ -11,7 +11,6 @@ namespace Cats_Cafe_Accounting_System.Models
     {
         [Key]
         public int Id { get; set; }
-        //public string Username { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Pathronymic { get; set; }
@@ -24,9 +23,10 @@ namespace Cats_Cafe_Accounting_System.Models
         public int JobId { get; set; }
         public JobModel Job { get; set; }
         public string ContractNumber { get; set; }
-        public string Pass { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string Salt { get; set; }
-        public EmployeeModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, int jobId, string contractNumber)
+        public EmployeeModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, int jobId, string contractNumber, string username)
         {
             Id = id;
             FirstName = firstName;
@@ -38,11 +38,12 @@ namespace Cats_Cafe_Accounting_System.Models
             Gender = new Gender(GenderId);
             JobId = jobId;
             ContractNumber = contractNumber;
+            Username = username;
             Job = new JobModel(JobId);
         }
         public EmployeeModel(int id)
         {
-            DataRow row = DBContext.GetById("employee", id);
+            DataRow row = DBContext.GetById("employees", id);
             Id = Convert.ToInt32(row["id"]);
             FirstName = row["first_name"].ToString();
             LastName = row["last_name"].ToString();
@@ -52,7 +53,7 @@ namespace Cats_Cafe_Accounting_System.Models
             Birthday = DateTime.Parse(row["birthday"].ToString());
             JobId = Convert.ToInt32(row["job_id"]); ;
             ContractNumber = row["contract_number"].ToString();
-            Pass = row["pass"].ToString();
+            Username = row["username"].ToString();
             Gender = new Gender(GenderId);
             Job = new JobModel(JobId);
         }

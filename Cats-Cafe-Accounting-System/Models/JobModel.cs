@@ -24,7 +24,7 @@ namespace Cats_Cafe_Accounting_System.Models
         }
         public JobModel(int id)
         {
-            DataRow row = DBContext.GetById("job", id);
+            DataRow row = DBContext.GetById("jobs", id);
             Id = Convert.ToInt32(row["id"]);
             Title = row["title"].ToString();
             Rate = (float)Convert.ToDouble(row["rate"]);

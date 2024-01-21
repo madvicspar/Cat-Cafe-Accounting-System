@@ -23,7 +23,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public PetsViewModel()
         {
             // Инициализация коллекции питомцев
-            Pets = GetPetsFromTable("pet");
+            Pets = GetPetsFromTable("pets");
         }
         public static ObservableCollection<PetModel> GetPetsFromTable(string table)
         {
