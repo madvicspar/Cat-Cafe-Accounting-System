@@ -49,13 +49,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
         public ICommand SignInCommand { get; set; }
-        public IRelayCommand OpenMainWindowCommand { get; set; }
 
         public AuthorizationViewModel()
         {
             UserName = "6";
             SignInCommand = new RelayCommand(ExecuteSignInCommand);
-            OpenMainWindowCommand = new RelayCommand(OpenMainWindow);
         }
 
         private void ExecuteSignInCommand()
@@ -93,11 +91,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             //    Password == null || Password.Length < 3)
             //    validData = false;
             //return validData;
-        }
-
-        private void OpenMainWindow()
-        {
-            //WeakReferenceMessenger.Default.Send(new OpenMainWindowMessage());
         }
     }
 }

@@ -21,7 +21,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         }
         public MainWindowViewModel(NavigationViewModel navVM)
         {
-            //WeakReferenceMessenger.Default.Register<OpenMainWindowMessage>(this, OpenMainWindow);
             NavigationVM = navVM;
             CurrentVM = new PetsViewModel();
             WeakReferenceMessenger.Default.Register<NavigationChangedRequestMessage>(this, NavigateTo);
@@ -32,14 +31,5 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             if (message.Value is NavigationModel navModel)
                 CurrentVM = navModel.DestinationVM;
         }
-        //private void OpenMainWindow(object recipient, OpenMainWindowMessage message)
-        //{
-        //    var mainWindow = new MainWindow();
-        //    mainWindow.Show();
-        //}
-    }
-    public class OpenMainWindowMessage
-    {
-
     }
 }
