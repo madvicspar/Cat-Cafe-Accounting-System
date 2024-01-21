@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Security;
-using Cats_Cafe_Accounting_System.RegularClasses;
+﻿using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 namespace Cats_Cafe_Accounting_System.Models
@@ -27,7 +26,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public string ContractNumber { get; set; }
         public string Pass { get; set; }
         public string Salt { get; set; }
-        public EmployeeModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, int jobId, string contractNumber, Gender gender, JobModel job)
+        public EmployeeModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, int jobId, string contractNumber)
         {
             Id = id;
             FirstName = firstName;
@@ -36,10 +35,10 @@ namespace Cats_Cafe_Accounting_System.Models
             GenderId = genderId;
             Phone = phone;
             Birthday = birthday;
-            Gender = gender;
+            Gender = new Gender(GenderId);
             JobId = jobId;
             ContractNumber = contractNumber;
-            Job = job;
+            Job = new JobModel(JobId);
         }
         public EmployeeModel(int id)
         {

@@ -32,11 +32,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             foreach (DataRow row in dataTable.Rows)
             {
-                // вместо того, чтобы передавать лучше сделать уже внутри конструктора (это про pet и тд)
-                // есть pet_id = null? поменять тут потом
                 TicketModel ticket = new TicketModel(Convert.ToInt32(row["id"]), (float)Convert.ToDouble(row["price"]),
-                    5, row["comments"].ToString(), new PetModel(5)
-                    );
+                    Convert.ToInt32(row["pet_id"]), row["comments"].ToString());
                 tickets.Add(ticket);
             }
 

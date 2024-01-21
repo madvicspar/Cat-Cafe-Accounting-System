@@ -35,8 +35,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 VisitorLogEntryModel visitorsLogEntry = new VisitorLogEntryModel(Convert.ToInt32(row["id_entry"]), DateTime.Parse(row["date"].ToString()),
                     DateTime.Parse(row["start_time"].ToString()), DateTime.Parse(row["end_time"].ToString()),
-                    Convert.ToInt32(row["visitor_id"]), Convert.ToInt32(row["ticket_id"]),
-                    Convert.ToInt32(row["tickets_count"]), new VisitorModel(Convert.ToInt32(row["visitor_id"])), new TicketModel(Convert.ToInt32(row["ticket_id"])));
+                    Convert.ToInt32(row["visitor_id"]), Convert.ToInt32(row["ticket_id"]),Convert.ToInt32(row["tickets_count"]));
                 visitorsLogEntries.Add(visitorsLogEntry);
             }
 

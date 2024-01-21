@@ -33,12 +33,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             foreach (DataRow row in dataTable.Rows)
             {
-                //DateTime temp = DateTime.Parse(row["birthday"].ToString());
                 PetModel pet = new PetModel(Convert.ToInt32(row["id"]), row["name"].ToString(),
-                    Convert.ToInt32(row["gender_id"]), Convert.ToInt32(row["status_id"]),
-                    row["breed_id"].ToString(), DateTime.Parse(row["birthday"].ToString()),
-                    DateTime.Parse(row["check_in_date"].ToString()), row["pass_number"].ToString(),
-                    new Breed(row["breed_id"].ToString()), new Gender(Convert.ToInt32(row["gender_id"])), new Status(Convert.ToInt32(row["status_id"])));
+                    Convert.ToInt32(row["gender_id"]), Convert.ToInt32(row["status_id"]), row["breed_id"].ToString(), 
+                    DateTime.Parse(row["birthday"].ToString()), DateTime.Parse(row["check_in_date"].ToString()), 
+                    row["pass_number"].ToString());
                 pets.Add(pet);
             }
 

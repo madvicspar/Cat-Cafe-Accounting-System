@@ -33,20 +33,9 @@ namespace Cats_Cafe_Accounting_System.Models
             Birthday = birthday;
             CheckInDate = checkInDate;
             PassNumber = passNumber;
-        }
-        public PetModel(int id, string name, int genderId, int statusId, string breedId, DateTime birthday, DateTime checkInDate, string passNumber, Breed breed, Gender gender, Status status)
-        {
-            Id = id;
-            Name = name;
-            GenderId = genderId;
-            StatusId = statusId;
-            BreedId = breedId;
-            Birthday = birthday;
-            CheckInDate = checkInDate;
-            PassNumber = passNumber;
-            Breed = breed;
-            Gender = gender;
-            Status = status;
+            Breed = new Breed(BreedId);
+            Gender = new Gender(GenderId);
+            Status = new Status(StatusId);
         }
         public PetModel(int id)
         {

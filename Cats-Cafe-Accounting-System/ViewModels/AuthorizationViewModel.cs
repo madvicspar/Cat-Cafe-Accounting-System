@@ -53,6 +53,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public AuthorizationViewModel()
         {
+            UserName = "6";
             SignInCommand = new RelayCommand(ExecuteSignInCommand);
             OpenMainWindowCommand = new RelayCommand(OpenMainWindow);
         }

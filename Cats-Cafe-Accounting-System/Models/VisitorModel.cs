@@ -2,11 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Cats_Cafe_Accounting_System.RegularClasses;
-using System.Xml.Linq;
 using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
-using System.Windows.Media;
-using System.Reflection;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -22,7 +19,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public Gender Gender { get; set; }
         public string Phone { get; set; }
         public DateTime Birthday { get; set; }
-        public VisitorModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, Gender gender)
+        public VisitorModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday)
         {
             Id = id;
             FirstName = firstName;
@@ -31,7 +28,7 @@ namespace Cats_Cafe_Accounting_System.Models
             GenderId = genderId;
             Phone = phone;
             Birthday = birthday;
-            Gender = gender;
+            Gender = new Gender(GenderId);
         }
         public VisitorModel(int id)
         {

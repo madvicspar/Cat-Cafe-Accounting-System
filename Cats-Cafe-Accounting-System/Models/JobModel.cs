@@ -1,5 +1,4 @@
-﻿using Cats_Cafe_Accounting_System.RegularClasses;
-using Cats_Cafe_Accounting_System.Utilities;
+﻿using Cats_Cafe_Accounting_System.Utilities;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Data;

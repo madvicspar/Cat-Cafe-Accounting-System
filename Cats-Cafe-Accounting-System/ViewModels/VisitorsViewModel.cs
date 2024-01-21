@@ -37,10 +37,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             foreach (DataRow row in dataTable.Rows)
             {
-                VisitorModel visitor = new VisitorModel(Convert.ToInt32(row["id"]), row["last_name"].ToString(), row["first_name"].ToString(), row["pathronymic"].ToString(),
-                    Convert.ToInt32(row["gender_id"]),
-                    row["phone_number"].ToString(), DateTime.Parse(row["birthday"].ToString()),
-                    new Gender(Convert.ToInt32(row["gender_id"])));
+                VisitorModel visitor = new VisitorModel(Convert.ToInt32(row["id"]), row["last_name"].ToString(), 
+                    row["first_name"].ToString(), row["pathronymic"].ToString(),Convert.ToInt32(row["gender_id"]),
+                    row["phone_number"].ToString(), DateTime.Parse(row["birthday"].ToString()));
                 visitors.Add(visitor);
             }
 

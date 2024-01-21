@@ -1,11 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Cats_Cafe_Accounting_System.RegularClasses;
-using System.Security.Cryptography;
 using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
-using System.Xml.Linq;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -23,7 +20,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public int TicketId { get; set; }
         public TicketModel Ticket { get; set; }
         public int TicketsCount { get; set; }
-        public VisitorLogEntryModel(int id, DateTime date, DateTime timeStart, DateTime timeEnd, int visitorId, int ticketId, int ticketsCount, VisitorModel visitor, TicketModel ticket)
+        public VisitorLogEntryModel(int id, DateTime date, DateTime timeStart, DateTime timeEnd, int visitorId, int ticketId, int ticketsCount)
         {
             Id = id;
             Date = date;
@@ -32,8 +29,8 @@ namespace Cats_Cafe_Accounting_System.Models
             VisitorId = visitorId;
             TicketId = ticketId;
             TicketsCount = ticketsCount;
-            Visitor = visitor;
-            Ticket = ticket;
+            Visitor = new VisitorModel(VisitorId);
+            Ticket = new TicketModel(TicketId);
         }
         public VisitorLogEntryModel(int id)
         {

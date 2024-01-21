@@ -11,8 +11,8 @@ namespace Cats_Cafe_Accounting_System.Utilities
 {
     public class DBContext
     {
-        public static string connectionStr = "Server=localhost;database=cat_cafe;user=root;password=Vorobushek_16jbl";
-        static MySqlConnection connection = new MySqlConnection(connectionStr);
+        private static readonly string connectionStr = "Server=localhost;database=cat_cafe;user=root;password=Vorobushek_16jbl";
+        static readonly MySqlConnection connection = new MySqlConnection(connectionStr);
 
         public static void OpenConnection()
         {
