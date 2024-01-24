@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Menu="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="400"
+             d:DesignHeight="550"
              d:DesignWidth="622"
              Background="Transparent">
     <Grid>
@@ -17,7 +18,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="450" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -29,17 +30,17 @@
                     <Grid Grid.Row="1">
                         <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}"/>
                                 <DataGridTextColumn Header="Кличка" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Title}"/>
                                 <DataGridTextColumn Header="Статус" Binding="{Binding Status.Title}" />
                                 <DataGridTextColumn Header="Порода" Binding="{Binding Breed.Title}" />
-                                <DataGridTextColumn Header="День рождения" Binding="{Binding Birthday}" />
+                                <DataGridTextColumn Header="День рождения" Binding="{Binding Birthday}"/>
                                 <DataGridTextColumn Header="Дата появления в котокафе" Binding="{Binding CheckInDate}" />
                                 <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-
 
 
                 </Grid>
