@@ -30,7 +30,6 @@
                     <Grid Grid.Row="1">
                         <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}"/>
                                 <DataGridTextColumn Header="Кличка" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Title}"/>
                                 <DataGridTextColumn Header="Статус" Binding="{Binding Status.Title}" />
