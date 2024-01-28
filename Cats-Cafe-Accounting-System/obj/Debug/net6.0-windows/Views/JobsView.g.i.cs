@@ -53,7 +53,7 @@ namespace Cats_Cafe_Accounting_System.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Cats-Cafe-Accounting-System;V1.0.0.0;component/views/jobsview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Cats-Cafe-Accounting-System;component/views/jobsview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\JobsView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
