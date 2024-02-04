@@ -20,7 +20,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Tickets"
+                    <TextBlock Text="Билеты"
         Style="{StaticResource Pages_Headers}"/>
                 </Grid>
 

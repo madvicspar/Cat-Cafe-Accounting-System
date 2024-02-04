@@ -23,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="VisitorsLog"
+                        <TextBlock Text="Журнал учета посещений"
                            Style="{StaticResource Pages_Headers}"/>
                     </Grid>
 

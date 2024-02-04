@@ -23,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Employees"
+                        <TextBlock Text="Сотрудники"
                            Style="{StaticResource Pages_Headers}"/>
                     </Grid>
 

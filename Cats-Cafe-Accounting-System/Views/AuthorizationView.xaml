@@ -21,7 +21,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="30" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="90" />
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -30,12 +30,11 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="35" />
-                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
 
 
-                <Grid Grid.Column="1" Margin="0,5,3,0">
+                <Grid Grid.Column="1" Margin="0,5,13,0">
 
                     <Button x:Name="CloseAppButton"
                             Style="{StaticResource CloseButtonStyle}"
@@ -53,16 +52,16 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" 
-                           Text="Autorisation" 
+                           Text="Авторизация" 
                            Style="{StaticResource Sign_in_and_up_Headers}"/>
                 <TextBlock Grid.Row="1"
-                           Text="Welcome to a Cat-Cafe Accounting System"
+                           Text="Добро пожаловать в «Cat-Cafe Accounting System»"
                            Height="35"
                            Foreground="DarkGray"
                            FontSize="14"
                            FontWeight="Medium"
                            FontFamily="Montserrat"
-                           VerticalAlignment="Top"
+                           VerticalAlignment="Center"
                            TextWrapping="Wrap"
                            TextAlignment="Center"
                            Margin="0,-5,0,0"/>
@@ -76,7 +75,7 @@
                         VerticalAlignment="Top">
                 <Grid>
 
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Логин"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -93,28 +92,32 @@
 
                 </Grid>
 
-                <TextBox x:Name="UsernameInput"
-                         Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
-                         FontSize="13"
-                         FontWeight="Medium"
-                         FontFamily="Montserrat"
-                         Foreground="#272B2F"
-                         CaretBrush="LightGray"
-                         BorderBrush="DarkGray"
-                         BorderThickness="0,0,0,2"
-                         Height="30"
-                         VerticalContentAlignment="Center"
-                         Margin="0,5,0,15"
-                         Padding="20,0,0,0"
-                         Background="#DBDBDB">
+                <Grid>
+
+                    <TextBox x:Name="UsernameInput"
+                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="#272B2F"
+                             CaretBrush="LightGray"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,2"
+                             Height="30"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,15"
+                             Padding="20,0,0,0"
+                             Background="#DBDBDB">
 
 
 
-                </TextBox>
+                    </TextBox>
+
+                </Grid>
 
                 <Grid>
 
-                    <TextBlock Text="Password"
+                    <TextBlock Text="Пароль"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -124,16 +127,15 @@
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="MontSerrat"
-                               Margin="55,0,0,0" />
+                               Margin="50,0,0,0" />
 
                 </Grid>
 
-
-
-                <Grid>
+                <Grid Margin="0,-5,0,0">
 
                     <PasswordBox x:Name="PasswordBox"
-                                 Pass:PasswordBox_Binding.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Pass:PasswordBox_Binding.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="Hidden"/>
 
                     <TextBox x:Name="PasswordTextBox" 
                              Height="30"
@@ -145,30 +147,39 @@
                              BorderBrush="DarkGray"
                              BorderThickness="0,0,0,2"
                              VerticalContentAlignment="Center"
+                             Margin="0,10,0,10"
                              Padding="20,0,0,0"
                              Background="#DBDBDB"
-                             Visibility="Hidden"
+                             Visibility="Visible"
                              Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 </Grid>
 
+                <Grid Margin="-1,0,0,0">
+                    <CheckBox x:Name="RevealPasswordCheckBox"
+                          Content="Показать пароль"
+                          IsChecked="False"
+                          Foreground="DarkGray"
+                          FontSize="11"
+                          FontWeight="Medium"
+                          FontFamily="MontSerrat"
+                          VerticalContentAlignment="Center"
+                          Padding="5,0,0,0"
+                          Margin="0,0,0,0"
+                          Checked="CheckBox_Changed"
+                          Unchecked="CheckBox_Changed"/>
 
-                <CheckBox x:Name="RevealPasswordCheckBox"
-                              Content="Show Password"
-                              IsChecked="False"
-                              Checked="CheckBox_Changed"
-                              Unchecked="CheckBox_Changed"/>
-
+                </Grid>
                 <Button x:Name="LoginButton" 
                         Command="{Binding SignInCommand}"
                         BorderThickness="0"
-                        Content="LOG IN"
+                        Content="ВОЙТИ"
                         Foreground="#272B2F"
                         FontWeight="Bold"
                         FontSize="12"
                         FontFamily="Montserrat"
                         Cursor="Hand"                           
-                        Margin="0,30,0,0">
+                        Margin="0,20,0,0">
 
                     <Button.Style>
                         <Style TargetType="Button">

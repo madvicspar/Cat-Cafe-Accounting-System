@@ -23,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="PetTransferLog"
+                        <TextBlock Text="Журнал учета передач питомцев"
                            Style="{StaticResource Pages_Headers}"/>
                     </Grid>
 

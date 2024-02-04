@@ -23,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Pets"
+                        <TextBlock Text="Питомцы"
                         Style="{StaticResource Pages_Headers}"/>
                     </Grid>
 
@@ -49,8 +49,8 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Content="" Width="100" Height="35"/>
                         <Button Grid.Column="1" Content="" Width="100" Height="35" />
-                        <Button Grid.Column="2" Content="Expopt exsel" Width="100" Height="35" Command="{Binding ExcelExportCommand}"/>
-                        <Button Grid.Column="3" Content="Expopt word" Width="100" Height="35" Command="{Binding WordExportCommand}"/>
+                        <Button Grid.Column="2" Content="Экспорт в Excel" Width="100" Height="35" Command="{Binding ExcelExportCommand}"/>
+                        <Button Grid.Column="3" Content="Экспорт в Word" Width="100" Height="35" Command="{Binding WordExportCommand}"/>
                     </Grid>
 
                 </Grid>

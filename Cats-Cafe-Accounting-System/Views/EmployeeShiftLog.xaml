@@ -23,7 +23,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="EmployeeShiftLog"
+                        <TextBlock Text="Журнал учета смен сотрудников"
                            Style="{StaticResource Pages_Headers}"/>
                     </Grid>
 
