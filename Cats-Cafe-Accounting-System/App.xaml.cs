@@ -54,6 +54,7 @@ namespace Cats_Cafe_Accounting_System
             services.AddSingleton<AuthorizationView>();
             services.AddSingleton<PetsViewModel>();
             services.AddSingleton<NavigationViewModel>();
+            services.AddSingleton<PersonalAreaViewModel>();
             Container = services.BuildServiceProvider();
         }
 
@@ -95,6 +96,7 @@ namespace Cats_Cafe_Accounting_System
             services.AddSingleton<PetTransferLogViewModel>();
             services.AddSingleton<EmployeeShiftLogViewModel>();
             services.AddSingleton<VisitLogViewModel>();
+            services.AddSingleton<PersonalAreaViewModel>();
             Container = services.BuildServiceProvider();
         }
     }

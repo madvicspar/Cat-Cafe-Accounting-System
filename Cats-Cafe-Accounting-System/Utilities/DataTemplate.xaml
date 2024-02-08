@@ -33,6 +33,9 @@
     <DataTemplate DataType="{x:Type vm:VisitLogViewModel}">
         <vw:VisitorLog />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PersonalAreaViewModel}">
+        <vw:PersonalAreaView />
+    </DataTemplate>
 
 
 </ResourceDictionary>
