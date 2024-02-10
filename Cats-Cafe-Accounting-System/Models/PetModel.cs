@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -54,6 +56,10 @@ namespace Cats_Cafe_Accounting_System.Models
                 Gender = new Gender(GenderId);
                 Status = new Status(StatusId);
             }
+        }
+        public PetModel()
+        {
+            
         }
     }
 }

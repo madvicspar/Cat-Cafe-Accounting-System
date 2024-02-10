@@ -11,7 +11,7 @@
              Background="Transparent">
     <Grid>
 
-        <Grid>
+        <Grid Margin="15,10,0,10">
 
             <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
             <Grid>
@@ -28,8 +28,9 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False">
+                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False">
                             <DataGrid.Columns>
+                                <!--<DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}"/>-->
                                 <DataGridTextColumn Header="Кличка" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Title}"/>
                                 <DataGridTextColumn Header="Статус" Binding="{Binding Status.Title}" />
@@ -38,6 +39,7 @@
                                 <DataGridTextColumn Header="Дата появления в котокафе" Binding="{Binding CheckInDate}" />
                                 <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}" />
                             </DataGrid.Columns>
+                            
                         </DataGrid>
                     </Grid>
                     <Grid Grid.Row="2">
