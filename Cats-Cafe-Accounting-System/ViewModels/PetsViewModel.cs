@@ -4,6 +4,7 @@ using Cats_Cafe_Accounting_System.Utilities;
 using ClosedXML.Excel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DocumentFormat.OpenXml.InkML;
 using Microsoft.Win32;
 using NPOI.XWPF.UserModel;
 using System;
@@ -11,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -27,6 +29,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(Pets));
             }
         }
+        public ICommand AddPetCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
@@ -35,6 +38,40 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Pets = GetPetsFromTable("pets");
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
+            AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
+        }
+
+        public void ExecuteAddPetCommand()
+        {
+            // добавить проверку на то, что все введено, и введено правильно
+            var lastPet = pets[pets.Count - 1];
+
+            // Допустим, что объекты Gender, Status и Breed уже доступны в контексте приложения
+
+            // Найти соответствующий Gender по названию
+            var gender = Data.gendersList.FirstOrDefault(g => g.Title == lastPet.Gender.Title);
+
+            // Найти соответствующий Status по названию
+            var status = Data.statusesList.FirstOrDefault(s => s.Title == lastPet.Status.Title);
+
+            // Найти соответствующую Breed по названию
+            var breed = Data.breedsList.FirstOrDefault(b => b.Title == lastPet.Breed.Title);
+
+            var petToAdd = new PetModel
+            {
+                Name = lastPet.Name,
+                GenderId = gender.Id,
+                Gender = gender,
+                StatusId = status.Id,
+                Status = status,
+                BreedId = breed.Id,
+                Breed = breed,
+                Birthday = lastPet.Birthday,
+                CheckInDate = lastPet.CheckInDate,
+                PassNumber = lastPet.PassNumber
+            };
+
+            
         }
 
         private void ExecuteWordExportCommand()

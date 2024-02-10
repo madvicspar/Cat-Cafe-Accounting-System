@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Menu="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
+             xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="550"
              d:DesignWidth="622"
@@ -28,15 +29,57 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False">
+                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True">
                             <DataGrid.Columns>
                                 <!--<DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}"/>-->
                                 <DataGridTextColumn Header="Кличка" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Title}"/>
-                                <DataGridTextColumn Header="Статус" Binding="{Binding Status.Title}" />
-                                <DataGridTextColumn Header="Порода" Binding="{Binding Breed.Title}" />
-                                <DataGridTextColumn Header="День рождения" Binding="{Binding Birthday}"/>
-                                <DataGridTextColumn Header="Дата появления в котокафе" Binding="{Binding CheckInDate}" />
+                                <DataGridTemplateColumn Header="Пол">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding Source={x:Static data:Data.gendersList}}"
+                                                      DisplayMemberPath="Title"
+                                                      SelectedValue="{Binding SelectedBreed,
+                                                                      Mode=TwoWay,
+                                                                      UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Статус">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding Source={x:Static data:Data.statusesList}}"
+                                                      DisplayMemberPath="Title"
+                                                      SelectedValue="{Binding SelectedBreed,
+                                                                      Mode=TwoWay,
+                                                                      UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Порода">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding Source={x:Static data:Data.breedsList}}"
+                                                      DisplayMemberPath="Title"
+                                                      SelectedValue="{Binding SelectedBreed,
+                                                                      Mode=TwoWay,
+                                                                      UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="День рождения">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Дата появления в котокафе">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}" />
                             </DataGrid.Columns>
                             
@@ -47,12 +90,10 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
-                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="" Width="100" Height="35"/>
-                        <Button Grid.Column="1" Content="" Width="100" Height="35" />
-                        <Button Grid.Column="2" Content="Экспорт в Excel" Width="100" Height="35" Command="{Binding ExcelExportCommand}"/>
-                        <Button Grid.Column="3" Content="Экспорт в Word" Width="100" Height="35" Command="{Binding WordExportCommand}"/>
+                        <Button Grid.Column="0" Content="Добавить питомца" Width="150" Height="35" Command="{Binding AddPetCommand}"/>
+                        <Button Grid.Column="1" Content="Экспорт в Excel" Width="150" Height="35" Command="{Binding ExcelExportCommand}"/>
+                        <Button Grid.Column="2" Content="Экспорт в Word" Width="150" Height="35" Command="{Binding WordExportCommand}"/>
                     </Grid>
 
                 </Grid>
