@@ -33,7 +33,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (DataRow row in dataTable.Rows)
             {
                 EmployeeShiftLogEntryModel employeeShiftLogEntry = new EmployeeShiftLogEntryModel(Convert.ToInt32(row["id"]), 
-                    DateTime.Parse(row["date"].ToString()), Convert.ToInt32(row["employee_id"]), row["comments"].ToString());
+                    DateTime.Parse(row["date"].ToString()), Convert.ToInt32(row["employeeid"]), row["comments"].ToString());
                 employeeShiftLogEntries.Add(employeeShiftLogEntry);
             }
 

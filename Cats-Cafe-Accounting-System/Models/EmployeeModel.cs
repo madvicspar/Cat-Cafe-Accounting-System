@@ -17,7 +17,7 @@ namespace Cats_Cafe_Accounting_System.Models
         [ForeignKey("Gender")]
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
         [ForeignKey("Job")]
         public int JobId { get; set; }
@@ -33,7 +33,7 @@ namespace Cats_Cafe_Accounting_System.Models
             LastName = lastName;
             Pathronymic = pathronymic;
             GenderId = genderId;
-            Phone = phone;
+            PhoneNumber = phone;
             Birthday = birthday;
             Gender = new Gender(GenderId);
             JobId = jobId;
@@ -44,16 +44,16 @@ namespace Cats_Cafe_Accounting_System.Models
         public EmployeeModel(int id)
         {
             DataRow row = DBContext.GetById("employees", id);
-            Id = Convert.ToInt32(row["id"]);
-            FirstName = row["first_name"].ToString();
-            LastName = row["last_name"].ToString();
-            Pathronymic = row["pathronymic"].ToString();
-            GenderId = Convert.ToInt32(row["gender_id"]);
-            Phone = row["phone_number"].ToString();
-            Birthday = DateTime.Parse(row["birthday"].ToString());
-            JobId = Convert.ToInt32(row["job_id"]); ;
-            ContractNumber = row["contract_number"].ToString();
-            Username = row["username"].ToString();
+            Id = Convert.ToInt32(row[nameof(Id)]);
+            FirstName = row[nameof(FirstName)].ToString();
+            LastName = row[nameof(LastName)].ToString();
+            Pathronymic = row[nameof(Pathronymic)].ToString();
+            GenderId = Convert.ToInt32(row[nameof(GenderId)]);
+            PhoneNumber = row[nameof(PhoneNumber)].ToString();
+            Birthday = DateTime.Parse(row[nameof(Birthday)].ToString());
+            JobId = Convert.ToInt32(row[nameof(JobId)]); ;
+            ContractNumber = row[nameof(ContractNumber)].ToString();
+            Username = row[nameof(Username)].ToString();
             Gender = new Gender(GenderId);
             Job = new JobModel(JobId);
         }

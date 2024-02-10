@@ -33,7 +33,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (DataRow row in dataTable.Rows)
             {
                 TicketModel ticket = new TicketModel(Convert.ToInt32(row["id"]), (float)Convert.ToDouble(row["price"]),
-                    row["pet_id"].ToString() == ""? 0 : Convert.ToInt32(row["pet_id"]), row["comments"].ToString());
+                    row["petid"].ToString() == ""? 0 : Convert.ToInt32(row["petid"]), row["comments"].ToString());
                 tickets.Add(ticket);
             }
 

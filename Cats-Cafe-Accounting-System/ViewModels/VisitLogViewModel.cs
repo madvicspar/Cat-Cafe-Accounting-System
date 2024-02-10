@@ -34,8 +34,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (DataRow row in dataTable.Rows)
             {
                 VisitLogEntryModel visitorsLogEntry = new VisitLogEntryModel(Convert.ToInt32(row["id"]), DateTime.Parse(row["date"].ToString()),
-                    DateTime.Parse(row["start_time"].ToString()),
-                    Convert.ToInt32(row["visitor_id"]), Convert.ToInt32(row["ticket_id"]),Convert.ToInt32(row["tickets_count"]));
+                    DateTime.Parse(row["starttime"].ToString()),
+                    Convert.ToInt32(row["visitorid"]), Convert.ToInt32(row["ticketid"]),Convert.ToInt32(row["ticketscount"]));
                 visitorsLogEntries.Add(visitorsLogEntry);
             }
 

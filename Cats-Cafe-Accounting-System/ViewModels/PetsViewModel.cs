@@ -60,7 +60,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 PassNumber = lastPet.PassNumber
             };
 
-            //DBContext.AddNote("pets", petToAdd);
+            DBContext.AddNote("pets", petToAdd);
         }
 
         private void ExecuteWordExportCommand()
@@ -142,9 +142,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (DataRow row in dataTable.Rows)
             {
                 PetModel pet = new PetModel(Convert.ToInt32(row["id"]), row["name"].ToString(),
-                    Convert.ToInt32(row["gender_id"]), Convert.ToInt32(row["status_id"]), row["breed_id"].ToString(), 
-                    DateTime.Parse(row["birthday"].ToString()), DateTime.Parse(row["check_in_date"].ToString()), 
-                    row["pass_number"].ToString());
+                    Convert.ToInt32(row["genderid"]), Convert.ToInt32(row["statusid"]), row["breedid"].ToString(), 
+                    DateTime.Parse(row["birthday"].ToString()), DateTime.Parse(row["checkindate"].ToString()), 
+                    row["passnumber"].ToString());
                 pets.Add(pet);
             }
 

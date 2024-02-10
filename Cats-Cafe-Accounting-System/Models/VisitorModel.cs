@@ -34,11 +34,11 @@ namespace Cats_Cafe_Accounting_System.Models
         {
             DataRow row = DBContext.GetById("visitors", id);
             Id = Convert.ToInt32(row["id"]);
-            FirstName = row["first_name"].ToString();
-            LastName = row["last_name"].ToString();
+            FirstName = row["firstname"].ToString();
+            LastName = row["lastname"].ToString();
             Pathronymic = row["pathronymic"].ToString();
-            GenderId = Convert.ToInt32(row["gender_id"]);
-            Phone = row["phone_number"].ToString();
+            GenderId = Convert.ToInt32(row["genderid"]);
+            Phone = row["phonenumber"].ToString();
             Birthday = DateTime.Parse(row["birthday"].ToString());
             Gender = new Gender(GenderId);
         }

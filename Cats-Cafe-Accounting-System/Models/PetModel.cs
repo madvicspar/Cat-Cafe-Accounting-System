@@ -46,12 +46,12 @@ namespace Cats_Cafe_Accounting_System.Models
                 DataRow row = DBContext.GetById("pets", id);
                 Id = id;
                 Name = row["name"].ToString();
-                GenderId = Convert.ToInt32(row["gender_id"]);
-                StatusId = Convert.ToInt32(row["status_id"]);
-                BreedId = row["breed_id"].ToString();
+                GenderId = Convert.ToInt32(row["genderid"]);
+                StatusId = Convert.ToInt32(row["statusid"]);
+                BreedId = row["breedid"].ToString();
                 Birthday = DateTime.Parse(row["birthday"].ToString());
-                CheckInDate = DateTime.Parse(row["check_in_date"].ToString());
-                PassNumber = row["pass_number"].ToString();
+                CheckInDate = DateTime.Parse(row["checkindate"].ToString());
+                PassNumber = row["passnumber"].ToString();
                 Breed = new Breed(BreedId);
                 Gender = new Gender(GenderId);
                 Status = new Status(StatusId);

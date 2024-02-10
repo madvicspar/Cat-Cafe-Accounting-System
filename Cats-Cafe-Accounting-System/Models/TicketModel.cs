@@ -28,7 +28,7 @@ namespace Cats_Cafe_Accounting_System.Models
             DataRow row = DBContext.GetById("tickets", id);
             Id = Convert.ToInt32(row["id"]);
             Price = (float)Convert.ToDouble(row["price"]);
-            PetId = row["pet_id"].ToString() == "" ? 0 : Convert.ToInt32(row["pet_id"]);
+            PetId = row["petid"].ToString() == "" ? 0 : Convert.ToInt32(row["petid"]);
             Comments = row["comments"].ToString();
             Pet = new PetModel(PetId);
         }

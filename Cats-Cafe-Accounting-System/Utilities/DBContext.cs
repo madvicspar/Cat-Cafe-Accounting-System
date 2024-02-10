@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Net;
+using NPOI.OpenXmlFormats.Dml.Chart;
 
 namespace Cats_Cafe_Accounting_System.Utilities
 {
@@ -65,6 +66,22 @@ namespace Cats_Cafe_Accounting_System.Utilities
             var values = string.Join(", ", newvalues.Select(v => $"'{v}'"));
 
             string sqlQuery = $"INSERT INTO {table} ({columns}) VALUES ({values})";
+
+            MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+            OpenConnection();
+            cmd.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        public static void AddNote<T>(string tableName, T item)
+        {
+            var prop1 = typeof(T).GetProperties().Where(prop => prop.Name != "Id").ToList();
+            var prop2 = GetAttributes(tableName).Skip(1).ToList();
+
+            var columns = string.Join(", ", prop1.Where(x => prop2.Contains(x.Name)).Select(prop => prop.Name ));
+            var values = string.Join(", ", prop1.Where(x => prop2.Contains(x.Name)).Select(prop => $"'{prop.GetValue(item)}'"));
+
+            string sqlQuery = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
 
             MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
             OpenConnection();

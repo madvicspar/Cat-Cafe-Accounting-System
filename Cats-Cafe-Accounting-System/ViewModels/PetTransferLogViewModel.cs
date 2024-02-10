@@ -33,7 +33,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (DataRow row in dataTable.Rows)
             {
                 PetTransferLogEntryModel petTransferLogEntry = new PetTransferLogEntryModel(Convert.ToInt32(row["id"]), 
-                    DateTime.Parse(row["date"].ToString()), Convert.ToInt32(row["visitor_id"]), Convert.ToInt32(row["pet_id"]));
+                    DateTime.Parse(row["date"].ToString()), Convert.ToInt32(row["visitorid"]), Convert.ToInt32(row["petid"]));
                 petTransferLogEntries.Add(petTransferLogEntry);
             }
 

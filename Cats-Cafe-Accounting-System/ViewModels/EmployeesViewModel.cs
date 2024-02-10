@@ -37,10 +37,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             foreach (DataRow row in dataTable.Rows)
             {
-                EmployeeModel employee = new EmployeeModel(Convert.ToInt32(row["id"]), row["last_name"].ToString(), 
-                    row["first_name"].ToString(), row["pathronymic"].ToString(), Convert.ToInt32(row["gender_id"]),
-                    row["phone_number"].ToString(), DateTime.Parse(row["birthday"].ToString()),
-                    Convert.ToInt32(row["job_id"]), row["contract_number"].ToString(), row["username"].ToString());
+                EmployeeModel employee = new EmployeeModel(Convert.ToInt32(row["id"]), row["lastname"].ToString(), 
+                    row["firstname"].ToString(), row["pathronymic"].ToString(), Convert.ToInt32(row["genderid"]),
+                    row["phonenumber"].ToString(), DateTime.Parse(row["birthday"].ToString()),
+                    Convert.ToInt32(row["jobid"]), row["contractnumber"].ToString(), row["username"].ToString());
                 emplyees.Add(employee);
             }
 
