@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using MySql.Data.MySqlClient;
 using System.Net;
+using Cats_Cafe_Accounting_System.RegularClasses;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -57,6 +58,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteSignInCommand()
         {
+            //Data.user = 
+            Data.breedsList = Breed.GetBreedsFromTable();
+            Data.gendersList = Gender.GetGendersFromTable();
+            Data.statusesList = Status.GetStatusesFromTable();
             var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
             authorizationWindow?.Close();
             //if (CanExecuteSignInCommand())

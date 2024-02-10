@@ -2,6 +2,7 @@
 using Cats_Cafe_Accounting_System.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Collections.Generic;
 
 namespace Cats_Cafe_Accounting_System.RegularClasses
 {
@@ -21,6 +22,21 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
             DataRow row = DBContext.GetById("genders", id);
             Id = Convert.ToInt32(row["id"]);
             Title = row["title"].ToString();
+        }
+
+        public static List<Gender> GetGendersFromTable()
+        {
+            List<Gender> genders = new List<Gender>();
+
+            DataTable dataTable = DBContext.GetTable("genders");
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Gender gender = new Gender(Convert.ToInt32(row["id"]), row["title"].ToString());
+                genders.Add(gender);
+            }
+
+            return genders;
         }
     }
 }
