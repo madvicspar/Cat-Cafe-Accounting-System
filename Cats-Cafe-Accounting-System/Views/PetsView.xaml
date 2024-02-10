@@ -38,7 +38,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.gendersList}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding SelectedBreed,
+                                                      SelectedValue="{Binding Gender,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}" />
                                         </DataTemplate>
@@ -49,7 +49,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.statusesList}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding SelectedBreed,
+                                                      SelectedValue="{Binding Status,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}" />
                                         </DataTemplate>
@@ -60,7 +60,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.breedsList}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding SelectedBreed,
+                                                      SelectedValue="{Binding Breed,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}" />
                                         </DataTemplate>

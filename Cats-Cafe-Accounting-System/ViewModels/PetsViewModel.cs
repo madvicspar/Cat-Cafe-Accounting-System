@@ -46,32 +46,21 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             // добавить проверку на то, что все введено, и введено правильно
             var lastPet = pets[pets.Count - 1];
 
-            // Допустим, что объекты Gender, Status и Breed уже доступны в контексте приложения
-
-            // Найти соответствующий Gender по названию
-            var gender = Data.gendersList.FirstOrDefault(g => g.Title == lastPet.Gender.Title);
-
-            // Найти соответствующий Status по названию
-            var status = Data.statusesList.FirstOrDefault(s => s.Title == lastPet.Status.Title);
-
-            // Найти соответствующую Breed по названию
-            var breed = Data.breedsList.FirstOrDefault(b => b.Title == lastPet.Breed.Title);
-
             var petToAdd = new PetModel
             {
                 Name = lastPet.Name,
-                GenderId = gender.Id,
-                Gender = gender,
-                StatusId = status.Id,
-                Status = status,
-                BreedId = breed.Id,
-                Breed = breed,
+                Gender = lastPet.Gender,
+                GenderId = lastPet.Gender.Id,
+                Status = lastPet.Status,
+                StatusId = lastPet.Status.Id,
+                Breed = lastPet.Breed,
+                BreedId = lastPet.Breed.Id,
                 Birthday = lastPet.Birthday,
                 CheckInDate = lastPet.CheckInDate,
                 PassNumber = lastPet.PassNumber
             };
 
-            
+            //DBContext.AddNote("pets", petToAdd);
         }
 
         private void ExecuteWordExportCommand()
