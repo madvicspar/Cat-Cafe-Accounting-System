@@ -31,8 +31,22 @@
                     <Grid Grid.Row="1">
                         <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True">
                             <DataGrid.Columns>
-                                <!--<DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}"/>-->
-                                <DataGridTextColumn Header="Кличка" Binding="{Binding Name}"/>
+                                <DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}">
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="Margin" Value="0,0,3,0"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridTextColumn Header="Кличка" Binding="{Binding Name}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
                                 <DataGridTemplateColumn Header="Пол">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -41,8 +55,7 @@
                                                       SelectedValue="{Binding Gender.Title,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Title"
-                                                      />
+                                                      SelectedValuePath="Title"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -84,7 +97,24 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}" />
+                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button>
+                                                    <!--<Image Source=""  Width="16" Height="16"/>-->
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                             
                         </DataGrid>
@@ -94,10 +124,12 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Добавить питомца" Width="150" Height="35" Command="{Binding AddPetCommand}"/>
-                        <Button Grid.Column="1" Content="Экспорт в Excel" Width="150" Height="35" Command="{Binding ExcelExportCommand}"/>
-                        <Button Grid.Column="2" Content="Экспорт в Word" Width="150" Height="35" Command="{Binding WordExportCommand}"/>
+                        <Button Grid.Column="0" Content="Удалить записи" Width="120" Height="35"/>
+                        <Button Grid.Column="1" Content="Добавить питомца" Width="120" Height="35" Command="{Binding AddPetCommand}"/>
+                        <Button Grid.Column="2" Content="Экспорт в Excel" Width="120" Height="35" Command="{Binding ExcelExportCommand}"/>
+                        <Button Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" Command="{Binding WordExportCommand}"/>
                     </Grid>
 
                 </Grid>
