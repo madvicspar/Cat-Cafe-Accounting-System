@@ -24,6 +24,7 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
             Title = row["title"].ToString();
         }
 
+        public Gender() { }
         public static List<Gender> GetGendersFromTable()
         {
             List<Gender> genders = new List<Gender>();

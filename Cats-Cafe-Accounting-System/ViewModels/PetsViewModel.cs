@@ -46,15 +46,19 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             // добавить проверку на то, что все введено, и введено правильно
             var lastPet = pets[pets.Count - 1];
 
+            Gender g = Data.gendersList.Where(x => x.Title == lastPet.Gender.Title).FirstOrDefault();
+            Breed b = Data.breedsList.Where(x => x.Title == lastPet.Breed.Title).FirstOrDefault();
+            Status s = Data.statusesList.Where(x => x.Title == lastPet.Status.Title).FirstOrDefault();
+
             var petToAdd = new PetModel
             {
                 Name = lastPet.Name,
-                Gender = lastPet.Gender,
-                GenderId = lastPet.Gender.Id,
-                Status = lastPet.Status,
-                StatusId = lastPet.Status.Id,
-                Breed = lastPet.Breed,
-                BreedId = lastPet.Breed.Id,
+                Gender = g,
+                GenderId = g.Id,
+                Status = s,
+                StatusId = s.Id,
+                Breed = b,
+                BreedId = b.Id,
                 Birthday = lastPet.Birthday,
                 CheckInDate = lastPet.CheckInDate,
                 PassNumber = lastPet.PassNumber

@@ -59,7 +59,9 @@ namespace Cats_Cafe_Accounting_System.Models
         }
         public PetModel()
         {
-            
+            Breed = new Breed();
+            Gender = new Gender();
+            Status = new Status();
         }
     }
 }

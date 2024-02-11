@@ -26,6 +26,11 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
             Title = row["title"].ToString();
         }
 
+        public Breed()
+        {
+
+        }
+
         public static List<Breed> GetBreedsFromTable()
         {
             List<Breed> breeds = new List<Breed>();

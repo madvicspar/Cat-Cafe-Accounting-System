@@ -24,6 +24,7 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
             Title = row["title"].ToString();
         }
 
+        public Status() { }
         public static List<Status> GetStatusesFromTable()
         {
             List<Status> statuses = new List<Status>();

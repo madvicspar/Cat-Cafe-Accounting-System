@@ -41,7 +41,8 @@
                                                       SelectedValue="{Binding Gender.Title,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Title"/>
+                                                      SelectedValuePath="Title"
+                                                      />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -72,14 +73,14 @@
                                 <DataGridTemplateColumn Header="День рождения">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DatePicker SelectedDate="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Дата появления в котокафе">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DatePicker SelectedDate="{Binding CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
