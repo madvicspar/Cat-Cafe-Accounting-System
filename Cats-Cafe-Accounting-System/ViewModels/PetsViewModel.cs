@@ -30,6 +30,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
         public ICommand AddPetCommand { get; set; }
+        public ICommand UpdatePetCommand { get; set; }
+        public ICommand DeletePetCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
@@ -39,6 +41,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
+            UpdatePetCommand = new RelayCommand<PetModel>(ExecuteUpdatePetCommand);
+            DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -65,6 +69,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             };
 
             DBContext.AddNote("pets", petToAdd);
+        }
+
+        private void ExecuteUpdatePetCommand(PetModel? pet)
+        {
+            DBContext.UpdateNote("pets", pet);
+        }
+
+        private void ExecuteDeletePetCommand(PetModel? pet)
+        {
+            DBContext.DeleteNote("pets", pet.Id.ToString());
+            pets.Remove(pet);
         }
 
         private void ExecuteWordExportCommand()

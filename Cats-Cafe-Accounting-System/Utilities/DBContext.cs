@@ -89,6 +89,37 @@ namespace Cats_Cafe_Accounting_System.Utilities
             CloseConnection();
         }
 
+        public static void UpdateNote<T>(string table, T item)
+        {
+            var prop1 = typeof(T).GetProperties().Where(prop => prop.Name != "Id").ToList();
+            var prop2 = GetAttributes(table).ToList();
+
+            var set = "";
+            for (int i = 0; i < prop1.Count; i++)
+            {
+                var prop = prop1[i];
+                var value = "";
+                if (prop2.Contains(prop.Name))
+                {
+                    if (prop.GetValue(item) is DateTime)
+                        value = $"'{ToDateTime(prop.GetValue(item).ToString())}'";
+                    else
+                        value = $"'{prop.GetValue(item)}'";
+                    set += $"{prop.Name} = {value}, ";
+                }
+            }
+            set = set.TrimEnd(',', ' ');
+
+            var id = typeof(T).GetProperty("Id").GetValue(item);
+
+            string sqlQuery = $"UPDATE {table} SET {set} WHERE Id = '{id}'";
+
+            MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+            OpenConnection();
+            cmd.ExecuteNonQuery();
+            CloseConnection();
+        }
+
         public static void UpdateNote(string table, List<string> newvalues, int toSkip = 1)
         {
             int id = int.Parse(newvalues[0]);
@@ -113,8 +144,12 @@ namespace Cats_Cafe_Accounting_System.Utilities
         public static void DeleteNote(string table, string id)
         {
             string sqlQuery = $"DELETE FROM {table} WHERE id = '{id}'";
+            string sqlForeignQuery = $"DELETE FROM tickets WHERE petId = '{id}'";
 
-            MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+            MySqlCommand cmd = new MySqlCommand(sqlForeignQuery, connection);
+            OpenConnection();
+            cmd.ExecuteNonQuery();
+            cmd = new MySqlCommand(sqlQuery, connection);
             OpenConnection();
             cmd.ExecuteNonQuery();
             CloseConnection();
@@ -170,6 +205,12 @@ namespace Cats_Cafe_Accounting_System.Utilities
                 CloseConnection() ;
             }
             return validUser;
+        }
+
+        public static string ToDateTime(string last)
+        {
+            DateTime dt = DateTime.ParseExact(last, "dd.MM.yyyy h:mm:ss", null);
+            return dt.Year.ToString() + "-" + dt.Month.ToString() + "-" + dt.Day.ToString();
         }
     }
 }

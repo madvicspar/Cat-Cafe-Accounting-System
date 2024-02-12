@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Menu="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              mc:Ignorable="d" 
@@ -44,7 +43,7 @@
                                         </Style>
                                     </DataGridCheckBoxColumn.ElementStyle>
                                 </DataGridCheckBoxColumn>
-                                <DataGridTextColumn Header="Кличка" Binding="{Binding Name}">
+                                <DataGridTextColumn Header="Кличка" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style>
                                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
@@ -110,21 +109,30 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber}">
+                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style>
                                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
                                 </DataGridTextColumn>
                                 <DataGridTemplateColumn Header="Actions">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Background="Transparent" BorderBrush="Transparent">
+                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding .}">
                                                     <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
                                                 </Button>
-                                                <Button Background="Transparent" BorderBrush="Transparent">
+                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding .}">
                                                     <Image Source="{StaticResource DeleteImage}" Height="15" Width="15"/>
                                                 </Button>
                                             </StackPanel>
