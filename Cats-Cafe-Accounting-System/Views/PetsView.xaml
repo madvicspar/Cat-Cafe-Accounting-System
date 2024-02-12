@@ -29,7 +29,11 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True">
+                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            </DataGrid.Resources>
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}">
                                     <DataGridCheckBoxColumn.ElementStyle>
@@ -46,6 +50,15 @@
                                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
                                 </DataGridTextColumn>
                                 <DataGridTemplateColumn Header="Пол">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -104,12 +117,15 @@
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTemplateColumn Header="">
+                                <DataGridTemplateColumn Header="Actions">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button>
-                                                    <!--<Image Source=""  Width="16" Height="16"/>-->
+                                                <Button Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
+                                                </Button>
+                                                <Button Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource DeleteImage}" Height="15" Width="15"/>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>

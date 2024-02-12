@@ -88,3 +88,4 @@ D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\bi
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Cats-Cafe-Accounting-System.sourcelink.json
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PersonalAreaView.g.cs
 D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Views\PersonalAreaView.baml
+D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\obj\Debug\net6.0-windows\Utilities\img.baml
