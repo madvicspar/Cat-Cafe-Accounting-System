@@ -28,7 +28,7 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <DataGrid ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
@@ -43,7 +43,7 @@
                                         </Style>
                                     </DataGridCheckBoxColumn.ElementStyle>
                                 </DataGridCheckBoxColumn>
-                                <DataGridTextColumn Header="Кличка" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGridTextColumn Header="Кличка" Binding="{Binding Pet.Name, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style>
                                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
@@ -64,7 +64,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.gendersList}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding Gender.Title,
+                                                      SelectedValue="{Binding Pet.Gender.Title,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Title"/>
@@ -76,7 +76,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.statusesList}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding Status.Title,
+                                                      SelectedValue="{Binding Pet.Status.Title,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Title"/>
@@ -88,7 +88,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.breedsList}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding Breed.Title,
+                                                      SelectedValue="{Binding Pet.Breed.Title,
                                                                       Mode=TwoWay,
                                                                       UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Title"/>
@@ -98,18 +98,18 @@
                                 <DataGridTemplateColumn Header="День рождения">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}" />
+                                            <DatePicker SelectedDate="{Binding Pet.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Дата появления в котокафе">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}"/>
+                                            <DatePicker SelectedDate="{Binding Pet.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding PassNumber, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding Pet.PassNumber, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style>
                                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
@@ -129,10 +129,10 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding .}">
+                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Pet}">
                                                     <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
                                                 </Button>
-                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding .}">
+                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Pet}">
                                                     <Image Source="{StaticResource DeleteImage}" Height="15" Width="15"/>
                                                 </Button>
                                             </StackPanel>
@@ -150,7 +150,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Удалить записи" Width="120" Height="35"/>
+                        <Button Grid.Column="0" Content="Удалить записи" Width="120" Height="35" Command="{Binding DeleteManyPetCommand}"/>
                         <Button Grid.Column="1" Content="Добавить питомца" Width="120" Height="35" Command="{Binding AddPetCommand}"/>
                         <Button Grid.Column="2" Content="Экспорт в Excel" Width="120" Height="35" Command="{Binding ExcelExportCommand}"/>
                         <Button Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" Command="{Binding WordExportCommand}"/>

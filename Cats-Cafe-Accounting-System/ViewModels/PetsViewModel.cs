@@ -5,6 +5,7 @@ using ClosedXML.Excel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Win32;
 using NPOI.XWPF.UserModel;
 using System;
@@ -17,8 +18,42 @@ using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
+    public class Elem : ObservableObject
+    {
+        public bool isSelected { get; set; }
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+        public PetModel Pet { get; set; }
+        public Elem(PetModel pet)
+        {
+            IsSelected = false;
+            Pet = pet;
+        }
+        public Elem()
+        {
+            IsSelected = false;
+            Pet = new PetModel();
+        }
+    }
     public class PetsViewModel : ObservableObject
     {
+        private ObservableCollection<Elem> items = new ObservableCollection<Elem>();
+        public ObservableCollection<Elem> Items
+        {
+            get { return items; }
+            set
+            {
+                items = value;
+                OnPropertyChanged(nameof(Items));
+            }
+        }
         private ObservableCollection<PetModel> pets;
         public ObservableCollection<PetModel> Pets
         {
@@ -32,23 +67,29 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand AddPetCommand { get; set; }
         public ICommand UpdatePetCommand { get; set; }
         public ICommand DeletePetCommand { get; set; }
+        public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
         {
             // Инициализация коллекции питомцев
             Pets = GetPetsFromTable("pets");
+            foreach (var item in Pets)
+            {
+                items.Add(new Elem(item));
+            }
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
             UpdatePetCommand = new RelayCommand<PetModel>(ExecuteUpdatePetCommand);
             DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
+            DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
         }
 
         public void ExecuteAddPetCommand()
         {
             // добавить проверку на то, что все введено, и введено правильно
-            var lastPet = pets[pets.Count - 1];
+            var lastPet = items[items.Count - 1].Pet;
 
             Gender g = Data.gendersList.Where(x => x.Title == lastPet.Gender.Title).FirstOrDefault();
             Breed b = Data.breedsList.Where(x => x.Title == lastPet.Breed.Title).FirstOrDefault();
@@ -80,6 +121,22 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             DBContext.DeleteNote("pets", pet.Id.ToString());
             pets.Remove(pet);
+        }
+
+        private void ExecuteDeleteManyPetCommand()
+        {
+            var itemsToDelete = new ObservableCollection<Elem>();
+            foreach (var item in items.Where(x => x.IsSelected))
+            {
+                DBContext.DeleteNote("pets", item.Pet.Id.ToString());
+                pets.Remove(item.Pet);
+                itemsToDelete.Add(item);
+            }
+            foreach (var item in itemsToDelete)
+            {
+                items.Remove(item);
+            }
+            itemsToDelete.Clear();
         }
 
         private void ExecuteWordExportCommand()
