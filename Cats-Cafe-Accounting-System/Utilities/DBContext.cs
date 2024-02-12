@@ -144,12 +144,8 @@ namespace Cats_Cafe_Accounting_System.Utilities
         public static void DeleteNote(string table, string id)
         {
             string sqlQuery = $"DELETE FROM {table} WHERE id = '{id}'";
-            string sqlForeignQuery = $"DELETE FROM tickets WHERE petId = '{id}'";
 
-            MySqlCommand cmd = new MySqlCommand(sqlForeignQuery, connection);
-            OpenConnection();
-            cmd.ExecuteNonQuery();
-            cmd = new MySqlCommand(sqlQuery, connection);
+            MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
             OpenConnection();
             cmd.ExecuteNonQuery();
             CloseConnection();
