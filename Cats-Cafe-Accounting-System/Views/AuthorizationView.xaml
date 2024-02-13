@@ -12,7 +12,8 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        x:Name="Auth">
     <Grid>
 
         <Border Background="#272B2F"
@@ -107,7 +108,8 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,15"
                              Padding="20,0,0,0"
-                             Background="#DBDBDB">
+                             Background="#DBDBDB"
+                             AutomationProperties.AutomationId="LoginTextId">
 
 
 
@@ -135,7 +137,8 @@
 
                     <PasswordBox x:Name="PasswordBox"
                                  Pass:PasswordBox_Binding.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 Visibility="Hidden"/>
+                                 Visibility="Visible"
+                                 AutomationProperties.AutomationId="PassPassId"/>
 
                     <TextBox x:Name="PasswordTextBox" 
                              Height="30"
@@ -150,8 +153,9 @@
                              Margin="0,10,0,10"
                              Padding="20,0,0,0"
                              Background="#DBDBDB"
-                             Visibility="Visible"
-                             Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Visibility="Hidden"
+                             Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             AutomationProperties.AutomationId="PassTextId"/>
 
                 </Grid>
 
@@ -179,7 +183,8 @@
                         FontSize="12"
                         FontFamily="Montserrat"
                         Cursor="Hand"                           
-                        Margin="0,20,0,0">
+                        Margin="0,20,0,0"
+                        AutomationProperties.AutomationId="SignInButtonId">
 
                     <Button.Style>
                         <Style TargetType="Button">

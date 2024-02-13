@@ -12,7 +12,8 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        AutomationProperties.AutomationId="MainWindowViewId">
     <Grid>
 
         <Border Background="#272B2F" CornerRadius="20" />
@@ -43,7 +44,8 @@
 
                 <Button x:Name="CloseAppButton"
                         Style="{StaticResource CloseButtonStyle}"
-                        Click="CloseAppButton_Click" />
+                        Click="CloseAppButton_Click"
+                        AutomationProperties.AutomationId="CloseButtonId"/>
 
             </Grid>
 
@@ -61,7 +63,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <ContentControl Content="{Binding NavigationVM}" Grid.ColumnSpan="2" />
+                <ContentControl Content="{Binding NavigationVM}" Grid.ColumnSpan="2"/>
                 
                 <!-- Navigation Panel --><!--
 

@@ -59,33 +59,36 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         private void ExecuteSignInCommand()
         {
             //Data.user = 
-            Data.breedsList = Breed.GetBreedsFromTable();
-            Data.gendersList = Gender.GetGendersFromTable();
-            Data.statusesList = Status.GetStatusesFromTable();
-            var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
-            authorizationWindow?.Close();
-            //if (CanExecuteSignInCommand())
-            //{
-            //    if(DBContext.AuthenticateUser(new NetworkCredential(UserName, Password)))
-            //    {
-            //        var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
-            //        authorizationWindow?.Close();
-            //        UsernameError = "";
-            //        PasswordError = "";
-            //    }
-            //    else
-            //    {
-            //        if (DBContext.UsernameIsExist(new NetworkCredential(UserName, "")))
-            //        {
-            //            UsernameError = "";
-            //            PasswordError = "(invalid password)";
-            //        }
-            //        else
-            //        {
-            //            UsernameError = "(invalid username)";
-            //        }
-            //    }
-            //}
+            //Data.breedsList = Breed.GetBreedsFromTable();
+            //Data.gendersList = Gender.GetGendersFromTable();
+            //Data.statusesList = Status.GetStatusesFromTable();
+            //var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
+            //authorizationWindow?.Close();
+            if (CanExecuteSignInCommand())
+            {
+                if (DBContext.AuthenticateUser(new NetworkCredential(UserName, Password)))
+                {
+                    Data.breedsList = Breed.GetBreedsFromTable();
+                    Data.gendersList = Gender.GetGendersFromTable();
+                    Data.statusesList = Status.GetStatusesFromTable();
+                    var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
+                    authorizationWindow?.Close();
+                    UsernameError = "";
+                    PasswordError = "";
+                }
+                else
+                {
+                    if (DBContext.UsernameIsExist(new NetworkCredential(UserName, "")))
+                    {
+                        UsernameError = "";
+                        PasswordError = "(invalid password)";
+                    }
+                    else
+                    {
+                        UsernameError = "(invalid username)";
+                    }
+                }
+            }
         }
 
         private bool CanExecuteSignInCommand()
