@@ -34,7 +34,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             TicketsViewModel ticketsViewModel,
             PetTransferLogViewModel petTransferLogViewModel,
             EmployeeShiftLogViewModel employeeShiftLogViewModel,
-            VisitLogViewModel visitorsLogViewModel)
+            VisitLogViewModel visitorsLogViewModel,
+            PersonalAreaViewModel personalAreaViewModel)
         {
             NavigationOptions.Add(new() { Name = "Pets", Description = "", DestinationVM = petsViewModel });
             NavigationOptions.Add(new() { Name = "Visitors", Description = "", DestinationVM = visitorsViewModel });
@@ -44,6 +45,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             NavigationOptions.Add(new() { Name = "VisitorsLog", Description = "", DestinationVM = visitorsLogViewModel });
             NavigationOptions.Add(new() { Name = "EmployeeShiiftLog", Description = "", DestinationVM = employeeShiftLogViewModel });
             NavigationOptions.Add(new() { Name = "PetTransferlog", Description = "", DestinationVM = petTransferLogViewModel });
+            NavigationOptions.Add(new() { Name = "PersonalArea", Description = "", DestinationVM = personalAreaViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);
             WeakReferenceMessenger.Default.Send(message);

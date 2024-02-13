@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Cats_Cafe_Accounting_System.Models;
+using Cats_Cafe_Accounting_System.Utilities;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class PersonalAreaViewModel : ObservableObject
     {
-        public PersonalAreaViewModel() { }
+        public EmployeeModel employee {  get; set; }
+        public PersonalAreaViewModel()
+        {
+            employee = Data.user;
+        }
     }
 }

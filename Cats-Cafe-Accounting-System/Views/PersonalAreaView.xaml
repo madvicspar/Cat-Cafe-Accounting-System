@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
+             xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="400"
              d:DesignWidth="622"
@@ -44,7 +45,7 @@
                         </Button>
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Margin="0,10,0,0">
 
                         <StackPanel Width="400"
                                     Height="330"
@@ -72,7 +73,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput"
-                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -101,7 +102,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput1"
-                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding employee.FirstName, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -135,7 +136,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput3"
-                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -160,7 +161,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput4"
-                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding employee.Birthday, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -191,7 +192,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput5"
-                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -219,7 +220,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput2"
-                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -252,7 +253,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput7"
-                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding employee.Job.Title, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -280,7 +281,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput8"
-                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding employee.ContractNumber, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
