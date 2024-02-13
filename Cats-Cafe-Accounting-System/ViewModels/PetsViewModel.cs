@@ -20,7 +20,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class Elem : ObservableObject
     {
-        public bool isSelected { get; set; }
+        public bool isSelected;
         public bool IsSelected
         {
             get { return isSelected; }

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Images\delete_note_image.png" />
+    <None Remove="Images\menu_image.png" />
     <None Remove="Images\update_note_image.png" />
   </ItemGroup>
 
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <Resource Include="Images\delete_note_image.png" />
+    <Resource Include="Images\menu_image.png" />
     <Resource Include="Images\update_note_image.png" />
   </ItemGroup>
 

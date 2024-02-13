@@ -18,7 +18,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -31,25 +30,285 @@
                                    Text="Личный кабинет"
                                    Style="{StaticResource Pages_Headers}"/>
                         <Button Grid.Column="1"
-                                x:Name="CloseAppButton"
-                                Foreground="#272B2F"
+                                x:Name="MenuButton"
                                 FontSize="20"
-                                Height="35"
-                                Width="35"
-                                HorizontalAlignment="Right"
+                                Height="25"
+                                Width="25"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 BorderThickness="0"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
-                                Padding="3,0,0,3"
-                                >
-                            <Image/>
+                                Margin="0,0,10,0">
+                            <Image Source="{StaticResource MenuImage}"/>
                         </Button>
                     </Grid>
 
                     <Grid Grid.Row="1">
-                    </Grid>
-                    <Grid Grid.Row="2">
+
+                        <StackPanel Width="400"
+                                    Height="330"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Top"
+                                    >
+                            <Border Background="Transparent"/>
+
+                            <TextBlock Text="Обо мне" FontSize="18" Margin="0,0,0,10" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+
+                                    <TextBlock Text="Фамилия"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               Width="60"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput"
+                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+
+                                    <TextBlock Text="Имя"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               Width="60"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput1"
+                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+                                </StackPanel>
+                            </Grid>
+                            
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <TextBlock Text="Отчество"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               Width="60"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput3"
+                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                    <TextBlock Text="Дата рождения"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput4"
+                                            Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                            FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <TextBlock Text="Номер телефона"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput5"
+                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                    <TextBlock Text="Отчество"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               Width="60"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput2"
+                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+
+                                    <TextBlock Text="Должность"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput7"
+                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+
+                                    <TextBlock Text="Табельный номер"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               HorizontalAlignment="Left"/>
+
+                                    <TextBox x:Name="UsernameInput8"
+                                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                             FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="LightGray">
+
+                                    </TextBox>
+
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Width="260">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Content="Сохранить" FontSize="13" Width="120"/>
+                                <Button Grid.Column="1" Content="Отменить" FontSize="13" Width="120"/>
+                            </Grid>
+
+                        </StackPanel>
                     </Grid>
 
                 </Grid>

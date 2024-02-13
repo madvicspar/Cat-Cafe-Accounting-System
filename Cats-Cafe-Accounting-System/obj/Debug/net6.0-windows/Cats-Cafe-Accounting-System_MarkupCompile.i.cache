@@ -16,5 +16,5 @@ D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Ap
 222-1251889972
 MainWindow.xaml;Styles\Button.xaml;Styles\PasswordBox_Binding.xaml;Styles\Text.xaml;Utilities\DataTemplate.xaml;Utilities\img.xaml;Views\AuthorizationView.xaml;Views\EmployeeShiftLog.xaml;Views\EmployeesView.xaml;Views\JobsView.xaml;Views\NavigationView.xaml;Views\PersonalAreaView.xaml;Views\PetsView.xaml;Views\PetTransferLog.xaml;Views\TicketsView.xaml;Views\VisitorLog.xaml;Views\VisitorsView.xaml;
 
-False
+True
 

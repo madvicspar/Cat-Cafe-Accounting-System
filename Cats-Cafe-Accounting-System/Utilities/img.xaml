@@ -3,5 +3,6 @@
 
     <BitmapImage x:Key="UpdateImage" UriSource="..\Images\update_note_image.png"></BitmapImage>
     <BitmapImage x:Key="DeleteImage" UriSource="..\Images\delete_note_image.png"></BitmapImage>
+    <BitmapImage x:Key="MenuImage" UriSource="..\Images\menu_image.png"></BitmapImage>
 
 </ResourceDictionary>
