@@ -14,6 +14,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -64,6 +65,40 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(Pets));
             }
         }
+
+        private ObservableCollection<string> selectedGenders = new ObservableCollection<string>() { "Все гендеры" };
+        public ObservableCollection<string> SelectedGenders
+        {
+            get { return selectedGenders; }
+            set
+            {
+                selectedGenders = value;
+                OnPropertyChanged(nameof(SelectedGenders));
+            }
+        }
+
+        private ObservableCollection<string> selectedBreeds = new ObservableCollection<string>() { "Все породы" };
+        public ObservableCollection<string> SelectedBreeds
+        {
+            get { return selectedBreeds; }
+            set
+            {
+                selectedBreeds = value;
+                OnPropertyChanged(nameof(SelectedBreeds));
+            }
+        }
+
+        private ObservableCollection<string> selectedStatuses = new ObservableCollection<string>() { "Все статусы" };
+        public ObservableCollection<string> SelectedStatuses
+        {
+            get { return selectedStatuses; }
+            set
+            {
+                selectedStatuses = value;
+                OnPropertyChanged(nameof(SelectedStatuses));
+            }
+        }
+
         public ICommand AddPetCommand { get; set; }
         public ICommand UpdatePetCommand { get; set; }
         public ICommand DeletePetCommand { get; set; }
@@ -78,6 +113,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 items.Add(new Elem(item));
             }
+            foreach (var item in Data.gendersList)
+                selectedGenders.Add(item.Title);
+            foreach (var item in Data.breedsList)
+                selectedBreeds.Add(item.Title);
+            foreach (var item in Data.statusesList)
+                selectedStatuses.Add(item.Title);
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
