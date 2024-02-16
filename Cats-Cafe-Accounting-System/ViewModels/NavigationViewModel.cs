@@ -42,9 +42,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             NavigationOptions.Add(new() { Name = "Должности", Description = "", DestinationVM = jobsViewModel });
             NavigationOptions.Add(new() { Name = "Сотрудники", Description = "", DestinationVM = employeesViewModel });
             NavigationOptions.Add(new() { Name = "Билеты", Description = "", DestinationVM = ticketsViewModel });
-            NavigationOptions.Add(new() { Name = "Журнал учета посетителей", Description = "", DestinationVM = visitorsLogViewModel });
-            NavigationOptions.Add(new() { Name = "Журнал учета смен сотрудников", Description = "", DestinationVM = employeeShiftLogViewModel });
-            NavigationOptions.Add(new() { Name = "Журнал учета передач питомцев", Description = "", DestinationVM = petTransferLogViewModel });
+            NavigationOptions.Add(new() { Name = "Учета посещений", Description = "", DestinationVM = visitorsLogViewModel });
+            NavigationOptions.Add(new() { Name = "Учета смен сотрудников", Description = "", DestinationVM = employeeShiftLogViewModel });
+            NavigationOptions.Add(new() { Name = "Учета передач питомцев", Description = "", DestinationVM = petTransferLogViewModel });
             NavigationOptions.Add(new() { Name = "Личный кабинет", Description = "", DestinationVM = personalAreaViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);

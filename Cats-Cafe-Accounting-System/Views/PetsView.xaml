@@ -7,7 +7,7 @@
              xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="550"
-             d:DesignWidth="622"
+             d:DesignWidth="620"
              Background="Transparent">
     <Grid>
 

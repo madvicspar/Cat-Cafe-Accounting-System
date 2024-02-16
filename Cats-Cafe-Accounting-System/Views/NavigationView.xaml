@@ -8,10 +8,10 @@
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550" 
-             d:DesignWidth="228"
+             d:DesignWidth="230"
              Background="Transparent">
 
-        <ListView ItemsSource="{Binding NavigationOptions}" Background="Transparent" SelectionMode="Single">
+        <ListView ItemsSource="{Binding NavigationOptions}" Background="Transparent" BorderBrush="Transparent" SelectionMode="Single" HorizontalContentAlignment="Left">
             <Behaviors:Interaction.Triggers>
                 <Behaviors:EventTrigger EventName="SelectionChanged">
                     <Behaviors:InvokeCommandAction Command="{Binding SelectionChangedCommand}" PassEventArgsToCommand="True"/>
@@ -20,15 +20,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                 <Border Height="35">
-                    <Border.ToolTip>
-                        <ToolTip Content="{Binding Description}">
-                            <ToolTip.ContentTemplate>
-                                <DataTemplate>
-                                    <Menu:Button Style="{StaticResource PanelNavigationButton}"/>
-                                </DataTemplate>
-                            </ToolTip.ContentTemplate>
-                        </ToolTip>
-                    </Border.ToolTip>
                     <TextBlock Text="{Binding Name}"
                                Style="{StaticResource Text_Style}"/>
                 </Border>
