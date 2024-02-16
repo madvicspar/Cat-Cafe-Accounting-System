@@ -103,6 +103,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand UpdatePetCommand { get; set; }
         public ICommand DeletePetCommand { get; set; }
         public ICommand DeleteManyPetCommand { get; set; }
+        public ICommand ChangeSelectionCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
@@ -125,6 +126,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdatePetCommand = new RelayCommand<PetModel>(ExecuteUpdatePetCommand);
             DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
+            ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -266,6 +268,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
 
             return pets;
+        }
+
+        public void ExecuteChangeSelectionCommand(bool value)
+        {
+            foreach (var item in Items)
+                item.IsSelected = value;
         }
     }
 }

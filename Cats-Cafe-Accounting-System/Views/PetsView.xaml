@@ -29,32 +29,15 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="210" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0"  Width="30" Height="25" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"  BorderBrush="Transparent">
+                        <Button Width="30" Height="25" Margin="0,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Left"  BorderBrush="Transparent">
                             <Image Source="{StaticResource SearchImage}"/>
                         </Button>
 
                         <!--<TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="Поиск..." Margin="0,5,5,5" VerticalAlignment="Center" Height="25" Width="200"
              GotFocus="RemoveText" LostFocus="AddText"/>-->
-                        <TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="Поиск..." Margin="0,5,5,5" VerticalAlignment="Center" Height="25" Width="200"/>
+                        <TextBox VerticalContentAlignment="Center" Text="Поиск..." Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left"/>
 
-                        <Grid Grid.Column="2" Margin="10,0,10,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <ComboBox ItemsSource="{Binding SelectedGenders}" SelectedIndex="0" Grid.Column="0" Width="100" Height="25" VerticalContentAlignment="Top"/>
-                            <ComboBox ItemsSource="{Binding SelectedBreeds}" SelectedIndex="0" Grid.Column="1" Width="100" Height="25" VerticalContentAlignment="Top"/>
-                            <ComboBox ItemsSource="{Binding SelectedStatuses}" SelectedIndex="0" Grid.Column="2" Width="100" Height="25" VerticalContentAlignment="Top"/>
-                            
-                        </Grid>
                     </Grid>
                     
                     <Grid Grid.Row="2">
@@ -64,32 +47,46 @@
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn Header="" Binding="{Binding IsSelected}">
-                                    <DataGridCheckBoxColumn.ElementStyle>
-                                        <Style TargetType="CheckBox">
-                                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                                            <Setter Property="VerticalAlignment" Value="Center"/>
-                                            <Setter Property="Margin" Value="0,0,3,0"/>
-                                        </Style>
-                                    </DataGridCheckBoxColumn.ElementStyle>
-                                </DataGridCheckBoxColumn>
-                                <DataGridTextColumn Header="Кличка" Binding="{Binding Pet.Name, UpdateSourceTrigger=PropertyChanged}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                    <DataGridTextColumn.CellStyle>
-                                        <Style TargetType="DataGridCell">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGridTextColumn.CellStyle>
-                                </DataGridTextColumn>
-                                <DataGridTemplateColumn Header="Пол">
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Command="{Binding DataContext.ChangeSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Кличка"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Pet.Name}" VerticalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Пол"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.gendersList}}"
@@ -101,7 +98,17 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Статус">
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Статус"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.statusesList}}"
@@ -113,7 +120,17 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Порода">
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Порода"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding Source={x:Static data:Data.breedsList}}"
@@ -125,36 +142,57 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="День рождения">
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="День рождения"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DatePicker SelectedDate="{Binding Pet.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Дата появления в котокафе">
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="День появления в котокафе"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DatePicker SelectedDate="{Binding Pet.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Номер паспорта" Binding="{Binding Pet.PassNumber, UpdateSourceTrigger=PropertyChanged}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                    <DataGridTextColumn.CellStyle>
-                                        <Style TargetType="DataGridCell">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGridTextColumn.CellStyle>
-                                </DataGridTextColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Номер паспорта"/>
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                    <Image Source="{StaticResource FilterImage}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Pet.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Действия">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
