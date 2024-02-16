@@ -37,15 +37,15 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             VisitLogViewModel visitorsLogViewModel,
             PersonalAreaViewModel personalAreaViewModel)
         {
-            NavigationOptions.Add(new() { Name = "Pets", Description = "", DestinationVM = petsViewModel });
-            NavigationOptions.Add(new() { Name = "Visitors", Description = "", DestinationVM = visitorsViewModel });
-            NavigationOptions.Add(new() { Name = "Jobs", Description = "", DestinationVM = jobsViewModel });
-            NavigationOptions.Add(new() { Name = "Employees", Description = "", DestinationVM = employeesViewModel });
-            NavigationOptions.Add(new() { Name = "Tickets", Description = "", DestinationVM = ticketsViewModel });
-            NavigationOptions.Add(new() { Name = "VisitorsLog", Description = "", DestinationVM = visitorsLogViewModel });
-            NavigationOptions.Add(new() { Name = "EmployeeShiiftLog", Description = "", DestinationVM = employeeShiftLogViewModel });
-            NavigationOptions.Add(new() { Name = "PetTransferlog", Description = "", DestinationVM = petTransferLogViewModel });
-            NavigationOptions.Add(new() { Name = "PersonalArea", Description = "", DestinationVM = personalAreaViewModel });
+            NavigationOptions.Add(new() { Name = "Питомцы", Description = "", DestinationVM = petsViewModel });
+            NavigationOptions.Add(new() { Name = "Посетители", Description = "", DestinationVM = visitorsViewModel });
+            NavigationOptions.Add(new() { Name = "Должности", Description = "", DestinationVM = jobsViewModel });
+            NavigationOptions.Add(new() { Name = "Сотрудники", Description = "", DestinationVM = employeesViewModel });
+            NavigationOptions.Add(new() { Name = "Билеты", Description = "", DestinationVM = ticketsViewModel });
+            NavigationOptions.Add(new() { Name = "Журнал учета посетителей", Description = "", DestinationVM = visitorsLogViewModel });
+            NavigationOptions.Add(new() { Name = "Журнал учета смен сотрудников", Description = "", DestinationVM = employeeShiftLogViewModel });
+            NavigationOptions.Add(new() { Name = "Журнал учета передач питомцев", Description = "", DestinationVM = petTransferLogViewModel });
+            NavigationOptions.Add(new() { Name = "Личный кабинет", Description = "", DestinationVM = personalAreaViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);
             WeakReferenceMessenger.Default.Send(message);
