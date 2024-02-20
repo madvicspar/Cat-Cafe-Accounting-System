@@ -41,7 +41,7 @@
                     </Grid>
                     
                     <Grid Grid.Row="2">
-                        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="True" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                        <DataGrid ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
@@ -72,7 +72,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Pet.Name}" VerticalAlignment="Center"/>
+                                            <TextBox Text="{Binding Pet.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -89,12 +89,9 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding Source={x:Static data:Data.gendersList}}"
+                                            <ComboBox ItemsSource="{Binding DataContext.SelectedGenders, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding Pet.Gender.Title,
-                                                                      Mode=TwoWay,
-                                                                      UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Title"/>
+                                                      SelectedItem="{Binding Pet.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -111,12 +108,9 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding Source={x:Static data:Data.statusesList}}"
+                                            <ComboBox ItemsSource="{Binding DataContext.SelectedStatuses, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding Pet.Status.Title,
-                                                                      Mode=TwoWay,
-                                                                      UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Title"/>
+                                                      SelectedItem="{Binding Pet.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -133,12 +127,9 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding Source={x:Static data:Data.breedsList}}"
+                                            <ComboBox ItemsSource="{Binding DataContext.SelectedBreeds, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Title"
-                                                      SelectedValue="{Binding Pet.Breed.Title,
-                                                                      Mode=TwoWay,
-                                                                      UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Title"/>
+                                                      SelectedItem="{Binding Pet.Breed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -155,7 +146,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Pet.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}" />
+                                            <DatePicker SelectedDate="{Binding Pet.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -172,7 +163,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Pet.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static data:Data.currentDate}}"/>
+                                            <DatePicker SelectedDate="{Binding Pet.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -189,7 +180,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock VerticalAlignment="Center" Text="{Binding Pet.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Pet.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

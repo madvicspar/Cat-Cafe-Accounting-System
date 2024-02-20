@@ -6,19 +6,20 @@ using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Wordprocessing;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
-    public class PetModel
+    public class PetModel : ObservableObject
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        [ForeignKey("Gender")]
         public int GenderId { get; set; }
-        public Gender Gender { get; set; }
-        [ForeignKey("Status")]
+        [ForeignKey("GenderId")]
+        public Gender Gender { get; set; } 
         public int StatusId { get; set; }
+        [ForeignKey("StatusId")]
         public Status Status { get; set; }
         public string BreedId { get; set; }
         public Breed Breed { get; set; }

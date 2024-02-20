@@ -1,13 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>Cats_Cafe_Accounting_System</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Images\delete_note_image.png" />
     <None Remove="Images\filter_image.png" />
@@ -15,16 +13,20 @@
     <None Remove="Images\search_image.png" />
     <None Remove="Images\update_note_image.png" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
     <PackageReference Include="NPOI" Version="2.6.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Images\delete_note_image.png" />
     <Resource Include="Images\filter_image.png" />
@@ -32,5 +34,4 @@
     <Resource Include="Images\search_image.png" />
     <Resource Include="Images\update_note_image.png" />
   </ItemGroup>
-
 </Project>
