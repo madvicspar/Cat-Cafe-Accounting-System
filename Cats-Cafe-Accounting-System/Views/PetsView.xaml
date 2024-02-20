@@ -64,7 +64,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Кличка"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                                                     <Image Source="{StaticResource FilterImage}"/>
                                                 </Button>
                                             </StackPanel>
@@ -211,6 +211,33 @@
 
                         </DataGrid>
                     </Grid>
+
+
+                    <Popup x:Name="popUpName" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                        <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="45"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox x:Name="FilterSearch" Grid.Row="0" Margin="10" Text="Поиск.." Height="20"/>
+                                <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
+
+                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding NameFilterCommand}"/>
+
+                            </Grid>
+                        </Border>
+                    </Popup>
+
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />

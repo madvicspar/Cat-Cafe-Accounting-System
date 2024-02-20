@@ -9,6 +9,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Win32;
 using NPOI.XWPF.UserModel;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
@@ -43,6 +44,47 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Pet = new PetModel();
         }
     }
+
+    public class FilterElem<T> : ObservableObject
+    {
+        public bool isSelected;
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+        public T Item { get; set; }
+        public FilterElem(T item)
+        {
+            IsSelected = true;
+            Item = item;
+        }
+    }
+
+    public class FilterElem : ObservableObject
+    {
+        public string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+        public List<string> SelectedItems { get; set; }
+        public FilterElem(string _name, List<string> _items)
+        {
+            Name = _name;
+            SelectedItems = _items;
+        }
+    }
+
     public class PetsViewModel : ObservableObject
     {
         private ObservableCollection<Elem> items = new ObservableCollection<Elem>();
@@ -66,8 +108,30 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<string> selectedGenders = new ObservableCollection<string>() { "Все гендеры" };
-        public ObservableCollection<string> SelectedGenders
+        private ObservableCollection<FilterElem> filters = new ObservableCollection<FilterElem>() { new FilterElem("Name", new List<string>()),  new FilterElem("GenderId", new List<string>()), new FilterElem("BreedId", new List<string>()), new FilterElem("StatusId", new List<string>()) };
+        public ObservableCollection<FilterElem> Filters
+        {
+            get { return filters; }
+            set
+            {
+                filters = value;
+                OnPropertyChanged(nameof(Filters));
+            }
+        }
+
+        private ObservableCollection<FilterElem<string>> selectedNames = new ObservableCollection<FilterElem<string>>() { new FilterElem<string>("Все клички") };
+        public ObservableCollection<FilterElem<string>> SelectedNames
+        {
+            get { return selectedNames; }
+            set
+            {
+                selectedNames = value;
+                OnPropertyChanged(nameof(SelectedNames));
+            }
+        }
+
+        private ObservableCollection<FilterElem<string>> selectedGenders = new ObservableCollection<FilterElem<string>>() { new FilterElem<string>("Все гендеры") };
+        public ObservableCollection<FilterElem<string>> SelectedGenders
         {
             get { return selectedGenders; }
             set
@@ -77,8 +141,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<string> selectedBreeds = new ObservableCollection<string>() { "Все породы" };
-        public ObservableCollection<string> SelectedBreeds
+        private ObservableCollection<FilterElem<string>> selectedBreeds = new ObservableCollection<FilterElem<string>>() { new FilterElem<string>("Все породы") };
+        public ObservableCollection<FilterElem<string>> SelectedBreeds
         {
             get { return selectedBreeds; }
             set
@@ -88,8 +152,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<string> selectedStatuses = new ObservableCollection<string>() { "Все статусы" };
-        public ObservableCollection<string> SelectedStatuses
+        private ObservableCollection<FilterElem<string>> selectedStatuses = new ObservableCollection<FilterElem<string>> () { new FilterElem<string>("Все статусы") };
+        public ObservableCollection<FilterElem<string>> SelectedStatuses
         {
             get { return selectedStatuses; }
             set
@@ -104,22 +168,23 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeletePetCommand { get; set; }
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
+        public ICommand NameFilterCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
         {
             // Инициализация коллекции питомцев
-            Pets = GetPetsFromTable("pets");
+            Pets = GetPetsFromTable("pets", false);
             foreach (var item in Pets)
             {
                 items.Add(new Elem(item));
             }
             foreach (var item in Data.gendersList)
-                selectedGenders.Add(item.Title);
+                SelectedGenders.Add(new FilterElem<string>(item.Title));
             foreach (var item in Data.breedsList)
-                selectedBreeds.Add(item.Title);
+                SelectedBreeds.Add(new FilterElem<string>(item.Title));
             foreach (var item in Data.statusesList)
-                selectedStatuses.Add(item.Title);
+                SelectedStatuses.Add(new FilterElem<string>(item.Title));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -127,6 +192,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
+            NameFilterCommand = new RelayCommand(ExecuteNameFilterCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -252,11 +318,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        public static ObservableCollection<PetModel> GetPetsFromTable(string table)
+        public ObservableCollection<PetModel> GetPetsFromTable(string table, bool isFilter)
         {
             ObservableCollection<PetModel> pets = new ObservableCollection<PetModel>();
 
-            DataTable dataTable = DBContext.GetTable(table);
+            DataTable dataTable = DBContext.GetTable(table, filters.Select(x => x.SelectedItems).ToList(), isFilter);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -265,6 +331,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     DateTime.Parse(row["birthday"].ToString()), DateTime.Parse(row["checkindate"].ToString()), 
                     row["passnumber"].ToString());
                 pets.Add(pet);
+                SelectedNames.Add(new FilterElem<string>(pet.Name));
             }
 
             return pets;
@@ -274,6 +341,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in Items)
                 item.IsSelected = value;
+        }
+
+        public void ExecuteNameFilterCommand()
+        {
+            filters[0].SelectedItems = SelectedNames.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
+            filters[1].SelectedItems = SelectedGenders.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
+            filters[3].SelectedItems = SelectedStatuses.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
+            filters[2].SelectedItems = SelectedBreeds.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
+
+            Pets = GetPetsFromTable("pets", false);
+            foreach (var item in Pets)
+            {
+                items.Add(new Elem(item));
+            }
         }
     }
 }

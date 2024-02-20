@@ -47,6 +47,39 @@ namespace Cats_Cafe_Accounting_System.Utilities
             return dataTable;
         }
 
+        public static DataTable GetTable(string table, List<List<string>> filters, bool isFilter)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                OpenConnection();
+                string query = $"SELECT * FROM {table}";
+                if (isFilter)
+                {
+                    List<string> list = GetAttributes(table).Skip(1).ToList();
+                    query += " WHERE ";
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (i != 0)
+                            query += " AND ";
+                        query += $"{list[i]} IN ({string.Join(", ", filters[i])})";
+
+                        // Траблы с внешними ключами
+                    }
+                }
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
+
+                adapter.Fill(dataTable);
+                CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
+            }
+            return dataTable;
+        }
+
         public static List<string> GetAttributes(string table)
         {
             List<string> attributes = new List<string>();
