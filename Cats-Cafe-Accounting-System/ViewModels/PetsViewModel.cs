@@ -4,86 +4,19 @@ using Cats_Cafe_Accounting_System.Utilities;
 using ClosedXML.Excel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using NPOI.XWPF.UserModel;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
-    public class Elem : ObservableObject
-    {
-        public bool isSelected;
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-        public PetModel pet;
-        public PetModel Pet
-        {
-            get { return pet; }
-            set
-            {
-                pet = value;
-                OnPropertyChanged(nameof(Pet));
-            }
-        }
-        public Elem(PetModel pet)
-        {
-            IsSelected = false;
-            Pet = pet;
-        }
-        public Elem()
-        {
-            IsSelected = false;
-            Pet = new PetModel();
-        }
-    }
-
-    public class FilterElem<T> : ObservableObject
-    {
-        public bool isSelected;
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-        public T item;
-        public T Item
-        {
-            get { return item; }
-            set
-            {
-                item = value;
-                OnPropertyChanged(nameof(Item));
-            }
-        }
-        public FilterElem(T item)
-        {
-            IsSelected = true;
-            Item = item;
-        }
-    }
-
     public class PetsViewModel : ObservableObject
     {
         private string searchName = "";
@@ -97,8 +30,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
         private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
-        private ObservableCollection<Elem> items = new ObservableCollection<Elem>();
-        public ObservableCollection<Elem> Items
+        private ObservableCollection<Elem<PetModel>> items = new ObservableCollection<Elem<PetModel>>();
+        public ObservableCollection<Elem<PetModel>> Items
         {
             get { return items; }
             set
@@ -141,7 +74,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<FilterElem<Status>> selectedStatuses = new ObservableCollection<FilterElem<Status>> ();
+        private ObservableCollection<FilterElem<Status>> selectedStatuses = new ObservableCollection<FilterElem<Status>>();
         public ObservableCollection<FilterElem<Status>> SelectedStatuses
         {
             get { return selectedStatuses; }
@@ -165,7 +98,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
             {
-                Items.Add(new Elem(item));
+                Items.Add(new Elem<PetModel>(item));
             }
             foreach (var item in _dbContext.Genders.ToList())
             {
@@ -183,7 +116,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 SelectedNames.Add(new FilterElem<PetModel>(item));
             }
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -198,7 +131,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteAddPetCommand()
         {
             // добавить проверку на то, что все введено, и введено правильно
-            var lastPet = Items[Items.Count - 1].Pet;
+            var lastPet = Items[Items.Count - 1].Item;
 
             var petToAdd = new PetModel
             {
@@ -235,10 +168,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteDeleteManyPetCommand()
         {
-            var itemsToDelete = new ObservableCollection<Elem>(Items.Where(x => x.IsSelected).ToList());
+            var itemsToDelete = new ObservableCollection<Elem<PetModel>>(Items.Where(x => x.IsSelected).ToList());
             foreach (var itemToDelete in itemsToDelete)
             {
-                _dbContext.Pets.Remove(itemToDelete.Pet);
+                _dbContext.Pets.Remove(itemToDelete.Item);
             }
             _dbContext.SaveChanges();
             UpdateTable();
@@ -266,7 +199,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             // Заполнение данных о питомцах
             for (int i = 0; i < Items.Count; i++)
             {
-                PetModel pet = Items[i].Pet;
+                PetModel pet = Items[i].Item;
 
                 table.GetRow(i + 1).GetCell(0).SetText(pet.Name);
                 table.GetRow(i + 1).GetCell(1).SetText(pet.Breed.Title);
@@ -342,8 +275,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             Items.Clear();
             foreach (var item in filteredPets)
-                Items.Add(new Elem(item));
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+                Items.Add(new Elem<PetModel>(item));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         public void ExecuteSearchNameCommand()

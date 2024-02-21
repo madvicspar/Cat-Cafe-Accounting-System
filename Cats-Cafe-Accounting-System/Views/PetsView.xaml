@@ -73,7 +73,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding Pet.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" VerticalContentAlignment="Center"/>
+                                            <TextBox Text="{Binding Item.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -92,7 +92,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding DataContext.SelectedGenders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
-                                                      SelectedValue="{Binding Pet.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValue="{Binding Item.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Item"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -112,7 +112,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding DataContext.SelectedStatuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
-                                                      SelectedValue="{Binding Pet.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValue="{Binding Item.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Item"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -132,7 +132,7 @@
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding DataContext.SelectedBreeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
-                                                      SelectedValue="{Binding Pet.Breed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValue="{Binding Item.Breed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Item"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -150,7 +150,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Pet.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DatePicker SelectedDate="{Binding Item.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -167,7 +167,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Pet.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <DatePicker SelectedDate="{Binding Item.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -184,7 +184,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox VerticalAlignment="Center" Text="{Binding Pet.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center"/>
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Item.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -192,10 +192,10 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Pet}">
+                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}">
                                                     <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
                                                 </Button>
-                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Pet}">
+                                                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}">
                                                     <Image Source="{StaticResource DeleteImage}" Height="15" Width="15"/>
                                                 </Button>
                                             </StackPanel>
