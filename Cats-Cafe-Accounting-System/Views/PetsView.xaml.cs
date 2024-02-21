@@ -20,9 +20,12 @@ namespace Cats_Cafe_Accounting_System.Views
     /// </summary>
     public partial class PetsView : UserControl
     {
+        readonly string FilterNamePlaceholder = "Поиск по имени..";
+        bool isNameFind = false;
         public PetsView()
         {
             InitializeComponent();
+            FilterSearch.Text = FilterNamePlaceholder;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -51,6 +54,27 @@ namespace Cats_Cafe_Accounting_System.Views
             popUpBreed.PlacementTarget = sender as Button;
             popUpBreed.VerticalOffset = 5;
             popUpBreed.IsOpen = true;
+        }
+
+        private void FilterSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (FilterSearch.Text == FilterNamePlaceholder)
+                FilterSearch.Text = "";
+            isNameFind = false;
+        }
+
+        private void FilterSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!isNameFind)
+                FilterSearch.Text = FilterNamePlaceholder;
+        }
+
+        private void FilterSearch_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                isNameFind = true;
+            }
         }
     }
 }

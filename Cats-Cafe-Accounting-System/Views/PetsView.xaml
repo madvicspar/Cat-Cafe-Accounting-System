@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              mc:Ignorable="d" 
@@ -141,9 +142,9 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="День рождения"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <!--<Button Width="20" Background="Transparent" BorderBrush="Transparent">
                                                     <Image Source="{StaticResource FilterImage}"/>
-                                                </Button>
+                                                </Button>-->
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -158,9 +159,9 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="День появления в котокафе"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <!--<Button Width="20" Background="Transparent" BorderBrush="Transparent">
                                                     <Image Source="{StaticResource FilterImage}"/>
-                                                </Button>
+                                                </Button>-->
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -175,9 +176,9 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Номер паспорта"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <!--<Button Width="20" Background="Transparent" BorderBrush="Transparent">
                                                     <Image Source="{StaticResource FilterImage}"/>
-                                                </Button>
+                                                </Button>-->
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -216,7 +217,13 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox x:Name="FilterSearch" Grid.Row="0" Margin="10" Text="Поиск.." Height="20"/>
+                                <TextBox x:Name="FilterSearch" Grid.Row="0" Margin="10" Text="{Binding SearchName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearch_GotFocus" LostFocus="FilterSearch_LostFocus" PreviewKeyDown="FilterSearch_PreviewKeyDown">
+                                    <behaviors:Interaction.Triggers>
+                                        <behaviors:EventTrigger EventName="PreviewKeyDown">
+                                            <behaviors:InvokeCommandAction />
+                                        </behaviors:EventTrigger>
+                                    </behaviors:Interaction.Triggers>
+                                </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
                                 <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

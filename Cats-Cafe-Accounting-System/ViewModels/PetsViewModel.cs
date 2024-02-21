@@ -86,6 +86,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
     public class PetsViewModel : ObservableObject
     {
+        private string searchName = "";
+        public string SearchName
+        {
+            get { return searchName; }
+            set
+            {
+                searchName = value;
+                OnPropertyChanged(nameof(SearchName));
+            }
+        }
         private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
         private ObservableCollection<Elem> items = new ObservableCollection<Elem>();
         public ObservableCollection<Elem> Items
@@ -148,6 +158,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand FilterCommand { get; set; }
+        public ICommand SearchNameCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
@@ -181,6 +192,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
+            //SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -332,6 +344,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (var item in filteredPets)
                 Items.Add(new Elem(item));
             Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+        }
+
+        public void ExecuteSearchNameCommand()
+        {
+            var petNames = new ObservableCollection<string>(SelectedNames.Where(p => p.Item.Name.Contains(searchName)).Select(p => p.Item.Name));
+            // нужно доп коллекцию или что-то подобное для поиска
         }
     }
 }
