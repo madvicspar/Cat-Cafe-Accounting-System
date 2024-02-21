@@ -81,7 +81,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Пол"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent" Click="Button_Click_1">
                                                     <Image Source="{StaticResource FilterImage}"/>
                                                 </Button>
                                             </StackPanel>
@@ -89,9 +89,10 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding DataContext.SelectedGenders, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
-                                                      DisplayMemberPath="Title"
-                                                      SelectedItem="{Binding Pet.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <ComboBox ItemsSource="{Binding DataContext.SelectedGenders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                      DisplayMemberPath="Item.Title"
+                                                      SelectedValue="{Binding Pet.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValuePath="Item"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -223,7 +224,32 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding NameFilterCommand}"/>
+                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
+
+                            </Grid>
+                        </Border>
+                    </Popup>
+
+                    <Popup x:Name="popUpGender" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                        <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="45"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBox x:Name="FilterSearchGender" Grid.Row="0" Margin="10" Text="Поиск.." Height="20"/>
+                                <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
+
+                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedGenders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
 
                             </Grid>
                         </Border>

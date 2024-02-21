@@ -67,7 +67,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(IsSelected));
             }
         }
-        public T Item { get; set; }
+        public T item;
+        public T Item
+        {
+            get { return item; }
+            set
+            {
+                item = value;
+                OnPropertyChanged(nameof(Item));
+            }
+        }
         public FilterElem(T item)
         {
             IsSelected = true;
@@ -120,8 +129,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<Gender> selectedGenders = new ObservableCollection<Gender>();
-        public ObservableCollection<Gender> SelectedGenders
+        private ObservableCollection<FilterElem<Gender>> selectedGenders = new ObservableCollection<FilterElem<Gender>>();
+        public ObservableCollection<FilterElem<Gender>> SelectedGenders
         {
             get { return selectedGenders; }
             set
@@ -158,7 +167,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeletePetCommand { get; set; }
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
-        public ICommand NameFilterCommand { get; set; }
+        public ICommand FilterCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
@@ -169,7 +178,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in _dbContext.Genders.ToList())
             {
-                SelectedGenders.Add(item);
+                SelectedGenders.Add(new FilterElem<Gender>(item));
             }
             foreach (var item in _dbContext.Breeds.ToList())
             {
@@ -181,9 +190,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in _dbContext.Pets.ToList())
             {
-                SelectedNames.Add( new FilterElem<PetModel>(item));
+                SelectedNames.Add(new FilterElem<PetModel>(item));
             }
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -191,7 +200,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
-            NameFilterCommand = new RelayCommand(ExecuteNameFilterCommand);
+            FilterCommand = new RelayCommand(ExecuteFilterCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -218,7 +227,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
                 Items.Add(new Elem(item));
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         private void ExecuteUpdatePetCommand(PetModel? pet)
@@ -228,7 +237,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
                 Items.Add(new Elem(item));
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         private void ExecuteDeletePetCommand(PetModel? pet)
@@ -238,7 +247,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
                 Items.Add(new Elem(item));
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         private void ExecuteDeleteManyPetCommand()
@@ -252,7 +261,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
                 Items.Add(new Elem(item));
-            Items.Add(new Elem(new PetModel() {Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem(new PetModel() {Breed = SelectedBreeds[0], Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
 
         }
 
@@ -352,18 +361,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 item.IsSelected = value;
         }
 
-        public void ExecuteNameFilterCommand()
+        public void ExecuteFilterCommand()
         {
             var petNames = new ObservableCollection<string>(SelectedNames.Where(p => p.IsSelected).Select(p => p.Item.Name));
+            var petGenders = new ObservableCollection<Gender>(SelectedGenders.Where(p => p.IsSelected).Select(p => p.Item));
 
             var filteredPets = _dbContext.Pets
                 .Where(p => petNames.Contains(p.Name))
+                .Where(p => petGenders.Contains(p.Gender))
                 .ToList();
 
             Items.Clear();
             foreach (var item in filteredPets)
                 Items.Add(new Elem(item));
-            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
     }
 }
