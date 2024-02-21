@@ -109,19 +109,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<FilterElem> filters = new ObservableCollection<FilterElem>() { new FilterElem("Name", new List<string>()),  new FilterElem("GenderId", new List<string>()), new FilterElem("BreedId", new List<string>()), new FilterElem("StatusId", new List<string>()) };
-        public ObservableCollection<FilterElem> Filters
-        {
-            get { return filters; }
-            set
-            {
-                filters = value;
-                OnPropertyChanged(nameof(Filters));
-            }
-        }
-
-        private ObservableCollection<FilterElem<string>> selectedNames = new ObservableCollection<FilterElem<string>>() { new FilterElem<string>("Все клички") };
-        public ObservableCollection<FilterElem<string>> SelectedNames
+        private ObservableCollection<FilterElem<PetModel>> selectedNames = new ObservableCollection<FilterElem<PetModel>>();
+        public ObservableCollection<FilterElem<PetModel>> SelectedNames
         {
             get { return selectedNames; }
             set
@@ -189,6 +178,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (var item in _dbContext.Statuses.ToList())
             {
                 SelectedStatuses.Add(item);
+            }
+            foreach (var item in _dbContext.Pets.ToList())
+            {
+                SelectedNames.Add( new FilterElem<PetModel>(item));
             }
             Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
@@ -333,25 +326,25 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        public ObservableCollection<PetModel> GetPetsFromTable(string table, bool isFilter)
-        {
-            ObservableCollection<PetModel> pets = new ObservableCollection<PetModel>();
+        //public ObservableCollection<PetModel> GetPetsFromTable(string table, bool isFilter)
+        //{
+        //    ObservableCollection<PetModel> pets = new ObservableCollection<PetModel>();
 
-            //ApplicationDbContext dbContext = new ApplicationDbContext();
-            DataTable dataTable = DBContext.GetTable(table, filters.Select(x => x.SelectedItems).ToList(), isFilter);
+        //    //ApplicationDbContext dbContext = new ApplicationDbContext();
+        //    DataTable dataTable = DBContext.GetTable(table, filters.Select(x => x.SelectedItems).ToList(), isFilter);
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                PetModel pet = new PetModel(Convert.ToInt32(row["id"]), row["name"].ToString(),
-                    Convert.ToInt32(row["genderid"]), Convert.ToInt32(row["statusid"]), row["breedid"].ToString(), 
-                    DateTime.Parse(row["birthday"].ToString()), DateTime.Parse(row["checkindate"].ToString()), 
-                    row["passnumber"].ToString());
-                pets.Add(pet);
-                SelectedNames.Add(new FilterElem<string>(pet.Name));
-            }
+        //    foreach (DataRow row in dataTable.Rows)
+        //    {
+        //        PetModel pet = new PetModel(Convert.ToInt32(row["id"]), row["name"].ToString(),
+        //            Convert.ToInt32(row["genderid"]), Convert.ToInt32(row["statusid"]), row["breedid"].ToString(), 
+        //            DateTime.Parse(row["birthday"].ToString()), DateTime.Parse(row["checkindate"].ToString()), 
+        //            row["passnumber"].ToString());
+        //        pets.Add(pet);
+        //        SelectedNames.Add(new FilterElem<string>(pet.Name));
+        //    }
 
-            return pets;
-        }
+        //    return pets;
+        //}
 
         public void ExecuteChangeSelectionCommand(bool value)
         {
@@ -361,16 +354,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void ExecuteNameFilterCommand()
         {
-            //filters[0].SelectedItems = SelectedNames.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
-            //filters[1].SelectedItems = SelectedGenders.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
-            //filters[3].SelectedItems = SelectedStatuses.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
-            //filters[2].SelectedItems = SelectedBreeds.Where(x => x.IsSelected == true).Select(s => s.Item).ToList();
+            var petNames = new ObservableCollection<string>(SelectedNames.Where(p => p.IsSelected).Select(p => p.Item.Name));
 
-            //Pets = GetPetsFromTable("pets", false);
-            //foreach (var item in Pets)
-            //{
-            //    items.Add(new Elem(item));
-            //}
+            var filteredPets = _dbContext.Pets
+                .Where(p => petNames.Contains(p.Name))
+                .ToList();
+
+            Items.Clear();
+            foreach (var item in filteredPets)
+                Items.Add(new Elem(item));
+            Items.Add(new Elem(new PetModel() { Breed = SelectedBreeds[0], Gender = SelectedGenders[0], Status = SelectedStatuses[0], Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
     }
 }
