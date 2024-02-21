@@ -24,8 +24,8 @@ namespace Cats_Cafe_Accounting_System.Models
         public JobModel Job { get; set; }
         public string ContractNumber { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
-        public string Salt { get; set; }
+        public byte[] Password { get; set; }
+        public byte[] Salt { get; set; }
         public EmployeeModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday, int jobId, string contractNumber, string username)
         {
             Id = id;

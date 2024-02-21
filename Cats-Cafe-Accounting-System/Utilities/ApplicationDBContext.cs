@@ -1,11 +1,9 @@
 ﻿using Cats_Cafe_Accounting_System.Models;
 using Cats_Cafe_Accounting_System.RegularClasses;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cats_Cafe_Accounting_System.Utilities
@@ -24,5 +22,6 @@ namespace Cats_Cafe_Accounting_System.Utilities
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Breed> Breeds { get; set; }
+        public DbSet<EmployeeModel> Employees { get; set; }
     }
 }

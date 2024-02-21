@@ -12,11 +12,17 @@ using System.Windows.Input;
 using MySql.Data.MySqlClient;
 using System.Net;
 using Cats_Cafe_Accounting_System.RegularClasses;
+using Microsoft.EntityFrameworkCore;
+using Cats_Cafe_Accounting_System.Models;
+using System.Text;
+using DocumentFormat.OpenXml.Spreadsheet;
+using System.Collections.Generic;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class AuthorizationViewModel : ObservableObject
     {
+        ApplicationDbContext context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
         private string? userName;
         private SecureString password;
         private string usernameError = "";
@@ -58,37 +64,46 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteSignInCommand()
         {
-            //Data.user = 
-            //Data.breedsList = Breed.GetBreedsFromTable();
-            //Data.gendersList = Gender.GetGendersFromTable();
-            //Data.statusesList = Status.GetStatusesFromTable();
-            //var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
-            //authorizationWindow?.Close();
             if (CanExecuteSignInCommand())
             {
-                if (DBContext.AuthenticateUser(new NetworkCredential(UserName, Password)))
+                var user = context.Employees.FirstOrDefault(u => u.Username == userName);
+                if (user is not null)
                 {
-                    Data.breedsList = Breed.GetBreedsFromTable();
-                    Data.gendersList = Gender.GetGendersFromTable();
-                    Data.statusesList = Status.GetStatusesFromTable();
-                    var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
-                    authorizationWindow?.Close();
-                    UsernameError = "";
-                    PasswordError = "";
-                }
-                else
-                {
-                    if (DBContext.UsernameIsExist(new NetworkCredential(UserName, "")))
+                    if (AuthenticateUser(user))
+                    {
+                        //Data.user = 
+                        Data.breedsList = Breed.GetBreedsFromTable();
+                        Data.gendersList = Gender.GetGendersFromTable();
+                        Data.statusesList = Status.GetStatusesFromTable();
+                        var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
+                        authorizationWindow?.Close();
+                        UsernameError = "";
+                        PasswordError = "";
+                    }
+                    else
                     {
                         UsernameError = "";
                         PasswordError = "(invalid password)";
                     }
-                    else
-                    {
-                        UsernameError = "(invalid username)";
-                    }
+                }
+                else
+                {
+                    UsernameError = "(invalid username)";
                 }
             }
+        }
+
+        private bool AuthenticateUser(EmployeeModel user)
+        {
+            byte[] enteredPasswordHash = HashingHelper.ComputeHash(password, user.Salt);
+
+            byte[] storedPasswordHash = HashingHelper.ComputeHash(user.Password, user.Salt);
+
+            if (HashingHelper.CompareByteArrays(enteredPasswordHash, storedPasswordHash))
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool CanExecuteSignInCommand()
