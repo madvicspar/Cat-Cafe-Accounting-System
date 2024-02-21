@@ -38,5 +38,19 @@ namespace Cats_Cafe_Accounting_System.Views
             popUpGender.VerticalOffset = 5;
             popUpGender.IsOpen = true;
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            popUpStatus.PlacementTarget = sender as Button;
+            popUpStatus.VerticalOffset = 5;
+            popUpStatus.IsOpen = true;
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            popUpBreed.PlacementTarget = sender as Button;
+            popUpBreed.VerticalOffset = 5;
+            popUpBreed.IsOpen = true;
+        }
     }
 }
