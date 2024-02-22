@@ -16,12 +16,12 @@ namespace Cats_Cafe_Accounting_System.Models
         public string Pathronymic { get; set; }
         [ForeignKey("Gender")]
         public int GenderId { get; set; }
-        public Gender Gender { get; set; }
+        public virtual Gender Gender { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
         [ForeignKey("Job")]
         public int JobId { get; set; }
-        public JobModel Job { get; set; }
+        public virtual JobModel Job { get; set; }
         public string ContractNumber { get; set; }
         public string Username { get; set; }
         public byte[] Password { get; set; }

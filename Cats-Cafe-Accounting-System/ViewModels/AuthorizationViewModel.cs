@@ -71,10 +71,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 {
                     if (AuthenticateUser(user))
                     {
-                        //Data.user = 
-                        Data.breedsList = Breed.GetBreedsFromTable();
-                        Data.gendersList = Gender.GetGendersFromTable();
-                        Data.statusesList = Status.GetStatusesFromTable();
+                        Data.user = user;
                         var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
                         authorizationWindow?.Close();
                         UsernameError = "";

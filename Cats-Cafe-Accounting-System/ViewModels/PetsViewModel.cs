@@ -19,6 +19,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class PetsViewModel : ObservableObject
     {
+        public bool IsEnabled {  get; set; }
+
         private string searchName = "";
         public string SearchName
         {
@@ -96,6 +98,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand WordExportCommand { get; set; }
         public PetsViewModel()
         {
+            IsEnabled = Data.user?.Job.Id != 3;
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
             {
                 Items.Add(new Elem<PetModel>(item));

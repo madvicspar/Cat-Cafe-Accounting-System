@@ -10,10 +10,6 @@ namespace Cats_Cafe_Accounting_System.Utilities
 {
     public static class Data
     {
-        public static EmployeeModel user = new EmployeeModel(Convert.ToInt32(DBContext.GetById("employees", 6.ToString())["Id"]));
-        public static List<Gender> gendersList = new List<Gender>();
-        public static List<Breed> breedsList = new List<Breed>();
-        public static List<Status> statusesList = new List<Status>();
-        public static DateTime currentDate = DateTime.Now;
+        public static EmployeeModel user;
     }
 }
