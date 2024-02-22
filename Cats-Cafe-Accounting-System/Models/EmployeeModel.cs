@@ -1,5 +1,6 @@
 ﻿using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Data;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
-    public class EmployeeModel
+    public class EmployeeModel : ObservableObject
     {
         [Key]
         public int Id { get; set; }

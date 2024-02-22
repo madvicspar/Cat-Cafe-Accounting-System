@@ -1,20 +1,24 @@
 ﻿using Cats_Cafe_Accounting_System.Models;
 using Cats_Cafe_Accounting_System.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class PersonalAreaViewModel : ObservableObject
     {
-        public EmployeeModel employee {  get; set; }
+        public static EmployeeModel employee = Data.user;
+        public EmployeeModel Employee
+        {
+            get { return employee; }
+            set
+            {
+                employee = value;
+                OnPropertyChanged(nameof(Employee));
+            }
+        }
         public PersonalAreaViewModel()
         {
-            employee = Data.user;
+
         }
     }
 }

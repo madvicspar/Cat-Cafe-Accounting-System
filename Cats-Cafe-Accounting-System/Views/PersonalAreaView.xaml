@@ -73,7 +73,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput"
-                                            Text="{Binding employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding Employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -102,7 +102,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput1"
-                                            Text="{Binding employee.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding Employee.FirstName, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -136,7 +136,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput3"
-                                            Text="{Binding employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding Employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -161,7 +161,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput4"
-                                            Text="{Binding employee.Birthday, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding Employee.Birthday, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -192,7 +192,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput5"
-                                             Text="{Binding employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -211,7 +211,7 @@
 
 
                                 <StackPanel Grid.Column="1" Margin="5,0,0,0">
-                                    <TextBlock Text="Отчество"
+                                    <TextBlock Text="ПОМЕНЯТЬ"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
@@ -220,7 +220,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput2"
-                                             Text="{Binding employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding Employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -253,7 +253,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput7"
-                                             Text="{Binding employee.Job.Title, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding Employee.Job.Title, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
@@ -281,7 +281,7 @@
                                                HorizontalAlignment="Left"/>
 
                                     <TextBox x:Name="UsernameInput8"
-                                             Text="{Binding employee.ContractNumber, UpdateSourceTrigger=PropertyChanged}"
+                                             Text="{Binding Employee.ContractNumber, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
                                             FontFamily="Montserrat"
