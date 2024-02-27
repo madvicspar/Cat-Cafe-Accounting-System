@@ -87,16 +87,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<FilterElem<Gender>> selectedGenders = new ObservableCollection<FilterElem<Gender>>();
-        public ObservableCollection<FilterElem<Gender>> SelectedGenders
-        {
-            get { return selectedGenders; }
-            set
-            {
-                selectedGenders = value;
-                OnPropertyChanged(nameof(SelectedGenders));
-            }
-        }
         private ObservableCollection<FilterElem<Gender>> filterGenders = new ObservableCollection<FilterElem<Gender>>();
         public ObservableCollection<FilterElem<Gender>> FilterGenders
         {
@@ -160,7 +150,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (var item in _dbContext.Genders.ToList())
             {
                 Genders.Add(new FilterElem<Gender>(item));
-                SelectedGenders.Add(new FilterElem<Gender>(item));
                 FilterGenders.Add(new FilterElem<Gender>(item));
             }
             foreach (var item in _dbContext.Breeds.ToList())
@@ -171,7 +160,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 SelectedStatuses.Add(new FilterElem<Status>(item));
             }
-            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -351,7 +340,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in filteredPets)
                 Items.Add(new Elem<PetModel>(item));
-            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         public void ExecuteUpdateCheckBoxSelectionCommand()
