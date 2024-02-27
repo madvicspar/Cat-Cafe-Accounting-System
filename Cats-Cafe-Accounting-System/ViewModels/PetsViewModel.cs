@@ -185,12 +185,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand ChangeNameSelectionCommand { get; set; }
-        public ICommand ChangeGenderSelectionCommandTrue { get; set; }
-        public ICommand ChangeGenderSelectionCommandFalse { get; set; }
-        public ICommand ChangeStatusSelectionCommandTrue { get; set; }
-        public ICommand ChangeStatusSelectionCommandFalse { get; set; }
-        public ICommand ChangeBreedSelectionCommandTrue { get; set; }
-        public ICommand ChangeBreedSelectionCommandFalse { get; set; }
+        public ICommand ChangeGenderSelectionCommand { get; set; }
+        public ICommand ChangeStatusSelectionCommand { get; set; }
+        public ICommand ChangeBreedSelectionCommand { get; set; }
         public ICommand ChangeFieldCommand { get; set; }
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
@@ -242,12 +239,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
             ChangeNameSelectionCommand = new RelayCommand<bool>(ExecuteChangeNameSelectionCommand);
-            ChangeGenderSelectionCommandTrue = new RelayCommand(ExecuteChangeGenderSelectionCommandTrue);
-            ChangeGenderSelectionCommandFalse = new RelayCommand(ExecuteChangeGenderSelectionCommandFalse);
-            ChangeStatusSelectionCommandTrue = new RelayCommand(ExecuteChangeStatusSelectionCommandTrue);
-            ChangeStatusSelectionCommandFalse = new RelayCommand(ExecuteChangeStatusSelectionCommandFalse);
-            ChangeBreedSelectionCommandTrue = new RelayCommand(ExecuteChangeBreedSelectionCommandTrue);
-            ChangeBreedSelectionCommandFalse = new RelayCommand(ExecuteChangeBreedSelectionCommandFalse);
+            ChangeGenderSelectionCommand = new RelayCommand<bool>(ExecuteChangeGenderSelectionCommand);
+            ChangeStatusSelectionCommand = new RelayCommand<bool>(ExecuteChangeStatusSelectionCommand);
+            ChangeBreedSelectionCommand = new RelayCommand<bool>(ExecuteChangeBreedSelectionCommand);
             ChangeFieldCommand = new RelayCommand<string>(ExecuteChangeFieldCommand);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
@@ -409,52 +403,22 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 item.IsSelected = !value;
         }
 
-        public void ExecuteChangeGenderSelectionCommandTrue()
-        {
-            ChangeGenderSelection(true);
-        }
-
-        public void ExecuteChangeGenderSelectionCommandFalse()
-        {
-            ChangeGenderSelection(false);
-        }
-
-        public void ChangeGenderSelection(bool value)
+        public void ExecuteChangeGenderSelectionCommand(bool value)
         {
             foreach (var item in FilterGenders)
-                item.IsSelected = value;
+                item.IsSelected = !value;
         }
 
-        public void ExecuteChangeStatusSelectionCommandTrue()
-        {
-            ChangeStatusSelection(true);
-        }
-
-        public void ExecuteChangeStatusSelectionCommandFalse()
-        {
-            ChangeStatusSelection(false);
-        }
-
-        public void ChangeStatusSelection(bool value)
+        public void ExecuteChangeStatusSelectionCommand(bool value)
         {
             foreach (var item in FilterStatuses)
-                item.IsSelected = value;
+                item.IsSelected = !value;
         }
 
-        public void ExecuteChangeBreedSelectionCommandTrue()
-        {
-            ChangeBreedSelection(true);
-        }
-
-        public void ExecuteChangeBreedSelectionCommandFalse()
-        {
-            ChangeBreedSelection(false);
-        }
-
-        public void ChangeBreedSelection(bool value)
+        public void ExecuteChangeBreedSelectionCommand(bool value)
         {
             foreach (var item in FilterBreeds)
-                item.IsSelected = value;
+                item.IsSelected = !value;
         }
 
         public void ExecuteChangeFieldCommand(string? value)

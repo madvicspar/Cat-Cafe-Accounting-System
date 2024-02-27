@@ -288,10 +288,10 @@
                                         <CheckBox x:Name="FilterGenderAll">
                                             <behaviors:Interaction.Triggers>
                                                 <behaviors:EventTrigger EventName="Checked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeGenderSelectionCommandTrue}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeGenderSelectionCommand}" CommandParameter="{Binding ElementName=FilterGenderAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                                 <behaviors:EventTrigger EventName="Unchecked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeGenderSelectionCommandFalse}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeGenderSelectionCommand}" CommandParameter="{Binding ElementName=FilterGenderAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                             </behaviors:Interaction.Triggers>
                                         </CheckBox>
@@ -343,10 +343,10 @@
                                         <CheckBox x:Name="FilterStatusAll">
                                             <behaviors:Interaction.Triggers>
                                                 <behaviors:EventTrigger EventName="Checked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeStatusSelectionCommandTrue}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeStatusSelectionCommand}" CommandParameter="{Binding ElementName=FilterStatusAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                                 <behaviors:EventTrigger EventName="Unchecked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeStatusSelectionCommandFalse}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeStatusSelectionCommand}" CommandParameter="{Binding ElementName=FilterStatusAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                             </behaviors:Interaction.Triggers>
                                         </CheckBox>
@@ -398,10 +398,10 @@
                                         <CheckBox x:Name="FilterBreedAll">
                                             <behaviors:Interaction.Triggers>
                                                 <behaviors:EventTrigger EventName="Checked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeBreedSelectionCommandTrue}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeBreedSelectionCommand}" CommandParameter="{Binding ElementName=FilterBreedAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                                 <behaviors:EventTrigger EventName="Unchecked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeBreedSelectionCommandFalse}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeBreedSelectionCommand}" CommandParameter="{Binding ElementName=FilterBreedAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                             </behaviors:Interaction.Triggers>
                                         </CheckBox>
