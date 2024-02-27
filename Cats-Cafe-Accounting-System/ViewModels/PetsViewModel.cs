@@ -457,7 +457,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in Names)
             {
-                var pet = FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name);
+                var pet = GetWithoutNameFilter().FirstOrDefault(p => p.Item.Name == item.Item.Name);
                 if (pet is not null)
                 {
                     item.IsSelected = pet.IsSelected;
@@ -465,7 +465,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in Genders)
             {
-                var g = FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Title);
+                var g = GetWithoutGenderFilter().FirstOrDefault(p => p.Item.Title == item.Item.Title);
                 if (g is not null)
                 {
                     item.IsSelected = g.IsSelected;
@@ -473,7 +473,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in Statuses)
             {
-                var g = FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Title);
+                var g = GetWithoutStatusFilter().FirstOrDefault(p => p.Item.Title == item.Item.Title);
                 if (g is not null)
                 {
                     item.IsSelected = g.IsSelected;
@@ -481,7 +481,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in Breeds)
             {
-                var g = FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Title);
+                var g = GetWithoutBreedFilter().FirstOrDefault(p => p.Item.Title == item.Item.Title);
                 if (g is not null)
                 {
                     item.IsSelected = g.IsSelected;
@@ -627,6 +627,58 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterBreeds.Add(item);
                 FilterBreeds.Last().IsSelected = item.IsSelected;
             }
+        }
+        public ObservableCollection<FilterElem<PetModel>> GetWithoutNameFilter()
+        {
+            var collection = new ObservableCollection<FilterElem<PetModel>>();
+            foreach (var item in Names)
+            {
+                if (!collection.Any(p => p.Item.Name == item.Item.Name))
+                {
+                    collection.Add(item);
+                    collection.Last().IsSelected = item.IsSelected;
+                }
+            }
+            return collection;
+        }
+        public ObservableCollection<FilterElem<Gender>> GetWithoutGenderFilter()
+        {
+            var collection = new ObservableCollection<FilterElem<Gender>>();
+            foreach (var item in Genders)
+            {
+                if (!collection.Any(p => p.Item.Title == item.Item.Title))
+                {
+                    collection.Add(item);
+                    collection.Last().IsSelected = item.IsSelected;
+                }
+            }
+            return collection;
+        }
+        public ObservableCollection<FilterElem<Status>> GetWithoutStatusFilter()
+        {
+            var collection = new ObservableCollection<FilterElem<Status>>();
+            foreach (var item in Statuses)
+            {
+                if (!collection.Any(p => p.Item.Title == item.Item.Title))
+                {
+                    collection.Add(item);
+                    collection.Last().IsSelected = item.IsSelected;
+                }
+            }
+            return collection;
+        }
+        public ObservableCollection<FilterElem<Breed>> GetWithoutBreedFilter()
+        {
+            var collection = new ObservableCollection<FilterElem<Breed>>();
+            foreach (var item in Breeds)
+            {
+                if (!collection.Any(p => p.Item.Title == item.Item.Title))
+                {
+                    collection.Add(item);
+                    collection.Last().IsSelected = item.IsSelected;
+                }
+            }
+            return collection;
         }
     }
 }
