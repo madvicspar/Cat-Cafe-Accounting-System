@@ -172,6 +172,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand ChangeNameSelectionCommandTrue { get; set; }
         public ICommand ChangeNameSelectionCommandFalse { get; set; }
+        public ICommand ChangeGenderSelectionCommandTrue { get; set; }
+        public ICommand ChangeGenderSelectionCommandFalse { get; set; }
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
         public ICommand SearchGenderCommand { get; set; }
@@ -223,6 +225,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
             ChangeNameSelectionCommandTrue = new RelayCommand(ExecuteChangeNameSelectionCommandTrue);
             ChangeNameSelectionCommandFalse = new RelayCommand(ExecuteChangeNameSelectionCommandFalse);
+            ChangeGenderSelectionCommandTrue = new RelayCommand(ExecuteChangeGenderSelectionCommandTrue);
+            ChangeGenderSelectionCommandFalse = new RelayCommand(ExecuteChangeGenderSelectionCommandFalse);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
             SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
@@ -393,6 +397,22 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 item.IsSelected = value;
         }
 
+        public void ExecuteChangeGenderSelectionCommandTrue()
+        {
+            ChangeGenderSelection(true);
+        }
+
+        public void ExecuteChangeGenderSelectionCommandFalse()
+        {
+            ChangeGenderSelection(false);
+        }
+
+        public void ChangeGenderSelection(bool value)
+        {
+            foreach (var item in FilterGenders)
+                item.IsSelected = value;
+        }
+
         public void ExecuteFilterCommand()
         {
             foreach (var item in Names)
@@ -402,7 +422,14 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 {
                     item.IsSelected = pet.IsSelected;
                 }
-                    
+            }
+            foreach (var item in Genders)
+            {
+                var g = FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Title);
+                if (g is not null)
+                {
+                    item.IsSelected = g.IsSelected;
+                }
             }
             UpdateTable();
         }
