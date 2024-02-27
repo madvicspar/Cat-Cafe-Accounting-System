@@ -11,11 +11,15 @@ namespace Cats_Cafe_Accounting_System.Views
     {
         readonly string FilterNamePlaceholder = "Поиск по имени..";
         readonly string FilterGenderPlaceholder = "Поиск по полу..";
+        readonly string FilterStatusPlaceholder = "Поиск по статусу..";
+        readonly string FilterBreedPlaceholder = "Поиск по породе..";
         public PetsView()
         {
             InitializeComponent();
             FilterSearch.Text = FilterNamePlaceholder;
             FilterSearchGender.Text = FilterGenderPlaceholder;
+            FilterSearchStatus.Text = FilterStatusPlaceholder;
+            FilterSearchBreed.Text = FilterBreedPlaceholder;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -82,32 +86,36 @@ namespace Cats_Cafe_Accounting_System.Views
 
         private void popUpBreed_Closed(object sender, System.EventArgs e)
         {
-
+            FilterSearchBreed.Text = FilterBreedPlaceholder;
         }
 
         private void FilterSearchBreed_GotFocus(object sender, RoutedEventArgs e)
         {
-
+            if (FilterSearchBreed.Text == FilterBreedPlaceholder)
+                FilterSearchBreed.Text = "";
         }
 
         private void FilterSearchBreed_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            if (FilterSearchBreed.Text == "")
+                FilterSearchBreed.Text = FilterBreedPlaceholder;
         }
 
         private void popUpStatus_Closed(object sender, System.EventArgs e)
         {
-
+            FilterSearchStatus.Text = FilterStatusPlaceholder;
         }
 
         private void FilterSearchStatus_GotFocus(object sender, RoutedEventArgs e)
         {
-
+            if (FilterSearchStatus.Text == FilterStatusPlaceholder)
+                FilterSearchStatus.Text = "";
         }
 
         private void FilterSearchStatus_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            if (FilterSearchStatus.Text == FilterStatusPlaceholder)
+                FilterSearchStatus.Text = "";
         }
     }
 }
