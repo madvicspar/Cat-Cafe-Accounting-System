@@ -43,6 +43,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        private string searchStatus = "";
+        public string SearchStatus
+        {
+            get { return searchStatus; }
+            set
+            {
+                searchStatus = value;
+                OnPropertyChanged(nameof(SearchStatus));
+            }
+        }
+
         private string searchBreed = "";
         public string SearchBreed
         {
@@ -88,6 +99,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        private ObservableCollection<FilterElem<Status>> statuses = new ObservableCollection<FilterElem<Status>>();
+        public ObservableCollection<FilterElem<Status>> Statuses
+        {
+            get { return statuses; }
+            set
+            {
+                statuses = value;
+                OnPropertyChanged(nameof(Statuses));
+            }
+        }
+
         private ObservableCollection<FilterElem<Breed>> breeds = new ObservableCollection<FilterElem<Breed>>();
         public ObservableCollection<FilterElem<Breed>> Breeds
         {
@@ -120,6 +142,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(FilterGenders));
             }
         }
+
+        private ObservableCollection<FilterElem<Status>> filterStatuses = new ObservableCollection<FilterElem<Status>>();
+        public ObservableCollection<FilterElem<Status>> FilterStatuses
+        {
+            get { return filterStatuses; }
+            set
+            {
+                filterStatuses = value;
+                OnPropertyChanged(nameof(FilterStatuses));
+            }
+        }
+
         private ObservableCollection<FilterElem<Breed>> filterBreeds = new ObservableCollection<FilterElem<Breed>>();
         public ObservableCollection<FilterElem<Breed>> FilterBreeds
         {
@@ -131,17 +165,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<FilterElem<Status>> selectedStatuses = new ObservableCollection<FilterElem<Status>>();
-        public ObservableCollection<FilterElem<Status>> SelectedStatuses
-        {
-            get { return selectedStatuses; }
-            set
-            {
-                selectedStatuses = value;
-                OnPropertyChanged(nameof(SelectedStatuses));
-            }
-        }
-
         public ICommand AddPetCommand { get; set; }
         public ICommand UpdatePetCommand { get; set; }
         public ICommand DeletePetCommand { get; set; }
@@ -150,11 +173,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
         public ICommand SearchGenderCommand { get; set; }
+        public ICommand SearchStatusCommand { get; set; }
         public ICommand SearchBreedCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public ICommand UpdateCheckBoxSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxGenderSelectionCommand { get; set; }
+        public ICommand UpdateCheckBoxStatusSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxBreedSelectionCommand { get; set; }
         public PetsViewModel()
         {
@@ -183,9 +208,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in _dbContext.Statuses.ToList())
             {
-                SelectedStatuses.Add(new FilterElem<Status>(item));
+                Statuses.Add(new FilterElem<Status>(item));
+                FilterStatuses.Add(new FilterElem<Status>(item));
             }
-            Items.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -196,9 +222,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
             SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
+            SearchStatusCommand = new RelayCommand(ExecuteSearchStatusCommand);
             SearchBreedCommand = new RelayCommand(ExecuteSearchBreedCommand);
             UpdateCheckBoxSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxSelectionCommand);
             UpdateCheckBoxGenderSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxGenderSelectionCommand);
+            UpdateCheckBoxStatusSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxStatusSelectionCommand);
             UpdateCheckBoxBreedSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxBreedSelectionCommand);
         }
 
@@ -354,7 +382,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             var petNames = new ObservableCollection<string>(Names.Where(p => p.IsSelected).Select(p => p.Item.Name));
             var petGenders = new ObservableCollection<Gender>(Genders.Where(p => p.IsSelected).Select(p => p.Item));
-            var petStatuses = new ObservableCollection<Status>(SelectedStatuses.Where(p => p.IsSelected).Select(p => p.Item));
+            var petStatuses = new ObservableCollection<Status>(Statuses.Where(p => p.IsSelected).Select(p => p.Item));
             var petBreeds = new ObservableCollection<Breed>(Breeds.Where(p => p.IsSelected).Select(p => p.Item));
 
             var filteredPets = _dbContext.Pets
@@ -367,7 +395,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in filteredPets)
                 Items.Add(new Elem<PetModel>(item));
-            Items.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         public void ExecuteUpdateCheckBoxSelectionCommand()
@@ -381,14 +409,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in FilterGenders)
                 Genders.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
-            //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+        }
+
+        public void ExecuteUpdateCheckBoxStatusSelectionCommand()
+        {
+            foreach (var item in FilterStatuses)
+                Statuses.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
         public void ExecuteUpdateCheckBoxBreedSelectionCommand()
         {
             foreach (var item in FilterBreeds)
                 Breeds.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
-            //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
         public void ExecuteSearchNameCommand()
@@ -432,6 +464,28 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 FilterGenders.Add(item);
                 FilterGenders.Last().IsSelected = item.IsSelected;
+            }
+        }
+
+        public void ExecuteSearchStatusCommand()
+        {
+            if (SearchStatus.Length > 5 && SearchStatus[..5] == "Поиск")
+            {
+                FilterStatuses.Clear();
+                foreach (var item in Statuses)
+                {
+                    FilterStatuses.Add(item);
+                    FilterStatuses.Last().IsSelected = item.IsSelected;
+                }
+                return;
+            }
+            var petStatuses = new ObservableCollection<string>(Statuses.Where(p => p.Item.Title.ToLower().Contains(SearchStatus.ToLower())).Select(p => p.Item.Title));
+
+            FilterStatuses.Clear();
+            foreach (var item in Statuses.Where(p => petStatuses.Contains(p.Item.Title)))
+            {
+                FilterStatuses.Add(item);
+                FilterStatuses.Last().IsSelected = item.IsSelected;
             }
         }
 

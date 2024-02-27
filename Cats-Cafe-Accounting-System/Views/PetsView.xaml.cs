@@ -94,5 +94,20 @@ namespace Cats_Cafe_Accounting_System.Views
         {
 
         }
+
+        private void popUpStatus_Closed(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void FilterSearchStatus_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FilterSearchStatus_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

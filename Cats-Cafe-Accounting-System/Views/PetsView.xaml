@@ -110,7 +110,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding DataContext.SelectedStatuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                            <ComboBox ItemsSource="{Binding DataContext.Statuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
                                                       SelectedValue="{Binding Item.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Item"/>
@@ -287,7 +287,7 @@
                             </Grid>
                         </Border>
                     </Popup>
-                    <Popup x:Name="popUpStatus" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                    <Popup x:Name="popUpStatus" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False" Closed="popUpStatus_Closed">
                         <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -296,13 +296,28 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox x:Name="FilterSearchStatus" Grid.Row="0" Margin="10" Text="Поиск.." Height="20"/>
+                                <TextBox x:Name="FilterSearchStatus" Grid.Row="0" Margin="10" Text="{Binding SearchStatus, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearchStatus_GotFocus"  LostFocus="FilterSearchStatus_LostFocus">
+                                    <behaviors:Interaction.Triggers>
+                                        <behaviors:EventTrigger EventName="TextChanged">
+                                            <behaviors:InvokeCommandAction Command="{Binding SearchStatusCommand}"/>
+                                        </behaviors:EventTrigger>
+                                    </behaviors:Interaction.Triggers>
+                                </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedStatuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding FilterStatuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}"/>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxStatusSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxStatusSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
