@@ -79,5 +79,20 @@ namespace Cats_Cafe_Accounting_System.Views
             if (FilterSearchGender.Text == "")
                 FilterSearchGender.Text = FilterGenderPlaceholder;
         }
+
+        private void popUpBreed_Closed(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void FilterSearchBreed_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FilterSearchBreed_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

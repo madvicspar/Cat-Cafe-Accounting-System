@@ -130,7 +130,7 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding DataContext.SelectedBreeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                            <ComboBox ItemsSource="{Binding DataContext.Breeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
                                                       SelectedValue="{Binding Item.Breed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedValuePath="Item"/>
@@ -311,7 +311,7 @@
                             </Grid>
                         </Border>
                     </Popup>
-                    <Popup x:Name="popUpBreed" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                    <Popup x:Name="popUpBreed" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False" Closed="popUpBreed_Closed">
                         <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -320,13 +320,28 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox x:Name="FilterSearchBreed" Grid.Row="0" Margin="10" Text="Поиск.." Height="20"/>
+                                <TextBox x:Name="FilterSearchBreed" Grid.Row="0" Margin="10" Text="{Binding SearchBreed, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearchBreed_GotFocus"  LostFocus="FilterSearchBreed_LostFocus">
+                                    <behaviors:Interaction.Triggers>
+                                        <behaviors:EventTrigger EventName="TextChanged">
+                                            <behaviors:InvokeCommandAction Command="{Binding SearchBreedCommand}"/>
+                                        </behaviors:EventTrigger>
+                                    </behaviors:Interaction.Triggers>
+                                </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedBreeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding FilterBreeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}"/>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxBreedSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxBreedSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>

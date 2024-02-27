@@ -42,6 +42,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(SearchGender));
             }
         }
+
+        private string searchBreed = "";
+        public string SearchBreed
+        {
+            get { return searchBreed; }
+            set
+            {
+                searchBreed = value;
+                OnPropertyChanged(nameof(SearchBreed));
+            }
+        }
+
         private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
         private ObservableCollection<Elem<PetModel>> items = new ObservableCollection<Elem<PetModel>>();
         public ObservableCollection<Elem<PetModel>> Items
@@ -76,6 +88,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        private ObservableCollection<FilterElem<Breed>> breeds = new ObservableCollection<FilterElem<Breed>>();
+        public ObservableCollection<FilterElem<Breed>> Breeds
+        {
+            get { return breeds; }
+            set
+            {
+                breeds = value;
+                OnPropertyChanged(nameof(Breeds));
+            }
+        }
+
         private ObservableCollection<FilterElem<PetModel>> filterNames = new ObservableCollection<FilterElem<PetModel>>();
         public ObservableCollection<FilterElem<PetModel>> FilterNames
         {
@@ -97,15 +120,14 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(FilterGenders));
             }
         }
-
-        private ObservableCollection<FilterElem<Breed>> selectedBreeds = new ObservableCollection<FilterElem<Breed>>();
-        public ObservableCollection<FilterElem<Breed>> SelectedBreeds
+        private ObservableCollection<FilterElem<Breed>> filterBreeds = new ObservableCollection<FilterElem<Breed>>();
+        public ObservableCollection<FilterElem<Breed>> FilterBreeds
         {
-            get { return selectedBreeds; }
+            get { return filterBreeds; }
             set
             {
-                selectedBreeds = value;
-                OnPropertyChanged(nameof(SelectedBreeds));
+                filterBreeds = value;
+                OnPropertyChanged(nameof(FilterBreeds));
             }
         }
 
@@ -128,10 +150,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
         public ICommand SearchGenderCommand { get; set; }
+        public ICommand SearchBreedCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public ICommand UpdateCheckBoxSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxGenderSelectionCommand { get; set; }
+        public ICommand UpdateCheckBoxBreedSelectionCommand { get; set; }
         public PetsViewModel()
         {
             IsEnabled = Data.user?.Job.Id != 3;
@@ -154,13 +178,14 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in _dbContext.Breeds.ToList())
             {
-                SelectedBreeds.Add(new FilterElem<Breed>(item));
+                Breeds.Add(new FilterElem<Breed>(item));
+                FilterBreeds.Add(new FilterElem<Breed>(item));
             }
             foreach (var item in _dbContext.Statuses.ToList())
             {
                 SelectedStatuses.Add(new FilterElem<Status>(item));
             }
-            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -171,8 +196,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
             SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
+            SearchBreedCommand = new RelayCommand(ExecuteSearchBreedCommand);
             UpdateCheckBoxSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxSelectionCommand);
             UpdateCheckBoxGenderSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxGenderSelectionCommand);
+            UpdateCheckBoxBreedSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxBreedSelectionCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -328,7 +355,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             var petNames = new ObservableCollection<string>(Names.Where(p => p.IsSelected).Select(p => p.Item.Name));
             var petGenders = new ObservableCollection<Gender>(Genders.Where(p => p.IsSelected).Select(p => p.Item));
             var petStatuses = new ObservableCollection<Status>(SelectedStatuses.Where(p => p.IsSelected).Select(p => p.Item));
-            var petBreeds = new ObservableCollection<Breed>(SelectedBreeds.Where(p => p.IsSelected).Select(p => p.Item));
+            var petBreeds = new ObservableCollection<Breed>(Breeds.Where(p => p.IsSelected).Select(p => p.Item));
 
             var filteredPets = _dbContext.Pets
                 .Where(p => petNames.Contains(p.Name))
@@ -340,7 +367,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Clear();
             foreach (var item in filteredPets)
                 Items.Add(new Elem<PetModel>(item));
-            Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            Items.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
         public void ExecuteUpdateCheckBoxSelectionCommand()
@@ -354,6 +381,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in FilterGenders)
                 Genders.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+            //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+        }
+
+        public void ExecuteUpdateCheckBoxBreedSelectionCommand()
+        {
+            foreach (var item in FilterBreeds)
+                Breeds.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
             //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
@@ -398,6 +432,28 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 FilterGenders.Add(item);
                 FilterGenders.Last().IsSelected = item.IsSelected;
+            }
+        }
+
+        public void ExecuteSearchBreedCommand()
+        {
+            if (SearchBreed.Length > 5 && SearchBreed[..5] == "Поиск")
+            {
+                FilterBreeds.Clear();
+                foreach (var item in Breeds)
+                {
+                    FilterBreeds.Add(item);
+                    FilterBreeds.Last().IsSelected = item.IsSelected;
+                }
+                return;
+            }
+            var petBreeds = new ObservableCollection<string>(Breeds.Where(p => p.Item.Title.ToLower().Contains(SearchBreed.ToLower())).Select(p => p.Item.Title));
+
+            FilterBreeds.Clear();
+            foreach (var item in Breeds.Where(p => petBreeds.Contains(p.Item.Title)))
+            {
+                FilterBreeds.Add(item);
+                FilterBreeds.Last().IsSelected = item.IsSelected;
             }
         }
     }
