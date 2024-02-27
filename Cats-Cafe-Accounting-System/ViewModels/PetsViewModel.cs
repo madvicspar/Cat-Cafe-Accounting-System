@@ -185,7 +185,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand ChangeNameSelectionCommand { get; set; }
-        //public ICommand ChangeNameSelectionCommandFalse { get; set; }
         public ICommand ChangeGenderSelectionCommandTrue { get; set; }
         public ICommand ChangeGenderSelectionCommandFalse { get; set; }
         public ICommand ChangeStatusSelectionCommandTrue { get; set; }
@@ -243,7 +242,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
             ChangeNameSelectionCommand = new RelayCommand<bool>(ExecuteChangeNameSelectionCommand);
-            //ChangeNameSelectionCommandFalse = new RelayCommand(ExecuteChangeNameSelectionCommandFalse);
             ChangeGenderSelectionCommandTrue = new RelayCommand(ExecuteChangeGenderSelectionCommandTrue);
             ChangeGenderSelectionCommandFalse = new RelayCommand(ExecuteChangeGenderSelectionCommandFalse);
             ChangeStatusSelectionCommandTrue = new RelayCommand(ExecuteChangeStatusSelectionCommandTrue);
@@ -408,18 +406,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteChangeNameSelectionCommand(bool value)
         {
             foreach (var item in FilterNames)
-                item.IsSelected = value;
-        }
-
-        public void ExecuteChangeNameSelectionCommandFalse()
-        {
-            ChangeNameSelection(false);
-        }
-
-        public void ChangeNameSelection(bool value)
-        {
-            foreach (var item in FilterNames)
-                item.IsSelected = value;
+                item.IsSelected = !value;
         }
 
         public void ExecuteChangeGenderSelectionCommandTrue()
