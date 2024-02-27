@@ -20,6 +20,7 @@ namespace Cats_Cafe_Accounting_System.Views
             FilterSearchGender.Text = FilterGenderPlaceholder;
             FilterSearchStatus.Text = FilterStatusPlaceholder;
             FilterSearchBreed.Text = FilterBreedPlaceholder;
+            FilterNameAll.IsChecked = true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

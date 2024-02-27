@@ -6,6 +6,7 @@
              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="550"
              d:DesignWidth="620"
@@ -35,8 +36,6 @@
                             <Image Source="{StaticResource SearchImage}"/>
                         </Button>
 
-                        <!--<TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="Поиск..." Margin="0,5,5,5" VerticalAlignment="Center" Height="25" Width="200"
-             GotFocus="RemoveText" LostFocus="AddText"/>-->
                         <TextBox VerticalContentAlignment="Center" Text="Поиск..." Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left"/>
 
                     </Grid>
@@ -142,9 +141,6 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="День рождения"/>
-                                                <!--<Button Width="20" Background="Transparent" BorderBrush="Transparent">
-                                                    <Image Source="{StaticResource FilterImage}"/>
-                                                </Button>-->
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -159,9 +155,6 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="День появления в котокафе"/>
-                                                <!--<Button Width="20" Background="Transparent" BorderBrush="Transparent">
-                                                    <Image Source="{StaticResource FilterImage}"/>
-                                                </Button>-->
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -176,9 +169,6 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Номер паспорта"/>
-                                                <!--<Button Width="20" Background="Transparent" BorderBrush="Transparent">
-                                                    <Image Source="{StaticResource FilterImage}"/>
-                                                </Button>-->
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -213,6 +203,7 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="45"/>
+                                    <RowDefinition Height="33"/>
                                     <RowDefinition/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
@@ -225,8 +216,22 @@
                                     </behaviors:Interaction.Triggers>
                                 </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
-
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding FilterNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10,10,10,0">
+                                    <Grid>
+                                        <CheckBox x:Name="FilterNameAll">
+                                            <behaviors:Interaction.Triggers>
+                                                <behaviors:EventTrigger EventName="Checked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeNameSelectionCommandTrue}"/>
+                                                </behaviors:EventTrigger>
+                                                <behaviors:EventTrigger EventName="Unchecked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeNameSelectionCommandFalse}"/>
+                                                </behaviors:EventTrigger>
+                                            </behaviors:Interaction.Triggers>
+                                        </CheckBox>
+                                        <TextBlock Text="Выделить все" Margin="20,0,0,0"/>
+                                    </Grid>
+                                </ListBox>
+                                <ListBox Grid.Row="2" Margin="10,0,10,10" ItemsSource="{Binding FilterNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Name}">
@@ -242,7 +247,7 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
+                                <Button Content="Применить" Grid.Row="3" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
 
                             </Grid>
                         </Border>

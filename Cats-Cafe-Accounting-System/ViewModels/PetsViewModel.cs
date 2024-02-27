@@ -170,6 +170,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeletePetCommand { get; set; }
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
+        public ICommand ChangeNameSelectionCommandTrue { get; set; }
+        public ICommand ChangeNameSelectionCommandFalse { get; set; }
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
         public ICommand SearchGenderCommand { get; set; }
@@ -219,6 +221,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
+            ChangeNameSelectionCommandTrue = new RelayCommand(ExecuteChangeNameSelectionCommandTrue);
+            ChangeNameSelectionCommandFalse = new RelayCommand(ExecuteChangeNameSelectionCommandFalse);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
             SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
@@ -373,8 +377,33 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 item.IsSelected = value;
         }
 
+        public void ExecuteChangeNameSelectionCommandTrue()
+        {
+            ChangeNameSelection(true);
+        }
+
+        public void ExecuteChangeNameSelectionCommandFalse()
+        {
+            ChangeNameSelection(false);
+        }
+
+        public void ChangeNameSelection(bool value)
+        {
+            foreach (var item in FilterNames)
+                item.IsSelected = value;
+        }
+
         public void ExecuteFilterCommand()
         {
+            foreach (var item in Names)
+            {
+                var pet = FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name);
+                if (pet is not null)
+                {
+                    item.IsSelected = pet.IsSelected;
+                }
+                    
+            }
             UpdateTable();
         }
 
@@ -430,8 +459,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterNames.Clear();
                 foreach (var item in Names)
                 {
-                    FilterNames.Add(item);
-                    FilterNames.Last().IsSelected = item.IsSelected;
+                    if (!FilterNames.Any(p => p.Item.Name == item.Item.Name))
+                    {
+                        FilterNames.Add(item);
+                        FilterNames.Last().IsSelected = item.IsSelected;
+                    }
                 }
                 return;
             }
@@ -440,8 +472,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             FilterNames.Clear();
             foreach (var item in Names.Where(p => petNames.Contains(p.Item.Name)))
             {
-                FilterNames.Add(item);
-                FilterNames.Last().IsSelected = item.IsSelected;
+                if (!FilterNames.Any(p => p.Item.Name == item.Item.Name))
+                {
+                    FilterNames.Add(item);
+                    FilterNames.Last().IsSelected = item.IsSelected;
+                }
             }
             // после удаления не обновляются значения фильтров
         }
