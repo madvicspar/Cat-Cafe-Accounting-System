@@ -9,6 +9,7 @@ namespace Cats_Cafe_Accounting_System.Views
     /// </summary>
     public partial class PetsView : UserControl
     {
+        readonly string SearchPlaceholder = "Поиск..";
         readonly string FilterNamePlaceholder = "Поиск по имени..";
         readonly string FilterGenderPlaceholder = "Поиск по полу..";
         readonly string FilterStatusPlaceholder = "Поиск по статусу..";
@@ -16,6 +17,7 @@ namespace Cats_Cafe_Accounting_System.Views
         public PetsView()
         {
             InitializeComponent();
+            Search.Text = SearchPlaceholder;
             FilterSearch.Text = FilterNamePlaceholder;
             FilterSearchGender.Text = FilterGenderPlaceholder;
             FilterSearchStatus.Text = FilterStatusPlaceholder;
@@ -120,6 +122,18 @@ namespace Cats_Cafe_Accounting_System.Views
         {
             if (FilterSearchStatus.Text == FilterStatusPlaceholder)
                 FilterSearchStatus.Text = "";
+        }
+
+        private void Search_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (Search.Text == SearchPlaceholder)
+                Search.Text = "";
+        }
+
+        private void Search_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Search.Text == "")
+                Search.Text = SearchPlaceholder;
         }
     }
 }

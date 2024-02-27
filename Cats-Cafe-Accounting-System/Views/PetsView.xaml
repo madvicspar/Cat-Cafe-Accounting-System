@@ -36,7 +36,13 @@
                             <Image Source="{StaticResource SearchImage}"/>
                         </Button>
 
-                        <TextBox VerticalContentAlignment="Center" Text="Поиск..." Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="Search" VerticalContentAlignment="Center" Text="{Binding SearchText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="TextChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                        </TextBox>
                         <ComboBox Margin="440,5,10,5" Height="25" SelectedIndex="0" x:Name="FindByItems">
                             <ComboBoxItem Content="По имени"/>
                             <ComboBoxItem Content="По породе"/>
@@ -52,7 +58,7 @@
                     </Grid>
                     
                     <Grid Grid.Row="2">
-                        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                        <DataGrid x:Name="dataGrid" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
