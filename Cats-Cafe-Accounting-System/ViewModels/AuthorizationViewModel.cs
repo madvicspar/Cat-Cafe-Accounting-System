@@ -1,22 +1,13 @@
-﻿using Cats_Cafe_Accounting_System.Utilities;
+﻿using Cats_Cafe_Accounting_System.Models;
+using Cats_Cafe_Accounting_System.Utilities;
 using Cats_Cafe_Accounting_System.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using System.ComponentModel;
-using System.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security;
 using System.Windows;
 using System.Windows.Input;
-using MySql.Data.MySqlClient;
-using System.Net;
-using Cats_Cafe_Accounting_System.RegularClasses;
-using Microsoft.EntityFrameworkCore;
-using Cats_Cafe_Accounting_System.Models;
-using System.Text;
-using DocumentFormat.OpenXml.Spreadsheet;
-using System.Collections.Generic;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -24,7 +15,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
     {
         ApplicationDbContext context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
         private string? userName;
-        private SecureString password;
+        private SecureString password = new SecureString();
         private string usernameError = "";
         private string passwordError = "";
         public string? UserName
@@ -35,7 +26,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public SecureString Password
         {
             get => password;
-            set => SetProperty(ref password, value);
+            set
+            {
+
+                SetProperty(ref password, value);
+                OnPropertyChanged(nameof(Password));
+            }
         }
         public string? UsernameError
         {
@@ -64,35 +60,32 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteSignInCommand()
         {
-            if (CanExecuteSignInCommand())
+            var user = context.Employees.FirstOrDefault(u => u.Username == UserName);
+            if (user is not null)
             {
-                var user = context.Employees.FirstOrDefault(u => u.Username == userName);
-                if (user is not null)
+                if (AuthenticateUser(user))
                 {
-                    if (AuthenticateUser(user))
-                    {
-                        Data.user = user;
-                        var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
-                        authorizationWindow?.Close();
-                        UsernameError = "";
-                        PasswordError = "";
-                    }
-                    else
-                    {
-                        UsernameError = "";
-                        PasswordError = "(invalid password)";
-                    }
+                    Data.user = user;
+                    var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
+                    authorizationWindow?.Close();
+                    UsernameError = "";
+                    PasswordError = "";
                 }
                 else
                 {
-                    UsernameError = "(invalid username)";
+                    UsernameError = "";
+                    PasswordError = "(invalid password)";
                 }
+            }
+            else
+            {
+                UsernameError = "(invalid username)";
             }
         }
 
         private bool AuthenticateUser(EmployeeModel user)
         {
-            byte[] enteredPasswordHash = HashingHelper.ComputeHash(password, user.Salt);
+            byte[] enteredPasswordHash = HashingHelper.ComputeHash(Password, user.Salt);
 
             byte[] storedPasswordHash = HashingHelper.ComputeHash(user.Password, user.Salt);
 
@@ -101,16 +94,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 return true;
             }
             return false;
-        }
-
-        private bool CanExecuteSignInCommand()
-        {
-            return true;
-            //bool validData = true;
-            //if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 ||
-            //    Password == null || Password.Length < 3)
-            //    validData = false;
-            //return validData;
         }
     }
 }
