@@ -10,7 +10,6 @@ namespace Cats_Cafe_Accounting_System.Views
     public partial class PetsView : UserControl
     {
         readonly string FilterNamePlaceholder = "Поиск по имени..";
-        bool isNameFind = false;
         public PetsView()
         {
             InitializeComponent();
@@ -49,21 +48,17 @@ namespace Cats_Cafe_Accounting_System.Views
         {
             if (FilterSearch.Text == FilterNamePlaceholder)
                 FilterSearch.Text = "";
-            isNameFind = false;
         }
 
         private void FilterSearch_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!isNameFind)
+            if (FilterSearch.Text == "")
                 FilterSearch.Text = FilterNamePlaceholder;
         }
 
-        private void FilterSearch_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void popUpName_Closed(object sender, System.EventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                isNameFind = true;
-            }
+            FilterSearch.Text = FilterNamePlaceholder;
         }
     }
 }

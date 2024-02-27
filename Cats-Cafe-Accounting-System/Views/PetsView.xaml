@@ -208,7 +208,7 @@
                     </Grid>
 
 
-                    <Popup x:Name="popUpName" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                    <Popup x:Name="popUpName" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False" Closed="popUpName_Closed">
                         <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -217,19 +217,28 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox x:Name="FilterSearch" Grid.Row="0" Margin="10" Text="{Binding SearchName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearch_GotFocus" LostFocus="FilterSearch_LostFocus" PreviewKeyDown="FilterSearch_PreviewKeyDown">
+                                <TextBox x:Name="FilterSearch" Grid.Row="0" Margin="10" Text="{Binding SearchName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearch_GotFocus" LostFocus="FilterSearch_LostFocus">
                                     <behaviors:Interaction.Triggers>
-                                        <behaviors:EventTrigger EventName="PreviewKeyDown">
-                                            <behaviors:InvokeCommandAction />
+                                        <behaviors:EventTrigger EventName="TextChanged">
+                                            <behaviors:InvokeCommandAction Command="{Binding SearchNameCommand}"/>
                                         </behaviors:EventTrigger>
                                     </behaviors:Interaction.Triggers>
                                 </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding FilterNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Name}"/>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Name}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
@@ -321,7 +330,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" Width="120" Height="35" Command="{Binding DeleteManyPetCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                         <Button x:Name="AddButton" Grid.Column="1" Content="Добавить питомца" Width="120" Height="35" Command="{Binding AddPetCommand}"/>
-                            <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Width="120" Height="35" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Width="120" Height="35" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                         <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                     </Grid>
 

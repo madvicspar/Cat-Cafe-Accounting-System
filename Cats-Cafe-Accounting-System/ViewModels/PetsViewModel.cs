@@ -43,6 +43,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        private ObservableCollection<FilterElem<PetModel>> names = new ObservableCollection<FilterElem<PetModel>>();
+        public ObservableCollection<FilterElem<PetModel>> Names
+        {
+            get { return names; }
+            set
+            {
+                names = value;
+                OnPropertyChanged(nameof(Names));
+            }
+        }
+
         private ObservableCollection<FilterElem<PetModel>> selectedNames = new ObservableCollection<FilterElem<PetModel>>();
         public ObservableCollection<FilterElem<PetModel>> SelectedNames
         {
@@ -51,6 +62,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 selectedNames = value;
                 OnPropertyChanged(nameof(SelectedNames));
+            }
+        }
+
+        private ObservableCollection<FilterElem<PetModel>> filterNames = new ObservableCollection<FilterElem<PetModel>>();
+        public ObservableCollection<FilterElem<PetModel>> FilterNames
+        {
+            get { return filterNames; }
+            set
+            {
+                filterNames = value;
+                OnPropertyChanged(nameof(FilterNames));
             }
         }
 
@@ -96,12 +118,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand SearchNameCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
+        public ICommand UpdateCheckBoxSelectionCommand { get; set; }
         public PetsViewModel()
         {
             IsEnabled = Data.user?.Job.Id != 3;
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
             {
                 Items.Add(new Elem<PetModel>(item));
+                Names.Add(new FilterElem<PetModel>(item));
+                SelectedNames.Add(new FilterElem<PetModel>(item));
+                FilterNames.Add(new FilterElem<PetModel>(item));
             }
             foreach (var item in _dbContext.Genders.ToList())
             {
@@ -115,10 +141,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 SelectedStatuses.Add(new FilterElem<Status>(item));
             }
-            foreach (var item in _dbContext.Pets.ToList())
-            {
-                SelectedNames.Add(new FilterElem<PetModel>(item));
-            }
             Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
@@ -128,7 +150,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
-            //SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
+            SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
+            UpdateCheckBoxSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxSelectionCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -264,7 +287,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void UpdateTable()
         {
-            var petNames = new ObservableCollection<string>(SelectedNames.Where(p => p.IsSelected).Select(p => p.Item.Name));
+            var petNames = new ObservableCollection<string>(Names.Where(p => p.IsSelected).Select(p => p.Item.Name)); // добавить фильтр
             var petGenders = new ObservableCollection<Gender>(SelectedGenders.Where(p => p.IsSelected).Select(p => p.Item));
             var petStatuses = new ObservableCollection<Status>(SelectedStatuses.Where(p => p.IsSelected).Select(p => p.Item));
             var petBreeds = new ObservableCollection<Breed>(SelectedBreeds.Where(p => p.IsSelected).Select(p => p.Item));
@@ -282,10 +305,36 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             Items.Add(new Elem<PetModel>(new PetModel() { Breed = SelectedBreeds[0].Item, Gender = SelectedGenders[0].Item, Status = SelectedStatuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
+        public void ExecuteUpdateCheckBoxSelectionCommand()
+        {
+            foreach (var item in FilterNames)
+                Names.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+            //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+        }
+
         public void ExecuteSearchNameCommand()
         {
-            var petNames = new ObservableCollection<string>(SelectedNames.Where(p => p.Item.Name.Contains(searchName)).Select(p => p.Item.Name));
-            // нужно доп коллекцию или что-то подобное для поиска
+            if (SearchName.Length > 5 && SearchName[..5] == "Поиск")
+            {
+                FilterNames.Clear();
+                foreach (var item in Names)
+                {
+                    FilterNames.Add(item);
+                    FilterNames.Last().IsSelected = item.IsSelected;
+                }
+                return;
+            }
+            var petNames = new ObservableCollection<string>(Names.Where(p => p.Item.Name.ToLower().Contains(SearchName.ToLower())).Select(p => p.Item.Name));
+
+            FilterNames.Clear();
+            foreach (var item in Names.Where(p => petNames.Contains(p.Item.Name)))
+            {
+                FilterNames.Add(item);
+                FilterNames.Last().IsSelected = item.IsSelected;
+            }
+            // плюс дб обновление коллекций после действий круд, возможно и при фильтрации, чекнуть
+            // после удаления не обновляются значения фильтров
+            //UpdateTable();
         }
     }
 }
