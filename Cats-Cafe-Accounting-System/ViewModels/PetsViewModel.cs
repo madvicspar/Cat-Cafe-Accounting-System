@@ -175,20 +175,40 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             _dbContext.Pets.Add(petToAdd);
             _dbContext.SaveChanges();
+            if (Names.FirstOrDefault (p => p.Item.Name == petToAdd.Name) == null)
+            {
+                Names.Add(new FilterElem<PetModel>(petToAdd));
+                SelectedNames.Add(new FilterElem<PetModel>(petToAdd));
+                FilterNames.Add(new FilterElem<PetModel>(petToAdd));
+            }    
             UpdateTable();
         }
 
         private void ExecuteUpdatePetCommand(PetModel? pet)
         {
+            string name = _dbContext.Pets.First(p => p == pet).Name;
             _dbContext.Pets.Update(pet);
             _dbContext.SaveChanges();
+            if (pet.Name != name)
+            {
+                Names.First(p => p.Item.Name == name).Item.Name = pet.Name;
+                SelectedNames.First(p => p.Item.Name == name).Item.Name = pet.Name;
+                FilterNames.First(p => p.Item.Name == name).Item.Name = pet.Name;
+            }
             UpdateTable();
         }
 
         private void ExecuteDeletePetCommand(PetModel? pet)
         {
+            string name = _dbContext.Pets.First(p => p == pet).Name;
             _dbContext.Pets.Remove(pet);
             _dbContext.SaveChanges();
+            if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
+            {
+                Names.Remove(Names.First(p => p.Item == pet));
+                SelectedNames.Remove(SelectedNames.First(p => p.Item == pet));
+                FilterNames.Remove(FilterNames.First(p => p.Item == pet));
+            }
             UpdateTable();
         }
 
@@ -287,7 +307,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void UpdateTable()
         {
-            var petNames = new ObservableCollection<string>(Names.Where(p => p.IsSelected).Select(p => p.Item.Name)); // добавить фильтр
+            var petNames = new ObservableCollection<string>(Names.Where(p => p.IsSelected).Select(p => p.Item.Name));
             var petGenders = new ObservableCollection<Gender>(SelectedGenders.Where(p => p.IsSelected).Select(p => p.Item));
             var petStatuses = new ObservableCollection<Status>(SelectedStatuses.Where(p => p.IsSelected).Select(p => p.Item));
             var petBreeds = new ObservableCollection<Breed>(SelectedBreeds.Where(p => p.IsSelected).Select(p => p.Item));
@@ -332,9 +352,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterNames.Add(item);
                 FilterNames.Last().IsSelected = item.IsSelected;
             }
-            // плюс дб обновление коллекций после действий круд, возможно и при фильтрации, чекнуть
             // после удаления не обновляются значения фильтров
-            //UpdateTable();
         }
     }
 }
