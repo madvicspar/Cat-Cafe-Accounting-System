@@ -176,6 +176,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand ChangeGenderSelectionCommandFalse { get; set; }
         public ICommand ChangeStatusSelectionCommandTrue { get; set; }
         public ICommand ChangeStatusSelectionCommandFalse { get; set; }
+        public ICommand ChangeBreedSelectionCommandTrue { get; set; }
+        public ICommand ChangeBreedSelectionCommandFalse { get; set; }
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
         public ICommand SearchGenderCommand { get; set; }
@@ -231,6 +233,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             ChangeGenderSelectionCommandFalse = new RelayCommand(ExecuteChangeGenderSelectionCommandFalse);
             ChangeStatusSelectionCommandTrue = new RelayCommand(ExecuteChangeStatusSelectionCommandTrue);
             ChangeStatusSelectionCommandFalse = new RelayCommand(ExecuteChangeStatusSelectionCommandFalse);
+            ChangeBreedSelectionCommandTrue = new RelayCommand(ExecuteChangeBreedSelectionCommandTrue);
+            ChangeBreedSelectionCommandFalse = new RelayCommand(ExecuteChangeBreedSelectionCommandFalse);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
             SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
@@ -433,6 +437,22 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 item.IsSelected = value;
         }
 
+        public void ExecuteChangeBreedSelectionCommandTrue()
+        {
+            ChangeBreedSelection(true);
+        }
+
+        public void ExecuteChangeBreedSelectionCommandFalse()
+        {
+            ChangeBreedSelection(false);
+        }
+
+        public void ChangeBreedSelection(bool value)
+        {
+            foreach (var item in FilterBreeds)
+                item.IsSelected = value;
+        }
+
         public void ExecuteFilterCommand()
         {
             foreach (var item in Names)
@@ -454,6 +474,14 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (var item in Statuses)
             {
                 var g = FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Title);
+                if (g is not null)
+                {
+                    item.IsSelected = g.IsSelected;
+                }
+            }
+            foreach (var item in Breeds)
+            {
+                var g = FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Title);
                 if (g is not null)
                 {
                     item.IsSelected = g.IsSelected;
