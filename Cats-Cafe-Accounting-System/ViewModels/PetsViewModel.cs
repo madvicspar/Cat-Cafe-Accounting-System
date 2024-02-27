@@ -19,6 +19,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class PetsViewModel : ObservableObject
     {
+        public enum Fields
+        {
+            name, breed, pass
+        }
+        public Fields field;
+        public Fields Field
+        {
+            get { return field; }
+            set
+            {
+                field = value;
+                OnPropertyChanged(nameof(field));
+            }
+        }
         public bool IsEnabled {  get; set; }
 
         private string searchName = "";
@@ -170,14 +184,15 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand DeletePetCommand { get; set; }
         public ICommand DeleteManyPetCommand { get; set; }
         public ICommand ChangeSelectionCommand { get; set; }
-        public ICommand ChangeNameSelectionCommandTrue { get; set; }
-        public ICommand ChangeNameSelectionCommandFalse { get; set; }
+        public ICommand ChangeNameSelectionCommand { get; set; }
+        //public ICommand ChangeNameSelectionCommandFalse { get; set; }
         public ICommand ChangeGenderSelectionCommandTrue { get; set; }
         public ICommand ChangeGenderSelectionCommandFalse { get; set; }
         public ICommand ChangeStatusSelectionCommandTrue { get; set; }
         public ICommand ChangeStatusSelectionCommandFalse { get; set; }
         public ICommand ChangeBreedSelectionCommandTrue { get; set; }
         public ICommand ChangeBreedSelectionCommandFalse { get; set; }
+        public ICommand ChangeFieldCommand { get; set; }
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
         public ICommand SearchGenderCommand { get; set; }
@@ -227,14 +242,15 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             DeletePetCommand = new RelayCommand<PetModel>(ExecuteDeletePetCommand);
             DeleteManyPetCommand = new RelayCommand(ExecuteDeleteManyPetCommand);
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
-            ChangeNameSelectionCommandTrue = new RelayCommand(ExecuteChangeNameSelectionCommandTrue);
-            ChangeNameSelectionCommandFalse = new RelayCommand(ExecuteChangeNameSelectionCommandFalse);
+            ChangeNameSelectionCommand = new RelayCommand<bool>(ExecuteChangeNameSelectionCommand);
+            //ChangeNameSelectionCommandFalse = new RelayCommand(ExecuteChangeNameSelectionCommandFalse);
             ChangeGenderSelectionCommandTrue = new RelayCommand(ExecuteChangeGenderSelectionCommandTrue);
             ChangeGenderSelectionCommandFalse = new RelayCommand(ExecuteChangeGenderSelectionCommandFalse);
             ChangeStatusSelectionCommandTrue = new RelayCommand(ExecuteChangeStatusSelectionCommandTrue);
             ChangeStatusSelectionCommandFalse = new RelayCommand(ExecuteChangeStatusSelectionCommandFalse);
             ChangeBreedSelectionCommandTrue = new RelayCommand(ExecuteChangeBreedSelectionCommandTrue);
             ChangeBreedSelectionCommandFalse = new RelayCommand(ExecuteChangeBreedSelectionCommandFalse);
+            ChangeFieldCommand = new RelayCommand<string>(ExecuteChangeFieldCommand);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
             SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
@@ -389,9 +405,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 item.IsSelected = value;
         }
 
-        public void ExecuteChangeNameSelectionCommandTrue()
+        public void ExecuteChangeNameSelectionCommand(bool value)
         {
-            ChangeNameSelection(true);
+            foreach (var item in FilterNames)
+                item.IsSelected = value;
         }
 
         public void ExecuteChangeNameSelectionCommandFalse()
@@ -451,6 +468,25 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in FilterBreeds)
                 item.IsSelected = value;
+        }
+
+        public void ExecuteChangeFieldCommand(string? value)
+        {
+            switch (value)
+            {
+                case "По имени":
+                    Field = Fields.name;
+                    break;
+                case "По породе":
+                    Field = Fields.breed;
+                    break;
+                case "По паспорту":
+                    Field = Fields.pass;
+                    break;
+                default:
+                    Field = Fields.name;
+                    break;
+            }
         }
 
         public void ExecuteFilterCommand()

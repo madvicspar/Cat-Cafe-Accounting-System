@@ -37,6 +37,17 @@
                         </Button>
 
                         <TextBox VerticalContentAlignment="Center" Text="Поиск..." Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left"/>
+                        <ComboBox Margin="440,5,10,5" Height="25" SelectedIndex="0" x:Name="FindByItems">
+                            <ComboBoxItem Content="По имени"/>
+                            <ComboBoxItem Content="По породе"/>
+                            <ComboBoxItem Content="По номеру паспорта"/>
+
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="SelectionChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding ChangeFieldCommand}" CommandParameter="{Binding ElementName=FindByItems, Path=SelectedItem.Content}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                        </ComboBox>
 
                     </Grid>
                     
@@ -221,10 +232,10 @@
                                         <CheckBox x:Name="FilterNameAll">
                                             <behaviors:Interaction.Triggers>
                                                 <behaviors:EventTrigger EventName="Checked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeNameSelectionCommandTrue}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeNameSelectionCommand}" CommandParameter="{Binding ElementName=FilterNameAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                                 <behaviors:EventTrigger EventName="Unchecked">
-                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeNameSelectionCommandFalse}"/>
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeNameSelectionCommand}" CommandParameter="{Binding ElementName=FilterNameAll, Path=IsChecked}"/>
                                                 </behaviors:EventTrigger>
                                             </behaviors:Interaction.Triggers>
                                         </CheckBox>
