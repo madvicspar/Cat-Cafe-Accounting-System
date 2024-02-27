@@ -76,17 +76,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private ObservableCollection<FilterElem<PetModel>> selectedNames = new ObservableCollection<FilterElem<PetModel>>();
-        public ObservableCollection<FilterElem<PetModel>> SelectedNames
-        {
-            get { return selectedNames; }
-            set
-            {
-                selectedNames = value;
-                OnPropertyChanged(nameof(SelectedNames));
-            }
-        }
-
         private ObservableCollection<FilterElem<PetModel>> filterNames = new ObservableCollection<FilterElem<PetModel>>();
         public ObservableCollection<FilterElem<PetModel>> FilterNames
         {
@@ -160,8 +149,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 Items.Add(new Elem<PetModel>(item));
                 Names.Add(new FilterElem<PetModel>(item));
-                SelectedNames.Add(new FilterElem<PetModel>(item));
-                FilterNames.Add(new FilterElem<PetModel>(item));
+            }
+            foreach (var item in Names)
+            {
+                if (!FilterNames.Any(p => p.Item.Name == item.Item.Name))
+                {
+                    FilterNames.Add(item);
+                }
             }
             foreach (var item in _dbContext.Genders.ToList())
             {
@@ -216,7 +210,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             if (Names.FirstOrDefault (p => p.Item.Name == petToAdd.Name) == null)
             {
                 Names.Add(new FilterElem<PetModel>(petToAdd));
-                SelectedNames.Add(new FilterElem<PetModel>(petToAdd));
                 FilterNames.Add(new FilterElem<PetModel>(petToAdd));
             }    
             UpdateTable();
@@ -230,7 +223,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             if (pet.Name != name)
             {
                 Names.First(p => p.Item.Name == name).Item.Name = pet.Name;
-                SelectedNames.First(p => p.Item.Name == name).Item.Name = pet.Name;
                 FilterNames.First(p => p.Item.Name == name).Item.Name = pet.Name;
             }
             UpdateTable();
@@ -244,7 +236,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
             {
                 Names.Remove(Names.First(p => p.Item == pet));
-                SelectedNames.Remove(SelectedNames.First(p => p.Item == pet));
                 FilterNames.Remove(FilterNames.First(p => p.Item == pet));
             }
             UpdateTable();
