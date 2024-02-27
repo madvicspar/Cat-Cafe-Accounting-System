@@ -248,7 +248,7 @@
                         </Border>
                     </Popup>
 
-                    <Popup x:Name="popUpGender" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                    <Popup x:Name="popUpGender" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False" Closed="popUpGender_Closed">
                         <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -257,13 +257,28 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox x:Name="FilterSearchGender" Grid.Row="0" Margin="10" Text="Поиск.." Height="20"/>
+                                <TextBox x:Name="FilterSearchGender" Grid.Row="0" Margin="10" Text="{Binding SearchGender, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearchGender_GotFocus"  LostFocus="FilterSearchGender_LostFocus">
+                                    <behaviors:Interaction.Triggers>
+                                        <behaviors:EventTrigger EventName="TextChanged">
+                                            <behaviors:InvokeCommandAction Command="{Binding SearchGenderCommand}"/>
+                                        </behaviors:EventTrigger>
+                                    </behaviors:Interaction.Triggers>
+                                </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedGenders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding FilterGenders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}"/>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxGenderSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxGenderSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>

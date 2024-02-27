@@ -31,6 +31,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(SearchName));
             }
         }
+
+        private string searchGender = "";
+        public string SearchGender
+        {
+            get { return searchGender; }
+            set
+            {
+                searchGender = value;
+                OnPropertyChanged(nameof(SearchGender));
+            }
+        }
         private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
         private ObservableCollection<Elem<PetModel>> items = new ObservableCollection<Elem<PetModel>>();
         public ObservableCollection<Elem<PetModel>> Items
@@ -51,6 +62,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 names = value;
                 OnPropertyChanged(nameof(Names));
+            }
+        }
+
+        private ObservableCollection<FilterElem<Gender>> genders = new ObservableCollection<FilterElem<Gender>>();
+        public ObservableCollection<FilterElem<Gender>> Genders
+        {
+            get { return genders; }
+            set
+            {
+                genders = value;
+                OnPropertyChanged(nameof(Genders));
             }
         }
 
@@ -86,6 +108,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(SelectedGenders));
             }
         }
+        private ObservableCollection<FilterElem<Gender>> filterGenders = new ObservableCollection<FilterElem<Gender>>();
+        public ObservableCollection<FilterElem<Gender>> FilterGenders
+        {
+            get { return filterGenders; }
+            set
+            {
+                filterGenders = value;
+                OnPropertyChanged(nameof(FilterGenders));
+            }
+        }
 
         private ObservableCollection<FilterElem<Breed>> selectedBreeds = new ObservableCollection<FilterElem<Breed>>();
         public ObservableCollection<FilterElem<Breed>> SelectedBreeds
@@ -116,9 +148,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand FilterCommand { get; set; }
         public ICommand SearchNameCommand { get; set; }
+        public ICommand SearchGenderCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
         public ICommand UpdateCheckBoxSelectionCommand { get; set; }
+        public ICommand UpdateCheckBoxGenderSelectionCommand { get; set; }
         public PetsViewModel()
         {
             IsEnabled = Data.user?.Job.Id != 3;
@@ -131,7 +165,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             foreach (var item in _dbContext.Genders.ToList())
             {
+                Genders.Add(new FilterElem<Gender>(item));
                 SelectedGenders.Add(new FilterElem<Gender>(item));
+                FilterGenders.Add(new FilterElem<Gender>(item));
             }
             foreach (var item in _dbContext.Breeds.ToList())
             {
@@ -151,7 +187,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             ChangeSelectionCommand = new RelayCommand<bool>(ExecuteChangeSelectionCommand);
             FilterCommand = new RelayCommand(ExecuteFilterCommand);
             SearchNameCommand = new RelayCommand(ExecuteSearchNameCommand);
+            SearchGenderCommand = new RelayCommand(ExecuteSearchGenderCommand);
             UpdateCheckBoxSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxSelectionCommand);
+            UpdateCheckBoxGenderSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxGenderSelectionCommand);
         }
 
         public void ExecuteAddPetCommand()
@@ -308,7 +346,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void UpdateTable()
         {
             var petNames = new ObservableCollection<string>(Names.Where(p => p.IsSelected).Select(p => p.Item.Name));
-            var petGenders = new ObservableCollection<Gender>(SelectedGenders.Where(p => p.IsSelected).Select(p => p.Item));
+            var petGenders = new ObservableCollection<Gender>(Genders.Where(p => p.IsSelected).Select(p => p.Item));
             var petStatuses = new ObservableCollection<Status>(SelectedStatuses.Where(p => p.IsSelected).Select(p => p.Item));
             var petBreeds = new ObservableCollection<Breed>(SelectedBreeds.Where(p => p.IsSelected).Select(p => p.Item));
 
@@ -329,6 +367,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in FilterNames)
                 Names.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+            //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
+        }
+
+        public void ExecuteUpdateCheckBoxGenderSelectionCommand()
+        {
+            foreach (var item in FilterGenders)
+                Genders.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
             //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
@@ -353,6 +398,27 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterNames.Last().IsSelected = item.IsSelected;
             }
             // после удаления не обновляются значения фильтров
+        }
+        public void ExecuteSearchGenderCommand()
+        {
+            if (SearchGender.Length > 5 && SearchGender[..5] == "Поиск")
+            {
+                FilterGenders.Clear();
+                foreach (var item in Genders)
+                {
+                    FilterGenders.Add(item);
+                    FilterGenders.Last().IsSelected = item.IsSelected;
+                }
+                return;
+            }
+            var petGenders = new ObservableCollection<string>(Genders.Where(p => p.Item.Title.ToLower().Contains(SearchGender.ToLower())).Select(p => p.Item.Title));
+
+            FilterGenders.Clear();
+            foreach (var item in Genders.Where(p => petGenders.Contains(p.Item.Title)))
+            {
+                FilterGenders.Add(item);
+                FilterGenders.Last().IsSelected = item.IsSelected;
+            }
         }
     }
 }
