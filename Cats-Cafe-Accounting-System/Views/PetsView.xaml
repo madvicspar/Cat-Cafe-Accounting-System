@@ -313,6 +313,7 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="45"/>
+                                    <RowDefinition Height="33"/>
                                     <RowDefinition/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
@@ -326,7 +327,22 @@
                                 </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding FilterStatuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10,10,10,0">
+                                    <Grid>
+                                        <CheckBox x:Name="FilterStatusAll">
+                                            <behaviors:Interaction.Triggers>
+                                                <behaviors:EventTrigger EventName="Checked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeStatusSelectionCommandTrue}"/>
+                                                </behaviors:EventTrigger>
+                                                <behaviors:EventTrigger EventName="Unchecked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeStatusSelectionCommandFalse}"/>
+                                                </behaviors:EventTrigger>
+                                            </behaviors:Interaction.Triggers>
+                                        </CheckBox>
+                                        <TextBlock Text="Выделить все" Margin="20,0,0,0"/>
+                                    </Grid>
+                                </ListBox>
+                                <ListBox Grid.Row="2" Margin="10" ItemsSource="{Binding FilterStatuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}">
@@ -342,7 +358,7 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
+                                <Button Content="Применить" Grid.Row="3" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
 
                             </Grid>
                         </Border>
