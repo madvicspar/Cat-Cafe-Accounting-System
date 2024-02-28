@@ -1,4 +1,5 @@
-﻿using Cats_Cafe_Accounting_System.ViewModels;
+﻿using Cats_Cafe_Accounting_System.Utilities;
+using Cats_Cafe_Accounting_System.ViewModels;
 using Cats_Cafe_Accounting_System.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -78,6 +79,10 @@ namespace Cats_Cafe_Accounting_System
 
             var mainViewModel = new MainWindowViewModel(Container.GetService<NavigationViewModel>());
             var mainView = new MainWindow { DataContext = mainViewModel };
+
+            var personalAreaViewModel = Container.GetService<PersonalAreaViewModel>();
+            personalAreaViewModel.Employee = Data.user;
+
             mainView.Show();
         }
         private static void InitContainer()

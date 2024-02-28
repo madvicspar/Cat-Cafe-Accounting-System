@@ -12,6 +12,7 @@
     <None Remove="Images\menu_image.png" />
     <None Remove="Images\search_image.png" />
     <None Remove="Images\update_note_image.png" />
+    <None Remove="Images\UsersPhoto\me.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.102.2" />
@@ -33,5 +34,7 @@
     <Resource Include="Images\menu_image.png" />
     <Resource Include="Images\search_image.png" />
     <Resource Include="Images\update_note_image.png" />
+    <Resource Include="Images\UsersPhoto\cat_default_icon.jpg" />
+    <Resource Include="Images\UsersPhoto\me.jpg" />
   </ItemGroup>
 </Project>

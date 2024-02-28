@@ -24,6 +24,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public int JobId { get; set; }
         public virtual JobModel Job { get; set; }
         public string ContractNumber { get; set; }
+        public string? PhotoAddress { get; set; }
         public string Username { get; set; }
         public byte[] Password { get; set; }
         public byte[] Salt { get; set; }

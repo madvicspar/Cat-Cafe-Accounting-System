@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              mc:Ignorable="d" 
-             d:DesignHeight="400"
-             d:DesignWidth="622"
+             d:DesignHeight="550"
+             d:DesignWidth="620"
              Background="Transparent">
     <Grid>
 
@@ -17,8 +17,9 @@
             <Grid>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="45" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="365" />
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -26,10 +27,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="45"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <TextBlock Grid.Column="0"
                                    Text="Личный кабинет"
-                                   Style="{StaticResource Pages_Headers}"/>
+                                   Style="{StaticResource Pages_Headers}"
+                                   Margin="10,0,0,0"
+                                   FontWeight="Medium"/>
                         <Button Grid.Column="1"
                                 x:Name="MenuButton"
                                 FontSize="20"
@@ -45,26 +48,48 @@
                         </Button>
                     </Grid>
 
-                    <Grid Grid.Row="1" Margin="0,10,0,0">
+                    <Border BorderBrush="#272B2F" Grid.Row="1" BorderThickness="1" Margin="10,0,10,0">
+                        <Grid Grid.Row="1" VerticalAlignment="Top" Background="#F5F5F5">
 
-                        <StackPanel Width="400"
-                                    Height="330"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="240"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="270"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="Black" BorderThickness="1" Width="190" Height="190" Margin="20,37,20,0">
+                                    <Image Grid.Row="0" Source="{Binding PhotoAddress}" Height="190" Width="190"/>
+                                </Border>
+                                <Button Grid.Row="1" Content="Удалить фото" BorderThickness="2" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,5,25,0" Background="#DBDBDB"/>
+                                <Button Grid.Row="2" Content="Загрузить фото" BorderThickness="2" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,5,25,0" Background="#DBDBDB"/>
+                            </Grid>
+
+                            <StackPanel Grid.Column="1"
+                                    Width="330"
+                                    Height="365"
                                     Orientation="Vertical"
-                                    VerticalAlignment="Top"
-                                    >
-                            <Border Background="Transparent"/>
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,0,25,0">
 
-                            <TextBlock Text="Обо мне" FontSize="18" Margin="0,0,0,10" />
+                                <TextBlock Text="Обо мне" FontSize="18" Margin="0,10,0,10" FontWeight="Medium"/>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
 
-                                    <TextBlock Text="Фамилия"
+                                        <TextBlock Text="Фамилия"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
@@ -72,7 +97,7 @@
                                                Width="60"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput"
+                                        <TextBox x:Name="UsernameInput"
                                             Text="{Binding Employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
@@ -85,15 +110,15 @@
                                             VerticalContentAlignment="Center"
                                             Margin="0,5,0,15"
                                             Padding="20,0,0,0"
-                                            Background="LightGray">
+                                            Background="#DBDBDB">
 
-                                    </TextBox>
+                                        </TextBox>
 
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
 
-                                    <TextBlock Text="Имя"
+                                        <TextBlock Text="Имя"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
@@ -101,7 +126,7 @@
                                                Width="60"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput1"
+                                        <TextBox x:Name="UsernameInput1"
                                             Text="{Binding Employee.FirstName, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
@@ -114,20 +139,20 @@
                                             VerticalContentAlignment="Center"
                                             Margin="0,5,0,15"
                                             Padding="20,0,0,0"
-                                            Background="LightGray">
+                                            Background="#DBDBDB">
 
-                                    </TextBox>
-                                </StackPanel>
-                            </Grid>
-                            
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                                    <TextBlock Text="Отчество"
+                                        </TextBox>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                        <TextBlock Text="Отчество"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
@@ -135,7 +160,7 @@
                                                Width="60"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput3"
+                                        <TextBox x:Name="UsernameInput3"
                                             Text="{Binding Employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="13"
                                             FontWeight="Medium"
@@ -148,50 +173,51 @@
                                             VerticalContentAlignment="Center"
                                             Margin="0,5,0,15"
                                             Padding="20,0,0,0"
-                                            Background="LightGray">
+                                            Background="#DBDBDB">
 
-                                    </TextBox>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
-                                    <TextBlock Text="Дата рождения"
+                                        </TextBox>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                        <TextBlock Text="Дата рождения"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
                                                FontFamily="Montserrat"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput4"
-                                            Text="{Binding Employee.Birthday, UpdateSourceTrigger=PropertyChanged}"
-                                            FontSize="13"
-                                            FontWeight="Medium"
-                                            FontFamily="Montserrat"
-                                            Foreground="#272B2F"
-                                            CaretBrush="LightGray"
-                                            BorderBrush="DarkGray"
-                                            BorderThickness="0,0,0,2"
-                                            Height="30"
-                                            VerticalContentAlignment="Center"
-                                            Margin="0,5,0,15"
-                                            Padding="20,0,0,0"
-                                            Background="LightGray">
-
-                                    </TextBox>
-                                </StackPanel>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                                    <TextBlock Text="Номер телефона"
+                                        <DatePicker SelectedDate="{Binding Employee.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                FontSize="13"
+                                                FontFamily="Montserrat"
+                                                Margin="0,5,0,0"
+                                                Padding="0,4,0,0"
+                                                BorderBrush="DarkGray"
+                                                Background="#DBDBDB"
+                                                BorderThickness="0,0,0,2"
+                                                Height="30"
+                                                VerticalContentAlignment="Center">
+                                            <DatePicker.Resources>
+                                                <Style TargetType="DatePickerTextBox">
+                                                    <Setter Property="Height" Value="21"/>
+                                                    <Setter Property="Margin" Value="4,-2,0,2"/>
+                                                </Style>
+                                            </DatePicker.Resources>
+                                        </DatePicker>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                        <TextBlock Text="Номер телефона"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
                                                FontFamily="Montserrat"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput5"
+                                        <TextBox x:Name="UsernameInput5"
                                              Text="{Binding Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
@@ -204,55 +230,22 @@
                                             VerticalContentAlignment="Center"
                                             Margin="0,5,0,15"
                                             Padding="20,0,0,0"
-                                            Background="LightGray">
+                                            Background="#DBDBDB">
 
-                                    </TextBox>
-                                </StackPanel>
+                                        </TextBox>
+                                    </StackPanel>
 
 
-                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
-                                    <TextBlock Text="ПОМЕНЯТЬ"
+                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                        <TextBlock Text="Должность"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
                                                FontFamily="Montserrat"
-                                               Width="60"
+                                               Width="100"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput2"
-                                             Text="{Binding Employee.Pathronymic, UpdateSourceTrigger=PropertyChanged}"
-                                             FontSize="13"
-                                            FontWeight="Medium"
-                                            FontFamily="Montserrat"
-                                            Foreground="#272B2F"
-                                            CaretBrush="LightGray"
-                                            BorderBrush="DarkGray"
-                                            BorderThickness="0,0,0,2"
-                                            Height="30"
-                                            VerticalContentAlignment="Center"
-                                            Margin="0,5,0,15"
-                                            Padding="20,0,0,0"
-                                            Background="LightGray">
-
-                                    </TextBox>
-                                </StackPanel>
-                            </Grid>
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Margin="0,0,5,0">
-
-                                    <TextBlock Text="Должность"
-                                               Foreground="Black"
-                                               FontSize="12"
-                                               FontWeight="Medium"
-                                               FontFamily="Montserrat"
-                                               HorizontalAlignment="Left"/>
-
-                                    <TextBox x:Name="UsernameInput7"
+                                        <TextBox x:Name="UsernameInput2"
                                              Text="{Binding Employee.Job.Title, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
@@ -265,22 +258,27 @@
                                             VerticalContentAlignment="Center"
                                             Margin="0,5,0,15"
                                             Padding="20,0,0,0"
-                                            Background="LightGray">
+                                            Background="#DBDBDB">
 
-                                    </TextBox>
+                                        </TextBox>
+                                    </StackPanel>
+                                </Grid>
 
-                                </StackPanel>
-                                
-                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
 
-                                    <TextBlock Text="Табельный номер"
+                                        <TextBlock Text="Табельный номер"
                                                Foreground="Black"
                                                FontSize="12"
                                                FontWeight="Medium"
                                                FontFamily="Montserrat"
                                                HorizontalAlignment="Left"/>
 
-                                    <TextBox x:Name="UsernameInput8"
+                                        <TextBox x:Name="UsernameInput7"
                                              Text="{Binding Employee.ContractNumber, UpdateSourceTrigger=PropertyChanged}"
                                              FontSize="13"
                                             FontWeight="Medium"
@@ -293,24 +291,54 @@
                                             VerticalContentAlignment="Center"
                                             Margin="0,5,0,15"
                                             Padding="20,0,0,0"
-                                            Background="LightGray">
+                                            Background="#DBDBDB">
 
-                                    </TextBox>
+                                        </TextBox>
 
-                                </StackPanel>
-                            </Grid>
+                                    </StackPanel>
 
-                            <Grid Width="260">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Content="Сохранить" FontSize="13" Width="120"/>
-                                <Button Grid.Column="1" Content="Отменить" FontSize="13" Width="120"/>
-                            </Grid>
+                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
 
-                        </StackPanel>
-                    </Grid>
+                                        <TextBlock Text="Username"
+                                               Foreground="Black"
+                                               FontSize="12"
+                                               FontWeight="Medium"
+                                               FontFamily="Montserrat"
+                                               HorizontalAlignment="Left"/>
+
+                                        <TextBox x:Name="UsernameInput8"
+                                             Text="{Binding Employee.Username, UpdateSourceTrigger=PropertyChanged}"
+                                             FontSize="13"
+                                            FontWeight="Medium"
+                                            FontFamily="Montserrat"
+                                            Foreground="#272B2F"
+                                            CaretBrush="LightGray"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,2"
+                                            Height="30"
+                                            VerticalContentAlignment="Center"
+                                            Margin="0,5,0,15"
+                                            Padding="20,0,0,0"
+                                            Background="#DBDBDB">
+
+                                        </TextBox>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <Grid Width="260" Margin="0,13,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" Content="Сохранить" BorderThickness="2" BorderBrush="DarkGray" FontSize="13" FontWeight="Medium" Width="120" Height="25" Background="LightGray"/>
+                                    <Button Grid.Column="1" Content="Отменить" BorderThickness="2" BorderBrush="DarkGray" FontSize="13" FontWeight="Medium" Width="120" Height="25" Background="LightGray"/>
+                                </Grid>
+
+                            </StackPanel>
+                        </Grid>
+                    </Border>
 
                 </Grid>
 
