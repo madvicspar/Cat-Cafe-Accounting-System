@@ -10,7 +10,6 @@
              d:DesignWidth="620"
              Background="Transparent">
     <Grid>
-
         <Grid>
 
             <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
@@ -65,10 +64,11 @@
 
                                 </Grid.RowDefinitions>
                                 <Border BorderBrush="Black" BorderThickness="1" Width="190" Height="190" Margin="20,37,20,0">
-                                    <Image Grid.Row="0" Source="{Binding PhotoAddress}" Height="190" Width="190"/>
+                                    <Image Grid.Row="0" Source="{Binding Avatar, UpdateSourceTrigger=PropertyChanged}" Height="190" Width="190"/>
+                                    
                                 </Border>
-                                <Button Grid.Row="1" Content="Удалить фото" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,6,25,0" Background="#DBDBDB"/>
-                                <Button Grid.Row="2" Content="Загрузить фото" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,6,25,0" Background="#DBDBDB"/>
+                                <Button Grid.Row="1" Content="Удалить фото" ToolTip="Возврат к картинке по умолчанию" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,3,25,3" Background="#DBDBDB"/>
+                                <Button Grid.Row="2" Content="Загрузить фото" ToolTip=" Сохраняется автоматически после нажатия на кнопку 'Открыть'" Command="{Binding LoadPhotoCommand}" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,6,25,0" Background="#DBDBDB"/>
                             </Grid>
 
                             <StackPanel Grid.Column="1"
