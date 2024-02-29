@@ -15,6 +15,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
     public class PersonalAreaViewModel : ObservableObject
     {
         private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private bool isActive;
+        public bool IsActive
+        {
+            get { return isActive; }
+            set
+            {
+                SetProperty(ref isActive, value);
+                OnPropertyChanged(nameof(IsActive));
+            }
+        }
         private EmployeeModel employee;
         public BitmapImage avatar;
         public BitmapImage Avatar
@@ -30,7 +40,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public string PhotoAddress
         {
             get { return photoAddress; }
-            set { SetProperty(ref photoAddress, value); }
+            set 
+            { 
+                SetProperty(ref photoAddress, value);
+                CheckActivity();
+            }
         }
 
         public EmployeeModel Employee
@@ -45,13 +59,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         }
         public ICommand UpdateEmployeeCommand { get; set; }
         public ICommand LoadPhotoCommand { get; set; }
+        public ICommand DeletePhotoCommand { get; set; }
         public PersonalAreaViewModel()
         {
             UpdateEmployeeCommand = new RelayCommand(ExecuteUpdateEmployeeCommand);
             LoadPhotoCommand = new RelayCommand(ExecuteLoadPhotoCommand);
+            DeletePhotoCommand = new RelayCommand(ExecuteDeletePhotoCommand);
         }
 
-        private async void UpdatePhotoAddress()
+        private void CheckActivity()
+        {
+            IsActive = PhotoAddress != Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "UsersPhoto", "cat_default_icon.jpg");
+        }
+
+        private void UpdatePhotoAddress()
         {
             PhotoAddress = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "UsersPhoto", "cat_default_icon.jpg");
             if (Employee != null)
@@ -69,7 +90,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             _dbContext.SaveChanges();
         }
 
-        public async void ExecuteLoadPhotoCommand()
+        public void ExecuteLoadPhotoCommand()
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp|Все файлы|*.*";
@@ -79,7 +100,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 ChangeAvatar(dlg.FileName);
             }
         }
-        public async void ChangeAvatar(string userPath)
+        public void ChangeAvatar(string userPath)
         {
             string fileName = $"{Employee.Username}_icon.jpg";
 
@@ -107,6 +128,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             bitmap.UriSource = uriBuilder.Uri;
             bitmap.EndInit();
             return bitmap;
+        }
+
+        public void ExecuteDeletePhotoCommand()
+        {
+            string fileName = $"{Employee.Username}_icon.jpg";
+
+            string destinationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "UsersPhoto", fileName);
+
+            File.Delete(destinationPath);
+
+            UpdatePhotoAddress();
         }
     }
 }

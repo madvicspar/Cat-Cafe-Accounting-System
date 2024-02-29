@@ -67,7 +67,7 @@
                                     <Image Grid.Row="0" Source="{Binding Avatar, UpdateSourceTrigger=PropertyChanged}" Height="190" Width="190"/>
                                     
                                 </Border>
-                                <Button Grid.Row="1" Content="Удалить фото" ToolTip="Возврат к картинке по умолчанию" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,3,25,3" Background="#DBDBDB"/>
+                                <Button Grid.Row="1" Content="Удалить фото" ToolTip="Возврат к картинке по умолчанию" Command="{Binding DeletePhotoCommand}" IsEnabled="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,3,25,3" Background="#DBDBDB"/>
                                 <Button Grid.Row="2" Content="Загрузить фото" ToolTip=" Сохраняется автоматически после нажатия на кнопку 'Открыть'" Command="{Binding LoadPhotoCommand}" BorderThickness="2" Height="25" BorderBrush="DarkGray" FontWeight="Medium" Margin="25,6,25,0" Background="#DBDBDB"/>
                             </Grid>
 
