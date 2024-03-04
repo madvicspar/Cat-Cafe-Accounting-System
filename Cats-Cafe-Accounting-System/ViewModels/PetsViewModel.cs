@@ -305,6 +305,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 Names.Add(new FilterElem<PetModel>(petToAdd));
                 FilterNames.Add(new FilterElem<PetModel>(petToAdd));
+                Items.Add(new Elem<PetModel>(petToAdd));
+                FilterItems.Add(new Elem<PetModel>(petToAdd));
             }    
             UpdateTable();
         }
