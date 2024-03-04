@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "srFiwnIGnhbsgixBfNpknehgdy6euf5VCK3S3NKDc7h0Ume/YE/LKIfUalJVOxsAD0sRAtrppA7AnsT87zoXpw==",
+  "dgSpecHash": "52Ln16+ckTiBvsBZDLF1xpemnPr+vNfqEApIfD3ElsGfNX930wuPeQEi/NQrwh9Qkt9Y8A5ROoJlkdxxer4LQg==",
   "success": true,
   "projectFilePath": "D:\\vikto\\source\\repos\\Cats-Cafe-Accounting-System\\Cats-Cafe-Accounting-System\\Cats-Cafe-Accounting-System.csproj",
   "expectedPackageFiles": [
@@ -49,7 +49,7 @@
     "C:\\Users\\vikto\\.nuget\\packages\\mysqlconnector\\2.3.5\\mysqlconnector.2.3.5.nupkg.sha512",
     "C:\\Users\\vikto\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\vikto\\.nuget\\packages\\npoi\\2.6.2\\npoi.2.6.2.nupkg.sha512",
-    "C:\\Users\\vikto\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\8.0.0\\pomelo.entityframeworkcore.mysql.8.0.0.nupkg.sha512",
+    "C:\\Users\\vikto\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\8.0.1\\pomelo.entityframeworkcore.mysql.8.0.1.nupkg.sha512",
     "C:\\Users\\vikto\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\vikto\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\vikto\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",

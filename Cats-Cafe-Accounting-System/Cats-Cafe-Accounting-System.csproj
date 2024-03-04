@@ -25,7 +25,7 @@
     <PackageReference Include="MySql.Data" Version="8.3.0" />
     <PackageReference Include="NPOI" Version="2.6.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\delete_note_image.png" />

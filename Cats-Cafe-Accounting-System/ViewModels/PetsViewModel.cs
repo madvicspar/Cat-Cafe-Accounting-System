@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
-using NPOI.XWPF.UserModel;
+using NPOI.XWPF.UserModel;  
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -507,8 +507,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             var petGenders = new ObservableCollection<Gender>(Genders.Where(p => p.IsSelected).Select(p => p.Item));
             var petStatuses = new ObservableCollection<Status>(Statuses.Where(p => p.IsSelected).Select(p => p.Item));
             var petBreeds = new ObservableCollection<Breed>(Breeds.Where(p => p.IsSelected).Select(p => p.Item));
+            var petSearched = FilterItems.Select(p => p.Item);
 
             var filteredPets = _dbContext.Pets
+                .Where(p => petSearched.Contains(p))
                 .Where(p => petNames.Contains(p.Name))
                 .Where(p => petGenders.Contains(p.Gender))
                 .Where(p => petStatuses.Contains(p.Status))
@@ -699,7 +701,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterItems.Clear();
                 foreach (var item in Items)
                 {
-                    FilterItems.Add(item);
+                    if (FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name && p.IsSelected == true) is not null
+                        && FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Gender.Title && p.IsSelected == true) is not null
+                        && FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Status.Title && p.IsSelected == true) is not null
+                        && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null)
+                        FilterItems.Add(item);
                 }
                 FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
                 return;
@@ -713,7 +719,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     FilterItems.Clear();
                     foreach (var item in Items.Where(p => petNames.Contains(p.Item.Name)))
                     {
-                        FilterItems.Add(item);
+                        if (FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name && p.IsSelected == true) is not null
+                            && FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Gender.Title && p.IsSelected == true) is not null
+                            && FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Status.Title && p.IsSelected == true) is not null
+                            && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null)
+                            FilterItems.Add(item);
                     }
                     FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
                     break;
@@ -723,7 +733,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     FilterItems.Clear();
                     foreach (var item in Items.Where(p => petBreeds.Contains(p.Item.Breed.Title)))
                     {
-                        FilterItems.Add(item);
+                        if (FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name && p.IsSelected == true) is not null
+                            && FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Gender.Title && p.IsSelected == true) is not null
+                            && FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Status.Title && p.IsSelected == true) is not null
+                            && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null)
+                            FilterItems.Add(item);
                     }
                     FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
                     break;
