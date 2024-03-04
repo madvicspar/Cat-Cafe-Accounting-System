@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using NPOI.XWPF.UserModel;  
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -339,6 +341,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             foreach (var itemToDelete in itemsToDelete)
             {
                 _dbContext.Pets.Remove(itemToDelete.Item);
+                if (_dbContext.Pets.FirstOrDefault(p => p.Name == itemToDelete.Item.Name) == null)
+                {
+                    Names.Remove(Names.First(p => p.Item == itemToDelete.Item));
+                    FilterNames.Remove(FilterNames.First(p => p.Item == itemToDelete.Item));
+                }
             }
             _dbContext.SaveChanges();
             UpdateTable();
@@ -401,17 +408,31 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             using (var workbook = new XLWorkbook())
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.ShowDialog();
                 saveFileDialog.DefaultExt = ".xlsx";
-                var worksheet = workbook.Worksheets.Add("Pets");
-                worksheet.Cell("A1").InsertTable(FilterItems);
-                string path = saveFileDialog.FileName + ".xlsx";
-                workbook.SaveAs(path);
-                Process.Start(new ProcessStartInfo
+                if (saveFileDialog.ShowDialog() == true)
                 {
-                    FileName = path,
-                    UseShellExecute = true
-                });
+                    var worksheet = workbook.Worksheets.Add("Pets");
+                    List<string> headers = new List<string>() { "Кличка", "Пол", "Статус", "Порода", "Дата рождения", "Дата появления в котокафе", "Номер паспорта" };
+                    List<List<string>> pets = new List<List<string>>();
+                    foreach (var item in FilterItems)
+                    {
+                        pets.Add(new List<string>() { item.Item.Name, item.Item.Gender.Title, 
+                            item.Item.Status.Title, item.Item.Breed.Title, item.Item.Birthday.ToString("dd.MM.yyyy"), 
+                            item.Item.CheckInDate.ToString("dd.MM.yyyy"), item.Item.PassNumber });
+                    }
+                    pets.RemoveAt(pets.Count - 1);
+                    worksheet.Cell("A1").InsertTable(pets);
+                    for (int i = 0; i < headers.Count; i++)
+                        worksheet.Column(i+1).Cell(1).Value = headers[i];
+                    worksheet.Columns().AdjustToContents();
+                    string path = saveFileDialog.FileName;
+                    workbook.SaveAs(path);
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = path,
+                        UseShellExecute = true
+                    });
+                }
             }
         }
 
