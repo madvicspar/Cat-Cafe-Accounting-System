@@ -14,19 +14,19 @@ namespace Cats_Cafe_Accounting_System.Models
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Pathronymic { get; set; }
-        [ForeignKey("Gender")]
         public int GenderId { get; set; }
-        public Gender Gender { get; set; }
-        public string Phone { get; set; }
-        public DateTime Birthday { get; set; }
-        public VisitorModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateTime birthday)
+        [ForeignKey("GenderId")]
+        public virtual Gender Gender { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateOnly Birthday { get; set; }
+        public VisitorModel(int id, string lastName, string firstName, string pathronymic, int genderId, string phone, DateOnly birthday)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Pathronymic = pathronymic;
             GenderId = genderId;
-            Phone = phone;
+            PhoneNumber = phone;
             Birthday = birthday;
             Gender = new Gender(GenderId);
         }
@@ -38,9 +38,13 @@ namespace Cats_Cafe_Accounting_System.Models
             LastName = row["lastname"].ToString();
             Pathronymic = row["pathronymic"].ToString();
             GenderId = Convert.ToInt32(row["genderid"]);
-            Phone = row["phonenumber"].ToString();
-            Birthday = DateTime.Parse(row["birthday"].ToString());
+            PhoneNumber = row["phonenumber"].ToString();
+            Birthday = DateOnly.Parse(row["birthday"].ToString());
             Gender = new Gender(GenderId);
+        }
+        public VisitorModel()
+        {
+            Gender = new Gender();
         }
     }
 }

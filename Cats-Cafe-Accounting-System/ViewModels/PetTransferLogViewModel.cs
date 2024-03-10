@@ -22,7 +22,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public PetTransferLogViewModel()
         {
             // Инициализация коллекции питомцев
-            PetTransferLogEntries = GetPetTransferLogEntriesFromTable("pet_transfer_log_entries");
+            //PetTransferLogEntries = GetPetTransferLogEntriesFromTable("pet_transfer_log_entries");
         }
         public static ObservableCollection<PetTransferLogEntryModel> GetPetTransferLogEntriesFromTable(string table)
         {

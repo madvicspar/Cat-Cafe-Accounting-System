@@ -21,5 +21,8 @@ namespace Cats_Cafe_Accounting_System.Utilities
         public DbSet<Breed> Breeds { get; set; }
         public DbSet<JobModel> Jobs { get; set; }
         public DbSet<EmployeeModel> Employees { get; set; }
+        public DbSet<VisitorModel> Visitors { get; set; }
+        public DbSet<TicketModel> Tickets { get; set; }
+        public DbSet<VisitLogEntryModel> VisitLogEntries { get; set;}
     }
 }

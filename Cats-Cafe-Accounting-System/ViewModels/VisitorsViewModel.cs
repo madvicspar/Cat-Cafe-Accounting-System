@@ -27,7 +27,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public VisitorsViewModel()
         {
             // Инициализация коллекции питомцев
-            Visitors = GetVisitorsFromTable("visitors");
+            //Visitors = GetVisitorsFromTable("visitors");
         }
         public static ObservableCollection<VisitorModel> GetVisitorsFromTable(string table)
         {
@@ -39,7 +39,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 VisitorModel visitor = new VisitorModel(Convert.ToInt32(row["id"]), row["lastname"].ToString(), 
                     row["firstname"].ToString(), row["pathronymic"].ToString(),Convert.ToInt32(row["genderid"]),
-                    row["phonenumber"].ToString(), DateTime.Parse(row["birthday"].ToString()));
+                    row["phonenumber"].ToString(), DateOnly.Parse(row["birthday"].ToString()));
                 visitors.Add(visitor);
             }
 

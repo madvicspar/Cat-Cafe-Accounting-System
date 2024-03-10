@@ -10,12 +10,12 @@ namespace Cats_Cafe_Accounting_System.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Visitor")]
         public int VisitorId { get; set; }
-        public VisitorModel Visitor { get; set; }
-        [ForeignKey("Pet")]
+        [ForeignKey("VisitorId")]
+        public virtual VisitorModel Visitor { get; set; }
         public int PetId { get; set; }
-        public PetModel Pet { get; set; }
+        [ForeignKey("PetId")]
+        public virtual PetModel Pet { get; set; }
         public DateTime Date { get; set; }
         public PetTransferLogEntryModel(int id, DateTime date, int visitorId, int petId)
         {
@@ -35,6 +35,11 @@ namespace Cats_Cafe_Accounting_System.Models
             PetId = Convert.ToInt32(row["pet_id"]);
             Visitor = new VisitorModel(VisitorId);
             Pet = new PetModel(PetId);
+        }
+        public PetTransferLogEntryModel()
+        {
+            Visitor = new VisitorModel();
+            Pet = new PetModel();
         }
     }
 }

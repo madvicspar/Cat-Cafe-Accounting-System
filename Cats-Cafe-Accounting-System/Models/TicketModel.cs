@@ -11,9 +11,9 @@ namespace Cats_Cafe_Accounting_System.Models
         [Key]
         public int Id { get; set; }
         public float Price { get; set; }
-        [ForeignKey("Pet")]
         public int PetId { get; set; }
-        public PetModel Pet { get; set; }
+        [ForeignKey("PetId")]
+        public virtual PetModel Pet { get; set; }
         public string Comments { get; set; }
         public TicketModel(int id, float price, int petId, string comments)
         {
@@ -31,6 +31,10 @@ namespace Cats_Cafe_Accounting_System.Models
             PetId = row["petid"].ToString() == "" ? 0 : Convert.ToInt32(row["petid"]);
             Comments = row["comments"].ToString();
             Pet = new PetModel(PetId);
+        }
+        public TicketModel()
+        {
+            Pet = new PetModel();
         }
     }
 }
