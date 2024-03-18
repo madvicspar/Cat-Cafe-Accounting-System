@@ -20,7 +20,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public IncomesViewModel()
         {
             Items = new SeriesCollection();
-            // Группировка данных по месяцам
             var groupedData = _dbContext.VisitLogEntries
                 .Include(p => p.Visitor)
                 .Include(p => p.Ticket)
@@ -35,26 +34,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 .OrderBy(data => new DateOnly(data.Year, data.Month, 1))
                 .ToList();
 
-            Labels = groupedData.Select(data => $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.Month)} {data.Year}").ToArray();
+            Labels = groupedData.Select(data => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.Month))} {data.Year}").ToArray();
 
             ChartValues<ObservableValue> values = new ChartValues<ObservableValue>();
 
             foreach (var data in groupedData)
             {
-                //ChartValues<ObservableValue> values = new ChartValues<ObservableValue>();
-                //foreach (var value in data.TotalIncome)
-                //{
-                //    values.Add(new ObservableValue(value));
-                //}
                 values.Add(new ObservableValue(data.TotalIncome.Sum()));
-                //Items.Add(new ColumnSeries
-                //{
-                //    Title = $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.Month)} {data.Year}",
-                //    Values = new ChartValues<ObservableValue>() { new ObservableValue(data.TotalIncome.Sum()) }
-                //});
             }
             Items.Add(new ColumnSeries
             {
+                Title = "Доходы",
                 Values = values
             });
         }

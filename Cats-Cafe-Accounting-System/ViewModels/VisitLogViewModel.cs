@@ -2,44 +2,34 @@
 using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class VisitLogViewModel : ObservableObject
     {
-        private ObservableCollection<VisitLogEntryModel> visitorsLogEntries;
-        public ObservableCollection<VisitLogEntryModel> VisitorsLogEntries
+        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private ObservableCollection<Elem<VisitLogEntryModel>> items = new ObservableCollection<Elem<VisitLogEntryModel>>();
+        public ObservableCollection<Elem<VisitLogEntryModel>> Items
         {
-            get { return visitorsLogEntries; }
+            get { return items; }
             set
             {
-                visitorsLogEntries = value;
-                OnPropertyChanged(nameof(VisitorsLogEntries));
+                items = value;
+                OnPropertyChanged(nameof(Items));
             }
-        }
+        }  
+        
         public VisitLogViewModel()
         {
-            // Инициализация коллекции питомцев
-            //VisitorsLogEntries = GetVisitorsLogEntriesFromTable("visit_log_entries");
-        }
-        public static ObservableCollection<VisitLogEntryModel> GetVisitorsLogEntriesFromTable(string table)
-        {
-            ObservableCollection<VisitLogEntryModel> visitorsLogEntries = new ObservableCollection<VisitLogEntryModel>();
-
-            DataTable dataTable = DBContext.GetTable(table);
-
-            foreach (DataRow row in dataTable.Rows)
+            foreach (var item in _dbContext.VisitLogEntries.Include(p => p.Visitor).Include(p => p.Ticket).ToList())
             {
-                VisitLogEntryModel visitorsLogEntry = new VisitLogEntryModel(Convert.ToInt32(row["id"]), DateOnly.Parse(row["date"].ToString()),
-                    TimeOnly.Parse(row["starttime"].ToString()),
-                    Convert.ToInt32(row["visitorid"]), Convert.ToInt32(row["ticketid"]),Convert.ToInt32(row["ticketscount"]));
-                visitorsLogEntries.Add(visitorsLogEntry);
+                Items.Add(new Elem<VisitLogEntryModel>(item));
             }
-
-            return visitorsLogEntries;
         }
     }
 }
