@@ -326,13 +326,21 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteDeletePetCommand(PetModel? pet)
         {
-            string name = _dbContext.Pets.First(p => p == pet).Name;
-            _dbContext.Pets.Remove(pet);
-            _dbContext.SaveChanges();
-            if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
+            if (pet.Id != 0)
             {
-                Names.Remove(Names.First(p => p.Item == pet));
-                FilterNames.Remove(FilterNames.First(p => p.Item == pet));
+                string name = _dbContext.Pets.First(p => p == pet).Name;
+                _dbContext.Pets.Remove(pet);
+                _dbContext.SaveChanges();
+                if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
+                {
+                    Names.Remove(Names.First(p => p.Item == pet));
+                    FilterNames.Remove(FilterNames.First(p => p.Item == pet));
+                }
+            }
+            else
+            {
+                FilterItems[filterItems.Count - 1].Item.Name = "";
+                FilterItems[filterItems.Count - 1].Item.PassNumber = "";
             }
             UpdateTable();
         }
@@ -342,11 +350,19 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             var itemsToDelete = new ObservableCollection<Elem<PetModel>>(FilterItems.Where(x => x.IsSelected).ToList());
             foreach (var itemToDelete in itemsToDelete)
             {
-                _dbContext.Pets.Remove(itemToDelete.Item);
-                if (_dbContext.Pets.FirstOrDefault(p => p.Name == itemToDelete.Item.Name) == null)
+                if (itemToDelete.Item.Id != 0)
                 {
-                    Names.Remove(Names.First(p => p.Item == itemToDelete.Item));
-                    FilterNames.Remove(FilterNames.First(p => p.Item == itemToDelete.Item));
+                    _dbContext.Pets.Remove(itemToDelete.Item);
+                    if (_dbContext.Pets.FirstOrDefault(p => p.Name == itemToDelete.Item.Name) == null)
+                    {
+                        Names.Remove(Names.First(p => p.Item == itemToDelete.Item));
+                        FilterNames.Remove(FilterNames.First(p => p.Item == itemToDelete.Item));
+                    }
+                }
+                else
+                {
+                    FilterItems[filterItems.Count - 1].Item.Name = "";
+                    FilterItems[filterItems.Count - 1].Item.PassNumber = "";
                 }
             }
             _dbContext.SaveChanges();
