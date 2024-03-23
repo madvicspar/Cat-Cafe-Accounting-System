@@ -313,6 +313,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteUpdatePetCommand(PetModel? pet)
         {
+            // сделать недоступной кнопку пока не добавлен элемент (последний)
+
             string name = _dbContext.Pets.First(p => p == pet).Name;
             _dbContext.Pets.Update(pet);
             _dbContext.SaveChanges();
@@ -372,35 +374,34 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         private void ExecuteWordExportCommand()
         {
+            // сделать кнопку неактивной, если в коллекции 0 элементов (фильтры учитываются)
             // Создание нового документа Word
             XWPFDocument document = new XWPFDocument();
 
             // Создание таблицы
-            XWPFTable table = document.CreateTable(FilterItems.Count + 1, 8);
+            XWPFTable table = document.CreateTable(FilterItems.Count, 8);
 
             // Заполнение заголовков столбцов
-            table.GetRow(0).GetCell(0).SetText("Name");
-            table.GetRow(0).GetCell(1).SetText("Breed");
-            table.GetRow(0).GetCell(2).SetText("Gender");
-            table.GetRow(0).GetCell(3).SetText("Status");
-            table.GetRow(0).GetCell(4).SetText("Breed");
-            table.GetRow(0).GetCell(5).SetText("Дата рождения");
-            table.GetRow(0).GetCell(6).SetText("Дата появления в котокафе");
-            table.GetRow(0).GetCell(7).SetText("Номер паспорта");
+            table.GetRow(0).GetCell(0).SetText("Кличка");
+            table.GetRow(0).GetCell(1).SetText("Пол");
+            table.GetRow(0).GetCell(2).SetText("Порода");
+            table.GetRow(0).GetCell(3).SetText("Статус");
+            table.GetRow(0).GetCell(4).SetText("Дата рождения");
+            table.GetRow(0).GetCell(5).SetText("Дата появления в котокафе");
+            table.GetRow(0).GetCell(6).SetText("Номер паспорта");
 
             // Заполнение данных о питомцах
-            for (int i = 0; i < FilterItems.Count; i++)
+            for (int i = 0; i < FilterItems.Count-1; i++)
             {
                 PetModel pet = FilterItems[i].Item;
 
                 table.GetRow(i + 1).GetCell(0).SetText(pet.Name);
-                table.GetRow(i + 1).GetCell(1).SetText(pet.Breed.Title);
-                table.GetRow(i + 1).GetCell(2).SetText(pet.Gender.Title);
+                table.GetRow(i + 1).GetCell(1).SetText(pet.Gender.Title);
+                table.GetRow(i + 1).GetCell(2).SetText(pet.Breed.Title);
                 table.GetRow(i + 1).GetCell(3).SetText(pet.Status.Title);
-                table.GetRow(i + 1).GetCell(4).SetText(pet.Breed.Title);
-                table.GetRow(i + 1).GetCell(5).SetText(pet.Birthday.ToString());
-                table.GetRow(i + 1).GetCell(6).SetText(pet.CheckInDate.ToString());
-                table.GetRow(i + 1).GetCell(7).SetText(pet.PassNumber);
+                table.GetRow(i + 1).GetCell(4).SetText(pet.Birthday.ToString());
+                table.GetRow(i + 1).GetCell(5).SetText(pet.CheckInDate.ToString());
+                table.GetRow(i + 1).GetCell(6).SetText(pet.PassNumber);
             }
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -430,15 +431,14 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     var worksheet = workbook.Worksheets.Add("Pets");
-                    List<string> headers = new List<string>() { "Кличка", "Пол", "Статус", "Порода", "Дата рождения", "Дата появления в котокафе", "Номер паспорта" };
+                    List<string> headers = new List<string>() { "Кличка", "Пол", "Порода", "Статус", "Дата рождения", "Дата появления в котокафе", "Номер паспорта" };
                     List<List<string>> pets = new List<List<string>>();
-                    foreach (var item in FilterItems)
+                    for (int i = 0; i < FilterItems.Count - 1; i++)
                     {
-                        pets.Add(new List<string>() { item.Item.Name, item.Item.Gender.Title, 
-                            item.Item.Status.Title, item.Item.Breed.Title, item.Item.Birthday.ToString("dd.MM.yyyy"), 
-                            item.Item.CheckInDate.ToString("dd.MM.yyyy"), item.Item.PassNumber });
+                        pets.Add(new List<string>() { FilterItems[i].Item.Name, FilterItems[i].Item.Gender.Title,
+                            FilterItems[i].Item.Breed.Title, FilterItems[i].Item.Status.Title, FilterItems[i].Item.Birthday.ToString("dd.MM.yyyy"),
+                            FilterItems[i].Item.CheckInDate.ToString("dd.MM.yyyy"), FilterItems[i].Item.PassNumber });
                     }
-                    pets.RemoveAt(pets.Count - 1);
                     worksheet.Cell("A1").InsertTable(pets);
                     for (int i = 0; i < headers.Count; i++)
                         worksheet.Column(i+1).Cell(1).Value = headers[i];
