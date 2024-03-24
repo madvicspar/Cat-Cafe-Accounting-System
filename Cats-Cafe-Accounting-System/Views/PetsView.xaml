@@ -20,8 +20,9 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="400"/>
+                        <RowDefinition Height="35" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="370"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -56,9 +57,37 @@
                         </ComboBox>
 
                     </Grid>
+                    <!--<Separator Grid.Row="2"  Height="1" VerticalAlignment="Top" Margin="0,1,0,0"/>-->
+                    <Grid Grid.Row="2" Margin="35,0,7,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="158"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Фильтр по дате:" VerticalAlignment="Center" FontSize="13" Width="100"/>
+                        <DatePicker Grid.Column="1" Margin="0,0,0,0" Width="150" BorderBrush="Transparent" VerticalAlignment="Center" SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="SelectedDateChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding FilterCommand}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                        </DatePicker>
+                        <TextBlock Grid.Column="2" Text=" -" VerticalAlignment="Center" FontSize="13"/>
+                        <DatePicker Grid.Column="3" Margin="0,0,0,0" Width="150" BorderBrush="Transparent" VerticalAlignment="Center" SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="SelectedDateChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding FilterCommand}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                        </DatePicker>
+                        <Button Grid.Column="5" Content="Сбросить фильтр" Margin="0,0,0,0" Padding="5,0,10,0" Height="24" Width="158" FontSize="12" Background="#FFEBEBEB" BorderBrush="DarkGray" HorizontalContentAlignment="Left" Command="{Binding DeleteDateFiltersCommand}"/>
+                    </Grid>
                     
-                    <Grid Grid.Row="2">
-                        <DataGrid x:Name="dataGrid" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                    <Grid Grid.Row="3">
+                        <DataGrid x:Name="dataGrid" Margin="0,0,10,0" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
@@ -157,7 +186,7 @@
                                     <DataGridTemplateColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="День рождения"/>
+                                                <TextBlock Text="Дата рождения"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -171,7 +200,7 @@
                                     <DataGridTemplateColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="День появления в котокафе"/>
+                                                <TextBlock Text="Дата появления в котокафе"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.HeaderTemplate>
@@ -436,17 +465,17 @@
                         </Border>
                     </Popup>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="4" Margin="0,0,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" Width="120" Height="35" Command="{Binding DeleteManyPetCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
-                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить питомца" Width="120" Height="35" Command="{Binding AddPetCommand}"/>
-                        <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Width="120" Height="35" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
-                        <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding DeleteManyPetCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить питомца" Margin="10,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding AddPetCommand}"/>
+                        <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Margin="0,0,10,0" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                     </Grid>
 
                 </Grid>

@@ -90,6 +90,27 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        private DateTime startDate = new DateTime();
+        public DateTime StartDate
+        {
+            get { return startDate; }
+            set
+            {
+                startDate = value;
+                OnPropertyChanged(nameof(StartDate));
+            }
+        }
+        private DateTime endDate = new DateTime();
+        public DateTime EndDate
+        {
+            get { return endDate; }
+            set
+            {
+                endDate = value;
+                OnPropertyChanged(nameof(EndDate));
+            }
+        }
+
         private readonly ApplicationDbContext _dbContext;
         private ObservableCollection<Elem<PetModel>> items = new ObservableCollection<Elem<PetModel>>();
         public ObservableCollection<Elem<PetModel>> Items
@@ -223,6 +244,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand UpdateCheckBoxGenderSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxStatusSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxBreedSelectionCommand { get; set; }
+        public ICommand DeleteDateFiltersCommand { get; set; }
         public PetsViewModel(ApplicationDbContext context)
         {
             _dbContext = context;
@@ -255,6 +277,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 Statuses.Add(new FilterElem<Status>(item));
                 FilterStatuses.Add(new FilterElem<Status>(item));
             }
+            ExecuteDeleteDateFiltersCommand();
             FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
@@ -278,8 +301,23 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateCheckBoxGenderSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxGenderSelectionCommand);
             UpdateCheckBoxStatusSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxStatusSelectionCommand);
             UpdateCheckBoxBreedSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxBreedSelectionCommand);
+            DeleteDateFiltersCommand = new RelayCommand(ExecuteDeleteDateFiltersCommand);
         }
-
+        public void ExecuteDeleteDateFiltersCommand()
+        {
+            DateTime birtdayMin = FilterItems.MinBy(item => item.Item.Birthday).Item.Birthday;
+            DateTime birtdayMax = FilterItems.MaxBy(item => item.Item.Birthday).Item.Birthday;
+            DateTime checkInDateMin = FilterItems.MinBy(item => item.Item.CheckInDate).Item.CheckInDate;
+            DateTime checkInDateMax = FilterItems.MaxBy(item => item.Item.CheckInDate).Item.CheckInDate;
+            if (birtdayMin < checkInDateMin)
+                StartDate = birtdayMin;
+            else
+                StartDate = checkInDateMin;
+            if (birtdayMax > checkInDateMax)
+                EndDate = birtdayMax;
+            else
+                endDate = checkInDateMax;
+        }
         public void ExecuteAddPetCommand()
         {
             // добавить проверку на то, что все введено, и введено правильно
@@ -549,11 +587,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             var petSearched = FilterItems.Select(p => p.Item);
 
             var filteredPets = _dbContext.Pets
-                .Where(p => petSearched.Contains(p))
+                //.Where(p => petSearched.Contains(p))
                 .Where(p => petNames.Contains(p.Name))
                 .Where(p => petGenders.Contains(p.Gender))
                 .Where(p => petStatuses.Contains(p.Status))
                 .Where(p => petBreeds.Contains(p.Breed))
+                .Where(p => p.Birthday >= StartDate && p.Birthday <= EndDate)
+                .Where(p => p.CheckInDate >= StartDate && p.CheckInDate <= EndDate)
                 .ToList();
 
             FilterItems.Clear();
@@ -743,7 +783,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     if (FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name && p.IsSelected == true) is not null
                         && FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Gender.Title && p.IsSelected == true) is not null
                         && FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Status.Title && p.IsSelected == true) is not null
-                        && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null)
+                        && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null
+                        && item.Item.Birthday >= StartDate && item.Item.Birthday <= EndDate
+                        && item.Item.CheckInDate >= StartDate && item.Item.CheckInDate <= EndDate)
                         FilterItems.Add(item);
                 }
                 FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
@@ -761,7 +803,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                         if (FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name && p.IsSelected == true) is not null
                             && FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Gender.Title && p.IsSelected == true) is not null
                             && FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Status.Title && p.IsSelected == true) is not null
-                            && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null)
+                            && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null
+                            && item.Item.Birthday >= StartDate && item.Item.Birthday <= EndDate
+                            && item.Item.CheckInDate >= StartDate && item.Item.CheckInDate <= EndDate)
                             FilterItems.Add(item);
                     }
                     FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
@@ -775,7 +819,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                         if (FilterNames.FirstOrDefault(p => p.Item.Name == item.Item.Name && p.IsSelected == true) is not null
                             && FilterGenders.FirstOrDefault(p => p.Item.Title == item.Item.Gender.Title && p.IsSelected == true) is not null
                             && FilterStatuses.FirstOrDefault(p => p.Item.Title == item.Item.Status.Title && p.IsSelected == true) is not null
-                            && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null)
+                            && FilterBreeds.FirstOrDefault(p => p.Item.Title == item.Item.Breed.Title && p.IsSelected == true) is not null
+                            && item.Item.Birthday >= StartDate && item.Item.Birthday <= EndDate
+                            && item.Item.CheckInDate >= StartDate && item.Item.CheckInDate <= EndDate)
                             FilterItems.Add(item);
                     }
                     FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
