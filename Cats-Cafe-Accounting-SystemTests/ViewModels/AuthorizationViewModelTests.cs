@@ -1,19 +1,21 @@
-﻿using Cats_Cafe_Accounting_System.RegularClasses;
+﻿using Cats_Cafe_Accounting_System.ViewModels;
+using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
 using Cats_Cafe_Accounting_System.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cats_Cafe_Accounting_System.ViewModels.Tests
 {
     [TestClass()]
     public class AuthorizationViewModelTests
     {
-        private ServiceProvider _serviceProvider;
-        private ApplicationDbContext _dbContext;
+        private static ServiceProvider _serviceProvider;
+        private static ApplicationDbContext _dbContext;
 
-        [TestInitialize]
-        public void Setup()
+        [ClassInitialize] 
+        public static void ClassInitialize(TestContext context)
         {
             var services = new ServiceCollection();
 
@@ -21,36 +23,27 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
 
             // Добавление фейковых данных в таблицы Genders, Breeds, Statuses
-            _dbContext.Genders.Add(new Gender { Title = "мужской" });
             _dbContext.Genders.Add(new Gender { Title = "женский" });
+            _dbContext.Genders.Add(new Gender { Title = "мужской" });
 
             _dbContext.Statuses.Add(new Status { Title = "чилится" });
             _dbContext.Statuses.Add(new Status { Title = "не числится" });
 
-            _dbContext.Breeds.Add(new Breed { Title = "сиамская", Id = "SIA" });
+            _dbContext.Breeds.Add(new Breed { Title = "сиамская", Id = "SMS" });
             _dbContext.Breeds.Add(new Breed { Title = "мейн-кун", Id = "MNC" });
 
             _dbContext.SaveChanges();
 
             services.AddSingleton(_dbContext);
-            services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<AuthorizationViewModel>();
-            services.AddSingleton<AuthorizationView>();
-            services.AddSingleton<NavigationViewModel>();
             services.AddSingleton(new PetsViewModel(_dbContext));
-            services.AddSingleton<VisitorsViewModel>();
-            services.AddSingleton<JobsViewModel>(new JobsViewModel(_dbContext));
-            services.AddSingleton<EmployeesViewModel>();
-            services.AddSingleton<TicketsViewModel>();
-            services.AddSingleton<PetTransferLogViewModel>();
-            services.AddSingleton<EmployeeShiftLogViewModel>();
-            services.AddSingleton<VisitLogViewModel>(new VisitLogViewModel(_dbContext));
-            services.AddSingleton<PersonalAreaViewModel>(new PersonalAreaViewModel(_dbContext));
-            services.AddSingleton<IncomesViewModel>(new IncomesViewModel(_dbContext));
 
             _serviceProvider = services.BuildServiceProvider();
+        }
 
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            _dbContext.Dispose();
         }
 
         [TestMethod()]
@@ -68,7 +61,54 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
                 petsViewModel.ExecuteAddPetCommand();
 
                 // Assert
-                Assert.IsTrue(petsViewModel.Items.Count == 1);
+                Assert.AreEqual(1, petsViewModel.Items.Count);
+            }
+        }
+
+        [TestMethod()]
+        public void ExecuteSearchNameCommandTest()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+
+                // Arranges and Acts
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test2";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test2";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Name";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Pass";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test3";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test3";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.SearchName = "Tes";
+                petsViewModel.ExecuteSearchNameCommand();
+                // Assert
+                Assert.AreEqual(3, petsViewModel.FilterNames.Count);
+            }
+        }
+        [TestMethod()]
+        public void ExecuteSearchNameCommandTest_EmptySearchText()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+
+                // Arranges and Acts
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test2";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test2";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.SearchName = "Поиск по имени";
+                petsViewModel.ExecuteSearchNameCommand();
+                // Assert
+                Assert.AreEqual("Поиск по имени", petsViewModel.SearchName);
             }
         }
     }
