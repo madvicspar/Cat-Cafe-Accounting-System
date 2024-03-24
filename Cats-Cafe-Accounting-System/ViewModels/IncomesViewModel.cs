@@ -14,39 +14,40 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class IncomesViewModel : ObservableObject
     {
-        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private readonly ApplicationDbContext _dbContext;
         public SeriesCollection Items { get; set; }
         public string[] Labels { get; set; }
-        public IncomesViewModel()
+        public IncomesViewModel(ApplicationDbContext context)
         {
-            Items = new SeriesCollection();
-            var groupedData = _dbContext.VisitLogEntries
-                .Include(p => p.Visitor)
-                .Include(p => p.Ticket)
-                .AsEnumerable()
-                .GroupBy(item => new { item.Date.Year, item.Date.Month })
-                .Select(group => new
-                {
-                    group.Key.Year,
-                    group.Key.Month,
-                    TotalIncome = group.Select(item => item.Ticket.Price * item.TicketsCount)
-                })
-                .OrderBy(data => new DateOnly(data.Year, data.Month, 1))
-                .ToList();
+            _dbContext = context;
+            //Items = new SeriesCollection();
+            //var groupedData = _dbContext.VisitLogEntries
+            //    .Include(p => p.Visitor)
+            //    .Include(p => p.Ticket)
+            //    .AsEnumerable()
+            //    .GroupBy(item => new { item.Date.Year, item.Date.Month })
+            //    .Select(group => new
+            //    {
+            //        group.Key.Year,
+            //        group.Key.Month,
+            //        TotalIncome = group.Select(item => item.Ticket.Price * item.TicketsCount)
+            //    })
+            //    .OrderBy(data => new DateOnly(data.Year, data.Month, 1))
+            //    .ToList();
 
-            Labels = groupedData.Select(data => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.Month))} {data.Year}").ToArray();
+            //Labels = groupedData.Select(data => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.Month))} {data.Year}").ToArray();
 
-            ChartValues<ObservableValue> values = new ChartValues<ObservableValue>();
+            //ChartValues<ObservableValue> values = new ChartValues<ObservableValue>();
 
-            foreach (var data in groupedData)
-            {
-                values.Add(new ObservableValue(data.TotalIncome.Sum()));
-            }
-            Items.Add(new ColumnSeries
-            {
-                Title = "Доходы",
-                Values = values
-            });
+            //foreach (var data in groupedData)
+            //{
+            //    values.Add(new ObservableValue(data.TotalIncome.Sum()));
+            //}
+            //Items.Add(new ColumnSeries
+            //{
+            //    Title = "Доходы",
+            //    Values = values
+            //});
         }
     }
 }

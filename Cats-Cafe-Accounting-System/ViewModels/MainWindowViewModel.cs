@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using Cats_Cafe_Accounting_System.Utilities;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -19,10 +20,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             get => currentVM;
             set => SetProperty(ref currentVM, value);
         }
-        public MainWindowViewModel(NavigationViewModel navVM)
+        public MainWindowViewModel(NavigationViewModel navVM, ApplicationDbContext _dbContext)
         {
             NavigationVM = navVM;
-            CurrentVM = new PetsViewModel();
+            CurrentVM = new PetsViewModel(_dbContext);
             WeakReferenceMessenger.Default.Register<NavigationChangedRequestMessage>(this, NavigateTo);
         }
 

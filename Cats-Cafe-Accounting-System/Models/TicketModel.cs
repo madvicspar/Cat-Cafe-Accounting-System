@@ -13,7 +13,7 @@ namespace Cats_Cafe_Accounting_System.Models
         public float Price { get; set; }
         public int PetId { get; set; }
         [ForeignKey("PetId")]
-        public virtual PetModel Pet { get; set; }
+        public virtual PetModel? Pet { get; set; }
         public string Comments { get; set; }
         public TicketModel(int id, float price, int petId, string comments)
         {

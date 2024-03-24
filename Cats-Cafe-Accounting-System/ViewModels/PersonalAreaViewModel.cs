@@ -14,7 +14,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class PersonalAreaViewModel : ObservableObject
     {
-        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private readonly ApplicationDbContext _dbContext;
         private bool isActive;
         public bool IsActive
         {
@@ -60,8 +60,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand UpdateEmployeeCommand { get; set; }
         public ICommand LoadPhotoCommand { get; set; }
         public ICommand DeletePhotoCommand { get; set; }
-        public PersonalAreaViewModel()
+        public PersonalAreaViewModel(ApplicationDbContext context)
         {
+            _dbContext = context;
             UpdateEmployeeCommand = new RelayCommand(ExecuteUpdateEmployeeCommand);
             LoadPhotoCommand = new RelayCommand(ExecuteLoadPhotoCommand);
             DeletePhotoCommand = new RelayCommand(ExecuteDeletePhotoCommand);

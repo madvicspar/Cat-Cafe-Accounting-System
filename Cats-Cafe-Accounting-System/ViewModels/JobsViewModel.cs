@@ -27,7 +27,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(SearchTitle));
             }
         }
-        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private readonly ApplicationDbContext _dbContext;
         private ObservableCollection<Elem<JobModel>> items = new ObservableCollection<Elem<JobModel>>();
         public ObservableCollection<Elem<JobModel>> Items
         {
@@ -59,8 +59,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand SearchTitleCommand { get; set; }
         public ICommand ExcelExportCommand { get; set; }
         public ICommand WordExportCommand { get; set; }
-        public JobsViewModel()
+        public JobsViewModel(ApplicationDbContext context)
         {
+            _dbContext = context;
             foreach (var item in _dbContext.Jobs)
             {
                 Items.Add(new Elem<JobModel>(item));

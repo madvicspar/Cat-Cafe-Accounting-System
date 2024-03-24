@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
-using NPOI.XWPF.UserModel;  
+using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +14,6 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -45,7 +44,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 OnPropertyChanged(nameof(SearchText));
             }
         }
-        public bool IsEnabled {  get; set; }
+        public bool IsEnabled { get; set; }
 
         private string searchName = "";
         public string SearchName
@@ -91,7 +90,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
-        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private readonly ApplicationDbContext _dbContext;
         private ObservableCollection<Elem<PetModel>> items = new ObservableCollection<Elem<PetModel>>();
         public ObservableCollection<Elem<PetModel>> Items
         {
@@ -224,8 +223,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand UpdateCheckBoxGenderSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxStatusSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxBreedSelectionCommand { get; set; }
-        public PetsViewModel()
+        public PetsViewModel(ApplicationDbContext context)
         {
+            _dbContext = context;
             IsEnabled = Data.user?.Job.Id != 3;
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
             {
@@ -301,13 +301,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             _dbContext.Pets.Add(petToAdd);
             _dbContext.SaveChanges();
-            if (Names.FirstOrDefault (p => p.Item.Name == petToAdd.Name) == null)
+            if (Names.FirstOrDefault(p => p.Item.Name == petToAdd.Name) == null)
             {
                 Names.Add(new FilterElem<PetModel>(petToAdd));
                 FilterNames.Add(new FilterElem<PetModel>(petToAdd));
                 Items.Add(new Elem<PetModel>(petToAdd));
                 FilterItems.Add(new Elem<PetModel>(petToAdd));
-            }    
+            }
             UpdateTable();
         }
 
@@ -391,7 +391,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             table.GetRow(0).GetCell(6).SetText("Номер паспорта");
 
             // Заполнение данных о питомцах
-            for (int i = 0; i < FilterItems.Count-1; i++)
+            for (int i = 0; i < FilterItems.Count - 1; i++)
             {
                 PetModel pet = FilterItems[i].Item;
 
@@ -441,7 +441,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     }
                     worksheet.Cell("A1").InsertTable(pets);
                     for (int i = 0; i < headers.Count; i++)
-                        worksheet.Column(i+1).Cell(1).Value = headers[i];
+                        worksheet.Column(i + 1).Cell(1).Value = headers[i];
                     worksheet.Columns().AdjustToContents();
                     string path = saveFileDialog.FileName;
                     workbook.SaveAs(path);
@@ -780,19 +780,19 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     }
                     FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
                     break;
-                //case Fields.pass:
-                //    var petPasses = new ObservableCollection<string>(Breeds.Where(p => p.Item.Title.ToLower().Contains(SearchText.ToLower())).Select(p => p.Item.Title));
+                    //case Fields.pass:
+                    //    var petPasses = new ObservableCollection<string>(Breeds.Where(p => p.Item.Title.ToLower().Contains(SearchText.ToLower())).Select(p => p.Item.Title));
 
-                //    Items.Clear();
-                //    foreach (var item in _dbContext.Pets.Where(p => petBreeds.Contains(p.Breed.Title)))
-                //    {
-                //        Items.Add(new Elem<PetModel>(item));
-                //    }
-                //    break;
+                    //    Items.Clear();
+                    //    foreach (var item in _dbContext.Pets.Where(p => petBreeds.Contains(p.Breed.Title)))
+                    //    {
+                    //        Items.Add(new Elem<PetModel>(item));
+                    //    }
+                    //    break;
 
 
             }
-            
+
         }
     }
 }

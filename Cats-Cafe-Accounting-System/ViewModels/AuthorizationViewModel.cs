@@ -13,7 +13,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class AuthorizationViewModel : ObservableObject
     {
-        ApplicationDbContext context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        ApplicationDbContext _dbContext; // = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
         private string? userName;
         private SecureString password = new SecureString();
         private string usernameError = "";
@@ -53,14 +53,15 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         }
         public ICommand SignInCommand { get; set; }
 
-        public AuthorizationViewModel()
+        public AuthorizationViewModel(ApplicationDbContext context)
         {
+            _dbContext = context;
             SignInCommand = new RelayCommand(ExecuteSignInCommand);
         }
 
         private void ExecuteSignInCommand()
         {
-            var user = context.Employees.FirstOrDefault(u => u.Username == UserName);
+            var user = _dbContext.Employees.FirstOrDefault(u => u.Username == UserName);
             if (user is not null)
             {
                 if (AuthenticateUser(user))

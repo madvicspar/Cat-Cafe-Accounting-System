@@ -1,18 +1,50 @@
 ﻿using Cats_Cafe_Accounting_System.Models;
 using Cats_Cafe_Accounting_System.RegularClasses;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace Cats_Cafe_Accounting_System.Utilities
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        private static IConfiguration? _configuration { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+        }
+
+        public static ApplicationDbContext CreateDatabase()
+        {
+            if (_configuration == null)
+            {
+                return CreateInMemoryDatabase();
+            }
+            else
+            {
+                return CreateMySqlDatabase();
+            }
+        }
+
+        public static ApplicationDbContext CreateInMemoryDatabase()
+        {
+            var con = _configuration;
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "InMemoryDatabase")
+                .Options;
+
+            return new ApplicationDbContext(options, null);
+        }
+
+        public static ApplicationDbContext CreateMySqlDatabase()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                .Options;
+
+            return new ApplicationDbContext(options, _configuration);
         }
 
         public DbSet<PetModel> Pets { get; set; }
@@ -23,6 +55,6 @@ namespace Cats_Cafe_Accounting_System.Utilities
         public DbSet<EmployeeModel> Employees { get; set; }
         public DbSet<VisitorModel> Visitors { get; set; }
         public DbSet<TicketModel> Tickets { get; set; }
-        public DbSet<VisitLogEntryModel> VisitLogEntries { get; set;}
+        public DbSet<VisitLogEntryModel> VisitLogEntries { get; set; }
     }
 }

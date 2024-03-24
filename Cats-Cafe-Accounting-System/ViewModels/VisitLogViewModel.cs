@@ -4,6 +4,7 @@ using Cats_Cafe_Accounting_System.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class VisitLogViewModel : ObservableObject
     {
-        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+        private readonly ApplicationDbContext _dbContext;
         private ObservableCollection<Elem<VisitLogEntryModel>> items = new ObservableCollection<Elem<VisitLogEntryModel>>();
         public ObservableCollection<Elem<VisitLogEntryModel>> Items
         {
@@ -24,12 +25,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }  
         
-        public VisitLogViewModel()
+        public VisitLogViewModel(ApplicationDbContext context)
         {
-            foreach (var item in _dbContext.VisitLogEntries.Include(p => p.Visitor).Include(p => p.Ticket).ToList())
-            {
-                Items.Add(new Elem<VisitLogEntryModel>(item));
-            }
+            _dbContext = context;
+            //List<VisitLogEntryModel>? list = _dbContext.VisitLogEntries.Include(p => p.Visitor).Include(p => p.Ticket).Where(entry => entry.Ticket.Pet != null).ToList();
+            //List<VisitLogEntryModel>? list2 = _dbContext.VisitLogEntries.Include(p => p.Visitor).Include(p => p.Ticket).Where(entry => entry.Ticket.Pet == null).ToList();
+            //list.AddRange(list2);
+            //list.OrderBy(item => item.Id);
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    VisitLogEntryModel? item = list[i];
+            //    Items.Add(new Elem<VisitLogEntryModel>(item));
+            //}
         }
     }
 }

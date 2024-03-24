@@ -27,8 +27,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         });
         public NavigationViewModel(
-            PetsViewModel petsViewModel,
+            
             VisitorsViewModel visitorsViewModel,
+            PetsViewModel petsViewModel,
             JobsViewModel jobsViewModel,
             EmployeesViewModel employeesViewModel,
             TicketsViewModel ticketsViewModel,
