@@ -15,23 +15,6 @@ namespace Cats_Cafe_Accounting_System.Models
         [ForeignKey("PetId")]
         public virtual PetModel? Pet { get; set; }
         public string Comments { get; set; }
-        public TicketModel(int id, float price, int petId, string comments)
-        {
-            Id = id;
-            Price = price;
-            PetId = petId;
-            Comments = comments;
-            Pet = new PetModel(PetId);
-        }
-        public TicketModel(int id)
-        {
-            DataRow row = DBContext.GetById("tickets", id);
-            Id = Convert.ToInt32(row["id"]);
-            Price = (float)Convert.ToDouble(row["price"]);
-            PetId = row["petid"].ToString() == "" ? 0 : Convert.ToInt32(row["petid"]);
-            Comments = row["comments"].ToString();
-            Pet = new PetModel(PetId);
-        }
         public TicketModel()
         {
             Pet = new PetModel();

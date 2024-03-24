@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.151315789473684" branch-rate="0.0404624277456647" lines-covered="299" lines-valid="1976" branches-covered="14" branches-valid="346" complexity="644" version="0" timestamp="1711293586">
+<coverage line-rate="0.194915254237288" branch-rate="0.0479452054794521" lines-covered="299" lines-valid="1534" branches-covered="14" branches-valid="292" complexity="570" version="0" timestamp="1711295546">
   <sources>
     <source>D:\vikto\source\repos\Cats-Cafe-Accounting-System\</source>
     <source>C:\</source>
   </sources>
   <packages>
-    <package name="Cats-Cafe-Accounting-System" line-rate="0.134744450180692" branch-rate="0.0404624277456647" complexity="641">
+    <package name="Cats-Cafe-Accounting-System" line-rate="0.174581939799331" branch-rate="0.0479452054794521" complexity="567">
       <classes>
         <class name="Cats_Cafe_Accounting_System.App" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\App.xaml.cs" line-rate="0" branch-rate="0" complexity="8">
           <methods>
@@ -190,7 +190,7 @@
             <line number="17" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.EmployeeModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\EmployeeModel.cs" line-rate="0" branch-rate="1" complexity="16">
+        <class name="Cats_Cafe_Accounting_System.Models.EmployeeModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\EmployeeModel.cs" line-rate="0" branch-rate="1" complexity="15">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -214,7 +214,7 @@
             </method>
             <method name="get_GenderId" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="19" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_Gender" signature="()" line-rate="0" branch-rate="1" complexity="1">
@@ -234,7 +234,7 @@
             </method>
             <method name="get_JobId" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="24" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_Job" signature="()" line-rate="0" branch-rate="1" complexity="1">
@@ -262,43 +262,13 @@
                 <line number="29" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="30" hits="0" branch="false" />
                 <line number="31" hits="0" branch="false" />
                 <line number="32" hits="0" branch="false" />
                 <line number="33" hits="0" branch="false" />
                 <line number="34" hits="0" branch="false" />
                 <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="39" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="45" hits="0" branch="false" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
-                <line number="48" hits="0" branch="false" />
-                <line number="49" hits="0" branch="false" />
-                <line number="50" hits="0" branch="false" />
-                <line number="51" hits="0" branch="false" />
-                <line number="52" hits="0" branch="false" />
-                <line number="53" hits="0" branch="false" />
-                <line number="54" hits="0" branch="false" />
-                <line number="55" hits="0" branch="false" />
-                <line number="56" hits="0" branch="false" />
-                <line number="57" hits="0" branch="false" />
-                <line number="58" hits="0" branch="false" />
-                <line number="59" hits="0" branch="false" />
-                <line number="60" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
@@ -307,50 +277,24 @@
             <line number="15" hits="0" branch="false" />
             <line number="16" hits="0" branch="false" />
             <line number="17" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="21" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
             <line number="26" hits="0" branch="false" />
             <line number="27" hits="0" branch="false" />
             <line number="28" hits="0" branch="false" />
             <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
             <line number="31" hits="0" branch="false" />
             <line number="32" hits="0" branch="false" />
             <line number="33" hits="0" branch="false" />
             <line number="34" hits="0" branch="false" />
             <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="45" hits="0" branch="false" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
-            <line number="48" hits="0" branch="false" />
-            <line number="49" hits="0" branch="false" />
-            <line number="50" hits="0" branch="false" />
-            <line number="51" hits="0" branch="false" />
-            <line number="52" hits="0" branch="false" />
-            <line number="53" hits="0" branch="false" />
-            <line number="54" hits="0" branch="false" />
-            <line number="55" hits="0" branch="false" />
-            <line number="56" hits="0" branch="false" />
-            <line number="57" hits="0" branch="false" />
-            <line number="58" hits="0" branch="false" />
-            <line number="59" hits="0" branch="false" />
-            <line number="60" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.EmployeeShiftLogEntryModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\EmployeeShiftLogEntryModel.cs" line-rate="0" branch-rate="1" complexity="7">
+        <class name="Cats_Cafe_Accounting_System.Models.EmployeeShiftLogEntryModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\EmployeeShiftLogEntryModel.cs" line-rate="0" branch-rate="1" complexity="5">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -364,103 +308,17 @@
             </method>
             <method name="get_EmployeeId" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="get_Сomments" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="16" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_Employee" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="17" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="19" hits="0" branch="false" />
-                <line number="20" hits="0" branch="false" />
-                <line number="21" hits="0" branch="false" />
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="32" hits="0" branch="false" />
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="12" hits="0" branch="false" />
-            <line number="13" hits="0" branch="false" />
-            <line number="15" hits="0" branch="false" />
-            <line number="16" hits="0" branch="false" />
-            <line number="17" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="false" />
-            <line number="21" hits="0" branch="false" />
-            <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="32" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-          </lines>
-        </class>
-        <class name="Cats_Cafe_Accounting_System.Models.JobModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\JobModel.cs" line-rate="0.230769230769231" branch-rate="1" complexity="5">
-          <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="12" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="get_Title" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="13" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="get_Rate" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="14" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="15" hits="0" branch="false" />
                 <line number="16" hits="0" branch="false" />
-                <line number="17" hits="0" branch="false" />
-                <line number="18" hits="0" branch="false" />
-                <line number="19" hits="0" branch="false" />
-                <line number="20" hits="0" branch="false" />
-                <line number="21" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+            <method name="get_Сomments" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="22" hits="1" branch="false" />
-                <line number="23" hits="1" branch="false" />
-                <line number="25" hits="1" branch="false" />
+                <line number="17" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
@@ -468,16 +326,42 @@
             <line number="12" hits="0" branch="false" />
             <line number="13" hits="0" branch="false" />
             <line number="14" hits="0" branch="false" />
-            <line number="15" hits="0" branch="false" />
             <line number="16" hits="0" branch="false" />
             <line number="17" hits="0" branch="false" />
-            <line number="18" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="false" />
-            <line number="21" hits="0" branch="false" />
-            <line number="22" hits="1" branch="false" />
-            <line number="23" hits="1" branch="false" />
-            <line number="25" hits="1" branch="false" />
+          </lines>
+        </class>
+        <class name="Cats_Cafe_Accounting_System.Models.JobModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\JobModel.cs" line-rate="0.5" branch-rate="1" complexity="4">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Title" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Rate" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="1" branch="false" />
+                <line number="13" hits="1" branch="false" />
+                <line number="15" hits="1" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="9" hits="0" branch="false" />
+            <line number="10" hits="0" branch="false" />
+            <line number="11" hits="0" branch="false" />
+            <line number="12" hits="1" branch="false" />
+            <line number="13" hits="1" branch="false" />
+            <line number="15" hits="1" branch="false" />
           </lines>
         </class>
         <class name="Cats_Cafe_Accounting_System.Models.NavigationChangedRequestMessage" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\NavigationChangedRequestMessage.cs" line-rate="0" branch-rate="1" complexity="1">
@@ -522,7 +406,7 @@
             <line number="10" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.PetModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\PetModel.cs" line-rate="0.326530612244898" branch-rate="0" complexity="15">
+        <class name="Cats_Cafe_Accounting_System.Models.PetModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\PetModel.cs" line-rate="0.516129032258065" branch-rate="1" complexity="13">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -561,27 +445,26 @@
             </method>
             <method name="get_Breed" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="25" hits="8" branch="false" />
+                <line number="26" hits="8" branch="false" />
               </lines>
             </method>
             <method name="get_Birthday" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="26" hits="4" branch="false" />
+                <line number="27" hits="4" branch="false" />
               </lines>
             </method>
             <method name="get_CheckInDate" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="27" hits="4" branch="false" />
+                <line number="28" hits="4" branch="false" />
               </lines>
             </method>
             <method name="get_PassNumber" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="28" hits="3" branch="false" />
+                <line number="29" hits="3" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="29" hits="0" branch="false" />
                 <line number="30" hits="0" branch="false" />
                 <line number="31" hits="0" branch="false" />
                 <line number="32" hits="0" branch="false" />
@@ -595,38 +478,17 @@
                 <line number="40" hits="0" branch="false" />
                 <line number="41" hits="0" branch="false" />
                 <line number="42" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
                 <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-                <line number="45" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
-                <line number="48" hits="0" branch="false" />
-                <line number="49" hits="0" branch="false" />
-                <line number="50" hits="0" branch="false" />
-                <line number="51" hits="0" branch="false" />
-                <line number="52" hits="0" branch="false" />
-                <line number="53" hits="0" branch="false" />
-                <line number="54" hits="0" branch="false" />
-                <line number="55" hits="0" branch="false" />
-                <line number="56" hits="0" branch="false" />
-                <line number="57" hits="0" branch="false" />
-                <line number="58" hits="0" branch="false" />
-                <line number="59" hits="0" branch="false" />
-                <line number="60" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="61" hits="3" branch="false" />
-                <line number="62" hits="3" branch="false" />
-                <line number="63" hits="3" branch="false" />
-                <line number="64" hits="3" branch="false" />
-                <line number="65" hits="3" branch="false" />
-                <line number="66" hits="3" branch="false" />
+                <line number="44" hits="3" branch="false" />
+                <line number="45" hits="3" branch="false" />
+                <line number="46" hits="3" branch="false" />
+                <line number="47" hits="3" branch="false" />
+                <line number="48" hits="3" branch="false" />
+                <line number="49" hits="3" branch="false" />
               </lines>
             </method>
           </methods>
@@ -638,11 +500,10 @@
             <line number="21" hits="1" branch="false" />
             <line number="23" hits="8" branch="false" />
             <line number="24" hits="1" branch="false" />
-            <line number="25" hits="8" branch="false" />
-            <line number="26" hits="4" branch="false" />
+            <line number="26" hits="8" branch="false" />
             <line number="27" hits="4" branch="false" />
-            <line number="28" hits="3" branch="false" />
-            <line number="29" hits="0" branch="false" />
+            <line number="28" hits="4" branch="false" />
+            <line number="29" hits="3" branch="false" />
             <line number="30" hits="0" branch="false" />
             <line number="31" hits="0" branch="false" />
             <line number="32" hits="0" branch="false" />
@@ -657,134 +518,71 @@
             <line number="41" hits="0" branch="false" />
             <line number="42" hits="0" branch="false" />
             <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="45" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
-            <line number="48" hits="0" branch="false" />
-            <line number="49" hits="0" branch="false" />
-            <line number="50" hits="0" branch="false" />
-            <line number="51" hits="0" branch="false" />
-            <line number="52" hits="0" branch="false" />
-            <line number="53" hits="0" branch="false" />
-            <line number="54" hits="0" branch="false" />
-            <line number="55" hits="0" branch="false" />
-            <line number="56" hits="0" branch="false" />
-            <line number="57" hits="0" branch="false" />
-            <line number="58" hits="0" branch="false" />
-            <line number="59" hits="0" branch="false" />
-            <line number="60" hits="0" branch="false" />
-            <line number="61" hits="3" branch="false" />
-            <line number="62" hits="3" branch="false" />
-            <line number="63" hits="3" branch="false" />
-            <line number="64" hits="3" branch="false" />
-            <line number="65" hits="3" branch="false" />
-            <line number="66" hits="3" branch="false" />
+            <line number="44" hits="3" branch="false" />
+            <line number="45" hits="3" branch="false" />
+            <line number="46" hits="3" branch="false" />
+            <line number="47" hits="3" branch="false" />
+            <line number="48" hits="3" branch="false" />
+            <line number="49" hits="3" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.PetTransferLogEntryModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\PetTransferLogEntryModel.cs" line-rate="0" branch-rate="1" complexity="9">
+        <class name="Cats_Cafe_Accounting_System.Models.PetTransferLogEntryModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\PetTransferLogEntryModel.cs" line-rate="0" branch-rate="1" complexity="7">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="12" hits="0" branch="false" />
+                <line number="10" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_VisitorId" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="13" hits="0" branch="false" />
+                <line number="11" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_Visitor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="0" branch="false" />
+                <line number="13" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_PetId" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="16" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_Pet" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="18" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
               </lines>
             </method>
             <method name="get_Date" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="19" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="20" hits="0" branch="false" />
-                <line number="21" hits="0" branch="false" />
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="29" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="32" hits="0" branch="false" />
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="39" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="12" hits="0" branch="false" />
+            <line number="10" hits="0" branch="false" />
+            <line number="11" hits="0" branch="false" />
             <line number="13" hits="0" branch="false" />
-            <line number="15" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
             <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
             <line number="18" hits="0" branch="false" />
             <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="21" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="32" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.TicketModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\TicketModel.cs" line-rate="0" branch-rate="0" complexity="9">
+        <class name="Cats_Cafe_Accounting_System.Models.TicketModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\TicketModel.cs" line-rate="0" branch-rate="1" complexity="6">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -811,37 +609,12 @@
                 <line number="17" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="18" hits="0" branch="false" />
                 <line number="19" hits="0" branch="false" />
                 <line number="20" hits="0" branch="false" />
                 <line number="21" hits="0" branch="false" />
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="26" hits="0" branch="false" />
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="32" hits="0" branch="false" />
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
@@ -855,26 +628,9 @@
             <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="21" hits="0" branch="false" />
-            <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="32" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.VisitLogEntryModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\VisitLogEntryModel.cs" line-rate="0" branch-rate="1" complexity="11">
+        <class name="Cats_Cafe_Accounting_System.Models.VisitLogEntryModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\VisitLogEntryModel.cs" line-rate="0" branch-rate="1" complexity="9">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -916,44 +672,13 @@
                 <line number="21" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="22" hits="0" branch="false" />
                 <line number="23" hits="0" branch="false" />
                 <line number="24" hits="0" branch="false" />
                 <line number="25" hits="0" branch="false" />
                 <line number="26" hits="0" branch="false" />
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="32" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="39" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="45" hits="0" branch="false" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
-                <line number="48" hits="0" branch="false" />
-                <line number="49" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
@@ -971,32 +696,9 @@
             <line number="24" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
             <line number="26" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="32" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="45" hits="0" branch="false" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
-            <line number="48" hits="0" branch="false" />
-            <line number="49" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.Models.VisitorModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\VisitorModel.cs" line-rate="0" branch-rate="1" complexity="11">
+        <class name="Cats_Cafe_Accounting_System.Models.VisitorModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Models\VisitorModel.cs" line-rate="0" branch-rate="1" complexity="9">
           <methods>
             <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -1038,43 +740,12 @@
                 <line number="21" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="22" hits="0" branch="false" />
                 <line number="23" hits="0" branch="false" />
                 <line number="24" hits="0" branch="false" />
                 <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="32" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="39" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="45" hits="0" branch="false" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
-                <line number="48" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
@@ -1091,32 +762,9 @@
             <line number="23" hits="0" branch="false" />
             <line number="24" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="32" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="45" hits="0" branch="false" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
-            <line number="48" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.RegularClasses.Breed" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\RegularClasses\Breed.cs" line-rate="0.192307692307692" branch-rate="0" complexity="7">
+        <class name="Cats_Cafe_Accounting_System.RegularClasses.Breed" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\RegularClasses\Breed.cs" line-rate="0.384615384615385" branch-rate="1" complexity="5">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -1126,20 +774,6 @@
             <method name="get_Title" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
                 <line number="15" hits="2" branch="false" />
-              </lines>
-            </method>
-            <method name="GetBreedsFromTable" signature="()" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="40" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
@@ -1155,17 +789,14 @@
               <lines>
                 <line number="22" hits="0" branch="false" />
                 <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
                 <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
-                <line number="27" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="29" hits="5" branch="false" />
+                <line number="27" hits="5" branch="false" />
+                <line number="28" hits="5" branch="false" />
                 <line number="30" hits="5" branch="false" />
-                <line number="32" hits="5" branch="false" />
               </lines>
             </method>
           </methods>
@@ -1179,26 +810,13 @@
             <line number="21" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
             <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="29" hits="5" branch="false" />
+            <line number="27" hits="5" branch="false" />
+            <line number="28" hits="5" branch="false" />
             <line number="30" hits="5" branch="false" />
-            <line number="32" hits="5" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="40" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.RegularClasses.Gender" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\RegularClasses\Gender.cs" line-rate="0.125" branch-rate="0" complexity="7">
+        <class name="Cats_Cafe_Accounting_System.RegularClasses.Gender" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\RegularClasses\Gender.cs" line-rate="1" branch-rate="1" complexity="3">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -1210,73 +828,19 @@
                 <line number="14" hits="2" branch="false" />
               </lines>
             </method>
-            <method name="GetGendersFromTable" signature="()" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="33" hits="0" branch="false" />
-                <line number="35" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="39" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="16" hits="0" branch="false" />
-                <line number="17" hits="0" branch="false" />
-                <line number="18" hits="0" branch="false" />
-                <line number="19" hits="0" branch="false" />
-                <line number="20" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="21" hits="0" branch="false" />
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
-              </lines>
-            </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="28" hits="15" branch="false" />
+                <line number="15" hits="15" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
             <line number="13" hits="1" branch="false" />
             <line number="14" hits="2" branch="false" />
-            <line number="16" hits="0" branch="false" />
-            <line number="17" hits="0" branch="false" />
-            <line number="18" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="false" />
-            <line number="21" hits="0" branch="false" />
-            <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="28" hits="15" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="35" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="39" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
+            <line number="15" hits="15" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.RegularClasses.Status" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\RegularClasses\Status.cs" line-rate="0.125" branch-rate="0" complexity="7">
+        <class name="Cats_Cafe_Accounting_System.RegularClasses.Status" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\RegularClasses\Status.cs" line-rate="1" branch-rate="1" complexity="3">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -1288,70 +852,16 @@
                 <line number="13" hits="2" branch="false" />
               </lines>
             </method>
-            <method name="GetStatusesFromTable" signature="()" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="29" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="32" hits="0" branch="false" />
-                <line number="34" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="15" hits="0" branch="false" />
-                <line number="16" hits="0" branch="false" />
-                <line number="17" hits="0" branch="false" />
-                <line number="18" hits="0" branch="false" />
-                <line number="19" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="20" hits="0" branch="false" />
-                <line number="21" hits="0" branch="false" />
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-              </lines>
-            </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="27" hits="15" branch="false" />
+                <line number="15" hits="15" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
             <line number="12" hits="1" branch="false" />
             <line number="13" hits="2" branch="false" />
-            <line number="15" hits="0" branch="false" />
-            <line number="16" hits="0" branch="false" />
-            <line number="17" hits="0" branch="false" />
-            <line number="18" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="false" />
-            <line number="21" hits="0" branch="false" />
-            <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="27" hits="15" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="32" hits="0" branch="false" />
-            <line number="34" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
+            <line number="15" hits="15" branch="false" />
           </lines>
         </class>
         <class name="Cats_Cafe_Accounting_System.Utilities.ApplicationDbContext" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Utilities\ApplicationDBContext.cs" line-rate="0.6" branch-rate="0" complexity="15">
@@ -1484,424 +994,6 @@
             <line number="56" hits="1" branch="false" />
             <line number="57" hits="1" branch="false" />
             <line number="58" hits="1" branch="false" />
-          </lines>
-        </class>
-        <class name="Cats_Cafe_Accounting_System.Utilities.DBContext" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Utilities\DBContext.cs" line-rate="0" branch-rate="0" complexity="37">
-          <methods>
-            <method name="OpenConnection" signature="()" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="19" hits="0" branch="false" />
-                <line number="20" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="21" hits="0" branch="false" />
-                <line number="22" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="CloseConnection" signature="()" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetTable" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="31" hits="0" branch="false" />
-                <line number="32" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-                <line number="45" hits="0" branch="false" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
-                <line number="48" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetTable" signature="(...)" line-rate="0" branch-rate="0" complexity="6">
-              <lines>
-                <line number="51" hits="0" branch="false" />
-                <line number="52" hits="0" branch="false" />
-                <line number="54" hits="0" branch="false" />
-                <line number="55" hits="0" branch="false" />
-                <line number="56" hits="0" branch="false" />
-                <line number="57" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="58" hits="0" branch="false" />
-                <line number="59" hits="0" branch="false" />
-                <line number="60" hits="0" branch="false" />
-                <line number="61" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="62" hits="0" branch="false" />
-                <line number="63" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="64" hits="0" branch="false" />
-                <line number="65" hits="0" branch="false" />
-                <line number="68" hits="0" branch="false" />
-                <line number="69" hits="0" branch="false" />
-                <line number="71" hits="0" branch="false" />
-                <line number="73" hits="0" branch="false" />
-                <line number="74" hits="0" branch="false" />
-                <line number="75" hits="0" branch="false" />
-                <line number="76" hits="0" branch="false" />
-                <line number="77" hits="0" branch="false" />
-                <line number="78" hits="0" branch="false" />
-                <line number="79" hits="0" branch="false" />
-                <line number="80" hits="0" branch="false" />
-                <line number="81" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetAttributes" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="84" hits="0" branch="false" />
-                <line number="85" hits="0" branch="false" />
-                <line number="86" hits="0" branch="false" />
-                <line number="87" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="88" hits="0" branch="false" />
-                <line number="89" hits="0" branch="false" />
-                <line number="90" hits="0" branch="false" />
-                <line number="91" hits="0" branch="false" />
-                <line number="92" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="AddNote" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="95" hits="0" branch="false" />
-                <line number="96" hits="0" branch="false" />
-                <line number="97" hits="0" branch="false" />
-                <line number="98" hits="0" branch="false" />
-                <line number="99" hits="0" branch="false" />
-                <line number="101" hits="0" branch="false" />
-                <line number="103" hits="0" branch="false" />
-                <line number="104" hits="0" branch="false" />
-                <line number="105" hits="0" branch="false" />
-                <line number="106" hits="0" branch="false" />
-                <line number="107" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="AddNote" signature="(...)" line-rate="0" branch-rate="0" complexity="4">
-              <lines>
-                <line number="110" hits="0" branch="false" />
-                <line number="111" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="112" hits="0" branch="false" />
-                <line number="114" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="115" hits="0" branch="false" />
-                <line number="117" hits="0" branch="false" />
-                <line number="119" hits="0" branch="false" />
-                <line number="120" hits="0" branch="false" />
-                <line number="121" hits="0" branch="false" />
-                <line number="122" hits="0" branch="false" />
-                <line number="123" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="UpdateNote" signature="(...)" line-rate="0" branch-rate="0" complexity="8">
-              <lines>
-                <line number="126" hits="0" branch="false" />
-                <line number="127" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="128" hits="0" branch="false" />
-                <line number="130" hits="0" branch="false" />
-                <line number="131" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="132" hits="0" branch="false" />
-                <line number="133" hits="0" branch="false" />
-                <line number="134" hits="0" branch="false" />
-                <line number="135" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="136" hits="0" branch="false" />
-                <line number="137" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="138" hits="0" branch="false" />
-                <line number="140" hits="0" branch="false" />
-                <line number="141" hits="0" branch="false" />
-                <line number="142" hits="0" branch="false" />
-                <line number="143" hits="0" branch="false" />
-                <line number="144" hits="0" branch="false" />
-                <line number="146" hits="0" branch="false" />
-                <line number="148" hits="0" branch="false" />
-                <line number="150" hits="0" branch="false" />
-                <line number="151" hits="0" branch="false" />
-                <line number="152" hits="0" branch="false" />
-                <line number="153" hits="0" branch="false" />
-                <line number="154" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="UpdateNote" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="157" hits="0" branch="false" />
-                <line number="158" hits="0" branch="false" />
-                <line number="159" hits="0" branch="false" />
-                <line number="160" hits="0" branch="false" />
-                <line number="162" hits="0" branch="false" />
-                <line number="163" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="164" hits="0" branch="false" />
-                <line number="165" hits="0" branch="false" />
-                <line number="166" hits="0" branch="false" />
-                <line number="167" hits="0" branch="false" />
-                <line number="168" hits="0" branch="false" />
-                <line number="169" hits="0" branch="false" />
-                <line number="171" hits="0" branch="false" />
-                <line number="172" hits="0" branch="false" />
-                <line number="173" hits="0" branch="false" />
-                <line number="174" hits="0" branch="false" />
-                <line number="175" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="DeleteNote" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="178" hits="0" branch="false" />
-                <line number="179" hits="0" branch="false" />
-                <line number="181" hits="0" branch="false" />
-                <line number="182" hits="0" branch="false" />
-                <line number="183" hits="0" branch="false" />
-                <line number="184" hits="0" branch="false" />
-                <line number="185" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetById" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="187" hits="0" branch="false" />
-                <line number="189" hits="0" branch="false" />
-                <line number="190" hits="0" branch="false" />
-                <line number="191" hits="0" branch="false" />
-                <line number="193" hits="0" branch="false" />
-                <line number="195" hits="0" branch="false" />
-                <line number="196" hits="0" branch="false" />
-                <line number="197" hits="0" branch="false" />
-                <line number="199" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="200" hits="0" branch="false" />
-                <line number="201" hits="0" branch="false" />
-                <line number="202" hits="0" branch="false" />
-                <line number="203" hits="0" branch="false" />
-                <line number="204" hits="0" branch="false" />
-                <line number="205" hits="0" branch="false" />
-                <line number="207" hits="0" branch="false" />
-                <line number="208" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="UsernameIsExist" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="210" hits="0" branch="false" />
-                <line number="212" hits="0" branch="false" />
-                <line number="213" hits="0" branch="false" />
-                <line number="214" hits="0" branch="false" />
-                <line number="215" hits="0" branch="false" />
-                <line number="216" hits="0" branch="false" />
-                <line number="217" hits="0" branch="false" />
-                <line number="218" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="219" hits="0" branch="false" />
-                <line number="220" hits="0" branch="false" />
-                <line number="221" hits="0" branch="false" />
-                <line number="222" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="AuthenticateUser" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="224" hits="0" branch="false" />
-                <line number="226" hits="0" branch="false" />
-                <line number="227" hits="0" branch="false" />
-                <line number="228" hits="0" branch="false" />
-                <line number="229" hits="0" branch="false" />
-                <line number="230" hits="0" branch="false" />
-                <line number="231" hits="0" branch="false" />
-                <line number="232" hits="0" branch="false" />
-                <line number="233" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="234" hits="0" branch="false" />
-                <line number="235" hits="0" branch="false" />
-                <line number="236" hits="0" branch="false" />
-                <line number="237" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="ToDateTime" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="240" hits="0" branch="false" />
-                <line number="241" hits="0" branch="false" />
-                <line number="242" hits="0" branch="false" />
-                <line number="243" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".cctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="15" hits="0" branch="false" />
-                <line number="16" hits="0" branch="false" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="15" hits="0" branch="false" />
-            <line number="16" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="21" hits="0" branch="false" />
-            <line number="22" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="32" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="45" hits="0" branch="false" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
-            <line number="48" hits="0" branch="false" />
-            <line number="51" hits="0" branch="false" />
-            <line number="52" hits="0" branch="false" />
-            <line number="54" hits="0" branch="false" />
-            <line number="55" hits="0" branch="false" />
-            <line number="56" hits="0" branch="false" />
-            <line number="57" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="58" hits="0" branch="false" />
-            <line number="59" hits="0" branch="false" />
-            <line number="60" hits="0" branch="false" />
-            <line number="61" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="62" hits="0" branch="false" />
-            <line number="63" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="64" hits="0" branch="false" />
-            <line number="65" hits="0" branch="false" />
-            <line number="68" hits="0" branch="false" />
-            <line number="69" hits="0" branch="false" />
-            <line number="71" hits="0" branch="false" />
-            <line number="73" hits="0" branch="false" />
-            <line number="74" hits="0" branch="false" />
-            <line number="75" hits="0" branch="false" />
-            <line number="76" hits="0" branch="false" />
-            <line number="77" hits="0" branch="false" />
-            <line number="78" hits="0" branch="false" />
-            <line number="79" hits="0" branch="false" />
-            <line number="80" hits="0" branch="false" />
-            <line number="81" hits="0" branch="false" />
-            <line number="84" hits="0" branch="false" />
-            <line number="85" hits="0" branch="false" />
-            <line number="86" hits="0" branch="false" />
-            <line number="87" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="88" hits="0" branch="false" />
-            <line number="89" hits="0" branch="false" />
-            <line number="90" hits="0" branch="false" />
-            <line number="91" hits="0" branch="false" />
-            <line number="92" hits="0" branch="false" />
-            <line number="95" hits="0" branch="false" />
-            <line number="96" hits="0" branch="false" />
-            <line number="97" hits="0" branch="false" />
-            <line number="98" hits="0" branch="false" />
-            <line number="99" hits="0" branch="false" />
-            <line number="101" hits="0" branch="false" />
-            <line number="103" hits="0" branch="false" />
-            <line number="104" hits="0" branch="false" />
-            <line number="105" hits="0" branch="false" />
-            <line number="106" hits="0" branch="false" />
-            <line number="107" hits="0" branch="false" />
-            <line number="110" hits="0" branch="false" />
-            <line number="111" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="112" hits="0" branch="false" />
-            <line number="114" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="115" hits="0" branch="false" />
-            <line number="117" hits="0" branch="false" />
-            <line number="119" hits="0" branch="false" />
-            <line number="120" hits="0" branch="false" />
-            <line number="121" hits="0" branch="false" />
-            <line number="122" hits="0" branch="false" />
-            <line number="123" hits="0" branch="false" />
-            <line number="126" hits="0" branch="false" />
-            <line number="127" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="128" hits="0" branch="false" />
-            <line number="130" hits="0" branch="false" />
-            <line number="131" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="132" hits="0" branch="false" />
-            <line number="133" hits="0" branch="false" />
-            <line number="134" hits="0" branch="false" />
-            <line number="135" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="136" hits="0" branch="false" />
-            <line number="137" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="138" hits="0" branch="false" />
-            <line number="140" hits="0" branch="false" />
-            <line number="141" hits="0" branch="false" />
-            <line number="142" hits="0" branch="false" />
-            <line number="143" hits="0" branch="false" />
-            <line number="144" hits="0" branch="false" />
-            <line number="146" hits="0" branch="false" />
-            <line number="148" hits="0" branch="false" />
-            <line number="150" hits="0" branch="false" />
-            <line number="151" hits="0" branch="false" />
-            <line number="152" hits="0" branch="false" />
-            <line number="153" hits="0" branch="false" />
-            <line number="154" hits="0" branch="false" />
-            <line number="157" hits="0" branch="false" />
-            <line number="158" hits="0" branch="false" />
-            <line number="159" hits="0" branch="false" />
-            <line number="160" hits="0" branch="false" />
-            <line number="162" hits="0" branch="false" />
-            <line number="163" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="164" hits="0" branch="false" />
-            <line number="165" hits="0" branch="false" />
-            <line number="166" hits="0" branch="false" />
-            <line number="167" hits="0" branch="false" />
-            <line number="168" hits="0" branch="false" />
-            <line number="169" hits="0" branch="false" />
-            <line number="171" hits="0" branch="false" />
-            <line number="172" hits="0" branch="false" />
-            <line number="173" hits="0" branch="false" />
-            <line number="174" hits="0" branch="false" />
-            <line number="175" hits="0" branch="false" />
-            <line number="178" hits="0" branch="false" />
-            <line number="179" hits="0" branch="false" />
-            <line number="181" hits="0" branch="false" />
-            <line number="182" hits="0" branch="false" />
-            <line number="183" hits="0" branch="false" />
-            <line number="184" hits="0" branch="false" />
-            <line number="185" hits="0" branch="false" />
-            <line number="187" hits="0" branch="false" />
-            <line number="189" hits="0" branch="false" />
-            <line number="190" hits="0" branch="false" />
-            <line number="191" hits="0" branch="false" />
-            <line number="193" hits="0" branch="false" />
-            <line number="195" hits="0" branch="false" />
-            <line number="196" hits="0" branch="false" />
-            <line number="197" hits="0" branch="false" />
-            <line number="199" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="200" hits="0" branch="false" />
-            <line number="201" hits="0" branch="false" />
-            <line number="202" hits="0" branch="false" />
-            <line number="203" hits="0" branch="false" />
-            <line number="204" hits="0" branch="false" />
-            <line number="205" hits="0" branch="false" />
-            <line number="207" hits="0" branch="false" />
-            <line number="208" hits="0" branch="false" />
-            <line number="210" hits="0" branch="false" />
-            <line number="212" hits="0" branch="false" />
-            <line number="213" hits="0" branch="false" />
-            <line number="214" hits="0" branch="false" />
-            <line number="215" hits="0" branch="false" />
-            <line number="216" hits="0" branch="false" />
-            <line number="217" hits="0" branch="false" />
-            <line number="218" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="219" hits="0" branch="false" />
-            <line number="220" hits="0" branch="false" />
-            <line number="221" hits="0" branch="false" />
-            <line number="222" hits="0" branch="false" />
-            <line number="224" hits="0" branch="false" />
-            <line number="226" hits="0" branch="false" />
-            <line number="227" hits="0" branch="false" />
-            <line number="228" hits="0" branch="false" />
-            <line number="229" hits="0" branch="false" />
-            <line number="230" hits="0" branch="false" />
-            <line number="231" hits="0" branch="false" />
-            <line number="232" hits="0" branch="false" />
-            <line number="233" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="234" hits="0" branch="false" />
-            <line number="235" hits="0" branch="false" />
-            <line number="236" hits="0" branch="false" />
-            <line number="237" hits="0" branch="false" />
-            <line number="240" hits="0" branch="false" />
-            <line number="241" hits="0" branch="false" />
-            <line number="242" hits="0" branch="false" />
-            <line number="243" hits="0" branch="false" />
           </lines>
         </class>
         <class name="Cats_Cafe_Accounting_System.Utilities.Elem`1" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Utilities\Elem.cs" line-rate="0.933333333333333" branch-rate="1" complexity="5">
@@ -2398,132 +1490,72 @@
             <line number="98" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.ViewModels.EmployeeShiftLogViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\EmployeeShiftLogViewModel.cs" line-rate="0" branch-rate="0" complexity="5">
+        <class name="Cats_Cafe_Accounting_System.ViewModels.EmployeeShiftLogViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\EmployeeShiftLogViewModel.cs" line-rate="0" branch-rate="1" complexity="3">
           <methods>
             <method name="get_EmployeeShiftLogEntries" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
               </lines>
             </method>
             <method name="set_EmployeeShiftLogEntries" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
                 <line number="17" hits="0" branch="false" />
-                <line number="18" hits="0" branch="false" />
-                <line number="19" hits="0" branch="false" />
-                <line number="20" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetEmployeeShiftLogEntriesFromTable" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
                 <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
+            <line number="12" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
             <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
             <line number="17" hits="0" branch="false" />
-            <line number="18" hits="0" branch="false" />
             <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.ViewModels.EmployeesViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\EmployeesViewModel.cs" line-rate="0" branch-rate="0" complexity="5">
+        <class name="Cats_Cafe_Accounting_System.ViewModels.EmployeesViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\EmployeesViewModel.cs" line-rate="0" branch-rate="1" complexity="3">
           <methods>
             <method name="get_Employees" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="20" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
               </lines>
             </method>
             <method name="set_Employees" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetEmployeesFromTable" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="38" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="39" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-                <line number="45" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
-                <line number="48" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-                <line number="30" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
+            <line number="12" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="30" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="38" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="45" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
-            <line number="48" hits="0" branch="false" />
           </lines>
         </class>
         <class name="Cats_Cafe_Accounting_System.ViewModels.IncomesViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\IncomesViewModel.cs" line-rate="0.666666666666667" branch-rate="1" complexity="3">
@@ -4962,7 +3994,7 @@
             <line number="796" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.ViewModels.PetTransferLogViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\PetTransferLogViewModel.cs" line-rate="0" branch-rate="0" complexity="5">
+        <class name="Cats_Cafe_Accounting_System.ViewModels.PetTransferLogViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\PetTransferLogViewModel.cs" line-rate="0" branch-rate="1" complexity="3">
           <methods>
             <method name="get_PetTransferLogEntries" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -4977,87 +4009,11 @@
                 <line number="20" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="GetPetTransferLogEntriesFromTable" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="15" hits="0" branch="false" />
-            <line number="17" hits="0" branch="false" />
-            <line number="18" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="false" />
-            <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-          </lines>
-        </class>
-        <class name="Cats_Cafe_Accounting_System.ViewModels.TicketsViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\TicketsViewModel.cs" line-rate="0" branch-rate="0" complexity="7">
-          <methods>
-            <method name="get_Tickets" signature="()" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="15" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="set_Tickets" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
-              <lines>
-                <line number="17" hits="0" branch="false" />
-                <line number="18" hits="0" branch="false" />
-                <line number="19" hits="0" branch="false" />
-                <line number="20" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetTicketsFromTable" signature="(...)" line-rate="0" branch-rate="0" complexity="4">
-              <lines>
-                <line number="28" hits="0" branch="false" />
-                <line number="29" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
-                <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="34" hits="0" branch="false" />
-                <line number="35" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="36" hits="0" branch="false" />
-                <line number="37" hits="0" branch="false" />
-                <line number="38" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-              </lines>
-            </method>
             <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="22" hits="0" branch="false" />
                 <line number="23" hits="0" branch="false" />
                 <line number="25" hits="0" branch="false" />
-                <line number="26" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
@@ -5070,18 +4026,40 @@
             <line number="22" hits="0" branch="false" />
             <line number="23" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
-            <line number="26" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="29" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="Cats_Cafe_Accounting_System.ViewModels.TicketsViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\TicketsViewModel.cs" line-rate="0" branch-rate="1" complexity="3">
+          <methods>
+            <method name="get_Tickets" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="set_Tickets" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
           </lines>
         </class>
         <class name="Cats_Cafe_Accounting_System.ViewModels.VisitLogViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\VisitLogViewModel.cs" line-rate="0.5" branch-rate="1" complexity="3">
@@ -5127,66 +4105,38 @@
             <line number="40" hits="1" branch="false" />
           </lines>
         </class>
-        <class name="Cats_Cafe_Accounting_System.ViewModels.VisitorsViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\VisitorsViewModel.cs" line-rate="0" branch-rate="0" complexity="5">
+        <class name="Cats_Cafe_Accounting_System.ViewModels.VisitorsViewModel" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\ViewModels\VisitorsViewModel.cs" line-rate="0" branch-rate="1" complexity="3">
           <methods>
             <method name="get_Visitors" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="20" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
               </lines>
             </method>
             <method name="set_Visitors" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="22" hits="0" branch="false" />
-                <line number="23" hits="0" branch="false" />
-                <line number="24" hits="0" branch="false" />
-                <line number="25" hits="0" branch="false" />
-              </lines>
-            </method>
-            <method name="GetVisitorsFromTable" signature="(...)" line-rate="0" branch-rate="0" complexity="2">
-              <lines>
-                <line number="33" hits="0" branch="false" />
-                <line number="34" hits="0" branch="false" />
-                <line number="36" hits="0" branch="false" />
-                <line number="38" hits="0" branch="true" condition-coverage="0% (0/2)" />
-                <line number="39" hits="0" branch="false" />
-                <line number="40" hits="0" branch="false" />
-                <line number="41" hits="0" branch="false" />
-                <line number="42" hits="0" branch="false" />
-                <line number="43" hits="0" branch="false" />
-                <line number="44" hits="0" branch="false" />
-                <line number="46" hits="0" branch="false" />
-                <line number="47" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
-                <line number="27" hits="0" branch="false" />
-                <line number="28" hits="0" branch="false" />
-                <line number="31" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
+            <line number="12" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
-            <line number="23" hits="0" branch="false" />
-            <line number="24" hits="0" branch="false" />
-            <line number="25" hits="0" branch="false" />
-            <line number="27" hits="0" branch="false" />
-            <line number="28" hits="0" branch="false" />
-            <line number="31" hits="0" branch="false" />
-            <line number="33" hits="0" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="38" hits="0" branch="true" condition-coverage="0% (0/2)" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
-            <line number="44" hits="0" branch="false" />
-            <line number="46" hits="0" branch="false" />
-            <line number="47" hits="0" branch="false" />
           </lines>
         </class>
         <class name="Cats_Cafe_Accounting_System.Views.AuthorizationView" filename="D:\vikto\source\repos\Cats-Cafe-Accounting-System\Cats-Cafe-Accounting-System\Views\AuthorizationView.xaml.cs" line-rate="0" branch-rate="0" complexity="4">

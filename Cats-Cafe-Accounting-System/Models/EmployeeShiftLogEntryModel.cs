@@ -11,27 +11,9 @@ namespace Cats_Cafe_Accounting_System.Models
         [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
+        [ForeignKey("Employee")]
+        public virtual EmployeeModel Employee { get; set; }
         public string Сomments { get; set; }
-        public EmployeeModel Employee { get; set; }
-
-        public EmployeeShiftLogEntryModel(int id, DateTime date, int employeeId, string comments)
-        {
-            Id = id;
-            Date = date;
-            EmployeeId = employeeId;
-            Сomments = comments;
-            Employee = new EmployeeModel(EmployeeId);
-        }
-        public EmployeeShiftLogEntryModel(int id)
-        {
-            DataRow row = DBContext.GetById("employee_shift_log_entries", id);
-            Id = id;
-            Date = DateTime.Parse(row["date"].ToString());
-            EmployeeId = Convert.ToInt32(row["employee_id"]);
-            Сomments = row["comments"].ToString();
-            Employee = new EmployeeModel(EmployeeId);
-        }
     }
 }

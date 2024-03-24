@@ -22,42 +22,11 @@ namespace Cats_Cafe_Accounting_System.Models
         [ForeignKey("StatusId")]
         public Status Status { get; set; }
         public string BreedId { get; set; }
+        [ForeignKey("BreedId")]
         public Breed Breed { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CheckInDate { get; set; }
         public string PassNumber { get; set; }
-        public PetModel(int id, string name, int genderId, int statusId, string breedId, DateTime birthday, DateTime checkInDate, string passNumber)
-        {
-            Id = id;
-            Name = name;
-            GenderId = genderId;
-            StatusId = statusId;
-            BreedId = breedId;
-            Birthday = birthday;
-            CheckInDate = checkInDate;
-            PassNumber = passNumber;
-            Breed = new Breed(BreedId);
-            Gender = new Gender(GenderId);
-            Status = new Status(StatusId);
-        }
-        public PetModel(int id)
-        {
-            if (id != 0)
-            {
-                DataRow row = DBContext.GetById("pets", id);
-                Id = id;
-                Name = row["name"].ToString();
-                GenderId = Convert.ToInt32(row["genderid"]);
-                StatusId = Convert.ToInt32(row["statusid"]);
-                BreedId = row["breedid"].ToString();
-                Birthday = DateTime.Parse(row["birthday"].ToString());
-                CheckInDate = DateTime.Parse(row["checkindate"].ToString());
-                PassNumber = row["passnumber"].ToString();
-                Breed = new Breed(BreedId);
-                Gender = new Gender(GenderId);
-                Status = new Status(StatusId);
-            }
-        }
         public PetModel()
         {
             Breed = new Breed();

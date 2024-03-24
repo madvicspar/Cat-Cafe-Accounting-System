@@ -19,29 +19,6 @@ namespace Cats_Cafe_Accounting_System.Models
         [ForeignKey("TicketId")]
         public virtual TicketModel Ticket { get; set; }
         public int TicketsCount { get; set; }
-        public VisitLogEntryModel(int id, DateOnly date, TimeOnly timeStart, int visitorId, int ticketId, int ticketsCount)
-        {
-            Id = id;
-            Date = date;
-            StartTime = timeStart;
-            VisitorId = visitorId;
-            TicketId = ticketId;
-            TicketsCount = ticketsCount;
-            Visitor = new VisitorModel(VisitorId);
-            Ticket = new TicketModel(TicketId);
-        }
-        public VisitLogEntryModel(int id)
-        {
-            DataRow row = DBContext.GetById("visit_log_entries", id);
-            Id = id;
-            Date = DateOnly.Parse(row["date"].ToString());
-            StartTime = TimeOnly.Parse(row["start_time"].ToString());
-            VisitorId = Convert.ToInt32(row["visitor_id"]);
-            TicketId = Convert.ToInt32(row["ticket_id"]);
-            TicketsCount = Convert.ToInt32(row["tickets_count"]);
-            Visitor = new VisitorModel(VisitorId);
-            Ticket = new TicketModel(TicketId);
-        }
         public VisitLogEntryModel()
         {
             Visitor = new VisitorModel();
