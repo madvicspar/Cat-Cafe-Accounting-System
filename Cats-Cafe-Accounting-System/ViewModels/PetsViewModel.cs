@@ -24,6 +24,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             name, breed, pass
         }
+
         public Fields field;
         public Fields Field
         {
@@ -253,7 +254,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 FilterItems.Add(new Elem<PetModel>(item));
                 Items.Add(new Elem<PetModel>(item));
-                Names.Add(new FilterElem<PetModel>(item));
+                Names.Add(new FilterElem<PetModel>((PetModel)item.Clone()));
             }
             foreach (var item in Names)
             {
@@ -341,14 +342,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             _dbContext.SaveChanges();
             if (Names.FirstOrDefault(p => p.Item.Name == petToAdd.Name) == null)
             {
-                Names.Add(new FilterElem<PetModel>(petToAdd));
-                FilterNames.Add(new FilterElem<PetModel>(petToAdd));
+                Names.Add(new FilterElem<PetModel>((PetModel)petToAdd.Clone()));
+                FilterNames.Add(new FilterElem<PetModel>((PetModel)petToAdd.Clone()));
                 Items.Add(new Elem<PetModel>(petToAdd));
                 FilterItems.Add(new Elem<PetModel>(petToAdd));
             }
             UpdateTable();
         }
-
+        /// <summary>
+        /// Обновление PetModel в базе данных, обновление коллекций Names, FilterNames для корректных поиска и фильтрации
+        /// </summary>
+        /// <param name="pet"> Измененный PetModel </param>
         public void ExecuteUpdatePetCommand(PetModel? pet)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
@@ -364,17 +368,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
-        private void ExecuteDeletePetCommand(PetModel? pet)
+        public void ExecuteDeletePetCommand(PetModel? pet)
         {
-            if (pet.Id != 0)
+            if (pet.Id != 0) // тут лучше проверять количество наверно
             {
                 string name = _dbContext.Pets.First(p => p == pet).Name;
                 _dbContext.Pets.Remove(pet);
                 _dbContext.SaveChanges();
                 if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
                 {
-                    Names.Remove(Names.First(p => p.Item == pet));
-                    FilterNames.Remove(FilterNames.First(p => p.Item == pet));
+                    Names.Remove(Names.First(p => p.Item.Equals(pet)));
+                    FilterNames.Remove(FilterNames.First(p => p.Item.Equals(pet)));
                 }
             }
             else

@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
-    public class PetModel : ObservableObject
+    public class PetModel : ObservableObject, ICloneable, IEquatable<PetModel>
     {
         [Key]
         public int Id { get; set; }
@@ -32,6 +32,26 @@ namespace Cats_Cafe_Accounting_System.Models
             Breed = new Breed();
             Gender = new Gender();
             Status = new Status();
+        }
+
+        public object Clone()
+        {
+            return new PetModel() { Id = Id, Birthday = Birthday, Status = Status, BreedId = BreedId, Name = Name, GenderId = GenderId, Gender = Gender, Breed = Breed, CheckInDate = CheckInDate, PassNumber = PassNumber, StatusId = StatusId };
+        }
+
+        public bool Equals(PetModel? other)
+        {
+            return other.Id == Id
+                && other.Name == Name
+                && other.GenderId == GenderId
+                && other.Gender == Gender
+                && other.StatusId == StatusId
+                && other.Status == Status
+                && other.BreedId == BreedId
+                && other.Breed == Breed
+                && other.Birthday == Birthday
+                && other.CheckInDate == CheckInDate
+                && other.PassNumber == PassNumber;
         }
     }
 }

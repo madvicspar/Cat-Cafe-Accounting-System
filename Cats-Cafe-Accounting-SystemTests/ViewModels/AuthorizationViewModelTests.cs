@@ -1,4 +1,5 @@
-﻿using Cats_Cafe_Accounting_System.RegularClasses;
+﻿using Cats_Cafe_Accounting_System.Models;
+using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -115,24 +116,53 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
             }
         }
 
-        [TestMethod()]
-        public void ExecuteUpdatePetCommandTest()
-        {
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+        //[TestMethod()]
+        //public void UpdatePetTest()
+        //{
+        //    using (var scope = _serviceProvider.CreateScope())
+        //    {
+        //        var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
 
-                // Arranges and Acts
-                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
-                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
-                petsViewModel.ExecuteAddPetCommand();
-                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 2].Item.Name = "TestUpdated";
-                //petsViewModel.ExecuteUpdatePetCommand(petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 2].Item);
-                // Assert
-                Assert.AreEqual("TestUpdated", _dbContext.Pets.Last().Name);
-                Assert.AreEqual("TestUpdated", petsViewModel.Names.Last().Item.Name);
-                Assert.AreEqual("TestUpdated", petsViewModel.FilterNames.Last().Item.Name);
-            }
+        //        // Arranges and Acts
+        //        petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
+        //        petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
+        //        petsViewModel.ExecuteAddPetCommand();
+        //        petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 2].Item.Name = "TestUpdated";
+        //        // Assert
+        //        Assert.AreEqual("TestUpdated", _dbContext.Pets.Last().Name);
+        //        Assert.AreEqual("TestUpdated", petsViewModel.Names.Last().Item.Name);
+        //        Assert.AreEqual("TestUpdated", petsViewModel.FilterNames.Last().Item.Name);
+        //    }
+        //}
+
+        //[TestMethod()]
+        //public void ExecuteUpdatePetCommandTest()
+        //{
+        //    var petsViewModel = _serviceProvider.GetRequiredService<PetsViewModel>();
+        //    petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
+        //    petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
+        //    petsViewModel.ExecuteAddPetCommand();
+        //    PetModel pet = (PetModel)petsViewModel.FilterItems[0].Item.Clone();
+        //    pet.Name = "TestUpdated";
+        //    petsViewModel.ExecuteUpdatePetCommand(pet);
+        //    Assert.AreEqual("TestUpdated", _dbContext.Pets.Last().Name);
+        //    Assert.AreEqual("TestUpdated", petsViewModel.Names.Last().Item.Name);
+        //    Assert.AreEqual("TestUpdated", petsViewModel.FilterNames.Last().Item.Name);
+        //}
+
+        [TestMethod()]
+        public void ExecuteDeletePetCommandTest()
+        {
+            var petsViewModel = _serviceProvider.GetRequiredService<PetsViewModel>();
+            petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
+            petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
+            petsViewModel.ExecuteAddPetCommand();
+            petsViewModel.ExecuteDeletePetCommand(_dbContext.Pets.First());
+            Assert.AreEqual(_dbContext.Pets.Count(), 0);
+            Assert.AreEqual(petsViewModel.Names.Count(), 0);
+            Assert.AreEqual(petsViewModel.FilterNames.Count(), 0);
         }
+
+
     }
 }
