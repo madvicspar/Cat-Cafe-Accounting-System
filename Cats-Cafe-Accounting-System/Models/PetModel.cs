@@ -34,9 +34,37 @@ namespace Cats_Cafe_Accounting_System.Models
             Status = new Status();
         }
 
+        public static PetModel Update(PetModel oldPet, PetModel newPet)
+        {
+            oldPet.Name = newPet.Name;
+            oldPet.GenderId = newPet.GenderId;
+            oldPet.Gender = newPet.Gender;
+            oldPet.StatusId = newPet.StatusId;
+            oldPet.Status = newPet.Status;
+            oldPet.BreedId = newPet.BreedId;
+            oldPet.Breed = newPet.Breed;
+            oldPet.Birthday = newPet.Birthday;
+            oldPet.CheckInDate = newPet.CheckInDate;
+            oldPet.PassNumber = newPet.PassNumber;
+            return oldPet;
+        }
+
         public object Clone()
         {
-            return new PetModel() { Id = Id, Birthday = Birthday, Status = Status, BreedId = BreedId, Name = Name, GenderId = GenderId, Gender = Gender, Breed = Breed, CheckInDate = CheckInDate, PassNumber = PassNumber, StatusId = StatusId };
+            return new PetModel
+            {
+                Id = Id,
+                Name = Name,
+                GenderId = GenderId,
+                Gender = Gender,
+                StatusId = StatusId,
+                Status = Status,
+                BreedId = BreedId,
+                Breed = Breed,
+                Birthday = Birthday,
+                CheckInDate = CheckInDate,
+                PassNumber = PassNumber
+            };
         }
 
         public bool Equals(PetModel? other)

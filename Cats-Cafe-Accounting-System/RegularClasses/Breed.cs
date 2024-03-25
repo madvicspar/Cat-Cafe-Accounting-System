@@ -14,9 +14,6 @@ namespace Cats_Cafe_Accounting_System.RegularClasses
         public string Id { get; set; }
         public string Title { get; set; }
 
-        public Breed()
-        {
-
-        }
+        public Breed() { }
     }
 }

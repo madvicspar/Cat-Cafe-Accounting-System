@@ -252,9 +252,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             IsEnabled = Data.user?.Job.Id != 3;
             foreach (var item in _dbContext.Pets.Include(p => p.Gender).Include(p => p.Status).Include(p => p.Breed).ToList())
             {
-                FilterItems.Add(new Elem<PetModel>(item));
-                Items.Add(new Elem<PetModel>(item));
-                Names.Add(new FilterElem<PetModel>((PetModel)item.Clone()));
+                FilterItems.Add(new Elem<PetModel>(item.Clone() as PetModel));
+                Items.Add(new Elem<PetModel>(item.Clone() as PetModel));
+                Names.Add(new FilterElem<PetModel>(item.Clone() as PetModel));
             }
             foreach (var item in Names)
             {
@@ -317,7 +317,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             if (birtdayMax > checkInDateMax)
                 EndDate = birtdayMax;
             else
-                endDate = checkInDateMax;
+                EndDate = checkInDateMax;
         }
         public void ExecuteAddPetCommand()
         {
@@ -338,14 +338,14 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 PassNumber = lastPet.PassNumber
             };
 
-            _dbContext.Pets.Add(petToAdd);
+            _dbContext.Pets.Add(petToAdd.Clone() as PetModel);
             _dbContext.SaveChanges();
             if (Names.FirstOrDefault(p => p.Item.Name == petToAdd.Name) == null)
             {
-                Names.Add(new FilterElem<PetModel>((PetModel)petToAdd.Clone()));
-                FilterNames.Add(new FilterElem<PetModel>((PetModel)petToAdd.Clone()));
-                Items.Add(new Elem<PetModel>(petToAdd));
-                FilterItems.Add(new Elem<PetModel>(petToAdd));
+                Names.Add(new FilterElem<PetModel>(petToAdd.Clone() as PetModel));
+                FilterNames.Add(new FilterElem<PetModel>(petToAdd.Clone() as PetModel));
+                Items.Add(new Elem<PetModel>(petToAdd.Clone() as PetModel));
+                FilterItems.Add(new Elem<PetModel>(petToAdd.Clone() as PetModel));
             }
             UpdateTable();
         }
@@ -357,8 +357,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
 
-            string name = _dbContext.Pets.First(p => p.Id == pet.Id).Name;
-            _dbContext.Pets.Update(pet);
+            PetModel old = _dbContext.Pets.First(p => p.Id == pet.Id);
+            string name = old.Name;
+            _dbContext.Pets.Update(PetModel.Update(old, pet));
             _dbContext.SaveChanges();
             if (pet.Name != name)
             {
@@ -370,15 +371,15 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void ExecuteDeletePetCommand(PetModel? pet)
         {
-            if (pet.Id != 0) // тут лучше проверять количество наверно
+            if (FilterItems.Count > 1)
             {
                 string name = _dbContext.Pets.First(p => p == pet).Name;
                 _dbContext.Pets.Remove(pet);
                 _dbContext.SaveChanges();
                 if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
                 {
-                    Names.Remove(Names.First(p => p.Item.Equals(pet)));
-                    FilterNames.Remove(FilterNames.First(p => p.Item.Equals(pet)));
+                    Names.Remove(Names.First(p => p.Item.Name == pet.Name));
+                    FilterNames.Remove(FilterNames.First(p => p.Item.Name == pet.Name));
                 }
             }
             else
@@ -389,29 +390,29 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
-        private void ExecuteDeleteManyPetCommand()
+        public void ExecuteDeleteManyPetCommand()
         {
             var itemsToDelete = new ObservableCollection<Elem<PetModel>>(FilterItems.Where(x => x.IsSelected).ToList());
             foreach (var itemToDelete in itemsToDelete)
             {
-                if (itemToDelete.Item.Id != 0)
+                if (FilterItems.IndexOf(itemToDelete) != FilterItems.Count-1)
                 {
-                    _dbContext.Pets.Remove(itemToDelete.Item);
+                    PetModel pet = _dbContext.Pets.First(p => p.Id == itemToDelete.Item.Id);
+                    _dbContext.Pets.Remove(pet);
+                    _dbContext.SaveChanges();
                     if (_dbContext.Pets.FirstOrDefault(p => p.Name == itemToDelete.Item.Name) == null)
                     {
-                        Names.Remove(Names.First(p => p.Item == itemToDelete.Item));
-                        FilterNames.Remove(FilterNames.First(p => p.Item == itemToDelete.Item));
+                        Names.Remove(Names.First(p => p.Item.Name == itemToDelete.Item.Name));
+                        FilterNames.Remove(FilterNames.First(p => p.Item.Name == itemToDelete.Item.Name));
                     }
                 }
                 else
                 {
-                    FilterItems[filterItems.Count - 1].Item.Name = "";
-                    FilterItems[filterItems.Count - 1].Item.PassNumber = "";
+                    FilterItems[FilterItems.Count - 1].Item.Name = "";
+                    FilterItems[FilterItems.Count - 1].Item.PassNumber = "";
                 }
             }
-            _dbContext.SaveChanges();
             UpdateTable();
-
         }
 
         private void ExecuteWordExportCommand()
@@ -602,7 +603,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             FilterItems.Clear();
             foreach (var item in filteredPets)
-                FilterItems.Add(new Elem<PetModel>(item));
+                FilterItems.Add(new Elem<PetModel>(item.Clone() as PetModel));
             FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
         }
 
