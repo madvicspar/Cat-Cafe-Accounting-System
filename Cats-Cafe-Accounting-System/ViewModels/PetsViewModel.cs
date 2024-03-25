@@ -277,8 +277,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 Statuses.Add(new FilterElem<Status>(item));
                 FilterStatuses.Add(new FilterElem<Status>(item));
             }
-            ExecuteDeleteDateFiltersCommand();
             FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
+            ExecuteDeleteDateFiltersCommand();
             ExcelExportCommand = new RelayCommand(ExecuteExcelExportCommand);
             WordExportCommand = new RelayCommand(ExecuteWordExportCommand);
             AddPetCommand = new RelayCommand(ExecuteAddPetCommand);
@@ -349,11 +349,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
-        private void ExecuteUpdatePetCommand(PetModel? pet)
+        public void ExecuteUpdatePetCommand(PetModel? pet)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
 
-            string name = _dbContext.Pets.First(p => p == pet).Name;
+            string name = _dbContext.Pets.First(p => p.Id == pet.Id).Name;
             _dbContext.Pets.Update(pet);
             _dbContext.SaveChanges();
             if (pet.Name != name)

@@ -1,49 +1,52 @@
-﻿using Cats_Cafe_Accounting_System.ViewModels;
-using Cats_Cafe_Accounting_System.RegularClasses;
+﻿using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
-using Cats_Cafe_Accounting_System.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.EntityFrameworkCore;
 
 namespace Cats_Cafe_Accounting_System.ViewModels.Tests
 {
     [TestClass()]
     public class AuthorizationViewModelTests
     {
-        private static ServiceProvider _serviceProvider;
+        private ServiceProvider _serviceProvider;
         private static ApplicationDbContext _dbContext;
 
-        [ClassInitialize] 
+        [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
-            var services = new ServiceCollection();
-
-            // Лучше использовать фейковый DbContext для тестирования
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
-
-            // Добавление фейковых данных в таблицы Genders, Breeds, Statuses
             _dbContext.Genders.Add(new Gender { Title = "женский" });
             _dbContext.Genders.Add(new Gender { Title = "мужской" });
-
             _dbContext.Statuses.Add(new Status { Title = "чилится" });
             _dbContext.Statuses.Add(new Status { Title = "не числится" });
-
             _dbContext.Breeds.Add(new Breed { Title = "сиамская", Id = "SMS" });
             _dbContext.Breeds.Add(new Breed { Title = "мейн-кун", Id = "MNC" });
-
             _dbContext.SaveChanges();
-
-            services.AddSingleton(_dbContext);
-            services.AddSingleton(new PetsViewModel(_dbContext));
-
-            _serviceProvider = services.BuildServiceProvider();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
             _dbContext.Dispose();
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton(_dbContext);
+            services.AddSingleton(new PetsViewModel(_dbContext));
+            _serviceProvider = services.BuildServiceProvider();
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            foreach (var pet in _dbContext.Pets)
+            {
+                _dbContext.Pets.Remove(pet);
+            }
+            _dbContext.SaveChanges();
         }
 
         [TestMethod()]
@@ -109,6 +112,26 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
                 petsViewModel.ExecuteSearchNameCommand();
                 // Assert
                 Assert.AreEqual("Поиск по имени", petsViewModel.SearchName);
+            }
+        }
+
+        [TestMethod()]
+        public void ExecuteUpdatePetCommandTest()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+
+                // Arranges and Acts
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 2].Item.Name = "TestUpdated";
+                //petsViewModel.ExecuteUpdatePetCommand(petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 2].Item);
+                // Assert
+                Assert.AreEqual("TestUpdated", _dbContext.Pets.Last().Name);
+                Assert.AreEqual("TestUpdated", petsViewModel.Names.Last().Item.Name);
+                Assert.AreEqual("TestUpdated", petsViewModel.FilterNames.Last().Item.Name);
             }
         }
     }
