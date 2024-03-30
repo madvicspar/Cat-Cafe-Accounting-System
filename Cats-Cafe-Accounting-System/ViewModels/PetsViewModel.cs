@@ -246,6 +246,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public ICommand UpdateCheckBoxStatusSelectionCommand { get; set; }
         public ICommand UpdateCheckBoxBreedSelectionCommand { get; set; }
         public ICommand DeleteDateFiltersCommand { get; set; }
+        public ICommand ElemUpdatedCommand { get; set; }
         public PetsViewModel(ApplicationDbContext context)
         {
             _dbContext = context;
@@ -303,6 +304,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateCheckBoxStatusSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxStatusSelectionCommand);
             UpdateCheckBoxBreedSelectionCommand = new RelayCommand(ExecuteUpdateCheckBoxBreedSelectionCommand);
             DeleteDateFiltersCommand = new RelayCommand(ExecuteDeleteDateFiltersCommand);
+            ElemUpdatedCommand = new RelayCommand<Elem<PetModel>>(ExecuteElemUpdatedCommand);
         }
         public void ExecuteDeleteDateFiltersCommand()
         {
@@ -318,6 +320,13 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 EndDate = birtdayMax;
             else
                 EndDate = checkInDateMax;
+        }
+        public void ExecuteElemUpdatedCommand(Elem<PetModel> petUpdated)
+        {
+            if (_dbContext.Pets.FirstOrDefault(p => p.Equals(petUpdated.Item)) == null || !petUpdated.Item.Equals(Items.First(p => p.Item.Id == petUpdated.Item.Id).Item))
+            {
+                petUpdated.IsUpdated = true;
+            }
         }
         public void ExecuteAddPetCommand()
         {
@@ -340,6 +349,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             _dbContext.Pets.Add(petToAdd.Clone() as PetModel);
             _dbContext.SaveChanges();
+            petToAdd.Id = _dbContext.Pets.First(p => p.Name == petToAdd.Name).Id;
             if (Names.FirstOrDefault(p => p.Item.Name == petToAdd.Name) == null)
             {
                 Names.Add(new FilterElem<PetModel>(petToAdd.Clone() as PetModel));
@@ -364,8 +374,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             if (pet.Name != name)
             {
                 Names.First(p => p.Item.Name == name).Item.Name = pet.Name;
-                FilterNames.First(p => p.Item.Name == name).Item.Name = pet.Name;
+                FilterNames.First(p => p.Item.Id == pet.Id).Item.Name = pet.Name;
             }
+            FilterItems.First(p => p.Item.Id == pet.Id).IsUpdated = false;
             UpdateTable();
         }
 

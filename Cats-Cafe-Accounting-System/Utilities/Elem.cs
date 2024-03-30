@@ -14,6 +14,18 @@ namespace Cats_Cafe_Accounting_System.Utilities
                 OnPropertyChanged(nameof(IsSelected));
             }
         }
+
+        private bool isUpdated;
+        public bool IsUpdated
+        {
+            get { return isUpdated; }
+            set
+            {
+                isUpdated = value;
+                OnPropertyChanged(nameof(IsUpdated));
+            }
+        }
+
         public T item;
         public T Item
         {
@@ -26,6 +38,7 @@ namespace Cats_Cafe_Accounting_System.Utilities
         }
         public Elem(T _item)
         {
+            IsUpdated = false;
             IsSelected = false;
             Item = _item;
         }
