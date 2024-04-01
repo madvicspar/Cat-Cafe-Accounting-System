@@ -39,6 +39,8 @@
     <DataTemplate DataType="{x:Type vm:IncomesViewModel}">
         <vw:IncomesView/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type vm:PopularPetsViewModel}">
+        <vw:PopularPetsView/>
+    </DataTemplate>
 
 </ResourceDictionary>

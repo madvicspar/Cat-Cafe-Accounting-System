@@ -34,6 +34,9 @@
     <Compile Update="Views\PetTransferLog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PopularPetsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\TicketsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +91,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PetTransferLog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PopularPetsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\TicketsView.xaml">
