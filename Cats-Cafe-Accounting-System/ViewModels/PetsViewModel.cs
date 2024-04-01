@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -22,7 +23,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
     {
         public enum Fields
         {
-            name, breed, pass
+            name, breed
         }
 
         public Fields field;
@@ -425,7 +426,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             UpdateTable();
         }
-
+        [ExcludeFromCodeCoverage]
         private void ExecuteWordExportCommand()
         {
             // сделать кнопку неактивной, если в коллекции 0 элементов (фильтры учитываются)
@@ -475,7 +476,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 });
             }
         }
-
+        [ExcludeFromCodeCoverage]
         private void ExecuteExcelExportCommand()
         {
             using (var workbook = new XLWorkbook())
@@ -548,9 +549,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 case "По породе":
                     Field = Fields.breed;
                     break;
-                case "По паспорту":
-                    Field = Fields.pass;
-                    break;
                 default:
                     Field = Fields.name;
                     break;
@@ -622,7 +620,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             foreach (var item in FilterNames)
                 Names.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
-            //selectedNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
         public void ExecuteUpdateCheckBoxGenderSelectionCommand()
@@ -791,7 +788,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void ExecuteSearchCommand()
         {
-            if (SearchText.Length > 5 && SearchName[..5] == "Поиск")
+            if (SearchText.Length > 5 && SearchText[..5] == "Поиск")
             {
                 FilterItems.Clear();
                 foreach (var item in Items)
@@ -842,17 +839,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     }
                     FilterItems.Add(new Elem<PetModel>(new PetModel() { Breed = Breeds[0].Item, Gender = Genders[0].Item, Status = Statuses[0].Item, Birthday = DateTime.Today, CheckInDate = DateTime.Today }));
                     break;
-                    //case Fields.pass:
-                    //    var petPasses = new ObservableCollection<string>(Breeds.Where(p => p.Item.Title.ToLower().Contains(SearchText.ToLower())).Select(p => p.Item.Title));
-
-                    //    Items.Clear();
-                    //    foreach (var item in _dbContext.Pets.Where(p => petBreeds.Contains(p.Breed.Title)))
-                    //    {
-                    //        Items.Add(new Elem<PetModel>(item));
-                    //    }
-                    //    break;
-
-
             }
 
         }

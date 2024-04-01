@@ -49,7 +49,6 @@
                         </TextBox>
                         <ComboBox Margin="440,5,10,5" Height="25" SelectedIndex="0" x:Name="FindByItems">
                             <ComboBoxItem Content="По имени"/>
-                            <ComboBoxItem Content="По породе"/>
                             <ComboBoxItem Content="По номеру паспорта"/>
 
                             <behaviors:Interaction.Triggers>

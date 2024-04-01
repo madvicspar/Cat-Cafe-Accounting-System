@@ -1,5 +1,4 @@
-﻿using Cats_Cafe_Accounting_System.Models;
-using Cats_Cafe_Accounting_System.RegularClasses;
+﻿using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -285,14 +284,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         }
 
         [TestMethod()]
-        public void ExecuteChangeFieldCommandTest_Pass()
-        {
-            var petsViewModel = _serviceProvider.GetRequiredService<PetsViewModel>();
-            petsViewModel.ExecuteChangeFieldCommand("По паспорту");
-            Assert.AreEqual(petsViewModel.Field, PetsViewModel.Fields.pass);
-        }
-
-        [TestMethod()]
         public void ExecuteChangeFieldCommandTest_Default()
         {
             var petsViewModel = _serviceProvider.GetRequiredService<PetsViewModel>();
@@ -432,6 +423,89 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
                 petsViewModel.ExecuteSearchBreedCommand();
                 // Assert
                 Assert.AreEqual(0, petsViewModel.FilterBreeds.Count);
+            }
+        }
+        [TestMethod()]
+        public void ExecuteSearchCommandTest_ByName()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test1";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test1";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test12";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test2";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test3";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test3";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test4";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test4";
+                petsViewModel.ExecuteAddPetCommand();
+                // Arranges and Acts
+                petsViewModel.Field = PetsViewModel.Fields.name;
+                petsViewModel.SearchText = "Test1";
+                petsViewModel.ExecuteSearchCommand();
+                // Assert
+                Assert.AreEqual(2, petsViewModel.FilterItems.Count - 1);
+            }
+        }
+        [TestMethod]
+        public void ExecuteSearchCommandTest_ByBreed()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test1";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test1";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Breed = _dbContext.Breeds.Last();
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test12";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test2";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Breed = _dbContext.Breeds.Last();
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test3";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test3";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test4";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test4";
+                petsViewModel.ExecuteAddPetCommand();
+                // Arranges and Acts
+                petsViewModel.Field = PetsViewModel.Fields.breed;
+                petsViewModel.SearchText = _dbContext.Breeds.Last().Title.Substring(5);
+                petsViewModel.ExecuteSearchCommand();
+                // Assert
+                Assert.AreEqual(2, petsViewModel.FilterItems.Count - 1);
+            }
+        }
+
+        [TestMethod]
+        public void ExecuteSearchCommandTest_Empty()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var petsViewModel = scope.ServiceProvider.GetRequiredService<PetsViewModel>();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test1";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test1";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Breed = _dbContext.Breeds.Last();
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test12";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test2";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Breed = _dbContext.Breeds.Last();
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test3";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test3";
+                petsViewModel.ExecuteAddPetCommand();
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.Name = "Test4";
+                petsViewModel.FilterItems[petsViewModel.FilterItems.Count - 1].Item.PassNumber = "Test4";
+                petsViewModel.ExecuteAddPetCommand();
+                // Arranges and Acts
+                petsViewModel.Field = PetsViewModel.Fields.name;
+                petsViewModel.SearchText = "Поиск по имени";
+                petsViewModel.ExecuteSearchCommand();
+                // Assert
+                Assert.AreEqual(4, petsViewModel.FilterItems.Count - 1);
             }
         }
     }

@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -45,7 +43,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 int score = 0;
                 foreach (var visit in item)
                     score += visit.TicketsCount;
-                PopularPetsModel model = new PopularPetsModel() { Pet = item.FirstOrDefault().Ticket.Pet, PetTransferLogEntryModels = visits, Place = i, Score = score};
+                PopularPetsModel model = new PopularPetsModel() { Pet = item.FirstOrDefault().Ticket.Pet, PetTransferLogEntryModels = visits, Place = i, Score = score };
                 Items.Add(new Elem<PopularPetsModel>(model));
                 FilterItems.Add(new Elem<PopularPetsModel>(model));
                 i++;
