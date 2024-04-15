@@ -6,6 +6,7 @@ using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -54,7 +55,13 @@ namespace Cats_Cafe_Accounting_System.Models
 
         public bool Equals(VisitorModel? other)
         {
-            throw new NotImplementedException();
+            return other?.LastName == LastName
+                && other?.FirstName == FirstName
+                && other?.Pathronymic == Pathronymic
+                && other?.GenderId == GenderId
+                && other?.Gender == Gender
+                && other?.Birthday == Birthday
+                && other?.PhoneNumber == PhoneNumber;
         }
     }
 }
