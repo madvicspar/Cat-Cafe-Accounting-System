@@ -15,12 +15,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         public static void ClassInitialize(TestContext context)
         {
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
+
             _dbContext.Genders.Add(new Gender { Title = "женский" });
             _dbContext.Genders.Add(new Gender { Title = "мужской" });
+
             _dbContext.Statuses.Add(new Status { Title = "числится" });
             _dbContext.Statuses.Add(new Status { Title = "не числится" });
+
             _dbContext.Breeds.Add(new Breed { Title = "сиамская", Id = "SMS" });
             _dbContext.Breeds.Add(new Breed { Title = "мейн-кун", Id = "MNC" });
+
             _dbContext.SaveChanges();
         }
 
@@ -65,6 +69,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
 
                 // Assert
                 Assert.AreEqual(1, petsViewModel.Items.Count);
+                Assert.AreEqual(_dbContext.Pets.Count(), 1);
+                Assert.AreEqual(petsViewModel.Names.Count(), 1);
+                Assert.AreEqual(petsViewModel.FilterNames.Count(), 1);
+                Assert.AreEqual(petsViewModel.FilterItems.Count(), 2);
             }
         }
 

@@ -17,13 +17,13 @@ namespace Cats_Cafe_Accounting_System.Models
         public string Name { get; set; }
         public int GenderId { get; set; }
         [ForeignKey("GenderId")]
-        public Gender Gender { get; set; } 
+        public virtual Gender Gender { get; set; } 
         public int StatusId { get; set; }
         [ForeignKey("StatusId")]
-        public Status Status { get; set; }
+        public virtual Status Status { get; set; }
         public string BreedId { get; set; }
         [ForeignKey("BreedId")]
-        public Breed Breed { get; set; }
+        public virtual Breed Breed { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CheckInDate { get; set; }
         public string PassNumber { get; set; }
@@ -69,17 +69,16 @@ namespace Cats_Cafe_Accounting_System.Models
 
         public bool Equals(PetModel? other)
         {
-            return other.Id == Id
-                && other.Name == Name
-                && other.GenderId == GenderId
-                && other.Gender == Gender
-                && other.StatusId == StatusId
-                && other.Status == Status
-                && other.BreedId == BreedId
-                && other.Breed == Breed
-                && other.Birthday == Birthday
-                && other.CheckInDate == CheckInDate
-                && other.PassNumber == PassNumber;
+            return other?.Name == Name
+                && other?.GenderId == GenderId
+                && other?.Gender == Gender
+                && other?.StatusId == StatusId
+                && other?.Status == Status
+                && other?.BreedId == BreedId
+                && other?.Breed == Breed
+                && other?.Birthday == Birthday
+                && other?.CheckInDate == CheckInDate
+                && other?.PassNumber == PassNumber;
         }
     }
 }

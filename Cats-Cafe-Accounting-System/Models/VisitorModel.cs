@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using Cats_Cafe_Accounting_System.RegularClasses;
 using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
+using CommunityToolkit.Mvvm.ComponentModel;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
-    public class VisitorModel
+    public class VisitorModel : ObservableObject, ICloneable, IEquatable<VisitorModel>
     {
         [Key]
         public int Id { get; set; }
@@ -18,10 +20,41 @@ namespace Cats_Cafe_Accounting_System.Models
         [ForeignKey("GenderId")]
         public virtual Gender Gender { get; set; }
         public string PhoneNumber { get; set; }
-        public DateOnly Birthday { get; set; }
+        public DateTime Birthday { get; set; }
         public VisitorModel()
         {
             Gender = new Gender();
+        }
+
+        public static VisitorModel Update(VisitorModel oldPet, VisitorModel newPet)
+        {
+            oldPet.FirstName = newPet.FirstName;
+            oldPet.LastName = newPet.LastName;
+            oldPet.Pathronymic = newPet.Pathronymic;
+            oldPet.GenderId = newPet.GenderId;
+            oldPet.Gender = newPet.Gender;
+            oldPet.Birthday = newPet.Birthday;
+            oldPet.PhoneNumber = newPet.PhoneNumber;
+            return oldPet;
+        }
+        public object Clone()
+        {
+            return new VisitorModel
+            {
+                Id = Id,
+                FirstName = FirstName,
+                LastName = LastName,
+                Pathronymic = Pathronymic,
+                GenderId = GenderId,
+                Gender = Gender,
+                PhoneNumber = PhoneNumber,
+                Birthday = Birthday
+            };
+        }
+
+        public bool Equals(VisitorModel? other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

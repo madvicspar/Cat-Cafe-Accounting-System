@@ -62,7 +62,7 @@ namespace Cats_Cafe_Accounting_System
             services.AddSingleton<AuthorizationView>();
             services.AddSingleton<NavigationViewModel>();
             services.AddSingleton(new PetsViewModel(_dbContext));
-            services.AddSingleton<VisitorsViewModel>();
+            services.AddSingleton<VisitorsViewModel>(new VisitorsViewModel(_dbContext));
             services.AddSingleton<JobsViewModel>(new JobsViewModel(_dbContext));
             services.AddSingleton<EmployeesViewModel>();
             services.AddSingleton<TicketsViewModel>();

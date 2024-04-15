@@ -256,13 +256,10 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 FilterItems.Add(new Elem<PetModel>(item.Clone() as PetModel));
                 Items.Add(new Elem<PetModel>(item.Clone() as PetModel));
-                Names.Add(new FilterElem<PetModel>(item.Clone() as PetModel));
-            }
-            foreach (var item in Names)
-            {
-                if (!FilterNames.Any(p => p.Item.Name == item.Item.Name))
+                if (!Names.Any(p => p.Item.Name == item.Name))
                 {
-                    FilterNames.Add(item);
+                    Names.Add(new FilterElem<PetModel>(item.Clone() as PetModel));
+                    FilterNames.Add(new FilterElem<PetModel>(item.Clone() as PetModel));
                 }
             }
             foreach (var item in _dbContext.Genders.ToList())
@@ -322,6 +319,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             else
                 EndDate = checkInDateMax;
         }
+
         public void ExecuteElemUpdatedCommand(Elem<PetModel> petUpdated)
         {
             if (_dbContext.Pets.FirstOrDefault(p => p.Equals(petUpdated.Item)) == null || !petUpdated.Item.Equals(Items.First(p => p.Item.Id == petUpdated.Item.Id).Item))
@@ -434,7 +432,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             XWPFDocument document = new XWPFDocument();
 
             // Создание таблицы
-            XWPFTable table = document.CreateTable(FilterItems.Count, 8);
+            XWPFTable table = document.CreateTable(FilterItems.Count, 7);
 
             // Заполнение заголовков столбцов
             table.GetRow(0).GetCell(0).SetText("Кличка");

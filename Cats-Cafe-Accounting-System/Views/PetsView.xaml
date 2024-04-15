@@ -89,7 +89,7 @@
                     </Grid>
                     
                     <Grid Grid.Row="3">
-                        <DataGrid x:Name="dataGrid" Margin="0,0,10,0" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                        <DataGrid x:Name="dataGrid" Margin="0,0,10,0" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="3" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
@@ -155,7 +155,15 @@
                                             <ComboBox ItemsSource="{Binding DataContext.Genders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
                                                       SelectedValue="{Binding Item.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Item"/>
+                                                      SelectedValuePath="Item">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                    RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                    CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -175,7 +183,15 @@
                                             <ComboBox ItemsSource="{Binding DataContext.Statuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
                                                       SelectedValue="{Binding Item.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Item"/>
+                                                      SelectedValuePath="Item">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -195,7 +211,15 @@
                                             <ComboBox ItemsSource="{Binding DataContext.Breeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
                                                       DisplayMemberPath="Item.Title"
                                                       SelectedValue="{Binding Item.Breed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Item"/>
+                                                      SelectedValuePath="Item">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -209,7 +233,15 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Item.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DatePicker SelectedDate="{Binding Item.Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                    RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                    CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </DatePicker>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -223,7 +255,15 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Item.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <DatePicker SelectedDate="{Binding Item.CheckInDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                            RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                            CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </DatePicker>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -237,7 +277,15 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox VerticalAlignment="Center" Text="{Binding Item.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center"/>
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Item.PassNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                    RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                    CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </TextBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
