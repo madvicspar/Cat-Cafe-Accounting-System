@@ -394,8 +394,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             else
             {
-                FilterItems[filterItems.Count - 1].Item.Name = "";
-                FilterItems[filterItems.Count - 1].Item.PassNumber = "";
+                FilterItems[FilterItems.Count - 1].Item.Name = "";
+                FilterItems[FilterItems.Count - 1].Item.PassNumber = "";
             }
             UpdateTable();
         }
@@ -424,6 +424,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             UpdateTable();
         }
+
         [ExcludeFromCodeCoverage]
         private void ExecuteWordExportCommand()
         {

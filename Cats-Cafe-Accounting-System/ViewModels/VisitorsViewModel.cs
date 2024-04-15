@@ -386,8 +386,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             else
             {
-                FilterItems[filterItems.Count - 1].Item.FirstName = "";
-                FilterItems[filterItems.Count - 1].Item.PhoneNumber = "";
+                FilterItems[FilterItems.Count - 1].Item.FirstName = "";
+                FilterItems[FilterItems.Count - 1].Item.PhoneNumber = "";
             }
             UpdateTable();
         }

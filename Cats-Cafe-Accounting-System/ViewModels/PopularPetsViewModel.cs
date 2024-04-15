@@ -37,17 +37,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             _dbContext = contex;
             int i = 1;
-            foreach (var item in _dbContext.VisitLogEntries.Include(t => t.Ticket).Where(t => t.Ticket.PetId != 0).GroupBy(g => g.TicketId).ToList().OrderBy(x => x.Count()))
-            {
-                List<VisitLogEntryModel> visits = [.. item];
-                int score = 0;
-                foreach (var visit in item)
-                    score += visit.TicketsCount;
-                PopularPetsModel model = new PopularPetsModel() { Pet = item.FirstOrDefault().Ticket.Pet, PetTransferLogEntryModels = visits, Place = i, Score = score };
-                Items.Add(new Elem<PopularPetsModel>(model));
-                FilterItems.Add(new Elem<PopularPetsModel>(model));
-                i++;
-            }
+            //foreach (var item in _dbContext.VisitLogEntries.Include(t => t.Ticket).Where(t => t.Ticket.PetId != 0).GroupBy(g => g.TicketId).ToList().OrderBy(x => x.Count()))
+            //{
+            //    List<VisitLogEntryModel> visits = [.. item];
+            //    int score = 0;
+            //    foreach (var visit in item)
+            //        score += visit.TicketsCount;
+            //    PopularPetsModel model = new PopularPetsModel() { Pet = item.FirstOrDefault().Ticket.Pet, PetTransferLogEntryModels = visits, Place = i, Score = score };
+            //    Items.Add(new Elem<PopularPetsModel>(model));
+            //    FilterItems.Add(new Elem<PopularPetsModel>(model));
+            //    i++;
+            //}
         }
     }
 }

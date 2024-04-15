@@ -3,42 +3,136 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="400"
-             d:DesignWidth="622"
+             d:DesignHeight="550"
+             d:DesignWidth="620"
              Background="Transparent">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
 
-        <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
-        <Grid>
+        <Grid Margin="15,10,0,10">
+
+            <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="435"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Билеты"
-        Style="{StaticResource Pages_Headers}"/>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Билеты"
+                    Style="{StaticResource Pages_Headers}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <DataGrid x:Name="dataGrid" Margin="0,0,10,0" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="3" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="10">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="*" Foreground="Red" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding IsUpdated, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Command="{Binding DataContext.ChangeSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Цена">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Item.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" VerticalContentAlignment="Center">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                                                                RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                                                                CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </TextBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Комментарий">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Item.Comments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" VerticalContentAlignment="Center">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </TextBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Питомец" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Item.Pet.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding Description}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Действия" Visibility="{Binding DataContext.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdateTicketCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding IsUpdated}">
+                                                    <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
+                                                </Button>
+                                                <Button x:Name="DeleteButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeleteTicketCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding IsEditable}" ToolTip="Это действие повлечет за собой удаление всех записей с этим элементом (из журнала учета посещений)">
+                                                    <Image Source="{StaticResource DeleteImage}" Height="15" Width="15"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="4" Margin="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" ToolTip="Это действие удалит только те билеты, у которых питомец - null. Для удаления других билетов нужно удалять соответствующего питомца" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding DeleteManyTicketCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить билет" ToolTip="Добавить можно только билеты, ненаправленные на конкретных питомцев" Margin="10,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding AddTicketCommand}"/>
+                        <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Margin="0,0,10,0" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                    </Grid>
                 </Grid>
-
-                <Grid Grid.Row="1">
-                    <DataGrid ItemsSource="{Binding Tickets}" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Питомец" Binding="{Binding Pet.Name}"/>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Комментарии" Binding="{Binding Comments}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-
-
-
             </Grid>
-
         </Grid>
-
     </Grid>
 </UserControl>
