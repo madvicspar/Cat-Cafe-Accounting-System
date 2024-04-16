@@ -292,6 +292,7 @@
                                             </TextBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
+
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Действия" Visibility="{Binding DataContext.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
                                     <DataGridTemplateColumn.CellTemplate>

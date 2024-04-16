@@ -20,9 +20,36 @@ namespace Cats_Cafe_Accounting_System.Views
     /// </summary>
     public partial class EmployeeShiftLog : UserControl
     {
+        readonly string FilterPlaceholder = "Поиск по табельному номеру..";
         public EmployeeShiftLog()
         {
             InitializeComponent();
+            FilterSearch.Text = FilterPlaceholder;
+            FilterNameAll.IsChecked = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            popUp.PlacementTarget = sender as Button;
+            popUp.VerticalOffset = 5;
+            popUp.IsOpen = true;
+        }
+
+        private void popUp_Closed(object sender, EventArgs e)
+        {
+            FilterSearch.Text = FilterPlaceholder;
+        }
+
+        private void FilterSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (FilterSearch.Text == FilterPlaceholder)
+                FilterSearch.Text = "";
+        }
+
+        private void FilterSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (FilterSearch.Text == "")
+                FilterSearch.Text = FilterPlaceholder;
         }
     }
 }
