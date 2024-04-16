@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550"
              d:DesignWidth="620"
              Background="Transparent">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
-
         <Grid Margin="15,10,0,10">
 
             <Border Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
@@ -34,14 +35,18 @@
                             <Image Source="{StaticResource SearchImage}"/>
                         </Button>
 
-                        <!--<TextBox Grid.Column="1" VerticalContentAlignment="Center" Text="Поиск..." Margin="0,5,5,5" VerticalAlignment="Center" Height="25" Width="200"
-         GotFocus="RemoveText" LostFocus="AddText"/>-->
-                        <TextBox VerticalContentAlignment="Center" Text="Поиск..." Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="Search" VerticalContentAlignment="Center" Text="{Binding SearchText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left" GotFocus="Search_GotFocus"  LostFocus="Search_LostFocus">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="TextChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                        </TextBox>
 
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <DataGrid ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                        <DataGrid ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
@@ -63,7 +68,7 @@
                                     <DataGridTemplateColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Название"/>
+                                                <TextBlock Text="Название" VerticalAlignment="Top" Margin="0,0,0,3"/>
                                                 <Button Width="20" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                                                     <Image Source="{StaticResource FilterImage}"/>
                                                 </Button>
@@ -90,7 +95,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn>
+                                <DataGridTemplateColumn Visibility="{Binding DataContext.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
                                     <DataGridTemplateColumn.Header>
                                         <TextBlock Text="Действия" VerticalAlignment="Top" Margin="0,0,0,3"/>
                                     </DataGridTemplateColumn.Header>
@@ -112,33 +117,57 @@
                         </DataGrid>
                     </Grid>
 
-
-                    <Popup x:Name="popUpTitle" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                    <Popup x:Name="popUpTitle" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False" Closed="popUpTitle_Closed">
                         <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="45"/>
+                                    <RowDefinition Height="33"/>
                                     <RowDefinition/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox x:Name="FilterSearch" Grid.Row="0" Margin="10" Text="{Binding SearchTitle, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearch_GotFocus"  LostFocus="FilterSearch_LostFocus"  PreviewKeyDown="FilterSearch_PreviewKeyDown">
+                                <TextBox x:Name="FilterSearchTitle" Grid.Row="0" Margin="10" Text="{Binding SearchTitle, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="20" GotFocus="FilterSearchTitle_GotFocus"  LostFocus="FilterSearchTitle_LostFocus">
                                     <behaviors:Interaction.Triggers>
-                                        <behaviors:EventTrigger EventName="PreviewKeyDown">
-                                            <behaviors:InvokeCommandAction />
+                                        <behaviors:EventTrigger EventName="TextChanged">
+                                            <behaviors:InvokeCommandAction Command="{Binding SearchTitleCommand}"/>
                                         </behaviors:EventTrigger>
                                     </behaviors:Interaction.Triggers>
                                 </TextBox>
                                 <Separator Grid.Row="0" VerticalAlignment="Bottom" Height="1"/>
 
-                                <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding SelectedTitles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListBox Grid.Row="1" Margin="10,10,10,0">
+                                    <Grid>
+                                        <CheckBox x:Name="FilterTitleAll">
+                                            <behaviors:Interaction.Triggers>
+                                                <behaviors:EventTrigger EventName="Checked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeTitleSelectionCommand}" CommandParameter="{Binding ElementName=FilterTitleAll, Path=IsChecked}"/>
+                                                </behaviors:EventTrigger>
+                                                <behaviors:EventTrigger EventName="Unchecked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeTitleSelectionCommand}" CommandParameter="{Binding ElementName=FilterTitleAll, Path=IsChecked}"/>
+                                                </behaviors:EventTrigger>
+                                            </behaviors:Interaction.Triggers>
+                                        </CheckBox>
+                                        <TextBlock Text="Выделить все" Margin="20,0,0,0"/>
+                                    </Grid>
+                                </ListBox>
+                                <ListBox Grid.Row="2" Margin="10" ItemsSource="{Binding FilterTitles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}"/>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Title}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxTitleSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxTitleSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <Button Content="Применить" Grid.Row="2" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
+                                <Button Content="Применить" Grid.Row="3" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
 
                             </Grid>
                         </Border>
@@ -151,18 +180,13 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Удалить записи" Width="120" Height="35" Command="{Binding DeleteManyJobsCommand}"/>
-                        <Button Grid.Column="1" Content="Добавить должность" Width="120" Height="35" Command="{Binding AddJobCommand}"/>
-                        <Button Grid.Column="2" Content="Экспорт в Excel" Width="120" Height="35" Command="{Binding ExcelExportCommand}"/>
-                        <Button Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" Command="{Binding WordExportCommand}"/>
+                        <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding DeleteManyJobCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить должность" Margin="10,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding AddJobCommand}"/>
+                        <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Margin="0,0,10,0" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                     </Grid>
-
                 </Grid>
-
             </Grid>
-
-
         </Grid>
-
     </Grid>
 </UserControl>

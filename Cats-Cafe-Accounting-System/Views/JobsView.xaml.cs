@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.Views
 {
@@ -9,33 +8,24 @@ namespace Cats_Cafe_Accounting_System.Views
     /// </summary>
     public partial class JobsView : UserControl
     {
-        readonly string FilterTitlePlaceholder = "Поиск по названию..";
-        private bool isTitleFind = false;
+        readonly string SearchPlaceholder = "Поиск по названию..";
         public JobsView()
         {
             InitializeComponent();
-            FilterSearch.Text = FilterTitlePlaceholder;
+            Search.Text = SearchPlaceholder;
+            FilterSearchTitle.Text = SearchPlaceholder;
         }
 
-        private void FilterSearch_GotFocus(object sender, RoutedEventArgs e)
+        private void Search_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (FilterSearch.Text == FilterTitlePlaceholder)
-                FilterSearch.Text = "";
-            isTitleFind = false;
+            if (Search.Text == SearchPlaceholder)
+                Search.Text = "";
         }
 
-        private void FilterSearch_LostFocus(object sender, RoutedEventArgs e)
+        private void Search_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!isTitleFind)
-                FilterSearch.Text = FilterTitlePlaceholder;
-        }
-
-        private void FilterSearch_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                isTitleFind = true;
-            }
+            if (Search.Text == "")
+                Search.Text = SearchPlaceholder;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,6 +33,23 @@ namespace Cats_Cafe_Accounting_System.Views
             popUpTitle.PlacementTarget = sender as Button;
             popUpTitle.VerticalOffset = 5;
             popUpTitle.IsOpen = true;
+        }
+
+        private void popUpTitle_Closed(object sender, System.EventArgs e)
+        {
+            FilterSearchTitle.Text = SearchPlaceholder;
+        }
+
+        private void FilterSearchTitle_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (FilterSearchTitle.Text == SearchPlaceholder)
+                FilterSearchTitle.Text = "";
+        }
+
+        private void FilterSearchTitle_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (FilterSearchTitle.Text == "")
+                FilterSearchTitle.Text = SearchPlaceholder;
         }
     }
 }
