@@ -17,6 +17,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="70"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -54,6 +55,15 @@
                             </DataGrid.Columns>
 
                         </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Margin="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="ExportExcelButton" Grid.Column="0" Content="Экспорт в Excel" Margin="0,0,50,0" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding ExcelExportCommand}"/>
+                        <Button x:Name="ExportWordButton" Grid.Column="1" Content="Экспорт в Word" Margin="50,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding WordExportCommand}"/>
                     </Grid>
                 </Grid>
             </Grid>
