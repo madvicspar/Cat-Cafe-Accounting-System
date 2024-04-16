@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="620">
@@ -13,18 +14,31 @@
             <RowDefinition Height="45"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Питомцы"
-                   Grid.Row="0"
-                   Style="{StaticResource Pages_Headers}"/>
+
+        <TextBlock Text="Доходы" Grid.Row="0" Style="{StaticResource Pages_Headers}"/>
+
+        <ComboBox x:Name="YearComboBox" Grid.Row="0" Margin="100, 0" Width="80" Height="25" 
+                  ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}">
+            <behaviors:Interaction.Triggers>
+                <behaviors:EventTrigger EventName="SelectionChanged">
+                    <behaviors:InvokeCommandAction Command="{Binding ChangeYearCommand}" CommandParameter="{Binding ElementName=YearComboBox, Path=SelectedItem.Content}"/>
+                </behaviors:EventTrigger>
+            </behaviors:Interaction.Triggers>
+        </ComboBox>
+
         <lvc:CartesianChart Grid.Row="1" Series="{Binding Items}">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Месяцы" Labels="{Binding Labels}" Foreground="Black"/>
+                <lvc:Axis Title="Месяцы" Labels="{Binding Labels}" Foreground="Black" FontSize="10">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" IsEnabled="True"/>
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Доходы" Foreground="Black"/>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.DataTooltip>
-                <lvc:DefaultTooltip ShowSeries="True" ShowTitle="True"/>
+                <lvc:DefaultTooltip ShowSeries="True" ShowTitle="True"  Content="{Binding Labels}"/>
             </lvc:CartesianChart.DataTooltip>
         </lvc:CartesianChart>
 
