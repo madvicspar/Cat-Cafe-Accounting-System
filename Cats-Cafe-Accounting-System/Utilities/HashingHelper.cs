@@ -42,4 +42,11 @@ public static class HashingHelper
             Marshal.ZeroFreeBSTR(ptr);
         }
     }
+
+    public static byte[] GenerateSalt()
+    {
+        byte[] byteArray = new byte[32];
+        new Random().NextBytes(byteArray);
+        return byteArray;
+    }
 }
