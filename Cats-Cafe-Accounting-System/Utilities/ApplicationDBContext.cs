@@ -57,5 +57,6 @@ namespace Cats_Cafe_Accounting_System.Utilities
         public DbSet<TicketModel> Tickets { get; set; }
         public DbSet<VisitLogEntryModel> VisitLogEntries { get; set; }
         public DbSet<EmployeeShiftLogEntryModel> EmployeeShiftLogEntries { get; set; }
+        public DbSet<PetTransferLogEntryModel> PetTransferLogEntries { get; set; }
     }
 }
