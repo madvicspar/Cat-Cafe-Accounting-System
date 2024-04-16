@@ -16,7 +16,7 @@ namespace Cats_Cafe_Accounting_System
     /// </summary>
     public partial class App : Application
     {
-        private void OpenMainWindow()
+        private static void OpenMainWindow()
         {
             var mainViewModel = new MainWindowViewModel(Container.GetService<NavigationViewModel>(), _dbContext);
             var mainView = new MainWindow { DataContext = mainViewModel };
@@ -75,7 +75,7 @@ namespace Cats_Cafe_Accounting_System
             Container = services.BuildServiceProvider();
         }
 
-        private void InitializeApplication()
+        public static void InitializeApplication()
         {
             if (Container is null)
             {
@@ -90,7 +90,8 @@ namespace Cats_Cafe_Accounting_System
             personalAreaViewModel.Employee = Data.user;
 
             var authorizationViewModel = new AuthorizationViewModel(_dbContext);
-            var authorizationWindow = Container.GetService<AuthorizationView>();
+            //var authorizationWindow = Container.GetService<AuthorizationView>();
+            var authorizationWindow = new AuthorizationView();
 
             authorizationWindow.DataContext = authorizationViewModel;
             authorizationWindow.Closed += (sender, args) => OpenMainWindow();

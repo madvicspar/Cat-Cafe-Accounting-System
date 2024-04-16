@@ -56,7 +56,16 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <ContentControl Content="{Binding NavigationVM}" Grid.Column="0"/>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <ContentControl Grid.Row="0" Content="{Binding NavigationVM}"/>
+                    <Button Margin="0,0,0,10" Grid.Row="1" Content="Выйти из аккаунта" Command="{Binding SignOutCommand}" Background="DarkGray" Width="180" Height="35" Foreground="Black"  FontSize="14" FontWeight="Medium" BorderBrush="Transparent"/>
+                </Grid>
+                
+                
                 <Border Grid.Column="1" Background="#DBDBDB" CornerRadius="5, 0, 20, 0" />
                 <Grid Grid.Column="1">
 
