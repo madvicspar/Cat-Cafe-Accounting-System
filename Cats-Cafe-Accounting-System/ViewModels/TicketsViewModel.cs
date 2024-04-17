@@ -87,8 +87,9 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             _dbContext.Tickets.Add(ticketToAdd.Clone() as TicketModel);
             _dbContext.SaveChanges();
+            ticketToAdd.Id = _dbContext.Tickets.First(p => p.Comments == ticketToAdd.Comments).Id;
             Items.Add(new ElemTicket(ticketToAdd.Clone() as TicketModel));
-            ticketToAdd.Id = _dbContext.Tickets.First(p => p.Equals(ticketToAdd)).Id;
+            FilterItems.First(x => x.Item.Comments == ticketToAdd.Comments).Item.Id = ticketToAdd.Id;
             UpdateTable();
         }
 
