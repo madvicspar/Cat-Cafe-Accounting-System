@@ -23,6 +23,22 @@ namespace Cats_Cafe_Accounting_System.Views
         public VisitorLog()
         {
             InitializeComponent();
+            FilterTicketAll.IsChecked = true;
+            FilterVisitorAll.IsChecked = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            popUpVisitor.PlacementTarget = sender as Button;
+            popUpVisitor.VerticalOffset = 5;
+            popUpVisitor.IsOpen = true;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            popUpTicket.PlacementTarget = sender as Button;
+            popUpTicket.VerticalOffset = 5;
+            popUpTicket.IsOpen = true;
         }
     }
 }

@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="400"
+             d:DesignHeight="550"
              d:DesignWidth="622"
              Background="Transparent">
+    <UserControl.Resources>
+        <data:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
 
         <Grid Margin="15,10,0,10">
@@ -18,50 +22,59 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="400"/>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="405"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <TextBlock Text="Журнал учета посещений"
+                        <TextBlock Text="Журнал учета посетителей"
                 Style="{StaticResource Pages_Headers}"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
-
-                        <Button Width="30" Height="25" Margin="0,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Left"  BorderBrush="Transparent">
-                            <Image Source="{StaticResource SearchImage}"/>
-                        </Button>
-
-                        <TextBox x:Name="Search" VerticalContentAlignment="Center" Text="{Binding SearchText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="35,5,5,5" VerticalAlignment="Center" Height="25" Width="400" HorizontalAlignment="Left">
+                    <!--<Separator Grid.Row="2"  Height="1" VerticalAlignment="Top" Margin="0,1,0,0"/>-->
+                    <Grid Grid.Row="1" Margin="35,0,7,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="158"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Фильтр по дате:" VerticalAlignment="Center" FontSize="13" Width="100"/>
+                        <DatePicker Grid.Column="1" Margin="0,0,0,0" Width="150" BorderBrush="Transparent" VerticalAlignment="Center" SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <behaviors:Interaction.Triggers>
-                                <behaviors:EventTrigger EventName="TextChanged">
-                                    <behaviors:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                <behaviors:EventTrigger EventName="SelectedDateChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding FilterCommand}"/>
                                 </behaviors:EventTrigger>
                             </behaviors:Interaction.Triggers>
-                        </TextBox>
-                        <ComboBox Margin="440,5,10,5" Height="25" SelectedIndex="0" x:Name="FindByItems">
-                            <ComboBoxItem Content="По имени"/>
-                            <ComboBoxItem Content="По породе"/>
-                            <ComboBoxItem Content="По номеру паспорта"/>
-
+                        </DatePicker>
+                        <TextBlock Grid.Column="2" Text=" -" VerticalAlignment="Center" FontSize="13"/>
+                        <DatePicker Grid.Column="3" Margin="0,0,0,0" Width="150" BorderBrush="Transparent" VerticalAlignment="Center" SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <behaviors:Interaction.Triggers>
-                                <behaviors:EventTrigger EventName="SelectionChanged">
-                                    <behaviors:InvokeCommandAction Command="{Binding ChangeFieldCommand}" CommandParameter="{Binding ElementName=FindByItems, Path=SelectedItem.Content}"/>
+                                <behaviors:EventTrigger EventName="SelectedDateChanged">
+                                    <behaviors:InvokeCommandAction Command="{Binding FilterCommand}"/>
                                 </behaviors:EventTrigger>
                             </behaviors:Interaction.Triggers>
-                        </ComboBox>
-
+                        </DatePicker>
+                        <Button Grid.Column="5" Content="Сбросить фильтр" Margin="0,0,0,0" Padding="5,0,10,0" Height="24" Width="158" FontSize="12" Background="#FFEBEBEB" BorderBrush="DarkGray" HorizontalContentAlignment="Left" Command="{Binding DeleteDateFiltersCommand}"/>
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="2" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
+                        <DataGrid x:Name="dataGrid" Margin="0,0,10,0" ItemsSource="{Binding FilterItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single" CanUserAddRows="False" FrozenColumnCount="3" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#DBDBDB"/>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="10">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="*" Foreground="Red" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding IsUpdated, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.HeaderTemplate>
                                         <DataTemplate>
@@ -74,17 +87,18 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn>
-                                    <DataGridTemplateColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Дата"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn Header="Дата">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Item.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DatePicker SelectedDate="{Binding Item.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </DatePicker>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -98,7 +112,15 @@
                                     </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Item.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Item.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </TextBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -107,7 +129,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Посетитель"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                                                     <Image Source="{StaticResource FilterImage}"/>
                                                 </Button>
                                             </StackPanel>
@@ -116,9 +138,17 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding DataContext.Visitors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
-                                                      DisplayMemberPath="Item.Title"
-                                                      SelectedValue="{Binding Item.Visitor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedValuePath="Item"/>
+                      DisplayMemberPath="Item.Visitor.LastName"
+                      SelectedValue="{Binding Item.Visitor.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Item.Visitor.LastName">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -127,7 +157,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Билет"/>
-                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent">
+                                                <Button Width="20" Background="Transparent" BorderBrush="Transparent" Click="Button_Click_1">
                                                     <Image Source="{StaticResource FilterImage}"/>
                                                 </Button>
                                             </StackPanel>
@@ -136,35 +166,43 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox ItemsSource="{Binding DataContext.Tickets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
-                                              DisplayMemberPath="Item.Title"
-                                              SelectedValue="{Binding Item.Ticket.Comments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                              SelectedValuePath="Item"/>
+                      DisplayMemberPath="Item.Ticket.Comments"
+                      SelectedValue="{Binding Item.Ticket.Comments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Item.Ticket.Comments">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn>
-                                    <DataGridTemplateColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Количество билетов"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn Header="Количество билетов">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox VerticalAlignment="Center" Text="{Binding Item.TicketsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center"/>
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Item.TicketsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="LostFocus">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.ElemUpdatedCommand, 
+                RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"
+                CommandParameter="{Binding .}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </TextBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                
-                                <DataGridTemplateColumn Header="Действия">
+                                <DataGridTemplateColumn Header="Действия" Visibility="{Binding DataContext.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}">
+                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdateEntryCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding IsUpdated}">
                                                     <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
                                                 </Button>
-                                                <Button x:Name="DeleteButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}">
+                                                <Button x:Name="DeleteButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeleteEntryCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" ToolTip="Это действие повлечет за собой удаление всех записей с этим элементов (из билетов, журнала учета посещений, журнала учета передачи питомцев)">
                                                     <Image Source="{StaticResource DeleteImage}" Height="15" Width="15"/>
                                                 </Button>
                                             </StackPanel>
@@ -175,8 +213,119 @@
 
                         </DataGrid>
                     </Grid>
+
+
+                    <Popup x:Name="popUpVisitor" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                        <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                
+                                <ListBox Grid.Row="0" Margin="10,10,10,0">
+                                    <Grid>
+                                        <CheckBox x:Name="FilterVisitorAll">
+                                            <behaviors:Interaction.Triggers>
+                                                <behaviors:EventTrigger EventName="Checked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeVisitorSelectionCommand}" CommandParameter="{Binding ElementName=FilterVisitorAll, Path=IsChecked}"/>
+                                                </behaviors:EventTrigger>
+                                                <behaviors:EventTrigger EventName="Unchecked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeVisitorSelectionCommand}" CommandParameter="{Binding ElementName=FilterVisitorAll, Path=IsChecked}"/>
+                                                </behaviors:EventTrigger>
+                                            </behaviors:Interaction.Triggers>
+                                        </CheckBox>
+                                        <TextBlock Text="Выделить все" Margin="20,0,0,0"/>
+                                    </Grid>
+                                </ListBox>
+                                <ListBox Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding FilterVisitors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Visitor.LastName}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxVisitorSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxVisitorSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Применить" Grid.Row="3" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
+
+                            </Grid>
+                        </Border>
+                    </Popup>
+
+                    <Popup x:Name="popUpTicket" Width="400" Height="400" Placement="Bottom" Grid.Row="2" StaysOpen="False">
+                        <Border Background="White" BorderBrush="LightGray" BorderThickness="1.5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <ListBox Grid.Row="0" Margin="10,10,10,0">
+                                    <Grid>
+                                        <CheckBox x:Name="FilterTicketAll">
+                                            <behaviors:Interaction.Triggers>
+                                                <behaviors:EventTrigger EventName="Checked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeTicketSelectionCommand}" CommandParameter="{Binding ElementName=FilterTicketAll, Path=IsChecked}"/>
+                                                </behaviors:EventTrigger>
+                                                <behaviors:EventTrigger EventName="Unchecked">
+                                                    <behaviors:InvokeCommandAction Command="{Binding ChangeTicketSelectionCommand}" CommandParameter="{Binding ElementName=FilterTicketAll, Path=IsChecked}"/>
+                                                </behaviors:EventTrigger>
+                                            </behaviors:Interaction.Triggers>
+                                        </CheckBox>
+                                        <TextBlock Text="Выделить все" Margin="20,0,0,0"/>
+                                    </Grid>
+                                </ListBox>
+                                <ListBox Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding FilterTickets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Item.Ticket.Comments}">
+                                                <behaviors:Interaction.Triggers>
+                                                    <behaviors:EventTrigger EventName="Unchecked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxTicketSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                    <behaviors:EventTrigger EventName="Checked">
+                                                        <behaviors:InvokeCommandAction Command="{Binding DataContext.UpdateCheckBoxTicketSelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                                                    </behaviors:EventTrigger>
+                                                </behaviors:Interaction.Triggers>
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Применить" Grid.Row="3" Margin="0,0,0,10" Width="150" Command="{Binding FilterCommand}"/>
+
+                            </Grid>
+                        </Border>
+                    </Popup>
+
+                    <Grid Grid.Row="4" Margin="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding DeleteManyEntryCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить запись" Margin="10,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding AddEntryCommand}"/>
+                        <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Margin="0,0,10,0" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                        <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
+                    </Grid>
+
                 </Grid>
+
             </Grid>
+
+
         </Grid>
+
     </Grid>
 </UserControl>
