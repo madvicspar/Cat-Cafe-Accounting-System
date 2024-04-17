@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -142,7 +143,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             _dbContext.Jobs.Add(jobToAdd.Clone() as JobModel);
             _dbContext.SaveChanges();
             jobToAdd.Id = _dbContext.Jobs.First(p => p.Title == jobToAdd.Title).Id;
-            if (Titles.FirstOrDefault(p => p.Item.Equals(jobToAdd)) == null)
+            if (Titles.FirstOrDefault(p => p.Item.Title == jobToAdd.Title) == null)
             {
                 Titles.Add(new FilterElem<JobModel>(jobToAdd.Clone() as JobModel));
                 FilterTitles.Add(new FilterElem<JobModel>(jobToAdd.Clone() as JobModel));
@@ -152,7 +153,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
-        private void ExecuteUpdateJobCommand(JobModel? job)
+        public void ExecuteUpdateJobCommand(JobModel? job)
         {
             JobModel old = _dbContext.Jobs.First(p => p.Id == job.Id);
             string name = old.Title;
@@ -167,7 +168,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
-        private void ExecuteDeleteJobCommand(JobModel? job)
+        public void ExecuteDeleteJobCommand(JobModel? job)
         {
             if (FilterItems.Count > 1)
             {
@@ -188,7 +189,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
-        private void ExecuteDeleteManyJobsCommand()
+        public void ExecuteDeleteManyJobsCommand()
         {
             var itemsToDelete = new ObservableCollection<Elem<JobModel>>(FilterItems.Where(x => x.IsSelected).ToList());
             foreach (var itemToDelete in itemsToDelete)
@@ -213,6 +214,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
+        [ExcludeFromCodeCoverage]
         private void ExecuteWordExportCommand()
         {
             // Создание нового документа Word
@@ -252,6 +254,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        [ExcludeFromCodeCoverage]
         private void ExecuteExcelExportCommand()
         {
             using (var workbook = new XLWorkbook())
@@ -310,7 +313,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             FilterItems.Clear();
             foreach (var item in filteredJobs)
-                FilterItems.Add(new Elem<JobModel>(item));
+                FilterItems.Add(new Elem<JobModel>(item.Clone() as JobModel));
             FilterItems.Add(new Elem<JobModel>(new JobModel()));
         }
 

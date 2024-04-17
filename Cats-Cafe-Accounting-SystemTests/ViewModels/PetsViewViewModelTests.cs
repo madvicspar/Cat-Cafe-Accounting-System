@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Cats_Cafe_Accounting_System.ViewModels.Tests
 {
     [TestClass()]
-    public class AuthorizationViewModelTests
+    public class PetsViewViewModelTests
     {
         private ServiceProvider _serviceProvider;
         private static ApplicationDbContext _dbContext;
