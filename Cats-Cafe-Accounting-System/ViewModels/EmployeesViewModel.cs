@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using System.Text;
+using System.Windows;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -347,30 +348,41 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
             var salt = HashingHelper.GenerateSalt();
 
-            var visitorToAdd = new EmployeeModel
+            EmployeeModel visitorToAdd = new EmployeeModel();
+            try
             {
-                FirstName = lastEmployee.FirstName,
-                LastName = lastEmployee.LastName,
-                Pathronymic = lastEmployee.Pathronymic,
-                GenderId = lastEmployee.Gender.Id,
-                Gender = lastEmployee.Gender,
-                PhoneNumber = lastEmployee.PhoneNumber,
-                Birthday = lastEmployee.Birthday,
-                ContractNumber = lastEmployee.ContractNumber,
-                JobId = lastEmployee.JobId,
-                Job = lastEmployee.Job,
-                Username = lastEmployee.PhoneNumber,
-                Salt = salt,
-                Password = Encoding.UTF8.GetBytes(lastEmployee.ContractNumber)
-            };
+                visitorToAdd = new EmployeeModel
+                {
+                    FirstName = lastEmployee.FirstName,
+                    LastName = lastEmployee.LastName,
+                    Pathronymic = lastEmployee.Pathronymic,
+                    GenderId = lastEmployee.Gender.Id,
+                    Gender = lastEmployee.Gender,
+                    PhoneNumber = lastEmployee.PhoneNumber,
+                    Birthday = lastEmployee.Birthday,
+                    ContractNumber = lastEmployee.ContractNumber,
+                    JobId = lastEmployee.JobId,
+                    Job = lastEmployee.Job,
+                    Username = lastEmployee.PhoneNumber,
+                    Salt = salt,
+                    Password = Encoding.UTF8.GetBytes(lastEmployee.ContractNumber)
+                };
 
-            _dbContext.Employees.Add(visitorToAdd.Clone() as EmployeeModel);
-            _dbContext.SaveChanges();
+                _dbContext.Employees.Add(visitorToAdd.Clone() as EmployeeModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные питомца в последней строке");
+                return;
+            }
             visitorToAdd.Id = _dbContext.Employees.First(p => p.LastName + p.FirstName + p.Pathronymic == visitorToAdd.LastName + visitorToAdd.FirstName + visitorToAdd.Pathronymic).Id;
             if (FirstNames.FirstOrDefault(p => p.Item.LastName + p.Item.FirstName + p.Item.Pathronymic == visitorToAdd.LastName + visitorToAdd.FirstName + visitorToAdd.Pathronymic) == null)
             {
                 FirstNames.Add(new FilterElem<EmployeeModel>(visitorToAdd.Clone() as EmployeeModel));
                 FilterFirstNames.Add(new FilterElem<EmployeeModel>(visitorToAdd.Clone() as EmployeeModel));
+                LastNames.Add(new FilterElem<EmployeeModel>(visitorToAdd.Clone() as EmployeeModel));
+                FilterLastNames.Add(new FilterElem<EmployeeModel>(visitorToAdd.Clone() as EmployeeModel));
                 Items.Add(new Elem<EmployeeModel>(visitorToAdd.Clone() as EmployeeModel));
                 FilterItems.Add(new Elem<EmployeeModel>(visitorToAdd.Clone() as EmployeeModel));
             }
@@ -383,20 +395,32 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteUpdateEmployeeCommand(EmployeeModel? visitor)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
-
-            EmployeeModel old = _dbContext.Employees.First(p => p.Id == visitor.Id);
-            string name = old.FirstName;
-            _dbContext.Employees.Update(EmployeeModel.Update(old, visitor));
-            _dbContext.SaveChanges();
-            if (visitor.FirstName != name)
+            EmployeeModel old = new EmployeeModel();
+            string name = "";
+            string lastName = "";
+            try
             {
-                FirstNames.First(p => p.Item.FirstName == name).Item.FirstName = visitor.FirstName;
-                FilterFirstNames.First(p => p.Item.Id == visitor.Id).Item.FirstName = visitor.FirstName;
+                old = _dbContext.Employees.First(p => p.Id == visitor.Id);
+                name = old.FirstName;
+                lastName = old.LastName;
+                _dbContext.Employees.Update(EmployeeModel.Update(old, visitor));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.Employees.FirstOrDefault(p => p.Id == visitor.Id) != null)
+                    MessageBox.Show("Введите все данные сотрудника");
+                return;
             }
             if (visitor.FirstName != name)
             {
                 FirstNames.First(p => p.Item.FirstName == name).Item.FirstName = visitor.FirstName;
                 FilterFirstNames.First(p => p.Item.Id == visitor.Id).Item.FirstName = visitor.FirstName;
+            }
+            if (visitor.LastName != name)
+            {
+                LastNames.First(p => p.Item.LastName == name).Item.LastName = visitor.LastName;
+                FilterLastNames.First(p => p.Item.Id == visitor.Id).Item.LastName = visitor.LastName;
             }
             FilterItems.First(p => p.Item.Id == visitor.Id).IsUpdated = false;
             UpdateTable();
@@ -406,9 +430,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                string name = _dbContext.Employees.First(p => p == visitor).FirstName;
-                _dbContext.Employees.Remove(visitor);
-                _dbContext.SaveChanges();
+                string name = "";
+                try
+                {
+                    name = _dbContext.Employees.First(p => p == visitor).FirstName;
+                    _dbContext.Employees.Remove(visitor);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    return;
+                }
+
                 if (_dbContext.Employees.FirstOrDefault(p => p.FirstName == name) == null)
                 {
                     FirstNames.Remove(FirstNames.First(p => p.Item.FirstName == visitor.FirstName));
@@ -430,13 +463,25 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 if (FilterItems.IndexOf(itemToDelete) != FilterItems.Count - 1)
                 {
-                    EmployeeModel visitor = _dbContext.Employees.First(p => p.Id == itemToDelete.Item.Id);
-                    _dbContext.Employees.Remove(visitor);
-                    _dbContext.SaveChanges();
+                    try
+                    {
+                        EmployeeModel visitor = _dbContext.Employees.First(p => p.Id == itemToDelete.Item.Id);
+                        _dbContext.Employees.Remove(visitor);
+                        _dbContext.SaveChanges();
+                    }
+                    catch
+                    {
+                        return;
+                    }
                     if (_dbContext.Employees.FirstOrDefault(p => p.FirstName == itemToDelete.Item.FirstName) == null)
                     {
                         FirstNames.Remove(FirstNames.First(p => p.Item.FirstName == itemToDelete.Item.FirstName));
                         FilterFirstNames.Remove(FilterFirstNames.First(p => p.Item.FirstName == itemToDelete.Item.FirstName));
+                    }
+                    if (_dbContext.Employees.FirstOrDefault(p => p.LastName == itemToDelete.Item.LastName) == null)
+                    {
+                        FirstNames.Remove(FirstNames.First(p => p.Item.LastName == itemToDelete.Item.LastName));
+                        FilterFirstNames.Remove(FilterFirstNames.First(p => p.Item.LastName == itemToDelete.Item.LastName));
                     }
                 }
                 else

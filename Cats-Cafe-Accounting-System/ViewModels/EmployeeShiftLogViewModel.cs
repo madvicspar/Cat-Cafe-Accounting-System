@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -170,17 +171,25 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // добавить проверку на то, что все введено, и введено правильно
             var lastEntry = FilterItems[FilterItems.Count - 1].Item;
-
-            var entryToAdd = new EmployeeShiftLogEntryModel
+            EmployeeShiftLogEntryModel entryToAdd = new EmployeeShiftLogEntryModel();
+            try
             {
-                Date = lastEntry.Date,
-                EmployeeId = lastEntry.Employee.Id,
-                Employee = lastEntry.Employee,
-                Comments = lastEntry.Comments
-            };
+                entryToAdd = new EmployeeShiftLogEntryModel
+                {
+                    Date = lastEntry.Date,
+                    EmployeeId = lastEntry.Employee.Id,
+                    Employee = lastEntry.Employee,
+                    Comments = lastEntry.Comments
+                };
 
-            _dbContext.EmployeeShiftLogEntries.Add(entryToAdd.Clone() as EmployeeShiftLogEntryModel);
-            _dbContext.SaveChanges();
+                _dbContext.EmployeeShiftLogEntries.Add(entryToAdd.Clone() as EmployeeShiftLogEntryModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные записи");
+                return;
+            }
             entryToAdd.Id = _dbContext.EmployeeShiftLogEntries.First(p => p.Employee.ContractNumber == entryToAdd.Employee.ContractNumber).Id;
             if (Numbers.FirstOrDefault(p => p.Item.Employee.ContractNumber == entryToAdd.Employee.ContractNumber) == null)
             {
@@ -198,11 +207,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteUpdateEntryCommand(EmployeeShiftLogEntryModel? entry)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
-
-            EmployeeShiftLogEntryModel old = _dbContext.EmployeeShiftLogEntries.First(p => p.Id == entry.Id);
-            string name = old.Employee.ContractNumber;
-            _dbContext.EmployeeShiftLogEntries.Update(EmployeeShiftLogEntryModel.Update(old, entry));
-            _dbContext.SaveChanges();
+            string name = "";
+            try
+            {
+                EmployeeShiftLogEntryModel old = _dbContext.EmployeeShiftLogEntries.First(p => p.Id == entry.Id);
+                name = old.Employee.ContractNumber;
+                _dbContext.EmployeeShiftLogEntries.Update(EmployeeShiftLogEntryModel.Update(old, entry));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.EmployeeShiftLogEntries.FirstOrDefault(p => p.Id == entry.Id) != null)
+                    MessageBox.Show("Введите все данные записи");
+                return;
+            }
             if (entry.Employee.ContractNumber != name)
             {
                 Numbers.First(p => p.Item.Employee.ContractNumber == name).Item.Employee.ContractNumber = entry.Employee.ContractNumber;
@@ -216,9 +234,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                string name = _dbContext.EmployeeShiftLogEntries.First(p => p == entry).Employee.ContractNumber;
-                _dbContext.EmployeeShiftLogEntries.Remove(entry);
-                _dbContext.SaveChanges();
+                string name = "";
+                try
+                {
+                    name = _dbContext.EmployeeShiftLogEntries.First(p => p == entry).Employee.ContractNumber;
+                    _dbContext.EmployeeShiftLogEntries.Remove(entry);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    MessageBox.Show("Введите все данные записи");
+                    return;
+                }
                 if (_dbContext.EmployeeShiftLogEntries.FirstOrDefault(p => p.Employee.ContractNumber == name) == null)
                 {
                     Numbers.Remove(Numbers.First(p => p.Item.Employee.ContractNumber == entry.Employee.ContractNumber));
@@ -239,13 +266,22 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 if (FilterItems.IndexOf(itemToDelete) != FilterItems.Count - 1)
                 {
-                    EmployeeShiftLogEntryModel entry = _dbContext.EmployeeShiftLogEntries.First(p => p.Id == itemToDelete.Item.Id);
-                    _dbContext.EmployeeShiftLogEntries.Remove(entry);
-                    _dbContext.SaveChanges();
-                    if (_dbContext.EmployeeShiftLogEntries.FirstOrDefault(p => p.Employee.ContractNumber == itemToDelete.Item.Employee.ContractNumber) == null)
+                    try
                     {
-                        Numbers.Remove(Numbers.First(p => p.Item.Employee.ContractNumber == itemToDelete.Item.Employee.ContractNumber));
-                        FilterNumbers.Remove(FilterNumbers.First(p => p.Item.Employee.ContractNumber == itemToDelete.Item.Employee.ContractNumber));
+                        EmployeeShiftLogEntryModel entry = _dbContext.EmployeeShiftLogEntries.First(p => p.Id == itemToDelete.Item.Id);
+                        _dbContext.EmployeeShiftLogEntries.Remove(entry);
+                        _dbContext.SaveChanges();
+
+                        if (_dbContext.EmployeeShiftLogEntries.FirstOrDefault(p => p.Employee.ContractNumber == itemToDelete.Item.Employee.ContractNumber) == null)
+                        {
+                            Numbers.Remove(Numbers.First(p => p.Item.Employee.ContractNumber == itemToDelete.Item.Employee.ContractNumber));
+                            FilterNumbers.Remove(FilterNumbers.First(p => p.Item.Employee.ContractNumber == itemToDelete.Item.Employee.ContractNumber));
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Введите все данные записи");
+                        return;
                     }
                 }
                 else

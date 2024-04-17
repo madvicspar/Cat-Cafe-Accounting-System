@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -125,21 +126,29 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // добавить проверку на то, что все введено, и введено правильно
             var lastEntry = FilterItems[FilterItems.Count - 1].Item;
-
-            var entryToAdd = new PetTransferLogEntryModel
+            var entryToAdd = new PetTransferLogEntryModel();
+            try
             {
-                Date = lastEntry.Date,
-                PetId = lastEntry.Pet.Id,
-                Pet = lastEntry.Pet,
-                VisitorId = lastEntry.VisitorId,
-                Visitor = lastEntry.Visitor
-            };
+                entryToAdd = new PetTransferLogEntryModel
+                {
+                    Date = lastEntry.Date,
+                    PetId = lastEntry.Pet.Id,
+                    Pet = lastEntry.Pet,
+                    VisitorId = lastEntry.VisitorId,
+                    Visitor = lastEntry.Visitor
+                };
 
-            _dbContext.PetTransferLogEntries.Add(entryToAdd.Clone() as PetTransferLogEntryModel);
-            _dbContext.SaveChanges();
+                _dbContext.PetTransferLogEntries.Add(entryToAdd.Clone() as PetTransferLogEntryModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные записи");
+                return;
+            }
             entryToAdd.Id = _dbContext.PetTransferLogEntries.First(p => p.Pet.Name == entryToAdd.Pet.Name).Id;
-            //Items.Add(new Elem<PetTransferLogEntryModel>(entryToAdd.Clone() as PetTransferLogEntryModel));
-            //FilterItems.Add(new Elem<PetTransferLogEntryModel>(entryToAdd.Clone() as PetTransferLogEntryModel));
+            Items.Add(new Elem<PetTransferLogEntryModel>(entryToAdd.Clone() as PetTransferLogEntryModel));
+            FilterItems.Add(new Elem<PetTransferLogEntryModel>(entryToAdd.Clone() as PetTransferLogEntryModel));
             UpdateTable();
         }
         /// <summary>
@@ -149,10 +158,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteUpdateEntryCommand(PetTransferLogEntryModel? entry)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
-
-            PetTransferLogEntryModel old = _dbContext.PetTransferLogEntries.First(p => p.Id == entry.Id);
-            _dbContext.PetTransferLogEntries.Update(PetTransferLogEntryModel.Update(old, entry));
-            _dbContext.SaveChanges();
+            try
+            {
+                PetTransferLogEntryModel old = _dbContext.PetTransferLogEntries.First(p => p.Id == entry.Id);
+                _dbContext.PetTransferLogEntries.Update(PetTransferLogEntryModel.Update(old, entry));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.PetTransferLogEntries.FirstOrDefault(p => p.Id == entry.Id) != null)
+                    MessageBox.Show("Введите все данные записи");
+                return;
+            }
             FilterItems.First(p => p.Item.Id == entry.Id).IsUpdated = false;
             UpdateTable();
         }

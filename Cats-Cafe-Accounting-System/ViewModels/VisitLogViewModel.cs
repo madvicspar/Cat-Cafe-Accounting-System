@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -191,20 +192,28 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // добавить проверку на то, что все введено, и введено правильно
             var lastEntry = FilterItems[FilterItems.Count - 1].Item;
-
-            var entryToAdd = new VisitLogEntryModel
+            var entryToAdd = new VisitLogEntryModel();
+            try
             {
-                Date = lastEntry.Date,
-                StartTime = lastEntry.StartTime,
-                VisitorId = lastEntry.Visitor.Id,
-                Visitor = lastEntry.Visitor,
-                TicketId = lastEntry.Ticket.Id,
-                Ticket = lastEntry.Ticket,
-                TicketsCount = lastEntry.TicketsCount
-            };
+                entryToAdd = new VisitLogEntryModel
+                {
+                    Date = lastEntry.Date,
+                    StartTime = lastEntry.StartTime,
+                    VisitorId = lastEntry.Visitor.Id,
+                    Visitor = lastEntry.Visitor,
+                    TicketId = lastEntry.Ticket.Id,
+                    Ticket = lastEntry.Ticket,
+                    TicketsCount = lastEntry.TicketsCount
+                };
 
-            _dbContext.VisitLogEntries.Add(entryToAdd.Clone() as VisitLogEntryModel);
-            _dbContext.SaveChanges();
+                _dbContext.VisitLogEntries.Add(entryToAdd.Clone() as VisitLogEntryModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные посещения");
+                return;
+            }
             entryToAdd.Id = _dbContext.VisitLogEntries.First(p => p.Visitor == entryToAdd.Visitor).Id;
             if (Visitors.FirstOrDefault(p => p.Item.Visitor == entryToAdd.Visitor) == null)
             {
@@ -224,11 +233,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteUpdateEntryCommand(VisitLogEntryModel? entry)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
-
-            VisitLogEntryModel old = _dbContext.VisitLogEntries.First(p => p.Id == entry.Id);
-            string name = old.Visitor.LastName;
-            _dbContext.VisitLogEntries.Update(VisitLogEntryModel.Update(old, entry));
-            _dbContext.SaveChanges();
+            string name = "";
+            try
+            {
+                VisitLogEntryModel old = _dbContext.VisitLogEntries.First(p => p.Id == entry.Id);
+                name = old.Visitor.LastName;
+                _dbContext.VisitLogEntries.Update(VisitLogEntryModel.Update(old, entry));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.VisitLogEntries.FirstOrDefault(p => p.Id == entry.Id) != null)
+                    MessageBox.Show("Введите все данные посещения");
+                return;
+            }
             if (entry.Visitor.LastName != name)
             {
                 Visitors.First(p => p.Item.Visitor.LastName == name).Item.Visitor = entry.Visitor;
@@ -244,10 +262,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                string name = _dbContext.VisitLogEntries.First(p => p == entry).Visitor.LastName;
-                int id = _dbContext.VisitLogEntries.First(p => p == entry).TicketId;
-                _dbContext.VisitLogEntries.Remove(entry);
-                _dbContext.SaveChanges();
+                string name = "";
+                int id = 0;
+                try
+                {
+                    name = _dbContext.VisitLogEntries.First(p => p == entry).Visitor.LastName;
+                    id = _dbContext.VisitLogEntries.First(p => p == entry).TicketId;
+                    _dbContext.VisitLogEntries.Remove(entry);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    MessageBox.Show("Введите все данные записи");
+                    return;
+                }
                 if (_dbContext.VisitLogEntries.FirstOrDefault(p => p.Visitor.LastName == name) == null)
                 {
                     Visitors.Remove(Visitors.First(p => p.Item.Visitor == entry.Visitor));

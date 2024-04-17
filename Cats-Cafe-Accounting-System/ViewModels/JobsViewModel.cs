@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -134,14 +135,23 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             // добавить проверку на то, что все введено, и введено правильно
             var lastJob = FilterItems[FilterItems.Count - 1].Item;
 
-            var jobToAdd = new JobModel
+            var jobToAdd = new JobModel();
+            try
             {
-                Title = lastJob.Title,
-                Rate = lastJob.Rate,
-            };
+                jobToAdd = new JobModel
+                {
+                    Title = lastJob.Title,
+                    Rate = lastJob.Rate,
+                };
 
-            _dbContext.Jobs.Add(jobToAdd.Clone() as JobModel);
-            _dbContext.SaveChanges();
+                _dbContext.Jobs.Add(jobToAdd.Clone() as JobModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные должности в последней строке");
+                return;
+            }
             jobToAdd.Id = _dbContext.Jobs.First(p => p.Title == jobToAdd.Title).Id;
             if (Titles.FirstOrDefault(p => p.Item.Title == jobToAdd.Title) == null)
             {
@@ -155,10 +165,21 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void ExecuteUpdateJobCommand(JobModel? job)
         {
-            JobModel old = _dbContext.Jobs.First(p => p.Id == job.Id);
-            string name = old.Title;
-            _dbContext.Jobs.Update(JobModel.Update(old, job));
-            _dbContext.SaveChanges();
+            JobModel old = new JobModel();
+            string name = "";
+            try
+            {
+                old = _dbContext.Jobs.First(p => p.Id == job.Id);
+                name = old.Title;
+                _dbContext.Jobs.Update(JobModel.Update(old, job));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.Jobs.FirstOrDefault(p => p.Id == job.Id) != null)
+                    MessageBox.Show("Введите все данные должности");
+                return;
+            }
             if (job.Title != name)
             {
                 Titles.First(p => p.Item.Title == name).Item.Title = job.Title;
@@ -172,9 +193,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                string name = _dbContext.Jobs.First(p => p == job).Title;
-                _dbContext.Jobs.Remove(job);
-                _dbContext.SaveChanges();
+                string name = "";
+                try
+                {
+                    name = _dbContext.Jobs.First(p => p == job).Title;
+                    _dbContext.Jobs.Remove(job);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    return;
+                }
                 if (_dbContext.Jobs.FirstOrDefault(p => p.Title == name) == null)
                 {
                     Titles.Remove(Titles.First(p => p.Item.Title == job.Title));
@@ -196,9 +225,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 if (FilterItems.IndexOf(itemToDelete) != FilterItems.Count - 1)
                 {
-                    JobModel job = _dbContext.Jobs.First(p => p.Id == itemToDelete.Item.Id);
-                    _dbContext.Jobs.Remove(job);
-                    _dbContext.SaveChanges();
+                    JobModel job = new JobModel();
+                    try
+                    {
+                        job = _dbContext.Jobs.First(p => p.Id == itemToDelete.Item.Id);
+                        _dbContext.Jobs.Remove(job);
+                        _dbContext.SaveChanges();
+                    }
+                    catch
+                    {
+                        return;
+                    }
                     if (_dbContext.Jobs.FirstOrDefault(p => p.Title == itemToDelete.Item.Title) == null)
                     {
                         Titles.Remove(Titles.First(p => p.Item.Title == itemToDelete.Item.Title));

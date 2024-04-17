@@ -293,7 +293,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding IsUpdated}">
+                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdatePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}">
                                                     <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
                                                 </Button>
                                                 <Button x:Name="DeleteButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" ToolTip="Это действие повлечет за собой удаление всех записей с этим элементов (из билетов, журнала учета посещений, журнала учета передачи питомцев)">
@@ -538,7 +538,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Button x:Name="DeleteManyButton" Grid.Column="0" Content="Удалить записи" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding DeleteManyPetCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
-                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить питомца" Margin="10,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding AddPetCommand}"/>
+                        <Button x:Name="AddButton" Grid.Column="1" Content="Добавить питомца" Margin="10,0,0,0" Width="120" Height="35" HorizontalAlignment="Left" Command="{Binding AddPetCommand}" ToolTip="Сохранение последнего питомца"/>
                         <Button x:Name="ExportExcelButton" Grid.Column="2" Content="Экспорт в Excel" Margin="0,0,10,0" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding ExcelExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                         <Button x:Name="ExportWordButton" Grid.Column="3" Content="Экспорт в Word" Width="120" Height="35" HorizontalAlignment="Right" Command="{Binding WordExportCommand}" IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                     </Grid>

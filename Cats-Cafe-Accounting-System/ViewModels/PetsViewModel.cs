@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -332,23 +333,30 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // добавить проверку на то, что все введено, и введено правильно
             var lastPet = FilterItems[FilterItems.Count - 1].Item;
-
-            var petToAdd = new PetModel
+            PetModel petToAdd = new PetModel();
+            try
             {
-                Name = lastPet.Name,
-                GenderId = lastPet.Gender.Id,
-                Gender = lastPet.Gender,
-                StatusId = lastPet.Status.Id,
-                Status = lastPet.Status,
-                BreedId = lastPet.Breed.Id,
-                Breed = lastPet.Breed,
-                Birthday = lastPet.Birthday,
-                CheckInDate = lastPet.CheckInDate,
-                PassNumber = lastPet.PassNumber
-            };
+                petToAdd = new PetModel
+                {
+                    Name = lastPet.Name,
+                    GenderId = lastPet.Gender.Id,
+                    Gender = lastPet.Gender,
+                    StatusId = lastPet.Status.Id,
+                    Status = lastPet.Status,
+                    BreedId = lastPet.Breed.Id,
+                    Breed = lastPet.Breed,
+                    Birthday = lastPet.Birthday,
+                    CheckInDate = lastPet.CheckInDate,
+                    PassNumber = lastPet.PassNumber
+                };
 
-            _dbContext.Pets.Add(petToAdd.Clone() as PetModel);
-            _dbContext.SaveChanges();
+                _dbContext.Pets.Add(petToAdd.Clone() as PetModel);
+                _dbContext.SaveChanges();
+            }
+            catch {
+                MessageBox.Show("Введите все данные питомца");
+                return;
+            }
             petToAdd.Id = _dbContext.Pets.First(p => p.Name == petToAdd.Name).Id;
             if (Names.FirstOrDefault(p => p.Item.Name == petToAdd.Name) == null)
             {
@@ -365,12 +373,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         /// <param name="pet"> Измененный PetModel </param>
         public void ExecuteUpdatePetCommand(PetModel? pet)
         {
-            // сделать недоступной кнопку пока не добавлен элемент (последний)
-
-            PetModel old = _dbContext.Pets.First(p => p.Id == pet.Id);
-            string name = old.Name;
-            _dbContext.Pets.Update(PetModel.Update(old, pet));
-            _dbContext.SaveChanges();
+            string name = "";
+            try
+            {
+                PetModel old = _dbContext.Pets.First(p => p.Id == pet.Id);
+                name = old.Name;
+                _dbContext.Pets.Update(PetModel.Update(old, pet));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.Pets.FirstOrDefault(p => p.Id == pet.Id) != null)
+                    MessageBox.Show("Введите все данные питомца");
+                return;
+            }
             if (pet.Name != name)
             {
                 Names.First(p => p.Item.Name == name).Item.Name = pet.Name;
@@ -384,9 +400,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                string name = _dbContext.Pets.First(p => p == pet).Name;
-                _dbContext.Pets.Remove(pet);
-                _dbContext.SaveChanges();
+                string name = "";
+                try
+                {
+                    name = _dbContext.Pets.First(p => p == pet).Name;
+                    _dbContext.Pets.Remove(pet);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    return;
+                }
                 if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
                 {
                     Names.Remove(Names.First(p => p.Item.Name == pet.Name));
@@ -408,9 +432,16 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             {
                 if (FilterItems.IndexOf(itemToDelete) != FilterItems.Count-1)
                 {
-                    PetModel pet = _dbContext.Pets.First(p => p.Id == itemToDelete.Item.Id);
-                    _dbContext.Pets.Remove(pet);
-                    _dbContext.SaveChanges();
+                    try
+                    {
+                        PetModel pet = _dbContext.Pets.First(p => p.Id == itemToDelete.Item.Id);
+                        _dbContext.Pets.Remove(pet);
+                        _dbContext.SaveChanges();
+                    }
+                    catch
+                    {
+                        return;
+                    }
                     if (_dbContext.Pets.FirstOrDefault(p => p.Name == itemToDelete.Item.Name) == null)
                     {
                         Names.Remove(Names.First(p => p.Item.Name == itemToDelete.Item.Name));

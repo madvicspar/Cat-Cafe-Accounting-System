@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
@@ -76,17 +77,25 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // добавить проверку на то, что все введено, и введено правильно
             var lastTicket = FilterItems[FilterItems.Count - 1].Item;
-
-            var ticketToAdd = new TicketModel
+            var ticketToAdd = new TicketModel();
+            try
             {
-                Price = lastTicket.Price,
-                Pet = null,
-                PetId = null,
-                Comments = lastTicket.Comments,
-            };
+                ticketToAdd = new TicketModel
+                {
+                    Price = lastTicket.Price,
+                    Pet = null,
+                    PetId = null,
+                    Comments = lastTicket.Comments,
+                };
 
-            _dbContext.Tickets.Add(ticketToAdd.Clone() as TicketModel);
-            _dbContext.SaveChanges();
+                _dbContext.Tickets.Add(ticketToAdd.Clone() as TicketModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные билета");
+                return;
+            }
             ticketToAdd.Id = _dbContext.Tickets.First(p => p.Comments == ticketToAdd.Comments).Id;
             Items.Add(new ElemTicket(ticketToAdd.Clone() as TicketModel));
             FilterItems.First(x => x.Item.Comments == ticketToAdd.Comments).Item.Id = ticketToAdd.Id;
@@ -96,10 +105,18 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         public void ExecuteUpdateTicketCommand(TicketModel? ticket)
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
-
-            TicketModel old = _dbContext.Tickets.First(p => p.Id == ticket.Id);
-            _dbContext.Tickets.Update(TicketModel.Update(old, ticket));
-            _dbContext.SaveChanges();
+            try
+            {
+                TicketModel old = _dbContext.Tickets.First(p => p.Id == ticket.Id);
+                _dbContext.Tickets.Update(TicketModel.Update(old, ticket));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                if (_dbContext.Tickets.FirstOrDefault(p => p.Id == ticket.Id) != null)
+                    MessageBox.Show("Введите все данные билета");
+                return;
+            }
             FilterItems.First(p => p.Item.Id == ticket.Id).IsUpdated = false;
             UpdateTable();
         }
@@ -108,8 +125,15 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                _dbContext.Tickets.Remove(ticket);
-                _dbContext.SaveChanges();
+                try
+                {
+                    _dbContext.Tickets.Remove(ticket);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    return;
+                }
             }
             else
             {

@@ -105,7 +105,7 @@ CommandParameter="{Binding .}"/>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdateTicketCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding IsUpdated}">
+                                                <Button x:Name="UpdateButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.UpdateTicketCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}">
                                                     <Image Source="{StaticResource UpdateImage}" Height="15" Width="15"/>
                                                 </Button>
                                                 <Button x:Name="DeleteButton" Background="Transparent" BorderBrush="Transparent" Command="{Binding DataContext.DeleteTicketCommand, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Item}" IsEnabled="{Binding IsEditable}" ToolTip="Это действие повлечет за собой удаление всех записей с этим элементом (из журнала учета посещений)">

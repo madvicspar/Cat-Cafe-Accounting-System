@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
@@ -322,19 +323,28 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             // добавить проверку на то, что все введено, и введено правильно
             var lastVisitor = FilterItems[FilterItems.Count - 1].Item;
 
-            var visitorToAdd = new VisitorModel
+            var visitorToAdd = new VisitorModel();
+            try
             {
-                FirstName = lastVisitor.FirstName,
-                LastName = lastVisitor.LastName,
-                Pathronymic = lastVisitor.Pathronymic,
-                GenderId = lastVisitor.Gender.Id,
-                Gender = lastVisitor.Gender,
-                PhoneNumber = lastVisitor.PhoneNumber,
-                Birthday = lastVisitor.Birthday
-            };
+                visitorToAdd = new VisitorModel
+                {
+                    FirstName = lastVisitor.FirstName,
+                    LastName = lastVisitor.LastName,
+                    Pathronymic = lastVisitor.Pathronymic,
+                    GenderId = lastVisitor.Gender.Id,
+                    Gender = lastVisitor.Gender,
+                    PhoneNumber = lastVisitor.PhoneNumber,
+                    Birthday = lastVisitor.Birthday
+                };
 
-            _dbContext.Visitors.Add(visitorToAdd.Clone() as VisitorModel);
-            _dbContext.SaveChanges();
+                _dbContext.Visitors.Add(visitorToAdd.Clone() as VisitorModel);
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные посетителя");
+                return;
+            }
             visitorToAdd.Id = _dbContext.Visitors.First(p => p.LastName + p.FirstName + p.Pathronymic == visitorToAdd.LastName + visitorToAdd.FirstName + visitorToAdd.Pathronymic).Id;
             if (FirstNames.FirstOrDefault(p => p.Item.LastName + p.Item.FirstName + p.Item.Pathronymic == visitorToAdd.LastName + visitorToAdd.FirstName + visitorToAdd.Pathronymic) == null)
             {
@@ -353,10 +363,20 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             // сделать недоступной кнопку пока не добавлен элемент (последний)
 
-            VisitorModel old = _dbContext.Visitors.First(p => p.Id == visitor.Id);
-            string name = old.FirstName;
-            _dbContext.Visitors.Update(VisitorModel.Update(old, visitor));
-            _dbContext.SaveChanges();
+            VisitorModel old = new VisitorModel();
+            string name = "";
+            try
+            {
+                old = _dbContext.Visitors.First(p => p.Id == visitor.Id);
+                name = old.FirstName;
+                _dbContext.Visitors.Update(VisitorModel.Update(old, visitor));
+                _dbContext.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Введите все данные питомца");
+                return;
+            }
             if (visitor.FirstName != name)
             {
                 FirstNames.First(p => p.Item.FirstName == name).Item.FirstName = visitor.FirstName;
@@ -375,9 +395,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         {
             if (FilterItems.Count > 1)
             {
-                string name = _dbContext.Visitors.First(p => p == visitor).FirstName;
-                _dbContext.Visitors.Remove(visitor);
-                _dbContext.SaveChanges();
+                string name = "";
+                try
+                {
+                    name = _dbContext.Visitors.First(p => p == visitor).FirstName;
+                    _dbContext.Visitors.Remove(visitor);
+                    _dbContext.SaveChanges();
+                }
+                catch
+                {
+                    return;
+                }
                 if (_dbContext.Visitors.FirstOrDefault(p => p.FirstName == name) == null)
                 {
                     FirstNames.Remove(FirstNames.First(p => p.Item.FirstName == visitor.FirstName));

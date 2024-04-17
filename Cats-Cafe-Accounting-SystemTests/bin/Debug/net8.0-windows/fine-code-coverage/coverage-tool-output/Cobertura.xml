@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.655439885690957" branch-rate="0.428730512249443" lines-covered="3211" lines-valid="4899" branches-covered="385" branches-valid="898" complexity="1511" version="0" timestamp="1713359868">
+<coverage line-rate="0.655439885690957" branch-rate="0.428730512249443" lines-covered="3211" lines-valid="4899" branches-covered="385" branches-valid="898" complexity="1511" version="0" timestamp="1713361537">
   <sources>
     <source>D:\vikto\source\repos\Cats-Cafe-Accounting-System\</source>
     <source>C:\</source>
