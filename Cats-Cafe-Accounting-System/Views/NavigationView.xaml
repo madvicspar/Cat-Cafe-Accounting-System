@@ -11,7 +11,7 @@
              d:DesignWidth="230"
              Background="Transparent">
 
-        <ListView ItemsSource="{Binding NavigationOptions}" Background="Transparent" BorderBrush="Transparent" SelectionMode="Single" HorizontalContentAlignment="Left">
+        <ListView ItemsSource="{Binding NavigationOptions}" Background="Transparent" BorderBrush="Transparent" SelectionMode="Single" SelectedIndex="1" HorizontalContentAlignment="Left">
             <Behaviors:Interaction.Triggers>
                 <Behaviors:EventTrigger EventName="SelectionChanged">
                     <Behaviors:InvokeCommandAction Command="{Binding SelectionChangedCommand}" PassEventArgsToCommand="True"/>

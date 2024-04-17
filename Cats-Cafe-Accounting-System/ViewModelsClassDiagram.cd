@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.AuthorizationViewModel">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAABCAAAAAAAAAAAAAAAAIAggAAAIAACAQAAAkEAAAA=</HashCode>
+      <FileName>ViewModels\AuthorizationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.EmployeeShiftLogViewModel">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>1RABIgCAADgGDAAgAjkEYAQhAAChACAWoAEAAMCgABI=</HashCode>
+      <FileName>ViewModels\EmployeeShiftLogViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.EmployeesViewModel">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Cats_Cafe_Accounting_System.ViewModels.EmployeesViewModel.Fields" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\EmployeesViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BYCLwgKAyHkGiUCECFlUSURZBEDkziAEANTAKEFQgJo=</HashCode>
+      <FileName>ViewModels\EmployeesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.IncomesViewModel">
+    <Position X="11" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAEAAACAAAAAAAAICABAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IncomesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.JobsViewModel">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AYABEwCAwDgGiEgCAEkBAAQAAACEQCAIAAAEAkAQQAM=</HashCode>
+      <FileName>ViewModels\JobsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.MainWindowViewModel">
+    <Position X="0.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEACAAAAQgAAQAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.NavigationViewModel">
+    <Position X="7.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ViewModels\NavigationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.PersonalAreaViewModel">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAABAAAAAEAQYABAECABAAIAQgACAAAAABEE=</HashCode>
+      <FileName>ViewModels\PersonalAreaViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.PetsViewModel">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Cats_Cafe_Accounting_System.ViewModels.PetsViewModel.Fields" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\PetsViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>y0KBgoDQQD2miEEEAnnUMyThAgCUCDAQEXExEEswoJI=</HashCode>
+      <FileName>ViewModels\PetsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.PetTransferLogViewModel">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>UQABIgCAADAGDAAAAjkEAAQhAACAACAEAAEAAECAABI=</HashCode>
+      <FileName>ViewModels\PetTransferLogViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.PopularPetsViewModel">
+    <Position X="7.5" Y="10" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAgCAADACCAAAAAgAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ViewModels\PopularPetsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.TicketsViewModel">
+    <Position X="2.25" Y="10.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQABAgCAAHAGCAAAAAkAAAQBAICAAAECASAAEAAAABI=</HashCode>
+      <FileName>ViewModels\TicketsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.VisitLogViewModel">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>0QQRIiCEADAGDAAAAjkEAA4hAASIAKAUAAkIAkCEEBI=</HashCode>
+      <FileName>ViewModels\VisitLogViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.ViewModels.VisitorsViewModel">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Cats_Cafe_Accounting_System.ViewModels.VisitorsViewModel.Fields" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\VisitorsViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>xYCLwwKASHkGicgAgGlEQQRpAECEiCAUANEKKEEQgJo=</HashCode>
+      <FileName>ViewModels\VisitorsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.EmployeeModel" BaseTypeListCollapsed="true">
+    <Position X="29.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARSAEAAAAAAAACAgQAAQAAAAAALEAACAAAAAAAAABg=</HashCode>
+      <FileName>Models\EmployeeModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.EmployeeShiftLogEntryModel" BaseTypeListCollapsed="true">
+    <Position X="34.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAAAAgAAAAAAACAAAAAABAAAAAAACIBA=</HashCode>
+      <FileName>Models\EmployeeShiftLogEntryModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.JobModel" BaseTypeListCollapsed="true">
+    <Position X="31" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQCAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\JobModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.NavigationChangedRequestMessage">
+    <Position X="31" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\NavigationChangedRequestMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.NavigationModel">
+    <Position X="24" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\NavigationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.PetModel" BaseTypeListCollapsed="true">
+    <Position X="32.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAIMAAAAAACAgAAAAAQAAAAIEAAAIAAAAAIAAFA=</HashCode>
+      <FileName>Models\PetModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.PetTransferLogEntryModel" BaseTypeListCollapsed="true">
+    <Position X="36.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAEAAAAACAAAiAABAAAAAAAAAAABAAAAAAAAABA=</HashCode>
+      <FileName>Models\PetTransferLogEntryModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.PopularPetsModel">
+    <Position X="34.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAgAACAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\PopularPetsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.TicketModel" BaseTypeListCollapsed="true">
+    <Position X="24" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAQAACAAAgAABAAAAAAAAAAAAAAAAAAAAIBA=</HashCode>
+      <FileName>Models\TicketModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.VisitLogEntryModel" BaseTypeListCollapsed="true">
+    <Position X="25.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAEAAQAAAAACiAAAAAAAIAAAABABAAAAAAAAABA=</HashCode>
+      <FileName>Models\VisitLogEntryModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Models.VisitorModel" BaseTypeListCollapsed="true">
+    <Position X="27.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAEAAAAAAAACAgAAAQAAAAAAIEAAAAAAAAAAAABg=</HashCode>
+      <FileName>Models\VisitorModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.ApplicationDbContext">
+    <Position X="34" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAEAkAAACBECAEAAAAAAAEUACIAAAA=</HashCode>
+      <FileName>Utilities\ApplicationDBContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.BooleanToVisibilityConverter" BaseTypeListCollapsed="true">
+    <Position X="35.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAIAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\BooleanToVisibilityConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.Data">
+    <Position X="35.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Utilities\Data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.Elem&lt;T&gt;">
+    <Position X="28.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAAgAEAAAAAQAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Elem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.ElemTicket">
+    <Position X="30.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAIAAAIAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\ElemTicket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.FilterElem&lt;T&gt;">
+    <Position X="28.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAEAAAAAQAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\FilterElem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.MyButton">
+    <Position X="32.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\MyButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.SecureStringBinding">
+    <Position X="32.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAIAAAAAEAABAAAAAAgBAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\SecureStringBinding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cats_Cafe_Accounting_System.Utilities.SecureStringConverter" BaseTypeListCollapsed="true">
+    <Position X="30.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAABAAAAAAAAAgAA=</HashCode>
+      <FileName>Utilities\SecureStringConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="HashingHelper">
+    <Position X="32.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAIAAAgAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Utilities\HashingHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

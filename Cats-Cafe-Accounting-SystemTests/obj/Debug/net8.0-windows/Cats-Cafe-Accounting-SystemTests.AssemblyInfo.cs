@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cats-Cafe-Accounting-SystemTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ae5f94278d36ce96bb8ca6554e1f08aba874213")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a1fdd6763b14fff54018b30a8144162083335b7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cats-Cafe-Accounting-SystemTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cats-Cafe-Accounting-SystemTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
