@@ -16,6 +16,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         {
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
 
+            foreach (var job in _dbContext.Genders)
+            {
+                _dbContext.Genders.Remove(job);
+            }
+            _dbContext.SaveChanges();
+
             _dbContext.Genders.Add(new Gender { Title = "женский" });
             _dbContext.Genders.Add(new Gender { Title = "мужской" });
 

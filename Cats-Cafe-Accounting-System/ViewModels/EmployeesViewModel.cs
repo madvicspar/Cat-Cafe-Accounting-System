@@ -321,7 +321,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             ElemUpdatedCommand = new RelayCommand<Elem<EmployeeModel>>(ExecuteElemUpdatedCommand);
         }
 
-        private void ExecuteChangeGenderSelectionCommand(bool value)
+        public void ExecuteChangeGenderSelectionCommand(bool value)
         {
             foreach (var item in FilterGenders)
                 item.IsSelected = !value;

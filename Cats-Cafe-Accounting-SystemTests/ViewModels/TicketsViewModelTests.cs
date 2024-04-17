@@ -67,11 +67,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
                 Name = "Test",
                 GenderId = 1,
                 Gender = _dbContext.Genders.First(g => g.Id == 1),
-                BreedId = "MNC",
-                Breed = _dbContext.Breeds.First(g => g.Id == "MNC"),
+                BreedId = "MEIN",
+                Breed = _dbContext.Breeds.First(g => g.Id == "MEIN"),
                 StatusId = 1,
                 Status = _dbContext.Statuses.First(g => g.Id == 1),
                 PassNumber = "Test",
+                CheckInDate = DateTime.Today,
                 Birthday = DateTime.Today
             };
             _dbContext.Pets.Add(visitorToAdd.Clone() as PetModel);

@@ -15,7 +15,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         public static void ClassInitialize(TestContext context)
         {
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
-
+            foreach (var job in _dbContext.Jobs)
+            {
+                _dbContext.Jobs.Remove(job);
+            }
+            _dbContext.SaveChanges();
             _dbContext.SaveChanges();
         }
 
