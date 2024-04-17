@@ -320,6 +320,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 EndDate = checkInDateMax;
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteElemUpdatedCommand(Elem<PetModel> petUpdated)
         {
             if (_dbContext.Pets.FirstOrDefault(p => p.Equals(petUpdated.Item)) == null || !petUpdated.Item.Equals(Items.First(p => p.Item.Id == petUpdated.Item.Id).Item))
@@ -554,6 +555,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteFilterCommand()
         {
             foreach (var item in Names)
@@ -732,6 +734,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterBreeds.Last().IsSelected = item.IsSelected;
             }
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<PetModel>> GetWithoutNameFilter()
         {
             var collection = new ObservableCollection<FilterElem<PetModel>>();
@@ -745,6 +749,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             return collection;
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<Gender>> GetWithoutGenderFilter()
         {
             var collection = new ObservableCollection<FilterElem<Gender>>();
@@ -758,6 +764,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             return collection;
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<Status>> GetWithoutStatusFilter()
         {
             var collection = new ObservableCollection<FilterElem<Status>>();
@@ -771,6 +779,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             return collection;
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<Breed>> GetWithoutBreedFilter()
         {
             var collection = new ObservableCollection<FilterElem<Breed>>();

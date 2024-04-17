@@ -571,6 +571,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteFilterCommand()
         {
             foreach (var item in FirstNames)
@@ -620,24 +621,28 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             FilterItems.Add(new Elem<EmployeeModel>(new EmployeeModel() { Gender = Genders[0].Item, Birthday = DateTime.Today, Job = Jobs[0].Item }));
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteUpdateCheckBoxLastNameSelectionCommand()
         {
             foreach (var item in FilterLastNames)
                 LastNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteUpdateCheckBoxFirstNameSelectionCommand()
         {
             foreach (var item in FilterFirstNames)
                 FirstNames.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteUpdateCheckBoxGenderSelectionCommand()
         {
             foreach (var item in FilterGenders)
                 Genders.First(p => p.Item == item.Item).IsSelected = item.IsSelected;
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteUpdateCheckBoxJobSelectionCommand()
         {
             foreach (var item in FilterJobs)
@@ -746,6 +751,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<EmployeeModel>> GetWithoutNameFilter()
         {
             var collection = new ObservableCollection<FilterElem<EmployeeModel>>();
@@ -759,6 +765,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             return collection;
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<Gender>> GetWithoutGenderFilter()
         {
             var collection = new ObservableCollection<FilterElem<Gender>>();
@@ -773,6 +781,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             return collection;
         }
 
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<JobModel>> GetWithoutJobFilter()
         {
             var collection = new ObservableCollection<FilterElem<JobModel>>();

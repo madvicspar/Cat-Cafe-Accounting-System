@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -9,6 +10,8 @@ namespace Cats_Cafe_Accounting_System.Models
         public int Score { get; set; }
         public PetModel Pet { get; set; }
         public List<VisitLogEntryModel> PetTransferLogEntryModels { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public PopularPetsModel()
         {
             Pet = new PetModel();

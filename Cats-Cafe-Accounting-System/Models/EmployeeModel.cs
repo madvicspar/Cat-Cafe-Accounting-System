@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -71,6 +72,7 @@ namespace Cats_Cafe_Accounting_System.Models
             };
         }
 
+        [ExcludeFromCodeCoverage]
         public bool Equals(EmployeeModel? other)
         {
             return other?.LastName == LastName

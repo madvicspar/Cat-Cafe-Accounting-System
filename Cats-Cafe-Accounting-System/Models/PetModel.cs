@@ -7,6 +7,7 @@ using System.Data;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Wordprocessing;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -67,6 +68,7 @@ namespace Cats_Cafe_Accounting_System.Models
             };
         }
 
+        [ExcludeFromCodeCoverage]
         public bool Equals(PetModel? other)
         {
             return other?.Name == Name

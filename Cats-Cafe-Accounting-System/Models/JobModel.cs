@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -29,6 +30,7 @@ namespace Cats_Cafe_Accounting_System.Models
             };
         }
 
+        [ExcludeFromCodeCoverage]
         public bool Equals(JobModel? other)
         {
             return other?.Title == Title

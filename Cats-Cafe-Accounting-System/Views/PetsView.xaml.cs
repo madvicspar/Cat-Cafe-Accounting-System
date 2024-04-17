@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -7,6 +8,7 @@ namespace Cats_Cafe_Accounting_System.Views
     /// <summary>
     /// Interaction logic for PetsView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class PetsView : UserControl
     {
         readonly string SearchPlaceholder = "Поиск..";

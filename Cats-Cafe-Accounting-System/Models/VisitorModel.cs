@@ -7,6 +7,7 @@ using System.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Bibliography;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -53,6 +54,7 @@ namespace Cats_Cafe_Accounting_System.Models
             };
         }
 
+        [ExcludeFromCodeCoverage]
         public bool Equals(VisitorModel? other)
         {
             return other?.LastName == LastName

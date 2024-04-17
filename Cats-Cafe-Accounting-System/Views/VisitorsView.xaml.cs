@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Cats_Cafe_Accounting_System.Views
     /// <summary>
     /// Interaction logic for VisitorsView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class VisitorsView : UserControl
     {
         readonly string SearchPlaceholder = "Поиск..";

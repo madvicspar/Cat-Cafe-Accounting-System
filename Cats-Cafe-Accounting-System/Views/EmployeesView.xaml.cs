@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,6 +8,7 @@ namespace Cats_Cafe_Accounting_System.Views
     /// <summary>
     /// Interaction logic for EmployeeShiftLogView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class EmployeesView : UserControl
     {
         readonly string SearchPlaceholder = "Поиск..";

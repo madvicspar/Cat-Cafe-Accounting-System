@@ -2,6 +2,7 @@
 using Cats_Cafe_Accounting_System.RegularClasses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace Cats_Cafe_Accounting_System.Utilities
@@ -15,6 +16,7 @@ namespace Cats_Cafe_Accounting_System.Utilities
             _configuration = configuration;
         }
 
+        [ExcludeFromCodeCoverage]
         public static ApplicationDbContext CreateDatabase()
         {
             if (_configuration == null)
@@ -37,6 +39,7 @@ namespace Cats_Cafe_Accounting_System.Utilities
             return new ApplicationDbContext(options, null);
         }
 
+        [ExcludeFromCodeCoverage]
         public static ApplicationDbContext CreateMySqlDatabase()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;

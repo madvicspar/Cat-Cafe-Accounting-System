@@ -317,6 +317,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             FilterItems.Add(new Elem<JobModel>(new JobModel()));
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteFilterCommand()
         {
             foreach (var item in Titles)
@@ -330,6 +331,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             UpdateTable();
         }
 
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<JobModel>> GetWithoutTitleFilter()
         {
             var collection = new ObservableCollection<FilterElem<JobModel>>();

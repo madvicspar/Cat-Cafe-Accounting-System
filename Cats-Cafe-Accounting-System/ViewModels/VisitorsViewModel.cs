@@ -296,7 +296,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             ElemUpdatedCommand = new RelayCommand<Elem<VisitorModel>>(ExecuteElemUpdatedCommand);
         }
 
-        private void ExecuteChangeGenderSelectionCommand(bool value)
+        public void ExecuteChangeGenderSelectionCommand(bool value)
         {
             foreach (var item in FilterGenders)
                 item.IsSelected = !value;
@@ -534,6 +534,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void ExecuteFilterCommand()
         {
             foreach (var item in FirstNames)
@@ -664,6 +665,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 FilterGenders.Last().IsSelected = item.IsSelected;
             }
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<VisitorModel>> GetWithoutNameFilter()
         {
             var collection = new ObservableCollection<FilterElem<VisitorModel>>();
@@ -677,6 +680,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             }
             return collection;
         }
+
+        [ExcludeFromCodeCoverage]
         public ObservableCollection<FilterElem<Gender>> GetWithoutGenderFilter()
         {
             var collection = new ObservableCollection<FilterElem<Gender>>();

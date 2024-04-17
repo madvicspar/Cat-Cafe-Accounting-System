@@ -12,12 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Views
 {
     /// <summary>
     /// Логика взаимодействия для IncomesView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class IncomesView : UserControl
     {
         public IncomesView()

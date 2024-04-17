@@ -9,6 +9,7 @@ using Cats_Cafe_Accounting_System.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Cats_Cafe_Accounting_System.Models;
 using Cats_Cafe_Accounting_System.RegularClasses;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.ViewModels.Tests
 {
@@ -18,13 +19,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         private ServiceProvider _serviceProvider;
         private static ApplicationDbContext _dbContext;
 
+        [ExcludeFromCodeCoverage]
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
 
-            _dbContext.Genders.Add(new Gender { Title = "женский" });
-            _dbContext.Genders.Add(new Gender { Title = "мужской" });
+            if (_dbContext.Genders.Count() != 2)
+            {
+                _dbContext.Genders.Add(new Gender { Title = "женский" });
+                _dbContext.Genders.Add(new Gender { Title = "мужской" });
+            }
 
             _dbContext.Statuses.Add(new Status { Title = "числится" });
             _dbContext.Statuses.Add(new Status { Title = "не числится" });

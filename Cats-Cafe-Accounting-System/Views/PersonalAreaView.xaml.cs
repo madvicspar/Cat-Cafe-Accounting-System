@@ -12,12 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Views
 {
     /// <summary>
     /// Interaction logic for PersonalAreaView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class PersonalAreaView : UserControl
     {
         public PersonalAreaView()

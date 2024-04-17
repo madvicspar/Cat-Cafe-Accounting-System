@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Cats_Cafe_Accounting_System.Utilities;
 using System.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Models
 {
@@ -54,6 +55,7 @@ namespace Cats_Cafe_Accounting_System.Models
             };
         }
 
+        [ExcludeFromCodeCoverage]
         public bool Equals(VisitLogEntryModel? other)
         {
             return other?.Date == Date

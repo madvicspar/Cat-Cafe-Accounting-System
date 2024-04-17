@@ -2,6 +2,7 @@
 using Cats_Cafe_Accounting_System.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.ViewModels.Tests
 {
@@ -11,19 +12,17 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         private ServiceProvider _serviceProvider;
         private static ApplicationDbContext _dbContext;
 
+        [ExcludeFromCodeCoverage]
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
 
-            foreach (var job in _dbContext.Genders)
+            if (_dbContext.Genders.Count() != 2)
             {
-                _dbContext.Genders.Remove(job);
+                _dbContext.Genders.Add(new Gender { Title = "женский" });
+                _dbContext.Genders.Add(new Gender { Title = "мужской" });
             }
-            _dbContext.SaveChanges();
-
-            _dbContext.Genders.Add(new Gender { Title = "женский" });
-            _dbContext.Genders.Add(new Gender { Title = "мужской" });
 
             _dbContext.Statuses.Add(new Status { Title = "числится" });
             _dbContext.Statuses.Add(new Status { Title = "не числится" });

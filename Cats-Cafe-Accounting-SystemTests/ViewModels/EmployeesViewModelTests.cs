@@ -23,8 +23,11 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
         {
             _dbContext = ApplicationDbContext.CreateInMemoryDatabase();
 
-            _dbContext.Genders.Add(new Gender { Title = "женский" });
-            _dbContext.Genders.Add(new Gender { Title = "мужской" });
+            if (_dbContext.Genders.Count() != 2)
+            {
+                _dbContext.Genders.Add(new Gender { Title = "женский" });
+                _dbContext.Genders.Add(new Gender { Title = "мужской" });
+            }
 
             _dbContext.Jobs.Add(new JobModel { Title = "дворник", Rate = 100f });
             _dbContext.Jobs.Add(new JobModel { Title = "продавец", Rate = 200f });

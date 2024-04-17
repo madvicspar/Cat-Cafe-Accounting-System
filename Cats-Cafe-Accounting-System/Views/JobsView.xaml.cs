@@ -1,11 +1,13 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cats_Cafe_Accounting_System.Views
 {
     /// <summary>
     /// Interaction logic for JobsView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class JobsView : UserControl
     {
         readonly string SearchPlaceholder = "Поиск по названию..";
