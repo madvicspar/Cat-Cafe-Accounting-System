@@ -67,6 +67,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 if (AuthenticateUser(user))
                 {
                     Data.user = user;
+                    Data.IsDirector = Data.user.JobId == 1;
                     var authorizationWindow = Application.Current.Windows.OfType<AuthorizationView>().FirstOrDefault();
                     authorizationWindow?.Close();
                     UsernameError = "";

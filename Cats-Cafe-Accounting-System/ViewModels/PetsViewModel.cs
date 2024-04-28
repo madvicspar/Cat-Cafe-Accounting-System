@@ -4,6 +4,7 @@ using Cats_Cafe_Accounting_System.Utilities;
 using ClosedXML.Excel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using NPOI.XWPF.UserModel;
@@ -331,7 +332,6 @@ namespace Cats_Cafe_Accounting_System.ViewModels
         }
         public void ExecuteAddPetCommand()
         {
-            // добавить проверку на то, что все введено, и введено правильно
             var lastPet = FilterItems[FilterItems.Count - 1].Item;
             PetModel petToAdd = new PetModel();
             try
@@ -353,9 +353,12 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                 _dbContext.Pets.Add(petToAdd.Clone() as PetModel);
                 _dbContext.SaveChanges();
             }
-            catch {
-                MessageBox.Show("Введите все данные питомца");
-                return;
+            catch (DbUpdateException ex) {
+                if (string.IsNullOrEmpty(petToAdd.Name) || string.IsNullOrEmpty(petToAdd.PassNumber))
+                {
+                    MessageBox.Show("Введите все данные питомца");
+                    return;
+                }
             }
             petToAdd.Id = _dbContext.Pets.First(p => p.Name == petToAdd.Name).Id;
             if (Names.FirstOrDefault(p => p.Item.Name == petToAdd.Name) == null)
@@ -398,25 +401,23 @@ namespace Cats_Cafe_Accounting_System.ViewModels
 
         public void ExecuteDeletePetCommand(PetModel? pet)
         {
-            if (FilterItems.Count > 1)
+            if (FilterItems.IndexOf(FilterItems.First(p => p.Item == pet)) == FilterItems.Count - 1)
             {
-                string name = "";
-                try
-                {
-                    name = _dbContext.Pets.First(p => p == pet).Name;
-                    _dbContext.Pets.Remove(pet);
-                    _dbContext.SaveChanges();
-                }
-                catch
-                {
-                    return;
-                }
-                if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
-                {
-                    Names.Remove(Names.First(p => p.Item.Name == pet.Name));
-                    FilterNames.Remove(FilterNames.First(p => p.Item.Name == pet.Name));
-                }
+                FilterItems[FilterItems.IndexOf(FilterItems.First(p => p.Item == pet))].Item = new PetModel();
+                return;
             }
+
+            var existingPet = _dbContext.Pets.Find(pet.Id);
+            _dbContext.Pets.Remove(existingPet);
+            _dbContext.SaveChanges();
+
+            string name = "";
+            if (_dbContext.Pets.FirstOrDefault(p => p.Name == name) == null)
+            {
+                Names.Remove(Names.First(p => p.Item.Name == pet.Name));
+                FilterNames.Remove(FilterNames.First(p => p.Item.Name == pet.Name));
+            }
+
             else
             {
                 FilterItems[FilterItems.Count - 1].Item.Name = "";

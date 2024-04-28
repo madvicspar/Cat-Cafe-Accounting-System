@@ -13,5 +13,6 @@ namespace Cats_Cafe_Accounting_System.Utilities
     public static class Data
     {
         public static EmployeeModel user;
+        public static bool IsDirector;
     }
 }

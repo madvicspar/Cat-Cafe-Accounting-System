@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:Menu="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
+             xmlns:data="clr-namespace:Cats_Cafe_Accounting_System.Utilities"
              xmlns:local="clr-namespace:Cats_Cafe_Accounting_System.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550" 
@@ -21,7 +21,8 @@
                 <DataTemplate>
                 <Border Height="35">
                     <TextBlock Text="{Binding Name}"
-                               Style="{StaticResource Text_Style}"/>
+                               Style="{StaticResource Text_Style}"
+                               IsEnabled="{Binding DataContext.IsDirector, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type UserControl}}}"/>
                 </Border>
             </DataTemplate>
             </ListView.ItemTemplate>
