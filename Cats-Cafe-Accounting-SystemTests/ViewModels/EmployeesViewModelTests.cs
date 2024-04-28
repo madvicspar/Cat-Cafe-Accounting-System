@@ -84,7 +84,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
                 // Assert
                 Assert.AreEqual(1, employeesViewModel.Items.Count);
                 Assert.AreEqual(_dbContext.Employees.Count(), 1);
-                Assert.AreEqual(employeesViewModel.FilterLastNames.Count(), 0);
+                Assert.AreEqual(employeesViewModel.FilterLastNames.Count(), 1);
                 Assert.AreEqual(employeesViewModel.FilterItems.Count(), 2);
             }
         }
@@ -214,8 +214,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels.Tests
             employeesViewModel.ExecuteAddEmployeeCommand();
             employeesViewModel.ExecuteDeleteEmployeeCommand(_dbContext.Employees.First());
             Assert.AreEqual(_dbContext.Employees.Count(), 0);
-            Assert.AreEqual(employeesViewModel.LastNames.Count(), 0);
-            Assert.AreEqual(employeesViewModel.FilterLastNames.Count(), 0);
+            Assert.AreEqual(employeesViewModel.LastNames.Count(), 1);
+            Assert.AreEqual(employeesViewModel.FilterLastNames.Count(), 1);
             Assert.AreEqual(employeesViewModel.FilterItems.Count(), 1);
         }
         [TestMethod()]

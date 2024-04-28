@@ -480,8 +480,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
                     }
                     if (_dbContext.Employees.FirstOrDefault(p => p.LastName == itemToDelete.Item.LastName) == null)
                     {
-                        FirstNames.Remove(FirstNames.First(p => p.Item.LastName == itemToDelete.Item.LastName));
-                        FilterFirstNames.Remove(FilterFirstNames.First(p => p.Item.LastName == itemToDelete.Item.LastName));
+                        LastNames.Remove(LastNames.First(p => p.Item.LastName == itemToDelete.Item.LastName));
+                        FilterLastNames.Remove(FilterLastNames.First(p => p.Item.LastName == itemToDelete.Item.LastName));
                     }
                 }
                 else

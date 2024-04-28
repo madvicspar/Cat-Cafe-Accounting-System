@@ -6,11 +6,23 @@ using System.Linq;
 using System.Windows.Input;
 using Cats_Cafe_Accounting_System.Models;
 using System.Windows.Controls;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using Cats_Cafe_Accounting_System.Utilities;
 
 namespace Cats_Cafe_Accounting_System.ViewModels
 {
     public class NavigationViewModel : ObservableObject
     {
+        private bool isDirector;
+        public bool IsDirector
+        {
+            get { return isDirector; }
+            set
+            {
+                isDirector = value;
+                OnPropertyChanged(nameof(IsDirector));
+            }
+        }
         public List<NavigationModel> NavigationOptions { get; set; } = new();
 
         public ICommand SelectionChangedCommand { get; set; } = new RelayCommand<object>((o) =>

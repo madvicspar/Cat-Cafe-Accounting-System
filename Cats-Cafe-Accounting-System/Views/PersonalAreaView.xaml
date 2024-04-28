@@ -32,19 +32,6 @@
                                    Style="{StaticResource Pages_Headers}"
                                    Margin="10,0,0,0"
                                    FontWeight="Medium"/>
-                        <Button Grid.Column="1"
-                                x:Name="MenuButton"
-                                FontSize="20"
-                                Height="25"
-                                Width="25"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                BorderThickness="0"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Margin="0,0,10,0">
-                            <Image Source="{StaticResource MenuImage}"/>
-                        </Button>
                     </Grid>
 
                     <Border BorderBrush="#272B2F" Grid.Row="1" BorderThickness="1" Margin="10,0,10,0">

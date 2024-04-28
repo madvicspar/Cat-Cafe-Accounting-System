@@ -21,7 +21,7 @@
                   ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}">
             <behaviors:Interaction.Triggers>
                 <behaviors:EventTrigger EventName="SelectionChanged">
-                    <behaviors:InvokeCommandAction Command="{Binding ChangeYearCommand}" CommandParameter="{Binding ElementName=YearComboBox, Path=SelectedItem.Content}"/>
+                    <behaviors:InvokeCommandAction Command="{Binding ChangeYearCommand}" CommandParameter="{Binding ElementName=YearComboBox, Path=SelectedItem}"/>
                 </behaviors:EventTrigger>
             </behaviors:Interaction.Triggers>
         </ComboBox>
