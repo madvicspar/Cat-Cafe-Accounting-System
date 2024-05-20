@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Configuration;
-using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;

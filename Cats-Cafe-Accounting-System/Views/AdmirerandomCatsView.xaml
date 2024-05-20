@@ -44,11 +44,7 @@
                         </DockPanel>
                     </Grid>
                 </Grid>
-
             </Grid>
-
-
         </Grid>
-
     </Grid>
 </UserControl>
