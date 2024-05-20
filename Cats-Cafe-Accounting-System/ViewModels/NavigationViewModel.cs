@@ -49,7 +49,8 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             VisitLogViewModel visitorsLogViewModel,
             PersonalAreaViewModel personalAreaViewModel,
             IncomesViewModel incomesViewModel,
-            PopularPetsViewModel popularCatsViewModel)
+            PopularPetsViewModel popularCatsViewModel,
+            AdmirerandomCatsViewModel admirerandomCatsViewModel)
         {
             NavigationOptions.Add(new() { Name = "Личный кабинет", Description = "", DestinationVM = personalAreaViewModel });
             NavigationOptions.Add(new() { Name = "Питомцы", Description = "", DestinationVM = petsViewModel });
@@ -62,6 +63,7 @@ namespace Cats_Cafe_Accounting_System.ViewModels
             NavigationOptions.Add(new() { Name = "Учета передач питомцев", Description = "", DestinationVM = petTransferLogViewModel });
             NavigationOptions.Add(new() { Name = "Доходы", Description = "", DestinationVM = incomesViewModel });
             NavigationOptions.Add(new() { Name = "Популярные питомцы", Description = "", DestinationVM = popularCatsViewModel });
+            NavigationOptions.Add(new() { Name = "Фото котиков", Description = "", DestinationVM = admirerandomCatsViewModel });
 
             var message = new NavigationChangedRequestMessage(NavigationOptions[0]);
             WeakReferenceMessenger.Default.Send(message);

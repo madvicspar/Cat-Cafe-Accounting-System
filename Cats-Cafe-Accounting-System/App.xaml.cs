@@ -109,6 +109,7 @@ namespace Cats_Cafe_Accounting_System
             services.AddSingleton<PersonalAreaViewModel>(new PersonalAreaViewModel(_dbContext));
             services.AddSingleton<IncomesViewModel>(new IncomesViewModel(_dbContext));
             services.AddSingleton<PopularPetsViewModel>(new PopularPetsViewModel(_dbContext));
+            services.AddSingleton<AdmirerandomCatsViewModel>();
             Container = services.BuildServiceProvider();
         }
 
