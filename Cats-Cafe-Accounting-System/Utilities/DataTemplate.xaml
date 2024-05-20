@@ -42,5 +42,8 @@
     <DataTemplate DataType="{x:Type vm:PopularPetsViewModel}">
         <vw:PopularPetsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AdmirerandomCatsViewModel}">
+        <vw:AdmirerandomCatsView/>
+    </DataTemplate>
 
 </ResourceDictionary>

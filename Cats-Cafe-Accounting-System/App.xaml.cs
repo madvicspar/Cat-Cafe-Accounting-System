@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
@@ -35,6 +37,7 @@ namespace Cats_Cafe_Accounting_System
         public static ApplicationDbContext _dbContext { get; protected set; }
         protected override void OnStartup(StartupEventArgs e)
         {
+            CheckImages();
             base.OnStartup(e);
 
             configuration = new ConfigurationBuilder()
@@ -52,6 +55,38 @@ namespace Cats_Cafe_Accounting_System
             InitContainer();
             InitializeApplication();
         }
+
+        private void CheckImages()
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string destinationFolder = Path.Combine(baseDirectory, "Images");
+            string sourceFolder = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(baseDirectory)))), "Images");
+
+            CopyFilesFromSourceToDestination(sourceFolder, destinationFolder);
+
+            string usersPhotoSourceFolder = Path.Combine(sourceFolder, "UsersPhoto");
+            string usersPhotoDestinationFolder = Path.Combine(destinationFolder, "UsersPhoto");
+
+            CopyFilesFromSourceToDestination(usersPhotoSourceFolder, usersPhotoDestinationFolder);
+        }
+
+        static void CopyFilesFromSourceToDestination(string sourceFolder, string destinationFolder)
+        {
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+
+            var files = Directory.GetFiles(sourceFolder);
+
+            foreach (string file in files)
+            {
+                string fileName = Path.GetFileName(file);
+                string destinationFilePath = Path.Combine(destinationFolder, fileName);
+                File.Copy(file, destinationFilePath, true);
+            }
+        }
+
         private static void InitContainer()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -74,6 +109,7 @@ namespace Cats_Cafe_Accounting_System
             services.AddSingleton<PersonalAreaViewModel>(new PersonalAreaViewModel(_dbContext));
             services.AddSingleton<IncomesViewModel>(new IncomesViewModel(_dbContext));
             services.AddSingleton<PopularPetsViewModel>(new PopularPetsViewModel(_dbContext));
+            services.AddSingleton<AdmirerandomCatsViewModel>();
             Container = services.BuildServiceProvider();
         }
 

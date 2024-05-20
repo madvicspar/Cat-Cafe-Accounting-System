@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AdmirerandomCatsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AuthorizationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +67,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Utilities\img.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AdmirerandomCatsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AuthorizationView.xaml">
